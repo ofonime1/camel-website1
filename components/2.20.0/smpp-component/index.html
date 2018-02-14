@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='SMPP Component Available as of Camel version 2.2
+ This component provides access to an SMSC (Short Message Service Center) over the SMPP protocol to send and receive SMS. The JSMPP library is used for the protocol implementation.
+ The Camel component currently operates as an ESME (External Short Messaging Entity) and not as an SMSC itself.
+ Starting with*Camel 2.9* you are also able to execute ReplaceSm, QuerySm, SubmitMulti, CancelSm and DataSm.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='SMPP Component Available as of Camel version 2.2
+ This component provides access to an SMSC (Short Message Service Center) over the SMPP protocol to send and receive SMS. The JSMPP library is used for the protocol implementation.
+ The Camel component currently operates as an ESME (External Short Messaging Entity) and not as an SMSC itself.
+ Starting with*Camel 2.9* you are also able to execute ReplaceSm, QuerySm, SubmitMulti, CancelSm and DataSm.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/smpp-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/smpp-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_smpp_component">SMPP Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.2</strong></p>
+</div>
+<div class="paragraph">
+<p>This component provides access to an SMSC (Short Message Service Center)
+over the <a href="http://smsforum.net/SMPP_v3_4_Issue1_2.zip">SMPP</a> protocol to
+send and receive SMS. The <a href="http://jsmpp.org">JSMPP</a> library is used for
+the protocol implementation.</p>
+</div>
+<div class="paragraph">
+<p>The Camel component currently operates as an
+<a href="http://en.wikipedia.org/wiki/ESME">ESME</a> (External Short Messaging
+Entity) and not as an SMSC itself.</p>
+</div>
+<div class="paragraph">
+<p>Starting with*Camel 2.9* you are also able to execute ReplaceSm,
+QuerySm, SubmitMulti, CancelSm and DataSm.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-smpp&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sms_limitations">SMS limitations</h3>
+<div class="paragraph">
+<p>SMS is neither reliable or secure.  Users who require reliable and
+secure delivery may want to consider using the XMPP or SIP components
+instead, combined with a smartphone app supporting the chosen protocol.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Reliability: although the SMPP standard offers a range of feedback
+mechanisms to indicate errors, non-delivery and confirmation of delivery
+it is not uncommon for mobile networks to hide or simulate these
+responses.  For example, some networks automatically send a delivery
+confirmation for every message even if the destination number is invalid
+or not switched on.  Some networks silently drop messages if they think
+they are spam.  Spam detection rules in the network may be very crude,
+sometimes more than 100 messages per day from a single sender may be
+considered spam.</p>
+</li>
+<li>
+<p>Security: there is basic encryption for the last hop from the radio
+tower down to the recipient handset.  SMS messages are not encrypted or
+authenticated in any other part of the network.  Some operators allow
+staff in retail outlets or call centres to browse through the SMS
+message histories of their customers.  Message sender identity can be
+easily forged.  Regulators and even the mobile telephone industry itself
+has cautioned against the use of SMS in two-factor authentication
+schemes and other purposes where security is important.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>While the Camel component makes it as easy as possible to send messages
+to the SMS network, it can not offer an easy solution to these problems.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_data_coding_alphabet_and_international_character_sets">Data coding, alphabet and international character sets</h3>
+<div class="paragraph">
+<p>Data coding and alphabet can be specified on a per-message basis.
+Default values can be specified for the endpoint.  It is important to
+understand the relationship between these options and the way the
+component acts when more than one value is set.</p>
+</div>
+<div class="paragraph">
+<p>Data coding is an 8 bit field in the SMPP wire format.</p>
+</div>
+<div class="paragraph">
+<p>Alphabet corresponds to bits 0-3 of the data coding field.  For some
+types of message, where a message class is used (by setting bit 5 of the
+data coding field), the lower two bits of the data coding field are not
+interpreted as alphabet and only bits 2 and 3 impact the alphabet.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, current version of the JSMPP library only seems to support
+bits 2 and 3, assuming that bits 0 and 1 are used for message class.
+This is why the Alphabet class in JSMPP doesn&#8217;t support the value 3
+(binary 0011) which indicates ISO-8859-1.</p>
+</div>
+<div class="paragraph">
+<p>Although JSMPP provides a representation of the message class parameter,
+the Camel component doesn&#8217;t currently provide a way to set it other than
+manually setting the corresponding bits in the data coding field.</p>
+</div>
+<div class="paragraph">
+<p>When setting the data coding field in the outgoing message, the Camel
+component considers the following values and uses the first one it can
+find:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the data coding specified in a header</p>
+</li>
+<li>
+<p>the alphabet specified in a header</p>
+</li>
+<li>
+<p>the data coding specified in the endpoint configuration (URI
+parameter)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Older versions of Camel had bugs in support for international character
+sets.  This feature only worked when a single encoding was used for all
+messages and was troublesome when users wanted to change it on a
+per-message basis.  Users who require this to work should ensure their
+version of Camel includes the fix for</p>
+</div>
+<div class="paragraph">
+<p>JIRA Issues Macro: com.atlassian.sal.api.net.ResponseStatusException:
+Unexpected response received. Status code: 404</p>
+</div>
+<div class="paragraph">
+<p>.</p>
+</div>
+<div class="paragraph">
+<p>In addition to trying to send the data coding value to the SMSC, the
+Camel component also tries to analyze the message body, convert it to a
+Java String (Unicode) and convert that to a byte array in the
+corresponding alphabet  When deciding which alphabet to use in the byte
+array, the Camel SMPP component does not consider the data coding value
+(header or configuration), it only considers the specified alphabet
+(from either the header or endpoint parameter).</p>
+</div>
+<div class="paragraph">
+<p>If some characters in the String can&#8217;t be represented in the chosen
+alphabet, they may be replaced by the question mark ( ? ) symbol.  Users
+of the API may want to consider checking if their message body can be
+converted to ISO-8859-1 before passing it to the component and if not,
+setting the alphabet header to request UCS-2 encoding.  If the alphabet
+and data coding options are not specified at all then the component may
+try to detect the required encoding and set the data coding for you.</p>
+</div>
+<div class="paragraph">
+<p>The list of alphabet codes are specified in the SMPP specification v3.4,
+section 5.2.19.  One notable limitation of the SMPP specification is
+that there is no alphabet code for explicitly requesting use of the GSM
+3.38 (7 bit) character set.  Choosing the value 0 for the alphabet
+selects the SMSC <em>default</em> alphabet, this usually means GSM 3.38 but it
+is not guaranteed.  The SMPP gateway Nexmo
+<a href="https://help.nexmo.com/hc/en-us/articles/204015813-How-to-change-the-character-encoding-in-SMPP-">actually
+allows the default to be mapped to any other character set with a
+control panel option</a>. It is suggested that users check with their SMSC
+operator to confirm exactly which character set is being used as the
+default.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message_splitting_and_throttling">Message splitting and throttling</h3>
+<div class="paragraph">
+<p>After transforming a message body from a String to a byte array, the
+Camel component is also responsible for splitting the message into parts
+(within the 140 byte SMS size limit) before passing it to JSMPP.  This
+is completed automatically.</p>
+</div>
+<div class="paragraph">
+<p>If the GSM 3.38 alphabet is used, the component will pack up to 160
+characters into the 140 byte message body.  If an 8 bit character set is
+used (e.g. ISO-8859-1 for western Europe) then 140 characters will be
+allowed within the 140 byte message body.  If 16 bit UCS-2 encoding is
+used then just 70 characters fit into each 140 byte message.</p>
+</div>
+<div class="paragraph">
+<p>Some SMSC providers implement throttling rules.  Each part of a message
+that has been split may be counted separately by the provider&#8217;s
+throttling mechanism.  The Camel Throttler component can be useful for
+throttling messages in the SMPP route before handing them to the SMSC.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">smpp://[username@]hostname[:port][?options]
+smpps://[username@]hostname[:port][?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If no <strong>username</strong> is provided, then Camel will provide the default value
+<code>smppclient</code>.<br>
+ If no <strong>port</strong> number is provided, then Camel will provide the default
+value <code>2775</code>.<br>
+ <strong>Camel 2.3:</strong> If the protocol name is "smpps", camel-smpp with try to
+use SSLSocket to init a connection to the server.</p>
+</div>
+<div class="paragraph">
+<p>You can append query options to the URI in the following format,
+<code>?option=value&amp;option=value&amp;&#8230;&#8203;</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_options">URI Options</h3>
+<div class="paragraph">
+<p>The SMPP component supports 2 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>configuration</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the shared SmppConfiguration as configuration.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SmppConfiguration</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The SMPP endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>smpp:host:port</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_2_parameters">Path Parameters (2 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>host</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hostname for the SMSC server to use.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">localhost</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>port</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Port number for the SMSC server to use.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2775</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_38_parameters">Query Parameters (38 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>initialReconnectDelay</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the initial delay in milliseconds after the consumer/producer tries to reconnect to the SMSC after the connection was lost.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxReconnect</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the maximum number of attempts to reconnect to the SMSC if SMSC returns a negative bind response</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2147483647</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>reconnectDelay</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the interval in milliseconds between the reconnect attempts if the connection to the SMSC was lost and the previous was not succeed.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>splittingPolicy</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">You can specify a policy for handling long messages: ALLOW - the default long messages are split to 140 bytes per message TRUNCATE - long messages are split and only the first fragment will be sent to the SMSC. Some carriers drop subsequent fragments so this reduces load on the SMPP connection sending parts of a message that will never be delivered. REJECT - if a message would need to be split it is rejected with an SMPP NegativeResponseException and the reason code signifying the message is too long.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">ALLOW</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SmppSplittingPolicy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>systemType</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This parameter is used to categorize the type of ESME (External Short Message Entity) that is binding to the SMSC (max. 13 characters).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">cp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>addressRange</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">You can specify the address range for the SmppConsumer as defined in section 5.2.7 of the SMPP 3.4 specification. The SmppConsumer will receive messages only from SMSC&#8217;s which target an address (MSISDN or IP address) within this range.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>destAddr</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the destination SME address. For mobile terminated messages this is the directory number of the recipient MS. Only for SubmitSm SubmitMulti CancelSm and DataSm.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1717</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>destAddrNpi</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the type of number (TON) to be used in the SME destination address parameters. Only for SubmitSm SubmitMulti CancelSm and DataSm. The following NPI values are defined: 0: Unknown 1: ISDN (E163/E164) 2: Data (X.121) 3: Telex (F.69) 6: Land Mobile (E.212) 8: National 9: Private 10: ERMES 13: Internet (IP) 18: WAP Client Id (to be defined by WAP Forum)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>destAddrTon</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the type of number (TON) to be used in the SME destination address parameters. Only for SubmitSm SubmitMulti CancelSm and DataSm. The following TON values are defined: 0: Unknown 1: International 2: National 3: Network Specific 4: Subscriber Number 5: Alphanumeric 6: Abbreviated</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>lazySessionCreation</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sessions can be lazily created to avoid exceptions if the SMSC is not available when the Camel producer is started. Camel will check the in message headers 'CamelSmppSystemId' and 'CamelSmppPassword' of the first exchange. If they are present Camel will use these data to connect to the SMSC.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>numberingPlanIndicator</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the numeric plan indicator (NPI) to be used in the SME. The following NPI values are defined: 0: Unknown 1: ISDN (E163/E164) 2: Data (X.121) 3: Telex (F.69) 6: Land Mobile (E.212) 8: National 9: Private 10: ERMES 13: Internet (IP) 18: WAP Client Id (to be defined by WAP Forum)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>priorityFlag</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows the originating SME to assign a priority level to the short message. Only for SubmitSm and SubmitMulti. Four Priority Levels are supported: 0: Level 0 (lowest) priority 1: Level 1 priority 2: Level 2 priority 3: Level 3 (highest) priority</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>protocolId</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The protocol id</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>registeredDelivery</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is used to request an SMSC delivery receipt and/or SME originated acknowledgements. The following values are defined: 0: No SMSC delivery receipt requested. 1: SMSC delivery receipt requested where final delivery outcome is success or failure. 2: SMSC delivery receipt requested where the final delivery outcome is delivery failure.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>replaceIfPresentFlag</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to request the SMSC to replace a previously submitted message that is still pending delivery. The SMSC will replace an existing message provided that the source address destination address and service type match the same fields in the new message. The following replace if present flag values are defined: 0: Don&#8217;t replace 1: Replace</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>serviceType</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The service type parameter can be used to indicate the SMS Application service associated with the message. The following generic service_types are defined: CMT: Cellular Messaging CPT: Cellular Paging VMN: Voice Mail Notification VMA: Voice Mail Alerting WAP: Wireless Application Protocol USSD: Unstructured Supplementary Services Data</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">CMT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sourceAddr</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the address of SME (Short Message Entity) which originated this message.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1616</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sourceAddrNpi</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the numeric plan indicator (NPI) to be used in the SME originator address parameters. The following NPI values are defined: 0: Unknown 1: ISDN (E163/E164) 2: Data (X.121) 3: Telex (F.69) 6: Land Mobile (E.212) 8: National 9: Private 10: ERMES 13: Internet (IP) 18: WAP Client Id (to be defined by WAP Forum)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sourceAddrTon</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the type of number (TON) to be used in the SME originator address parameters. The following TON values are defined: 0: Unknown 1: International 2: National 3: Network Specific 4: Subscriber Number 5: Alphanumeric 6: Abbreviated</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>typeOfNumber</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the type of number (TON) to be used in the SME. The following TON values are defined: 0: Unknown 1: International 2: National 3: Network Specific 4: Subscriber Number 5: Alphanumeric 6: Abbreviated</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>enquireLinkTimer</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the interval in milliseconds between the confidence checks. The confidence check is used to test the communication path between an ESME and an SMSC.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sessionStateListener</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">You can refer to a org.jsmpp.session.SessionStateListener in the Registry to receive callbacks when the session state changed.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SessionStateListener</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transactionTimer</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the maximum period of inactivity allowed after a transaction after which an SMPP entity may assume that the session is no longer active. This timer may be active on either communicating SMPP entity (i.e. SMSC or ESME).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">10000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>alphabet</strong> (codec)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines encoding of data according the SMPP 3.4 specification section 5.2.19. 0: SMSC Default Alphabet 4: 8 bit Alphabet 8: UCS2 Alphabet</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>dataCoding</strong> (codec)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the data coding according the SMPP 3.4 specification section 5.2.19. Example data encodings are: 0: SMSC Default Alphabet 3: Latin 1 (ISO-8859-1) 4: Octet unspecified (8-bit binary) 8: UCS2 (ISO/IEC-10646) 13: Extended Kanji JIS(X 0212-1990)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>encoding</strong> (codec)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the encoding scheme of the short message user data. Only for SubmitSm ReplaceSm and SubmitMulti.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">ISO-8859-1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpProxyHost</strong> (proxy)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If you need to tunnel SMPP through a HTTP proxy set this attribute to the hostname or ip address of your HTTP proxy.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpProxyPassword</strong> (proxy)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If your HTTP proxy requires basic authentication set this attribute to the password required for your HTTP proxy.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpProxyPort</strong> (proxy)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If you need to tunnel SMPP through a HTTP proxy set this attribute to the port of your HTTP proxy.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">3128</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpProxyUsername</strong> (proxy)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If your HTTP proxy requires basic authentication set this attribute to the username required for your HTTP proxy.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>proxyHeaders</strong> (proxy)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">These headers will be passed to the proxy server while establishing the connection.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>password</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The password for connecting to SMSC server.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>systemId</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system id (username) for connecting to SMSC server.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">smppclient</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>usingSSL</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether using SSL with the smpps protocol</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>You can have as many of these options as you like.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">smpp://smppclient@localhost:2775?password=password&amp;enquireLinkTimer=3000&amp;transactionTimer=5000&amp;systemType=consumer</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_producer_message_headers">Producer Message Headers</h3>
+<div class="paragraph">
+<p>The following message headers can be used to affect the behavior of the
+SMPP producer</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Header</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppDestAddr</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List</code>/<code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for SubmitSm, SubmitMulti, CancelSm and DataSm</strong> Defines the
+destination SME address(es). For mobile terminated messages, this is the
+directory number of the recipient MS. Is must be a <code>List&lt;String&gt;</code> for
+SubmitMulti and a <code>String</code> otherwise.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppDestAddrTon</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Byte</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for SubmitSm, SubmitMulti, CancelSm and DataSm</strong> Defines the type
+of number (TON) to be used in the SME destination address parameters.
+Use the <code>sourceAddrTon</code> URI option values defined above.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppDestAddrNpi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Byte</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for SubmitSm, SubmitMulti, CancelSm and DataSm</strong> Defines the
+numeric plan indicator (NPI) to be used in the SME destination address
+parameters. Use the URI option <code>sourceAddrNpi</code> values defined above.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppSourceAddr</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the address of SME (Short Message Entity) which originated this
+message.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppSourceAddrTon</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Byte</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the type of number (TON) to be used in the SME originator
+address parameters. Use the <code>sourceAddrTon</code> URI option values defined
+above.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppSourceAddrNpi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Byte</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the numeric plan indicator (NPI) to be used in the SME
+originator address parameters. Use the URI option <code>sourceAddrNpi</code> values
+defined above.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppServiceType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The service type parameter can be used to indicate the SMS Application
+service associated with the message. Use the URI option <code>serviceType</code>
+settings above.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppRegisteredDelivery</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Byte</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for SubmitSm, ReplaceSm, SubmitMulti and DataSm</strong> Is used to
+request an SMSC delivery receipt and/or SME originated acknowledgements.
+Use the URI option <code>registeredDelivery</code> settings above.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppPriorityFlag</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Byte</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for SubmitSm and SubmitMulti</strong> Allows the originating SME to assign
+a priority level to the short message. Use the URI option <code>priorityFlag</code>
+settings above.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppScheduleDeliveryTime</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Date</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for SubmitSm, SubmitMulti and ReplaceSm</strong> This parameter specifies
+the scheduled time at which the message delivery should be first
+attempted. It defines either the absolute date and time or relative time
+from the current SMSC time at which delivery of this message will be
+attempted by the SMSC. It can be specified in either absolute time
+format or relative time format. The encoding of a time format is
+specified in chapter 7.1.1. in the smpp specification v3.4.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppValidityPeriod</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code>/<code>Date</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for SubmitSm, SubmitMulti and ReplaceSm</strong> The validity period
+parameter indicates the SMSC expiration time, after which the message
+should be discarded if not delivered to the destination. If it&#8217;s
+provided as <code>Date</code>, it&#8217;s interpreted as absolute time. <strong>Camel 2.9.1
+onwards:</strong> It can be defined in absolute time format or relative time
+format if you provide it as <code>String</code> as specified in chapter 7.1.1 in
+the smpp specification v3.4.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppReplaceIfPresentFlag</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Byte</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for SubmitSm and SubmitMulti</strong> The replace if present flag
+parameter is used to request the SMSC to replace a previously submitted
+message, that is still pending delivery. The SMSC will replace an
+existing message provided that the source address, destination address
+and service type match the same fields in the new message. The following
+values are defined: <code>0</code>, Don&#8217;t replace and <code>1</code>, Replace</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppAlphabet</code> / <code>CamelSmppDataCoding</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Byte</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.5</strong> <strong>For SubmitSm, SubmitMulti and ReplaceSm</strong> (Prior to <strong>Camel
+2.9</strong> use <code>CamelSmppDataCoding</code> instead of <code>CamelSmppAlphabet</code>.) The data
+coding according to the SMPP 3.4 specification, section 5.2.19. Use the
+URI option <code>alphabet</code> settings above.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppOptionalParameters</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Map&lt;String, String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Deprecated and will be removed in Camel 2.13.0/3.0.0</strong><br>
+ <strong>Camel 2.10.5 and 2.11.1 onwards and only for SubmitSm, SubmitMulti and
+DataSm</strong> The optional parameters send back by the SMSC.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppOptionalParameter</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Map&lt;Short, Object&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.10.7 and 2.11.2 onwards and only for SubmitSm, SubmitMulti and
+DataSm</strong> The optional parameter which are send to the SMSC. The value is
+converted in the following way: <code>String</code> &#8594; <code>org.jsmpp.bean.OptionalParameter.COctetString</code>,
+<code>byte[]</code> &#8594; <code>org.jsmpp.bean.OptionalParameter.OctetString</code>,
+<code>Byte</code> &#8594; <code>org.jsmpp.bean.OptionalParameter.Byte</code>,
+<code>Integer</code> &#8594; <code>org.jsmpp.bean.OptionalParameter.Int</code>,
+<code>Short</code> &#8594; <code>org.jsmpp.bean.OptionalParameter.Short</code>,
+<code>null</code> &#8594; <code>org.jsmpp.bean.OptionalParameter.Null</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelSmppEncoding</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.14.1 and Camel 2.15.0 onwards and</strong>*only for SubmitSm,
+SubmitMulti and DataSm*.  Specifies the encoding (character set name) of
+the bytes in the message body.  If the message body is a string then
+this is not relevant because Java Strings are always Unicode.  If the
+body is a byte array then this header can be used to indicate that it is
+ISO-8859-1 or some other value.  Default value is specified by the
+endpoint configuration parameter <em>encoding</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelSmppSplittingPolicy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.14.1 and Camel 2.15.0 onwards and</strong>*only for SubmitSm,
+SubmitMulti and DataSm*.  Specifies the policy for message splitting for
+this exchange.  Possible values are described in the endpoint
+configuration parameter <em>splittingPolicy</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following message headers are used by the SMPP producer to set the
+response from the SMSC in the message header</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Header</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code>/<code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The id to identify the submitted short message(s) for later use. <strong>From
+Camel 2.9.0</strong>: In case of a ReplaceSm, QuerySm, CancelSm and DataSm this
+header vaule is a <code>String</code>. In case of a SubmitSm or SubmitMultiSm this
+header vaule is a <code>List&lt;String&gt;</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppSentMessageCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>From Camel 2.9 onwards only for SubmitSm and SubmitMultiSm</strong> The total
+number of messages which has been sent.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppError</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Map&lt;String, List&lt;Map&lt;String, Object&gt;&gt;&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>From Camel 2.9 onwards only for SubmitMultiSm</strong> The errors which
+occurred by sending the short message(s) the form <code>Map&lt;String, List&lt;Map&lt;String, Object&gt;&gt;&gt;</code> (messageID : (destAddr :
+address, error : errorCode)).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppOptionalParameters</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Map&lt;String, String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Deprecated and will be removed in Camel 2.13.0/3.0.0</strong>
+<strong>From Camel 2.11.1 onwards only for DataSm</strong> The optional parameters
+which are returned from the SMSC by sending the message.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppOptionalParameter</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Map&lt;Short, Object&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>From Camel 2.10.7, 2.11.2 onwards only for DataSm</strong> The optional
+parameter which are returned from the SMSC by sending the message. The
+key is the <code>Short</code> code for the optional parameter. The value is
+converted in the following way:
+<code>org.jsmpp.bean.OptionalParameter.COctetString</code> &#8594; <code>String</code>,
+<code>org.jsmpp.bean.OptionalParameter.OctetString</code> &#8594; <code>byte[]</code>,
+<code>org.jsmpp.bean.OptionalParameter.Byte</code> &#8594; <code>Byte</code>,
+<code>org.jsmpp.bean.OptionalParameter.Int</code> &#8594; <code>Integer</code>,
+<code>org.jsmpp.bean.OptionalParameter.Short</code> &#8594; <code>Short</code>,
+<code>org.jsmpp.bean.OptionalParameter.Null</code> &#8594; <code>null</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_consumer_message_headers">Consumer Message Headers</h3>
+<div class="paragraph">
+<p>The following message headers are used by the SMPP consumer to set the
+request data from the SMSC in the message header</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Header</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppSequenceNumber</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for AlertNotification, DeliverSm and DataSm</strong> A sequence number
+allows a response PDU to be correlated with a request PDU. The
+associated SMPP response PDU must preserve this field.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppCommandId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for AlertNotification, DeliverSm and DataSm</strong> The command id field
+identifies the particular SMPP PDU. For the complete list of defined
+values see chapter 5.1.2.1 in the smpp specification v3.4.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppSourceAddr</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for AlertNotification, DeliverSm and DataSm</strong> Defines the address
+of SME (Short Message Entity) which originated this message.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppSourceAddrNpi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Byte</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for AlertNotification and DataSm</strong> Defines the numeric plan
+indicator (NPI) to be used in the SME originator address parameters. Use
+the URI option <code>sourceAddrNpi</code> values defined above.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppSourceAddrTon</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Byte</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for AlertNotification and DataSm</strong> Defines the type of number (TON)
+to be used in the SME originator address parameters. Use the
+<code>sourceAddrTon</code> URI option values defined above.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppEsmeAddr</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for AlertNotification</strong> Defines the destination ESME address. For
+mobile terminated messages, this is the directory number of the
+recipient MS.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppEsmeAddrNpi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Byte</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for AlertNotification</strong> Defines the numeric plan indicator (NPI) to
+be used in the ESME originator address parameters. Use the URI option
+<code>sourceAddrNpi</code> values defined above.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppEsmeAddrTon</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Byte</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for AlertNotification</strong> Defines the type of number (TON) to be used
+in the ESME originator address parameters. Use the <code>sourceAddrTon</code> URI
+option values defined above.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for smsc DeliveryReceipt and DataSm</strong> The message ID allocated to
+the message by the SMSC when originally submitted.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppDelivered</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for smsc DeliveryReceipt</strong> Number of short messages delivered. This
+is only relevant where the original message was submitted to a
+distribution list.The value is padded with leading zeros if necessary.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppDoneDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Date</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for smsc DeliveryReceipt</strong> The time and date at which the short
+message reached it&#8217;s final state. The format is as follows: YYMMDDhhmm.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppStatus</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DeliveryReceiptState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for smsc DeliveryReceipt:</strong> The final status of the message. The
+following values are defined: <code>DELIVRD</code>: Message is delivered to destination,
+<code>EXPIRED</code>: Message validity period has expired,
+<code>DELETED</code>: Message has been deleted,
+<code>UNDELIV</code>: Message is undeliverable,
+<code>ACCEPTD</code>: Message is in accepted state (i.e. has been manually read on
+behalf of the subscriber by customer service),
+<code>UNKNOWN</code>: Message is in invalid state,
+<code>REJECTD</code>: Message is in a rejected state</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppCommandStatus</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for DataSm</strong> The Command status of the message.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppError</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for smsc DeliveryReceipt</strong> Where appropriate this may hold a
+Network specific error code or an SMSC error code for the attempted
+delivery of the message. These errors are Network or SMSC specific and
+are not included here.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppSubmitDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Date</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for smsc DeliveryReceipt</strong> The time and date at which the short
+message was submitted. In the case of a message which has been replaced,
+this is the date that the original message was replaced. The format is
+as follows: YYMMDDhhmm.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppSubmitted</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for smsc DeliveryReceipt</strong> Number of short messages originally
+submitted. This is only relevant when the original message was submitted
+to a distribution list.The value is padded with leading zeros if
+necessary.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppDestAddr</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for DeliverSm and DataSm:</strong> Defines the destination SME address.
+For mobile terminated messages, this is the directory number of the
+recipient MS.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppScheduleDeliveryTime</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for DeliverSm:</strong> This parameter specifies the scheduled time at
+which the message delivery should be first attempted. It defines either
+the absolute date and time or relative time from the current SMSC time
+at which delivery of this message will be attempted by the SMSC. It can
+be specified in either absolute time format or relative time format. The
+encoding of a time format is specified in Section 7.1.1. in the smpp
+specification v3.4.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppValidityPeriod</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for DeliverSm</strong> The validity period parameter indicates the SMSC
+expiration time, after which the message should be discarded if not
+delivered to the destination. It can be defined in absolute time format
+or relative time format. The encoding of absolute and relative time
+format is specified in Section 7.1.1 in the smpp specification v3.4.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppServiceType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for DeliverSm and DataSm</strong> The service type parameter indicates the
+SMS Application service associated with the message.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppRegisteredDelivery</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Byte</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for DataSm</strong> Is used to request an delivery receipt and/or SME
+originated acknowledgements. Same values as in Producer header list
+above.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppDestAddrNpi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Byte</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for DataSm</strong> Defines the numeric plan indicator (NPI) in the
+destination address parameters. Use the URI option <code>sourceAddrNpi</code>
+values defined above.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppDestAddrTon</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Byte</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>only for DataSm</strong> Defines the type of number (TON) in the destination
+address parameters. Use the <code>sourceAddrTon</code> URI option values defined
+above.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppMessageType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.6 onwards</strong>: Identifies the type of an incoming message:
+<code>AlertNotification</code>: an SMSC alert notification,
+<code>DataSm</code>: an SMSC data short message,
+<code>DeliveryReceipt</code>: an SMSC delivery receipt,
+<code>DeliverSm</code>: an SMSC deliver short message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppOptionalParameters</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Map&lt;String, Object&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Deprecated and will be removed in Camel 2.13.0/3.0.0</strong>
+<strong>Camel 2.10.5 onwards and only for DeliverSm</strong> The optional parameters
+send back by the SMSC.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSmppOptionalParameter</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Map&lt;Short, Object&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.10.7, 2.11.2 onwards and only for DeliverSm</strong> The optional
+parameters send back by the SMSC. The key is the <code>Short</code> code for the
+optional parameter. The value is converted in the following way:
+<code>org.jsmpp.bean.OptionalParameter.COctetString</code> &#8594; <code>String</code>,
+<code>org.jsmpp.bean.OptionalParameter.OctetString</code> &#8594; <code>byte[]</code>,
+<code>org.jsmpp.bean.OptionalParameter.Byte</code> &#8594; <code>Byte</code>,
+<code>org.jsmpp.bean.OptionalParameter.Int</code> &#8594; <code>Integer</code>,
+<code>org.jsmpp.bean.OptionalParameter.Short</code> &#8594; <code>Short</code>,
+<code>org.jsmpp.bean.OptionalParameter.Null</code> &#8594; <code>null</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<strong>JSMPP library</strong>
+See the documentation of the <a href="http://jsmpp.org">JSMPP Library</a> for more
+details about the underlying library.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exception_handling">Exception handling</h3>
+<div class="paragraph">
+<p>This component supports the general Camel exception handling
+capabilities</p>
+</div>
+<div class="paragraph">
+<p>When an error occurs sending a message with SubmitSm (the default
+action), the org.apache.camel.component.smpp.SmppException is thrown
+with a nested exception, org.jsmpp.extra.NegativeResponseException.
+Call NegativeResponseException.getCommandStatus() to obtain the exact
+SMPP negative response code, the values are explained in the SMPP
+specification 3.4, section 5.1.3.<br>
+ <strong>Camel 2.8 onwards</strong>: When the SMPP consumer receives a <code>DeliverSm</code> or
+<code>DataSm</code> short message and the processing of these messages fails, you
+can also throw a <code>ProcessRequestException</code> instead of handle the
+failure. In this case, this exception is forwarded to the underlying
+<a href="http://jsmpp.org">JSMPP library</a> which will return the included error
+code to the SMSC. This feature is useful to e.g. instruct the SMSC to
+resend the short message at a later time. This could be done with the
+following lines of code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("smpp://smppclient@localhost:2775?password=password&amp;enquireLinkTimer=3000&amp;transactionTimer=5000&amp;systemType=consumer")
+  .doTry()
+    .to("bean:dao?method=updateSmsState")
+  .doCatch(Exception.class)
+    .throwException(new ProcessRequestException("update of sms state failed", 100))
+  .end();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Please refer to the <a href="http://smsforum.net/SMPP_v3_4_Issue1_2.zip">SMPP
+specification</a> for the complete list of error codes and their meanings.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_samples">Samples</h3>
+<div class="paragraph">
+<p>A route which sends an SMS using the Java DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start")
+  .to("smpp://smppclient@localhost:2775?
+      password=password&amp;enquireLinkTimer=3000&amp;transactionTimer=5000&amp;systemType=producer");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A route which sends an SMS using the Spring XML DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+  &lt;from uri="direct:start"/&gt;
+  &lt;to uri="smpp://smppclient@localhost:2775?
+           password=password&amp;amp;enquireLinkTimer=3000&amp;amp;transactionTimer=5000&amp;amp;systemType=producer"/&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A route which receives an SMS using the Java DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("smpp://smppclient@localhost:2775?password=password&amp;enquireLinkTimer=3000&amp;transactionTimer=5000&amp;systemType=consumer")
+  .to("bean:foo");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A route which receives an SMS using the Spring XML DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">  &lt;route&gt;
+     &lt;from uri="smpp://smppclient@localhost:2775?
+                password=password&amp;amp;enquireLinkTimer=3000&amp;amp;transactionTimer=5000&amp;amp;systemType=consumer"/&gt;
+     &lt;to uri="bean:foo"/&gt;
+  &lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<strong>SMSC simulator</strong>
+If you need an SMSC simulator for your test, you can use the simulator
+provided by
+<a href="http://opensmpp.logica.com/CommonPart/Download/download2.html#simulator">Logica</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_debug_logging">Debug logging</h3>
+<div class="paragraph">
+<p>This component has log level <strong>DEBUG</strong>, which can be helpful in debugging
+problems. If you use log4j, you can add the following line to your
+configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">log4j.logger.org.apache.camel.component.smpp=DEBUG</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/snmp-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/slack-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

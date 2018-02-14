@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Simple JMS Batch Component Available as of Camel version 2.16
+ SJMS Batch is a specialized component for highly performant, transactional batch consumption from a JMS queue. It can be thought of as a hybrid of a consumer-only component and an aggregator.
+ A common use case in Camel is to consume messages from a queue and aggregate them before sending the aggregated state to another endpoint. In order to ensure that data is not lost if the system performing the processing fails, it is typically consumed within a transaction from the queue, and once aggregated stored in a persistent AggregationRepository, such as the one found in the JDBC Component.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Simple JMS Batch Component Available as of Camel version 2.16
+ SJMS Batch is a specialized component for highly performant, transactional batch consumption from a JMS queue. It can be thought of as a hybrid of a consumer-only component and an aggregator.
+ A common use case in Camel is to consume messages from a queue and aggregate them before sending the aggregated state to another endpoint. In order to ensure that data is not lost if the system performing the processing fails, it is typically consumed within a transaction from the queue, and once aggregated stored in a persistent AggregationRepository, such as the one found in the JDBC Component.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/sjms-batch-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/sjms-batch-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_simple_jms_batch_component">Simple JMS Batch Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.16</strong></p>
+</div>
+<div class="paragraph">
+<p>SJMS Batch is a specialized component for highly performant,
+transactional batch consumption from a JMS queue. It can be thought of
+as a hybrid of a consumer-only component and an
+<a href="aggregator2.html">aggregator</a>.</p>
+</div>
+<div class="paragraph">
+<p>A common use case in Camel is to consume messages from a queue and
+aggregate them before sending the aggregated state to another endpoint.
+In order to ensure that data is not lost if the system performing the
+processing fails, it is typically consumed within a transaction from the
+queue, and once aggregated stored in a persistent
+<code>AggregationRepository</code>, such as the one found in the
+<a href="jdbc.html">JDBC Component</a>.</p>
+</div>
+<div class="paragraph">
+<p>The behavior of the aggregator pattern involves fetching data from the
+<code>AggregationRepository</code> before an incoming message is aggregated, and
+writing back the result afterwards. By nature, the reads and writes take
+progressively longer as the number of aggregated artifacts increases. A
+rough example of this using arbitrary time units that demonstrates the
+impact of this is as follows:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Item</th>
+<th class="tableblock halign-left valign-top">Read Time</th>
+<th class="tableblock halign-left valign-top">Write Time</th>
+<th class="tableblock halign-left valign-top">Total Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">9</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">25</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">36</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">49</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">81</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">100</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>In contrast, consumption performance using the SJMS Batch component is
+linear. Each message is consumed and aggregated using an
+<code>AggregationStrategy</code> before the next one is fetched. As all of the
+consumption and aggregation is performed in a single JMS transaction no
+external storage is required to persist the intermediate state - this
+avoids the read and write costs described above. In practice, this
+yields multiple orders of magnitude higher throughput.</p>
+</div>
+<div class="paragraph">
+<p>Once a completion condition is met, either by size or period since first
+message, the aggregated <code>Exchange</code> is passed into the route. During the
+processing of this <code>Exchange</code>, if an exception is thrown or the system
+shuts down, all of the original consumed messages end up back on the
+queue (or are placed on the dead-letter queue depending on the broker
+configuration).</p>
+</div>
+<div class="paragraph">
+<p>Unlike using a regular aggregator, there is no facility for an
+aggregation condition, meaning that it is not possible to batch consume
+into multiple groups of messages. All consumed messages are aggregated
+together into a single batch.</p>
+</div>
+<div class="paragraph">
+<p>Multiple JMS consumer support is available which allows you to consume
+in parallel using the one route, and at the same time use facilities
+like JMS message groups to group related messages.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-sjms&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>sjms:[queue:]destinationName[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where <code>destinationName</code> is a JMS queue. By default, the
+<code>destinationName</code> is interpreted as a queue name.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>sjms:FOO.BAR</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can include the optional <code>queue:</code> prefix, if you prefer:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>sjms:queue:FOO.BAR</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Topic consumption is not supported, as there is no advantage to using
+batch consumption within that context. Topic messages are usually
+non-persistent, and loss is acceptable. If consumed within a transaction
+that fails, a topic message will likely not be redelivered by the
+broker. A plain <a href="sjms.html">SJMS</a> consumer endpoint can be used in
+conjunction with a regular non-persistence backed
+<a href="aggregator2.html">aggregator</a> in this scenario.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_component_options_and_configurations">Component Options and Configurations</h3>
+<div class="paragraph">
+<p>The Simple JMS Batch component supports 5 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionFactory</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A ConnectionFactory is required to enable the SjmsBatchComponent.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ConnectionFactory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>asyncStartListener</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to startup the consumer message listener asynchronously when starting a route. For example if a JmsConsumer cannot get a connection to a remote JMS broker then it may block while retrying and/or failover. This will cause Camel to block while starting routes. By setting this option to true you will let routes startup while the JmsConsumer connects to the JMS broker using a dedicated thread in asynchronous mode. If this option is used then beware that if the connection could not be established then an exception is logged at WARN level and the consumer will not be able to receive messages; You can then restart the route to retry.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>recoveryInterval</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the interval between recovery attempts i.e. when a connection is being refreshed in milliseconds. The default is 5000 ms that is 5 seconds.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>headerFilterStrategy</strong> (filter)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HeaderFilterStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Simple JMS Batch endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sjms-batch:destinationName</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>destinationName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The destination name. Only queues are supported names may be prefixed by 'queue:'.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_23_parameters">Query Parameters (23 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>aggregationStrategy</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The aggregation strategy to use which merges all the batched messages into a single message</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AggregationStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>allowNullBody</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to allow sending messages with no body. If this option is false and the message body is null then an JMSException is thrown.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>completionInterval</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The completion interval in millis which causes batches to be completed in a scheduled fixed rate every interval. The batch may be empty if the timeout triggered and there was no messages in the batch. Notice you cannot use both completion timeout and completion interval at the same time only one can be configured.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>completionPredicate</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The completion predicate which causes batches to be completed when the predicate evaluates as true. The predicate can also be configured using the simple language using the string syntax. You may want to set the option eagerCheckCompletion to true to let the predicate match the incoming message as otherwise it matches the aggregated message.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>completionSize</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of messages consumed at which the batch will be completed</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>completionTimeout</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timeout in millis from receipt of the first first message when the batch will be completed. The batch may be empty if the timeout triggered and there was no messages in the batch. Notice you cannot use both completion timeout and completion interval at the same time only one can be configured.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">500</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>consumerCount</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of JMS sessions to consume from</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>eagerCheckCompletion</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use eager completion checking which means that the completionPredicate will use the incoming Exchange. As opposed to without eager completion checking the completionPredicate will use the aggregated Exchange.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>includeAllJMSXProperties</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to include all JMSXxxx properties when mapping from JMS to Camel Message. Setting this to true will include properties such as JMSXAppID and JMSXUserID etc. Note: If you are using a custom headerFilterStrategy then this option does not apply.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>mapJmsMessage</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether Camel should auto map the received JMS message to a suited payload type such as javax.jms.TextMessage to a String etc. See section about how mapping works below for more details.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>pollDuration</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The duration in milliseconds of each poll for messages. completionTimeOut will be used if it is shorter and a batch has started.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sendEmptyMessageWhenIdle</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If using completion timeout or interval then the batch may be empty if the timeout triggered and there was no messages in the batch. If this option is true and the batch is empty then an empty message is added to the batch so an empty message is routed.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>asyncStartListener</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to startup the consumer message listener asynchronously when starting a route. For example if a JmsConsumer cannot get a connection to a remote JMS broker then it may block while retrying and/or failover. This will cause Camel to block while starting routes. By setting this option to true you will let routes startup while the JmsConsumer connects to the JMS broker using a dedicated thread in asynchronous mode. If this option is used then beware that if the connection could not be established then an exception is logged at WARN level and the consumer will not be able to receive messages; You can then restart the route to retry.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>headerFilterStrategy</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom HeaderFilterStrategy to filter header to and from Camel message.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HeaderFilterStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>jmsKeyFormatStrategy</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pluggable strategy for encoding and decoding JMS keys so they can be compliant with the JMS specification. Camel provides two implementations out of the box: default and passthrough. The default strategy will safely marshal dots and hyphens (. and -). The passthrough strategy leaves the key as is. Can be used for JMS brokers which do not care whether JMS header keys contain illegal characters. You can provide your own implementation of the org.apache.camel.component.jms.JmsKeyFormatStrategy and refer to it using the notation.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JmsKeyFormatStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>keepAliveDelay</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The delay in millis between attempts to re-establish a valid session. If this is a positive value the SjmsBatchConsumer will attempt to create a new session if it sees an IllegalStateException during message consumption. This delay value allows you to pause between attempts to prevent spamming the logs. If this is a negative value (default is -1) then the SjmsBatchConsumer will behave as it always has before - that is it will bail out and the route will shut down if it sees an IllegalStateException.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">-1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>messageCreatedStrategy</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the given MessageCreatedStrategy which are invoked when Camel creates new instances of javax.jms.Message objects when Camel is sending a JMS message.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MessageCreatedStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>recoveryInterval</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the interval between recovery attempts i.e. when a connection is being refreshed in milliseconds. The default is 5000 ms that is 5 seconds.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>timeoutCheckerExecutor Service</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If using the completionInterval option a background thread is created to trigger the completion interval. Set this option to provide a custom thread pool to be used rather than creating a new thread for every consumer.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ScheduledExecutor Service</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The <code>completionSize</code> endpoint attribute is used in conjunction with
+<code>completionTimeout</code>, where the first condition to be met will cause the
+aggregated <code>Exchange</code> to be emitted down the route.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/sjms-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/sip-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

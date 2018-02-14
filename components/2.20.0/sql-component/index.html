@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='SQL Component Available as of Camel version 1.4
+ The sql: component allows you to work with databases using JDBC queries. The difference between this component and JDBC component is that in case of SQL the query is a property of the endpoint and it uses message payload as parameters passed to the query.
+ This component uses spring-jdbc behind the scenes for the actual SQL handling.
+ Maven users will need to add the following dependency to their pom.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='SQL Component Available as of Camel version 1.4
+ The sql: component allows you to work with databases using JDBC queries. The difference between this component and JDBC component is that in case of SQL the query is a property of the endpoint and it uses message payload as parameters passed to the query.
+ This component uses spring-jdbc behind the scenes for the actual SQL handling.
+ Maven users will need to add the following dependency to their pom.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/sql-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/sql-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_sql_component">SQL Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 1.4</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>sql:</strong> component allows you to work with databases using JDBC
+queries. The difference between this component and <a href="jdbc.html">JDBC</a>
+component is that in case of SQL the query is a property of the endpoint
+and it uses message payload as parameters passed to the query.</p>
+</div>
+<div class="paragraph">
+<p>This component uses <code>spring-jdbc</code> behind the scenes for the actual SQL
+handling.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-sql&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The SQL component also supports:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a JDBC based repository for the
+<a href="idempotent-consumer.html">Idempotent Consumer</a> EIP pattern. See
+further below.</p>
+</li>
+<li>
+<p>a JDBC based repository for the <a href="aggregator2.html">Aggregator</a> EIP
+pattern. See further below.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="paragraph">
+<p>WARNING:From Camel 2.11 onwards this component can create both consumer (e.g.
+<code>from()</code>) and producer endpoints (e.g. <code>to()</code>).
+In previous versions, it could only act as a producer.</p>
+</div>
+<div class="paragraph">
+<p>INFO:This component can be used as a
+<a href="http://camel.apache.org/transactional-client.html">Transactional Client</a>.</p>
+</div>
+<div class="paragraph">
+<p>The SQL component uses the following endpoint URI notation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">sql:select * from table where id=# order by name[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>From Camel 2.11 onwards you can use named parameters by using
+:`#name_of_the_parameter` style as shown:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">sql:select * from table where id=:#myId order by name[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When using named parameters, Camel will lookup the names from, in the
+given precedence:<br>
+ 1. from message body if its a <code>java.util.Map</code><br>
+ 2. from message headers</p>
+</div>
+<div class="paragraph">
+<p>If a named parameter cannot be resolved, then an exception is thrown.</p>
+</div>
+<div class="paragraph">
+<p>From <strong>Camel 2.14</strong> onward you can use Simple expressions as parameters as
+shown:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">sql:select * from table where id=:#${property.myId} order by name[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice that the standard <code>?</code> symbol that denotes the parameters to an
+SQL query is substituted with the <code>#</code> symbol, because the <code>?</code> symbol is
+used to specify options for the endpoint. The <code>?</code> symbol replacement can
+be configured on endpoint basis.</p>
+</div>
+<div class="paragraph">
+<p>From <strong>Camel 2.17</strong> onwards you can externalize your SQL queries to files
+in the classpath or file system as shown:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">sql:classpath:sql/myquery.sql[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And the myquery.sql file is in the classpath and is just a plain text</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">-- this is a comment
+select *
+from table
+where
+  id = :#${property.myId}
+order by
+  name</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the file you can use multilines and format the SQL as you wish. And
+also use comments such as the – dash line.</p>
+</div>
+<div class="paragraph">
+<p>You can append query options to the URI in the following format,
+<code>?option=value&amp;option=value&amp;&#8230;&#8203;</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The SQL component supports 3 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>dataSource</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the DataSource to use to communicate with the database.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DataSource</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>usePlaceholder</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether to use placeholder and replace all placeholder characters with sign in the SQL queries. This option is default true</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The SQL endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sql:query</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>query</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Sets the SQL query to perform. You can externalize the query by using file: or classpath: as prefix and specify the location of the file.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_45_parameters">Query Parameters (45 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>allowNamedParameters</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to allow using named parameters in the queries.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>dataSource</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the DataSource to use to communicate with the database.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DataSource</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>dataSourceRef</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the reference to a DataSource to lookup from the registry to use for communicating with the database.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>outputClass</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specify the full package and class name to use as conversion when outputType=SelectOne.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>outputHeader</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Store the query result in a header instead of the message body. By default outputHeader == null and the query result is stored in the message body any existing content in the message body is discarded. If outputHeader is set the value is used as the name of the header to store the query result and the original message body is preserved.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>outputType</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Make the output of consumer or producer to SelectList as List of Map or SelectOne as single Java object in the following way: a) If the query has only single column then that JDBC Column object is returned. (such as SELECT COUNT( ) FROM PROJECT will return a Long object. b) If the query has more than one column then it will return a Map of that result. c) If the outputClass is set then it will convert the query result into an Java bean object by calling all the setters that match the column names. It will assume your class has a default constructor to create instance with. d) If the query resulted in more than one rows it throws an non-unique result exception.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">SelectList</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SqlOutputType</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>separator</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The separator to use when parameter values is taken from message body (if the body is a String type) to be inserted at placeholders. Notice if you use named parameters then a Map type is used instead. The default value is comma.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">char</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>breakBatchOnConsumeFail</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether to break batch if onConsume failed.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>expectedUpdateCount</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets an expected update count to validate when using onConsume.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">-1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxMessagesPerPoll</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the maximum number of messages to poll</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>onConsume</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">After processing each row then this query can be executed if the Exchange was processed successfully for example to mark the row as processed. The query can have parameter.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>onConsumeBatchComplete</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">After processing the entire batch this query can be executed to bulk update rows etc. The query cannot have parameters.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>onConsumeFailed</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">After processing each row then this query can be executed if the Exchange failed for example to mark the row as failed. The query can have parameter.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>routeEmptyResultSet</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether empty resultset should be allowed to be sent to the next hop. Defaults to false. So the empty resultset will be filtered out.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sendEmptyMessageWhenIdle</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the polling consumer did not poll any files you can enable this option to send an empty message (no body) instead.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transacted</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables or disables transaction. If enabled then if processing an exchange failed then the consumer break out processing any further exchanges to cause a rollback eager</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useIterator</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets how resultset should be delivered to route. Indicates delivery as either a list or individual object. defaults to true.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>pollStrategy</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pluggable org.apache.camel.PollingConsumerPollingStrategy allowing you to provide your custom implementation to control error handling usually occurred during the poll operation before an Exchange have been created and being routed in Camel.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PollingConsumerPoll Strategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>processingStrategy</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows to plugin to use a custom org.apache.camel.component.sql.SqlProcessingStrategy to execute queries when the consumer has processed the rows/batch.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SqlProcessingStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>batch</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables or disables batch mode</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>noop</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set will ignore the results of the SQL query and use the existing IN message as the OUT message for the continuation of processing</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useMessageBodyForSql</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to use the message body as the SQL and then headers for parameters. If this option is enabled then the SQL in the uri is not used.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>alwaysPopulateStatement</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If enabled then the populateStatement method from org.apache.camel.component.sql.SqlPrepareStatementStrategy is always invoked also if there is no expected parameters to be prepared. When this is false then the populateStatement is only invoked if there is 1 or more expected parameters to be set; for example this avoids reading the message body/headers for SQL queries with no parameters.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>parametersCount</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set greater than zero then Camel will use this count value of parameters to replace instead of querying via JDBC metadata API. This is useful if the JDBC vendor could not return correct parameters count then user may override instead.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>placeholder</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies a character that will be replaced to in SQL query. Notice that it is simple String.replaceAll() operation and no SQL parsing is involved (quoted strings will also change).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">#</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>prepareStatementStrategy</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows to plugin to use a custom org.apache.camel.component.sql.SqlPrepareStatementStrategy to control preparation of the query and prepared statement.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SqlPrepareStatement Strategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>templateOptions</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configures the Spring JdbcTemplate with the key/values from the Map</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>usePlaceholder</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether to use placeholder and replace all placeholder characters with sign in the SQL queries. This option is default true</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backoffErrorThreshold</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of subsequent error polls (failed due some error) that should happen before the backoffMultipler should kick-in.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backoffIdleThreshold</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of subsequent idle polls that should happen before the backoffMultipler should kick-in.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backoffMultiplier</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the scheduled polling consumer backoff if there has been a number of subsequent idles/errors in a row. The multiplier is then the number of polls that will be skipped before the next actual attempt is happening again. When this option is in use then backoffIdleThreshold and/or backoffErrorThreshold must also be configured.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>delay</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Milliseconds before the next poll. You can also specify time values using units such as 60s (60 seconds) 5m30s (5 minutes and 30 seconds) and 1h (1 hour).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">500</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>greedy</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If greedy is enabled then the ScheduledPollConsumer will run immediately again if the previous run polled 1 or more messages.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>initialDelay</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Milliseconds before the first poll starts. You can also specify time values using units such as 60s (60 seconds) 5m30s (5 minutes and 30 seconds) and 1h (1 hour).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>runLoggingLevel</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The consumer logs a start/complete log line when it polls. This option allows you to configure the logging level for that.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">TRACE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LoggingLevel</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>scheduledExecutorService</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for configuring a custom/shared thread pool to use for the consumer. By default each consumer has its own single threaded thread pool.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ScheduledExecutor Service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>scheduler</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a cron scheduler from either camel-spring or camel-quartz2 component</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ScheduledPollConsumer Scheduler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>schedulerProperties</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure additional properties when using a custom scheduler or any of the Quartz2 Spring based scheduler.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>startScheduler</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the scheduler should be auto started.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>timeUnit</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time unit for initialDelay and delay options.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">MILLISECONDS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TimeUnit</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useFixedDelay</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Controls if fixed delay or fixed rate is used. See ScheduledExecutorService in JDK for details.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_treatment_of_the_message_body">Treatment of the message body</h3>
+<div class="paragraph">
+<p>The SQL component tries to convert the message body to an object of
+<code>java.util.Iterator</code> type and then uses this iterator to fill the query
+parameters (where each query parameter is represented by a <code>#</code> symbol
+(or configured placeholder) in the endpoint URI). If the message body is
+not an array or collection, the conversion results in an iterator that
+iterates over only one object, which is the body itself.</p>
+</div>
+<div class="paragraph">
+<p>For example, if the message body is an instance of <code>java.util.List</code>, the
+first item in the list is substituted into the first occurrence of <code><mark></code>
+in the SQL query, the second item in the list is substituted into the
+second occurrence of <code></mark></code>, and so on.</p>
+</div>
+<div class="paragraph">
+<p>If <code>batch</code> is set to <code>true</code>, then the interpretation of the inbound
+message body changes slightly – instead of an iterator of parameters,
+the component expects an iterator that contains the parameter iterators;
+the size of the outer iterator determines the batch size.</p>
+</div>
+<div class="paragraph">
+<p>From Camel 2.16 onwards you can use the option useMessageBodyForSql that
+allows to use the message body as the SQL statement, and then the SQL
+parameters must be provided in a header with the
+key SqlConstants.SQL_PARAMETERS. This allows the SQL component to work
+more dynamic as the SQL query is from the message body.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_result_of_the_query">Result of the query</h3>
+<div class="paragraph">
+<p>For <code>select</code> operations, the result is an instance of
+<code>List&lt;Map&lt;String, Object&gt;&gt;</code> type, as returned by the
+<a href="http://static.springframework.org/spring/docs/2.5.x/api/org/springframework/jdbc/core/JdbcTemplate.html#queryForList(java.lang.String,%20java.lang.Object%91%93)">JdbcTemplate.queryForList()</a>
+method. For <code>update</code> operations, the result is the number of updated
+rows, returned as an <code>Integer</code>.</p>
+</div>
+<div class="paragraph">
+<p>By default, the result is placed in the message body.  If the
+outputHeader parameter is set, the result is placed in the header.  This
+is an alternative to using a full message enrichment pattern to add
+headers, it provides a concise syntax for querying a sequence or some
+other small value into a header.  It is convenient to use outputHeader
+and outputType together:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("jms:order.inbox")
+    .to("sql:select order_seq.nextval from dual?outputHeader=OrderId&amp;outputType=SelectOne")
+    .to("jms:order.booking");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_streamlist">Using StreamList</h3>
+<div class="paragraph">
+<p>From*Camel 2.18* onwards the producer supports outputType=StreamList
+that uses an iterator to stream the output of the query. This allows to
+process the data in a streaming fashion which for example can be used by
+the <a href="splitter.html">Splitter</a> EIP to process each row one at a time,
+and load data from the database as needed.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:withSplitModel")
+        .to("sql:select * from projects order by id?outputType=StreamList&amp;outputClass=org.apache.camel.component.sql.ProjectModel")
+        .to("log:stream")
+        .split(body()).streaming()
+            .to("log:row")
+            .to("mock:result")
+        .end();</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_header_values">Header values</h3>
+<div class="paragraph">
+<p>When performing <code>update</code> operations, the SQL Component stores the update
+count in the following message headers:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Header</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSqlUpdateCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of rows updated for <code>update</code> operations, returned as an
+<code>Integer</code> object. This header is not provided when using
+outputType=StreamList.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSqlRowCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of rows returned for <code>select</code> operations, returned as an
+<code>Integer</code> object. This header is not provided when using
+outputType=StreamList.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSqlQuery</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.8:</strong> Query to execute. This query takes precedence over the
+query specified in the endpoint URI. Note that query parameters in the
+header <em>are</em> represented by a <code>?</code> instead of a <code>#</code> symbol</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>When performing <code>insert</code> operations, the SQL Component stores the rows
+with the generated keys and number of these rown in the following
+message headers (<strong>Available as of Camel 2.12.4, 2.13.1</strong>):</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Header</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelSqlGeneratedKeysRowCount</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of rows in the header that contains generated keys.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelSqlGeneratedKeyRows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rows that contains the generated keys (a list of maps of keys).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_generated_keys">Generated keys</h3>
+<div class="paragraph">
+<p>*Available as of Camel 2.12.4, 2.13.1 and 2.14 *</p>
+</div>
+<div class="paragraph">
+<p>If you insert data using SQL INSERT, then the RDBMS may support auto
+generated keys. You can instruct the SQL producer to return the
+generated keys in headers.<br>
+ To do that set the header <code>CamelSqlRetrieveGeneratedKeys=true</code>. Then
+the generated keys will be provided as headers with the keys listed in
+the table above.</p>
+</div>
+<div class="paragraph">
+<p>You can see more details in this
+<a href="https://git-wip-us.apache.org/repos/asf?p=camel.git;a=blob_plain;f=components/camel-sql/src/test/java/org/apache/camel/component/sql/SqlGeneratedKeysTest.java;hb=3962b23f94bb4bc23011b931add08c3f6833c82e">unit
+test</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configuration">Configuration</h3>
+<div class="paragraph">
+<p>You can now set a reference to a <code>DataSource</code> in the URI directly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">sql:select * from table where id=# order by name?dataSource=myDS</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sample">Sample</h3>
+<div class="paragraph">
+<p>In the sample below we execute a query and retrieve the result as a
+<code>List</code> of rows, where each row is a <code>Map&lt;String, Object</code> and the key is
+the column name.</p>
+</div>
+<div class="paragraph">
+<p>First, we set up a table to use for our sample. As this is based on an
+unit test, we do it in java:</p>
+</div>
+<div class="paragraph">
+<p>The SQL script <code>createAndPopulateDatabase.sql</code> we execute looks like as
+described below:</p>
+</div>
+<div class="paragraph">
+<p>Then we configure our route and our <code>sql</code> component. Notice that we use
+a <code>direct</code> endpoint in front of the <code>sql</code> endpoint. This allows us to
+send an exchange to the <code>direct</code> endpoint with the URI, <code>direct:simple</code>,
+which is much easier for the client to use than the long <code>sql:</code> URI.
+Note that the <code>DataSource</code> is looked up up in the registry, so we can
+use standard Spring XML to configure our <code>DataSource</code>.</p>
+</div>
+<div class="paragraph">
+<p>And then we fire the message into the <code>direct</code> endpoint that will route
+it to our <code>sql</code> component that queries the database.</p>
+</div>
+<div class="paragraph">
+<p>We could configure the <code>DataSource</code> in Spring XML as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml"> &lt;jee:jndi-lookup id="myDS" jndi-name="jdbc/myDataSource"/&gt;</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_named_parameters">Using named parameters</h4>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.11</strong></p>
+</div>
+<div class="paragraph">
+<p>In the given route below, we want to get all the projects from the
+projects table. Notice the SQL query has 2 named parameters, :#lic and
+:#min.<br>
+ Camel will then lookup for these parameters from the message body or
+message headers. Notice in the example above we set two headers with
+constant value<br>
+ for the named parameters:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">   from("direct:projects")
+     .setHeader("lic", constant("ASF"))
+     .setHeader("min", constant(123))
+     .to("sql:select * from projects where license = :#lic and id &gt; :#min order by id")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Though if the message body is a <code>java.util.Map</code> then the named
+parameters will be taken from the body.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">   from("direct:projects")
+     .to("sql:select * from projects where license = :#lic and id &gt; :#min order by id")</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_expression_parameters">Using expression parameters</h4>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.14</strong></p>
+</div>
+<div class="paragraph">
+<p>In the given route below, we want to get all the project from the
+database. It uses the body of the exchange for defining the license and
+uses the value of a property as the second parameter.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:projects")
+  .setBody(constant("ASF"))
+  .setProperty("min", constant(123))
+  .to("sql:select * from projects where license = :#${body} and id &gt; :#${property.min} order by id")</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_in_queries_with_dynamic_values">Using IN queries with dynamic values</h4>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.17</strong></p>
+</div>
+<div class="paragraph">
+<p>From Camel 2.17 onwards the SQL producer allows to use SQL queries with
+IN statements where the IN values is dynamic computed. For example from
+the message body or a header etc.</p>
+</div>
+<div class="paragraph">
+<p>To use IN you need to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>prefix the parameter name with <code>in:</code></p>
+</li>
+<li>
+<p>add <code>( )</code> around the parameter</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An example explains this better. The following query is used:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">-- this is a comment
+select *
+from projects
+where project in (:#in:names)
+order by id</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the following route:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:query")
+    .to("sql:classpath:sql/selectProjectsIn.sql")
+    .to("log:query")
+    .to("mock:query");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then the IN query can use a header with the key names with the dynamic
+values such as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// use an array
+template.requestBodyAndHeader("direct:query", "Hi there!", "names", new String[]{"Camel", "AMQ"});
+
+
+// use a list
+List&lt;String&gt; names = new ArrayList&lt;String&gt;();
+names.add("Camel");
+names.add("AMQ");
+
+template.requestBodyAndHeader("direct:query", "Hi there!", "names", names);
+
+
+// use a string separated values with comma
+template.requestBodyAndHeader("direct:query", "Hi there!", "names", "Camel,AMQ");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The query can also be specified in the endpoint instead of being
+externalized (notice that externalizing makes maintaining the SQL
+queries easier)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:query")
+    .to("sql:select * from projects where project in (:#in:names) order by id")
+    .to("log:query")
+    .to("mock:query");</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_the_jdbc_based_idempotent_repository">Using the JDBC based idempotent repository</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.7</strong>: In this section we will use the JDBC based
+idempotent repository.</p>
+</div>
+<div class="paragraph">
+<p>TIP:*Abstract class*
+From Camel 2.9 onwards there is an abstract class
+<code>org.apache.camel.processor.idempotent.jdbc.AbstractJdbcMessageIdRepository</code>
+you can extend to build custom JDBC idempotent repository.</p>
+</div>
+<div class="paragraph">
+<p>First we have to create the database table which will be used by the
+idempotent repository. For <strong>Camel 2.7</strong>, we use the following schema:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-sql" data-lang="sql">CREATE TABLE CAMEL_MESSAGEPROCESSED ( processorName VARCHAR(255),
+messageId VARCHAR(100) )</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In <strong>Camel 2.8</strong>, we added the createdAt column:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-sql" data-lang="sql">CREATE TABLE CAMEL_MESSAGEPROCESSED ( processorName VARCHAR(255),
+messageId VARCHAR(100), createdAt TIMESTAMP )</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>WARNING:The SQL Server <strong>TIMESTAMP</strong> type is a fixed-length binary-string type. It
+does not map to any of the JDBC time types: <strong>DATE</strong>, <strong>TIME</strong>, or
+<strong>TIMESTAMP</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Customize the JdbcMessageIdRepository</p>
+</div>
+<div class="paragraph">
+<p>Starting with <strong>Camel 2.9.1</strong> you have a few options to tune the
+<code>org.apache.camel.processor.idempotent.jdbc.JdbcMessageIdRepository</code> for
+your needs:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Default Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">createTableIfNotExists</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines whether or not Camel should try to create the table if it
+doesn&#8217;t exist.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tableExistsString</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SELECT 1 FROM CAMEL_MESSAGEPROCESSED WHERE 1 = 0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This query is used to figure out whether the table already exists or
+not. It must throw an exception to indicate the table doesn&#8217;t exist.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">createString</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CREATE TABLE CAMEL_MESSAGEPROCESSED (processorName VARCHAR(255),
+messageId VARCHAR(100), createdAt TIMESTAMP)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The statement which is used to create the table.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">queryString</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SELECT COUNT(*) FROM CAMEL_MESSAGEPROCESSED WHERE processorName = ? AND
+messageId = ?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The query which is used to figure out whether the message already exists
+in the repository (the result is not equals to '0'). It takes two
+parameters. This first one is the processor name (<code>String</code>) and the
+second one is the message id (<code>String</code>).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">insertString</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INSERT INTO CAMEL_MESSAGEPROCESSED (processorName, messageId, createdAt)
+VALUES (?, ?, ?)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The statement which is used to add the entry into the table. It takes
+three parameter. The first one is the processor name (<code>String</code>), the
+second one is the message id (<code>String</code>) and the third one is the
+timestamp (<code>java.sql.Timestamp</code>) when this entry was added to the
+repository.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteString</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DELETE FROM CAMEL_MESSAGEPROCESSED WHERE processorName = ? AND messageId
+= ?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The statement which is used to delete the entry from the database. It
+takes two parameter. This first one is the processor name (<code>String</code>) and
+the second one is the message id (<code>String</code>).</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Using the JDBC based aggregation repository</p>
+</div>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.6</strong></p>
+</div>
+<div class="paragraph">
+<p>INFO: <strong>Using JdbcAggregationRepository in Camel 2.6</strong></p>
+</div>
+<div class="paragraph">
+<p>In Camel 2.6, the JdbcAggregationRepository is provided in the
+<code>camel-jdbc-aggregator</code> component. From Camel 2.7 onwards, the
+<code>JdbcAggregationRepository</code> is provided in the <code>camel-sql</code> component.</p>
+</div>
+<div class="paragraph">
+<p><code>JdbcAggregationRepository</code> is an <code>AggregationRepository</code> which on the
+fly persists the aggregated messages. This ensures that you will not
+loose messages, as the default aggregator will use an in memory only
+<code>AggregationRepository</code>. The <code>JdbcAggregationRepository</code> allows together with Camel to provide
+persistent support for the <a href="aggregator2.html">Aggregator</a>.</p>
+</div>
+<div class="paragraph">
+<p>Only when an <a href="exchange.html">Exchange</a> has been successfully
+processed it will be marked as complete which happens when the <code>confirm</code>
+method is invoked on the <code>AggregationRepository</code>. This means if the same
+<a href="exchange.html">Exchange</a> fails again it will be kept retried until
+it success.</p>
+</div>
+<div class="paragraph">
+<p>You can use option <code>maximumRedeliveries</code> to limit the maximum number of
+redelivery attempts for a given recovered <a href="exchange.html">Exchange</a>.
+You must also set the <code>deadLetterUri</code> option so Camel knows where to
+send the <a href="exchange.html">Exchange</a> when the <code>maximumRedeliveries</code> was
+hit.</p>
+</div>
+<div class="paragraph">
+<p>You can see some examples in the unit tests of camel-sql, for example
+<a href="https://svn.apache.org/repos/asf/camel/trunk/components/camel-sql/src/test/java/org/apache/camel/processor/aggregate/jdbc/JdbcAggregateRecoverDeadLetterChannelTest.java">this
+test</a>.</p>
+</div>
+<div class="paragraph">
+<p>Database</p>
+</div>
+<div class="paragraph">
+<p>To be operational, each aggregator uses two table: the aggregation and
+completed one. By convention the completed has the same name as the
+aggregation one suffixed with <code>"_COMPLETED"</code>. The name must be
+configured in the Spring bean with the <code>RepositoryName</code> property. In the
+following example aggregation will be used.</p>
+</div>
+<div class="paragraph">
+<p>The table structure definition of both table are identical: in both case
+a String value is used as key (<strong>id</strong>) whereas a Blob contains the
+exchange serialized in byte array.<br>
+ However one difference should be remembered: the <strong>id</strong> field does not
+have the same content depending on the table.<br>
+ In the aggregation table <strong>id</strong> holds the correlation Id used by the
+component to aggregate the messages. In the completed table, <strong>id</strong> holds
+the id of the exchange stored in corresponding the blob field.</p>
+</div>
+<div class="paragraph">
+<p>Here is the SQL query used to create the tables, just replace
+<code>"aggregation"</code> with your aggregator repository name.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-sql" data-lang="sql">CREATE TABLE aggregation ( id varchar(255) NOT NULL, exchange blob NOT
+NULL, constraint aggregation_pk PRIMARY KEY (id) ); CREATE TABLE
+aggregation_completed ( id varchar(255) NOT NULL, exchange blob NOT
+NULL, constraint aggregation_completed_pk PRIMARY KEY (id) );</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Storing body and headers as text</p>
+</div>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.11</strong></p>
+</div>
+<div class="paragraph">
+<p>You can configure the <code>JdbcAggregationRepository</code> to store message body
+and select(ed) headers as String in separate columns. For example to
+store the body, and the following two headers <code>companyName</code> and
+<code>accountName</code> use the following SQL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-sql" data-lang="sql">CREATE TABLE aggregationRepo3 ( id varchar(255) NOT NULL, exchange blob
+NOT NULL, body varchar(1000), companyName varchar(1000), accountName
+varchar(1000), constraint aggregationRepo3_pk PRIMARY KEY (id) ); CREATE
+TABLE aggregationRepo3_completed ( id varchar(255) NOT NULL, exchange
+blob NOT NULL, body varchar(1000), companyName varchar(1000),
+accountName varchar(1000), constraint aggregationRepo3_completed_pk
+PRIMARY KEY (id) );</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And then configure the repository to enable this behavior as shown
+below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;bean id="repo3"
+class="org.apache.camel.processor.aggregate.jdbc.JdbcAggregationRepository"&gt;
+&lt;property name="repositoryName" value="aggregationRepo3"/&gt; &lt;property
+name="transactionManager" ref="txManager3"/&gt; &lt;property name="dataSource"
+ref="dataSource3"/&gt; &lt;!-- configure to store the message body and
+following headers as text in the repo --&gt; &lt;property
+name="storeBodyAsText" value="true"/&gt; &lt;property
+name="headersToStoreAsText"&gt; &lt;list&gt; &lt;value&gt;companyName&lt;/value&gt;
+&lt;value&gt;accountName&lt;/value&gt; &lt;/list&gt; &lt;/property&gt; &lt;/bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Codec (Serialization)</p>
+</div>
+<div class="paragraph">
+<p>Since they can contain any type of payload, Exchanges are not
+serializable by design. It is converted into a byte array to be stored
+in a database BLOB field. All those conversions are handled by the
+<code>JdbcCodec</code> class. One detail of the code requires your attention: the
+<code>ClassLoadingAwareObjectInputStream</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>ClassLoadingAwareObjectInputStream</code> has been reused from the
+<a href="http://activemq.apache.org/">Apache ActiveMQ</a> project. It wraps an
+<code>ObjectInputStream</code> and use it with the <code>ContextClassLoader</code> rather than
+the <code>currentThread</code> one. The benefit is to be able to load classes
+exposed by other bundles. This allows the exchange body and headers to
+have custom types object references.</p>
+</div>
+<div class="paragraph">
+<p>Transaction</p>
+</div>
+<div class="paragraph">
+<p>A Spring <code>PlatformTransactionManager</code> is required to orchestrate
+transaction.</p>
+</div>
+<div class="paragraph">
+<p>Service (Start/Stop)</p>
+</div>
+<div class="paragraph">
+<p>The <code>start</code> method verify the connection of the database and the
+presence of the required tables. If anything is wrong it will fail
+during starting.</p>
+</div>
+<div class="paragraph">
+<p>Aggregator configuration</p>
+</div>
+<div class="paragraph">
+<p>Depending on the targeted environment, the aggregator might need some
+configuration. As you already know, each aggregator should have its own
+repository (with the corresponding pair of table created in the
+database) and a data source. If the default lobHandler is not adapted to
+your database system, it can be injected with the <code>lobHandler</code> property.</p>
+</div>
+<div class="paragraph">
+<p>Here is the declaration for Oracle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;bean id="lobHandler"
+class="org.springframework.jdbc.support.lob.OracleLobHandler"&gt; &lt;property
+name="nativeJdbcExtractor" ref="nativeJdbcExtractor"/&gt; &lt;/bean&gt; &lt;bean
+id="nativeJdbcExtractor"
+class="org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor"/&gt;
+&lt;bean id="repo"
+class="org.apache.camel.processor.aggregate.jdbc.JdbcAggregationRepository"&gt;
+&lt;property name="transactionManager" ref="transactionManager"/&gt; &lt;property
+name="repositoryName" value="aggregation"/&gt; &lt;property name="dataSource"
+ref="dataSource"/&gt; &lt;!-- Only with Oracle, else use default --&gt; &lt;property
+name="lobHandler" ref="lobHandler"/&gt; &lt;/bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Optimistic locking</p>
+</div>
+<div class="paragraph">
+<p>From <strong>Camel 2.12</strong> onwards you can turn on <code>optimisticLocking</code> and use
+this JDBC based aggregation repository in a clustered environment where
+multiple Camel applications shared the same database for the aggregation
+repository. If there is a race condition there JDBC driver will throw a
+vendor specific exception which the <code>JdbcAggregationRepository</code> can
+react upon. To know which caused exceptions from the JDBC driver is
+regarded as an optimistick locking error we need a mapper to do this.
+Therefore there is a
+<code>org.apache.camel.processor.aggregate.jdbc.JdbcOptimisticLockingExceptionMapper</code>
+allows you to implement your custom logic if needed. There is a default
+implementation
+<code>org.apache.camel.processor.aggregate.jdbc.DefaultJdbcOptimisticLockingExceptionMapper</code>
+which works as follows:</p>
+</div>
+<div class="paragraph">
+<p>The following check is done:</p>
+</div>
+<div class="paragraph">
+<p>If the caused exception is an <code>SQLException</code> then the SQLState is
+checked if starts with 23.</p>
+</div>
+<div class="paragraph">
+<p>If the caused exception is a <code>DataIntegrityViolationException</code></p>
+</div>
+<div class="paragraph">
+<p>If the caused exception class name has "ConstraintViolation" in its
+name.</p>
+</div>
+<div class="paragraph">
+<p>optional checking for FQN class name matches if any class names has been
+configured</p>
+</div>
+<div class="paragraph">
+<p>You can in addition add FQN classnames, and if any of the caused
+exception (or any nested) equals any of the FQN class names, then its an
+optimistick locking error.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example, where we define 2 extra FQN class names from the
+JDBC vendor.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;bean id="repo"
+class="org.apache.camel.processor.aggregate.jdbc.JdbcAggregationRepository"&gt;
+&lt;property name="transactionManager" ref="transactionManager"/&gt; &lt;property
+name="repositoryName" value="aggregation"/&gt; &lt;property name="dataSource"
+ref="dataSource"/&gt; &lt;property name"jdbcOptimisticLockingExceptionMapper"
+ref="myExceptionMapper"/&gt; &lt;/bean&gt; &lt;!-- use the default mapper with extra
+FQN class names from our JDBC driver --&gt; &lt;bean id="myExceptionMapper"
+class="org.apache.camel.processor.aggregate.jdbc.DefaultJdbcOptimisticLockingExceptionMapper"&gt;
+&lt;property name="classNames"&gt; &lt;util:set&gt;
+&lt;value&gt;com.foo.sql.MyViolationExceptoion&lt;/value&gt;
+&lt;value&gt;com.foo.sql.MyOtherViolationExceptoion&lt;/value&gt; &lt;/util:set&gt;
+&lt;/property&gt; &lt;/bean&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_camel_sql_starter">Camel Sql Starter</h3>
+<div class="paragraph">
+<p>A starter module is available to spring-boot users. When using the starter,
+the <code>DataSource</code> can be directly configured using spring-boot properties.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code># Example for a mysql datasource
+spring.datasource.url=jdbc:mysql://localhost/test
+spring.datasource.username=dbuser
+spring.datasource.password=dbpass
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To use this feature, add the following dependencies to your spring boot pom.xml file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-sql-starter&lt;/artifactId&gt;
+    &lt;version&gt;${camel.version}&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt;
+    &lt;version&gt;${spring-boot-version}&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should also include the specific database driver, if needed.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="sql-stored-procedure.html">SQL Stored Procedure</a></p>
+</div>
+<div class="paragraph">
+<p><a href="jdbc.html">JDBC</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/sql-language/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/spring/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

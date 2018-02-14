@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Kestrel Component (deprecated) Available as of Camel version 2.6
+ The Kestrel component allows messages to be sent to a Kestrel queue, or messages to be consumed from a Kestrel queue. This component uses the spymemcached client for memcached protocol communication with Kestrel servers.
+   Warning  The kestrel project is inactive and the Camel team regard this components as deprecated.     URI format kestrel://[addresslist/]queuename[?options]   Where queuename is the name of the queue on Kestrel.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Kestrel Component (deprecated) Available as of Camel version 2.6
+ The Kestrel component allows messages to be sent to a Kestrel queue, or messages to be consumed from a Kestrel queue. This component uses the spymemcached client for memcached protocol communication with Kestrel servers.
+   Warning  The kestrel project is inactive and the Camel team regard this components as deprecated.     URI format kestrel://[addresslist/]queuename[?options]   Where queuename is the name of the queue on Kestrel.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/kestrel-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/kestrel-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_kestrel_component_deprecated">Kestrel Component (deprecated)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.6</strong></p>
+</div>
+<div class="paragraph">
+<p>The Kestrel component allows messages to be sent to a
+<a href="https://github.com/robey/kestrel">Kestrel</a> queue, or messages to be
+consumed from a Kestrel queue. This component uses the
+<a href="http://code.google.com/p/spymemcached/">spymemcached</a> client for
+memcached protocol communication with Kestrel servers.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+The kestrel project is inactive and the Camel team regard this
+components as deprecated.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">kestrel://[addresslist/]queuename[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where <strong>queuename</strong> is the name of the queue on Kestrel. The <strong>addresslist</strong>
+part of the URI may include one or more <code>host:port</code> pairs. For example,
+to connect to the queue <code>foo</code> on <code>kserver01:22133</code>, use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">kestrel://kserver01:22133/foo</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the addresslist is omitted, <code>localhost:22133</code> is assumed, i.e.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">kestrel://foo</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Likewise, if a port is omitted from a <code>host:port</code> pair in addresslist,
+the default port 22133 is assumed, i.e.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">kestrel://kserver01/foo</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is an example of a Kestrel endpoint URI used for producing to a
+clustered queue:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">kestrel://kserver01:22133,kserver02:22133,kserver03:22133/massive</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is an example of a Kestrel endpoint URI used for consuming
+concurrently from a queue:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">kestrel://kserver03:22133/massive?concurrentConsumers=25&amp;waitTimeMs=500</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The Kestrel component supports 2 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>configuration</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a shared configured configuration as base for creating new endpoints.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KestrelConfiguration</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Kestrel endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>kestrel:addresses/queue</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_2_parameters">Path Parameters (2 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>addresses</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address(es) on which kestrel is running</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">localhost:22133</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String[]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>queue</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The queue we are polling</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_6_parameters">Query Parameters (6 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>concurrentConsumers</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How many concurrent listeners to schedule for the thread pool</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>waitTimeMs</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How long a given wait should block (server side) in milliseconds</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">100</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configuring_the_kestrel_component_using_spring_xml">Configuring the Kestrel component using Spring XML</h3>
+<div class="paragraph">
+<p>The simplest form of explicit configuration is as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd"&gt;
+
+  &lt;bean id="kestrel" class="org.apache.camel.component.kestrel.KestrelComponent"/&gt;
+
+  &lt;camelContext xmlns="http://camel.apache.org/schema/spring"&gt;
+  &lt;/camelContext&gt;
+
+&lt;/beans&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That will enable the Kestrel component with all default settings, i.e.
+it will use <code>localhost:22133</code>, 100ms wait time, and a single
+non-concurrent consumer by default.</p>
+</div>
+<div class="paragraph">
+<p>To use specific options in the base configuration (which supplies
+configuration to endpoints whose <code>?properties</code> are not specified), you
+can set up a KestrelConfiguration POJO as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd"&gt;
+
+  &lt;bean id="kestrelConfiguration" class="org.apache.camel.component.kestrel.KestrelConfiguration"&gt;
+    &lt;property name="addresses" value="kestrel01:22133"/&gt;
+    &lt;property name="waitTimeMs" value="100"/&gt;
+    &lt;property name="concurrentConsumers" value="1"/&gt;
+  &lt;/bean&gt;
+
+  &lt;bean id="kestrel" class="org.apache.camel.component.kestrel.KestrelComponent"&gt;
+    &lt;property name="configuration" ref="kestrelConfiguration"/&gt;
+  &lt;/bean&gt;
+
+  &lt;camelContext xmlns="http://camel.apache.org/schema/spring"&gt;
+  &lt;/camelContext&gt;
+
+&lt;/beans&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_usage_examples">Usage Examples</h3>
+<div class="sect3">
+<h4 id="_example_1_consuming">Example 1: Consuming</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("kestrel://kserver02:22133/massive?concurrentConsumers=10&amp;waitTimeMs=500")
+  .bean("myConsumer", "onMessage");</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class MyConsumer {
+    public void onMessage(String message) {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_2_producing">Example 2: Producing</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class MyProducer {
+    @EndpointInject(uri = "kestrel://kserver01:22133,kserver02:22133/myqueue")
+    ProducerTemplate producerTemplate;
+
+    public void produceSomething() {
+        producerTemplate.sendBody("Hello, world.");
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_3_spring_xml_configuration">Example 3: Spring XML Configuration</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">  &lt;camelContext xmlns="http://camel.apache.org/schema/spring"&gt;
+    &lt;route&gt;
+      &lt;from uri="kestrel://ks01:22133/sequential?concurrentConsumers=1&amp;waitTimeMs=500"/&gt;
+      &lt;bean ref="myBean" method="onMessage"/&gt;
+    &lt;/route&gt;
+    &lt;route&gt;
+      &lt;from uri="direct:start"/&gt;
+      &lt;to uri="kestrel://ks02:22133/stuff"/&gt;
+    &lt;/route&gt;
+  &lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class MyBean {
+    public void onMessage(String message) {
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dependencies">Dependencies</h3>
+<div class="paragraph">
+<p>The Kestrel component has the following dependencies:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>spymemcached</code> 2.5 (or greater)</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_spymemcached">spymemcached</h4>
+<div class="paragraph">
+<p>You <strong>must</strong> have the <code>spymemcached</code> jar on your classpath. Here is a
+snippet you can use in your pom.xml:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;dependency&gt;
+  &lt;groupId&gt;spy&lt;/groupId&gt;
+  &lt;artifactId&gt;memcached&lt;/artifactId&gt;
+  &lt;version&gt;2.5&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can
+<a href="http://code.google.com/p/spymemcached/downloads/list">download the jar</a>
+directly.</p>
+</div>
+<div class="paragraph">
+<p>Warning: Limitations</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The spymemcached client library does <strong>not</strong> work properly with
+kestrel when JVM assertions are enabled. There is a known issue with
+spymemcached when assertions are enabled and a requested key contains
+the <code>/t=&#8230;&#8203;</code> extension (i.e. if you&#8217;re using the <code>waitTimeMs</code> option on
+an endpoint URI, which is highly encouraged).
+Fortunately, JVM assertions are <strong>disabled by default</strong>, unless you
+<a href="http://download.oracle.com/javase/1.4.2/docs/guide/lang/assert.html">explicitly
+enable them</a>, so this should not present a problem under normal
+circumstances.
+Something to note is that Maven&#8217;s Surefire test plugin <strong>enables</strong>
+assertions. If you&#8217;re using this component in a Maven test environment,
+you may need to set <code>enableAssertions</code> to <code>false</code>. Please refer to the
+<a href="http://maven.apache.org/plugins/maven-surefire-plugin/test-mojo.html">surefire:test
+reference</a> for details.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/krati-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/kafka-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

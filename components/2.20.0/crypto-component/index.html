@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Crypto (JCE) Component Available as of Camel version 2.3
+ With Camel cryptographic endpoints and Java&#8217;s Cryptographic extension it is easy to create Digital Signatures for Exchanges. Camel provides a pair of flexible endpoints which get used in concert to create a signature for an exchange in one part of the exchange&#8217;s workflow and then verify the signature in a later part of the workflow.
+ Maven users will need to add the following dependency to their pom.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Crypto (JCE) Component Available as of Camel version 2.3
+ With Camel cryptographic endpoints and Java&#8217;s Cryptographic extension it is easy to create Digital Signatures for Exchanges. Camel provides a pair of flexible endpoints which get used in concert to create a signature for an exchange in one part of the exchange&#8217;s workflow and then verify the signature in a later part of the workflow.
+ Maven users will need to add the following dependency to their pom.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/crypto-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/crypto-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_crypto_jce_component">Crypto (JCE) Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.3</strong></p>
+</div>
+<div class="paragraph">
+<p>With Camel cryptographic endpoints and Java&#8217;s Cryptographic extension it
+is easy to create Digital Signatures for <a href="exchange.html">Exchange</a>s.
+Camel provides a pair of flexible endpoints which get used in concert to
+create a signature for an exchange in one part of the exchange&#8217;s
+workflow and then verify the signature in a later part of the workflow.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-crypto&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_introduction">Introduction</h3>
+<div class="paragraph">
+<p>Digital signatures make use of Asymmetric Cryptographic techniques to
+sign messages. From a (very) high level, the algorithms use pairs of
+complimentary keys with the special property that data encrypted with
+one key can only be decrypted with the other. One, the private key, is
+closely guarded and used to 'sign' the message while the other, public
+key, is shared around to anyone interested in verifying the signed
+messages. Messages are signed by using the private key to encrypting a
+digest of the message. This encrypted digest is transmitted along with
+the message. On the other side the verifier recalculates the message
+digest and uses the public key to decrypt the the digest in the
+signature. If both digests match the verifier knows only the holder of
+the private key could have created the signature.</p>
+</div>
+<div class="paragraph">
+<p>Camel uses the Signature service from the Java Cryptographic Extension
+to do all the heavy cryptographic lifting required to create exchange
+signatures. The following are some excellent resources for explaining
+the mechanics of Cryptography, Message digests and Digital Signatures
+and how to leverage them with the JCE.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Bruce Schneier&#8217;s Applied Cryptography</p>
+</li>
+<li>
+<p>Beginning Cryptography with Java by David Hook</p>
+</li>
+<li>
+<p>The ever insightful Wikipedia
+<a href="http://en.wikipedia.org/wiki/Digital_signature">Digital_signatures</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="paragraph">
+<p>As mentioned Camel provides a pair of crypto endpoints to create and
+verify signatures</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">crypto:sign:name[?options]
+crypto:verify:name[?options]</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>crypto:sign</code> creates the signature and stores it in the Header keyed
+by the constant
+<code>org.apache.camel.component.crypto.DigitalSignatureConstants.SIGNATURE</code>,
+i.e. <code>"CamelDigitalSignature"</code>.</p>
+</li>
+<li>
+<p><code>crypto:verify</code> will read in the contents of this header and do the
+verification calculation.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In order to correctly function, the sign and verify process needs a pair
+of keys to be shared, signing requiring a <code>PrivateKey</code> and verifying a
+<code>PublicKey</code> (or a <code>Certificate</code> containing one). Using the JCE it is
+very simple to generate these key pairs but it is usually most secure to
+use a KeyStore to house and share your keys. The DSL is very flexible
+about how keys are supplied and provides a number of mechanisms.</p>
+</div>
+<div class="paragraph">
+<p>Note a <code>crypto:sign</code> endpoint is typically defined in one route and the
+complimentary <code>crypto:verify</code> in another, though for simplicity in the
+examples they appear one after the other. It goes without saying that
+both signing and verifying should be configured identically.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The Crypto (JCE) component supports 2 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>configuration</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the shared DigitalSignatureConfiguration as configuration</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DigitalSignature Configuration</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Crypto (JCE) endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>crypto:cryptoOperation:name</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_2_parameters">Path Parameters (2 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>cryptoOperation</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Set the Crypto operation from that supplied after the crypto scheme in the endpoint uri e.g. crypto:sign sets sign as the operation.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CryptoOperation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>name</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The logical name of this operation.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_19_parameters">Query Parameters (19 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>algorithm</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the JCE name of the Algorithm that should be used for the signer.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">SHA1WithDSA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>alias</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the alias used to query the KeyStore for keys and link java.security.cert.Certificate Certificates to be used in signing and verifying exchanges. This value can be provided at runtime via the message header link org.apache.camel.component.crypto.DigitalSignatureConstantsKEYSTORE_ALIAS</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>certificateName</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the reference name for a PrivateKey that can be fond in the registry.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>keystore</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the KeyStore that can contain keys and Certficates for use in signing and verifying exchanges. A KeyStore is typically used with an alias either one supplied in the Route definition or dynamically via the message header CamelSignatureKeyStoreAlias. If no alias is supplied and there is only a single entry in the Keystore then this single entry will be used.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KeyStore</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>keystoreName</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the reference name for a Keystore that can be fond in the registry.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>privateKey</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the PrivateKey that should be used to sign the exchange</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PrivateKey</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>privateKeyName</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the reference name for a PrivateKey that can be fond in the registry.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>provider</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the id of the security provider that provides the configured Signature algorithm.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>publicKeyName</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">references that should be resolved when the context changes</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>secureRandomName</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the reference name for a SecureRandom that can be fond in the registry.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>signatureHeaderName</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the name of the message header that should be used to store the base64 encoded signature. This defaults to 'CamelDigitalSignature'</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bufferSize</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the size of the buffer used to read in the Exchange payload data.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2048</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>certificate</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the Certificate that should be used to verify the signature in the exchange based on its payload.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Certificate</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>clearHeaders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines if the Signature specific headers be cleared after signing and verification. Defaults to true and should only be made otherwise at your extreme peril as vital private information such as Keys and passwords may escape if unset.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>keyStoreParameters</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the KeyStore that can contain keys and Certficates for use in signing and verifying exchanges based on the given KeyStoreParameters. A KeyStore is typically used with an alias either one supplied in the Route definition or dynamically via the message header CamelSignatureKeyStoreAlias. If no alias is supplied and there is only a single entry in the Keystore then this single entry will be used.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KeyStoreParameters</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>publicKey</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the PublicKey that should be used to verify the signature in the exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PublicKey</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>secureRandom</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the SecureRandom used to initialize the Signature service</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SecureRandom</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>password</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the password used to access an aliased PrivateKey in the KeyStore.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using">Using</h3>
+<div class="sect3">
+<h4 id="_raw_keys">Raw keys</h4>
+<div class="paragraph">
+<p>The most basic way to way to sign and verify an exchange is with a
+KeyPair as follows.</p>
+</div>
+<div class="paragraph">
+<p>The same can be achieved with the <a href="spring-xml-extensions.html">Spring
+XML Extensions</a> using references to keys</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_keystores_and_aliases">KeyStores and Aliases.</h4>
+<div class="paragraph">
+<p>The JCE provides a very versatile keystore concept for housing pairs of
+private keys and certificates, keeping them encrypted and password
+protected. They can be retrieved by applying an alias to the retrieval
+APIs. There are a number of ways to get keys and Certificates into a
+keystore, most often this is done with the external 'keytool'
+application.
+<a href="http://www.exampledepot.com/egs/java.security.cert/CreateCert.html">This</a>
+is a good example of using keytool to create a KeyStore with a self
+signed Cert and Private key.</p>
+</div>
+<div class="paragraph">
+<p>The examples use a Keystore with a key and cert aliased by 'bob'. The
+password for the keystore and the key is 'letmein'</p>
+</div>
+<div class="paragraph">
+<p>The following shows how to use a Keystore via the Fluent builders, it
+also shows how to load and initialize the keystore.</p>
+</div>
+<div class="paragraph">
+<p>Again in Spring a ref is used to lookup an actual keystore instance.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_changing_jce_provider_and_algorithm">Changing JCE Provider and Algorithm</h4>
+<div class="paragraph">
+<p>Changing the Signature algorithm or the Security provider is a simple
+matter of specifying their names. You will need to also use Keys that
+are compatible with the algorithm you choose.</p>
+</div>
+<div class="paragraph">
+<p>or</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_changing_the_signature_message_header">Changing the Signature Message Header</h4>
+<div class="paragraph">
+<p>It may be desirable to change the message header used to store the
+signature. A different header name can be specified in the route
+definition as follows</p>
+</div>
+<div class="paragraph">
+<p>or</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_changing_the_buffersize">Changing the buffersize</h4>
+<div class="paragraph">
+<p>In case you need to update the size of the buffer&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>or</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_supplying_keys_dynamically">Supplying Keys dynamically.</h4>
+<div class="paragraph">
+<p>When using a Recipient list or similar EIP the recipient of an exchange
+can vary dynamically. Using the same key across all recipients may be
+neither feasible nor desirable. It would be useful to be able to specify
+signature keys dynamically on a per-exchange basis. The exchange could
+then be dynamically enriched with the key of its target recipient prior
+to signing. To facilitate this the signature mechanisms allow for keys
+to be supplied dynamically via the message headers below</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Exchange.SIGNATURE_PRIVATE_KEY</code>, <code>"CamelSignaturePrivateKey"</code></p>
+</li>
+<li>
+<p><code>Exchange.SIGNATURE_PUBLIC_KEY_OR_CERT</code>, <code>"CamelSignaturePublicKeyOrCert"</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>or</p>
+</div>
+<div class="paragraph">
+<p>Even better would be to dynamically supply a keystore alias. Again the
+alias can be supplied in a message header</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Exchange.KEYSTORE_ALIAS</code>, <code>"CamelSignatureKeyStoreAlias"</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>or</p>
+</div>
+<div class="paragraph">
+<p>The header would be set as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Exchange unsigned = getMandatoryEndpoint("direct:alias-sign").createExchange();
+unsigned.getIn().setBody(payload);
+unsigned.getIn().setHeader(DigitalSignatureConstants.KEYSTORE_ALIAS, "bob");
+unsigned.getIn().setHeader(DigitalSignatureConstants.KEYSTORE_PASSWORD, "letmein".toCharArray());
+template.send("direct:alias-sign", unsigned);
+Exchange signed = getMandatoryEndpoint("direct:alias-sign").createExchange();
+signed.getIn().copyFrom(unsigned.getOut());
+signed.getIn().setHeader(KEYSTORE_ALIAS, "bob");
+template.send("direct:alias-verify", signed);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/crypto-dataformat/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/cql-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

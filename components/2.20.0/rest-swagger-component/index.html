@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='REST Swagger Component Available as of Camel version 2.19
+ The rest-swagger configures rest producers from Swagger (Open API) specification document and delegates to a component implementing the RestProducerFactory interface. Currently known working components are:
+   http
+  http4
+  netty4-http
+  restlet
+  jetty
+  undertow
+   Maven users will need to add the following dependency to their pom.xml for this component:'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='REST Swagger Component Available as of Camel version 2.19
+ The rest-swagger configures rest producers from Swagger (Open API) specification document and delegates to a component implementing the RestProducerFactory interface. Currently known working components are:
+   http
+  http4
+  netty4-http
+  restlet
+  jetty
+  undertow
+   Maven users will need to add the following dependency to their pom.xml for this component:'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/rest-swagger-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/rest-swagger-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_rest_swagger_component">REST Swagger Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.19</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>rest-swagger</strong> configures rest producers from
+<a href="http://swagger.io/">Swagger</a> (Open API) specification document and
+delegates to a component implementing the <em>RestProducerFactory</em>
+interface. Currently known working components are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http-component.html">http</a></p>
+</li>
+<li>
+<p><a href="http4-component.html">http4</a></p>
+</li>
+<li>
+<p><a href="netty4-http-component.html">netty4-http</a></p>
+</li>
+<li>
+<p><a href="restlet-component.html">restlet</a></p>
+</li>
+<li>
+<p><a href="jetty-component.html">jetty</a></p>
+</li>
+<li>
+<p><a href="undertow-component.html">undertow</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their
+<code>pom.xml</code> for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-rest-swagger&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">rest-swagger:[specificationPath#]operationId</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where <code>operationId</code> is the ID of the operation in the Swagger
+specification, and <code>specificationPath</code> is the path to the
+specification.
+If the <code>specificationPath</code> is not specified it defaults to
+<code>swagger.json</code>. The lookup mechanism uses Camels <code>ResourceHelper</code> to
+load the resource, which means that you can use CLASSPATH resources
+(<code>classpath:my-specification.json</code>), files
+(<code>file:/some/path.json</code>), the web
+(<code><a href="http://api.example.com/swagger.json" class="bare">http://api.example.com/swagger.json</a></code>) or reference a bean
+(<code>ref:nameOfBean</code>) or use a method of a bean
+(<code>bean:nameOfBean.methodName</code>) to get the specification resource,
+failing that Swagger&#8217;s own resource loading support.</p>
+</div>
+<div class="paragraph">
+<p>This component does not act as a HTTP client, it delegates that to
+another component mentioned above. The lookup mechanism searches for a
+single component that implements the <em>RestProducerFactory</em> interface and
+uses that. If the CLASSPATH contains more than one, then the property
+<code>componentName</code> should be set to indicate which component to delegate
+to.</p>
+</div>
+<div class="paragraph">
+<p>Most of the configuration is taken from the Swagger specification but
+the option exists to override those by specifying them on the component
+or on the endpoint. Typically you would just need to override the
+<code>host</code> or <code>basePath</code> if those differ from the specification.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The <code>host</code> parameter should contain the absolute URI containing
+scheme, hostname and port number, for instance:
+<code><a href="https://api.example.com" class="bare">https://api.example.com</a></code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>With <code>componentName</code> you specify what component is used to perform the
+requests, this named component needs to be present in the Camel context
+and implement the required <em>RestProducerFactory</em> interface&#8201;&#8212;&#8201;as do the
+components listed at the top.</p>
+</div>
+<div class="paragraph">
+<p>If you do not specify the <em>componentName</em> at either component or
+endpoint level, CLASSPATH is searched for a suitable delegate. There
+should be only one component present on the CLASSPATH that implements
+the <em>RestProducerFactory</em> interface for this to work.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The REST Swagger component supports 7 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>basePath</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">API basePath for example /v2. Default is unset if set overrides the value present in Swagger specification.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>componentName</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the Camel component that will perform the requests. The compnent must be present in Camel registry and it must implement RestProducerFactory service provider interface. If not set CLASSPATH is searched for single component that implements RestProducerFactory SPI. Can be overriden in endpoint configuration.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>consumes</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What payload type this component capable of consuming. Could be one type like application/json or multiple types as application/json application/xml; q=0.5 according to the RFC7231. This equates to the value of Accept HTTP header. If set overrides any value found in the Swagger specification. Can be overriden in endpoint configuration</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>host</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scheme hostname and port to direct the HTTP requests to in the form of <a href="https://hostname:port" class="bare">https://hostname:port</a>. Can be configured at the endpoint component or in the correspoding REST configuration in the Camel Context. If you give this component a name (e.g. petstore) that REST configuration is consulted first rest-swagger next and global configuration last. If set overrides any value found in the Swagger specification RestConfiguration. Can be overriden in endpoint configuration.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>produces</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What payload type this component is producing. For example application/json according to the RFC7231. This equates to the value of Content-Type HTTP header. If set overrides any value present in the Swagger specification. Can be overriden in endpoint configuration.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>specificationUri</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path to the Swagger specification file. The scheme host base path are taken from this specification but these can be overriden with properties on the component or endpoint level. If not given the component tries to load swagger.json resource. Note that the host defined on the component and endpoint of this Component should contain the scheme hostname and optionally the port in the URI syntax (i.e. <a href="https://api.example.com:8080" class="bare">https://api.example.com:8080</a>). Can be overriden in endpoint configuration.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">swagger.json</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The REST Swagger endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>rest-swagger:specificationUri#operationId</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_2_parameters">Path Parameters (2 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>specificationUri</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path to the Swagger specification file. The scheme host base path are taken from this specification but these can be overriden with properties on the component or endpoint level. If not given the component tries to load swagger.json resource. Note that the host defined on the component and endpoint of this Component should contain the scheme hostname and optionally the port in the URI syntax (i.e. <a href="https://api.example.com:8080" class="bare">https://api.example.com:8080</a>). Overrides component configuration.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">swagger.json</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>operationId</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> ID of the operation from the Swagger specification.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_6_parameters">Query Parameters (6 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>basePath</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">API basePath for example /v2. Default is unset if set overrides the value present in Swagger specification and in the component configuration.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>componentName</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the Camel component that will perform the requests. The compnent must be present in Camel registry and it must implement RestProducerFactory service provider interface. If not set CLASSPATH is searched for single component that implements RestProducerFactory SPI. Overrides component configuration.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>consumes</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What payload type this component capable of consuming. Could be one type like application/json or multiple types as application/json application/xml; q=0.5 according to the RFC7231. This equates to the value of Accept HTTP header. If set overrides any value found in the Swagger specification and. in the component configuration</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>host</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scheme hostname and port to direct the HTTP requests to in the form of <a href="https://hostname:port" class="bare">https://hostname:port</a>. Can be configured at the endpoint component or in the correspoding REST configuration in the Camel Context. If you give this component a name (e.g. petstore) that REST configuration is consulted first rest-swagger next and global configuration last. If set overrides any value found in the Swagger specification RestConfiguration. Overrides all other configuration.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>produces</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What payload type this component is producing. For example application/json according to the RFC7231. This equates to the value of Content-Type HTTP header. If set overrides any value present in the Swagger specification. Overrides all other configuration.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_example_petstore">Example: PetStore</h3>
+<div class="paragraph">
+<p>Checkout the example in the <code>camel-example-rest-swagger</code> project in
+the <code>examples</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>For example if you wanted to use the
+<a href="http://petstore.swagger.io/"><em>PetStore</em></a> provided REST API simply
+reference the specification URI and desired operation id from the
+Swagger specification or download the specification and store it as
+<code>swagger.json</code> (in the root) of CLASSPATH that way it will be
+automaticaly used. Let&#8217;s use the <a href="undertow-component.html">Undertow</a>
+component to perform all the requests and Camels excelent support for
+<a href="spring-boot.html">Spring Boot</a>.</p>
+</div>
+<div class="paragraph">
+<p>Here are our dependencies defined in Maven POM file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-undertow-starter&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-rest-swagger-starter&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Start by defining the <em>Undertow</em> component and the
+<em>RestSwaggerComponent</em>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Bean
+public Component petstore(CamelContext camelContext, UndertowComponent undertow) {
+    RestSwaggerComponent petstore = new RestSwaggerComponent(camelContext);
+    petstore.setSpecificationUri("http://petstore.swagger.io/v2/swagger.json");
+    petstore.setDelegate(undertow);
+
+    return petstore;
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Support in Camel for Spring Boot will auto create the
+<code>UndertowComponent</code> Spring bean, and you can configure it using
+<code>application.properties</code> (or <code>application.yml</code>) using prefix
+<code>camel.component.undertow.</code>. We are defining the <code>petstore</code>
+component here in order to have a named component in the Camel context
+that we can use to interact with the PetStore REST API, if this is the
+only <code>rest-swagger</code> component used we might configure it in the same
+manner (using <code>application.properties</code>).
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now in our application we can simply use the <code>ProducerTemplate</code> to
+invoke PetStore REST methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Autowired
+ProducerTemplate template;
+
+String getPetJsonById(int petId) {
+    return template.requestBodyAndHeaders("petstore:getPetById", null, "petId", petId);
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/restlet-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/reactor-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Spring WebService Component Available as of Camel version 2.6
+ The spring-ws: component allows you to integrate with Spring Web Services. It offers both client-side support, for accessing web services, and server-side support for creating your own contract-first web services.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-spring-ws&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   INFO:*Dependencies* As of Camel 2.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Spring WebService Component Available as of Camel version 2.6
+ The spring-ws: component allows you to integrate with Spring Web Services. It offers both client-side support, for accessing web services, and server-side support for creating your own contract-first web services.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-spring-ws&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   INFO:*Dependencies* As of Camel 2.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/spring-ws-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/spring-ws-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_spring_webservice_component">Spring WebService Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.6</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>spring-ws:</strong> component allows you to integrate with
+<a href="http://static.springsource.org/spring-ws/sites/1.5/">Spring Web
+Services</a>. It offers both <em>client</em>-side support, for accessing web
+services, and <em>server</em>-side support for creating your own contract-first
+web services.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-spring-ws&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>INFO:*Dependencies*
+As of Camel 2.8 this component ships with Spring-WS 2.0.x which (like
+the rest of Camel) requires Spring 3.0.x.
+Earlier Camel versions shipped Spring-WS 1.5.9 which is compatible with
+Spring 2.5.x and 3.0.x. In order to run earlier versions of
+<code>camel-spring-ws</code> on Spring 2.5.x you need to add the <code>spring-webmvc</code>
+module from Spring 2.5.x. In order to run Spring-WS 1.5.9 on Spring
+3.0.x you need to exclude the OXM module from Spring 3.0.x as this
+module is also included in Spring-WS 1.5.9 (see
+<a href="http://stackoverflow.com/questions/3313314/can-spring-ws-1-5-be-used-with-spring-3">this
+post</a>)</p>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="paragraph">
+<p>The URI scheme for this component is as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">spring-ws:[mapping-type:]address[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To expose a web service <strong>mapping-type</strong> needs to be set to any of the
+following:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Mapping type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rootqname</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Offers the option to map web service requests based on the qualified
+name of the root element contained in the message.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>soapaction</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to map web service requests based on the SOAP action specified in
+the header of the message.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>uri</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In order to map web service requests that target a specific URI.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xpathresult</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to map web service requests based on the evaluation of an XPath
+<code>expression</code> against the incoming message. The result of the evaluation
+should match the XPath result specified in the endpoint URI.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>beanname</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows you to reference an
+<code>org.apache.camel.component.spring.ws.bean.CamelEndpointDispatcher</code>
+object in order to integrate with existing (legacy)
+<a href="http://static.springsource.org/spring-ws/sites/1.5/reference/html/server.html#server-endpoint-mapping">endpoint
+mappings</a> like <code>PayloadRootQNameEndpointMapping</code>,
+<code>SoapActionEndpointMapping</code>, etc</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>As a consumer the <strong>address</strong> should contain a value relevant to the
+specified mapping-type (e.g. a SOAP action, XPath expression). As a
+producer the address should be set to the URI of the web service your
+calling upon.</p>
+</div>
+<div class="paragraph">
+<p>You can append query <strong>options</strong> to the URI in the following format,
+<code>?option=value&amp;option=value&amp;&#8230;&#8203;</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The Spring WebService component supports 2 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useGlobalSslContext Parameters</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable usage of global SSL context parameters.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Spring WebService endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>spring-ws:type:lookupKey:webServiceEndpointUri</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_3_parameters">Path Parameters (3 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>type</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Endpoint mapping type if endpoint mapping is used. rootqname - Offers the option to map web service requests based on the qualified name of the root element contained in the message. soapaction - Used to map web service requests based on the SOAP action specified in the header of the message. uri - In order to map web service requests that target a specific URI. xpathresult - Used to map web service requests based on the evaluation of an XPath expression against the incoming message. The result of the evaluation should match the XPath result specified in the endpoint URI. beanname - Allows you to reference an org.apache.camel.component.spring.ws.bean.CamelEndpointDispatcher object in order to integrate with existing (legacy) endpoint mappings like PayloadRootQNameEndpointMapping SoapActionEndpointMapping etc</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EndpointMappingType</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>lookupKey</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Endpoint mapping key if endpoint mapping is used</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>webServiceEndpointUri</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The default Web Service endpoint uri to use for the producer.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_22_parameters">Query Parameters (22 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>messageFilter</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Option to provide a custom MessageFilter. For example when you want to process your headers or attachments by your own.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MessageFilter</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>endpointDispatcher</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spring org.springframework.ws.server.endpoint.MessageEndpoint for dispatching messages received by Spring-WS to a Camel endpoint to integrate with existing (legacy) endpoint mappings like PayloadRootQNameEndpointMapping SoapActionEndpointMapping etc.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelEndpointDispatcher</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>endpointMapping</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reference to an instance of org.apache.camel.component.spring.ws.bean.CamelEndpointMapping in the Registry/ApplicationContext. Only one bean is required in the registry to serve all Camel/Spring-WS endpoints. This bean is auto-discovered by the MessageDispatcher and used to map requests to Camel endpoints based on characteristics specified on the endpoint (like root QName SOAP action etc)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelSpringWSEndpoint Mapping</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>expression</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The XPath expression to use when option type=xpathresult. Then this option is required to be configured.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>allowResponseAttachment Override</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Option to override soap response attachments in in/out exchange with attachments from the actual service layer. If the invoked service appends or rewrites the soap attachments this option when set to true allows the modified soap attachments to be overwritten in in/out message attachments</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>allowResponseHeaderOverride</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Option to override soap response header in in/out exchange with header info from the actual service layer. If the invoked service appends or rewrites the soap header this option when set to true allows the modified soap header to be overwritten in in/out message headers</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>faultAction</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Signifies the value for the faultAction response WS-Addressing Fault Action header that is provided by the method.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>faultTo</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Signifies the value for the faultAction response WS-Addressing FaultTo header that is provided by the method.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>messageFactory</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Option to provide a custom WebServiceMessageFactory. For example when you want Apache Axiom to handle web service messages instead of SAAJ.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WebServiceMessage Factory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>messageIdStrategy</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Option to provide a custom MessageIdStrategy to control generation of unique message ids.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MessageIdStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>messageSender</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Option to provide a custom WebServiceMessageSender. For example to perform authentication or use alternative transports</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WebServiceMessage Sender</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>outputAction</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Signifies the value for the response WS-Addressing Action header that is provided by the method.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>replyTo</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Signifies the value for the replyTo response WS-Addressing ReplyTo header that is provided by the method.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>soapAction</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SOAP action to include inside a SOAP request when accessing remote web services</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>timeout</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the socket read timeout (in milliseconds) while invoking a webservice using the producer see URLConnection.setReadTimeout() and CommonsHttpMessageSender.setReadTimeout(). This option works when using the built-in message sender implementations: CommonsHttpMessageSender and HttpUrlConnectionMessageSender. One of these implementations will be used by default for HTTP based services unless you customize the Spring WS configuration options supplied to the component. If you are using a non-standard sender it is assumed that you will handle your own timeout configuration. The built-in message sender HttpComponentsMessageSender is considered instead of CommonsHttpMessageSender which has been deprecated see HttpComponentsMessageSender.setReadTimeout().</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>webServiceTemplate</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Option to provide a custom WebServiceTemplate. This allows for full control over client-side web services handling; like adding a custom interceptor or specifying a fault resolver message sender or message factory.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WebServiceTemplate</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>wsAddressingAction</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WS-Addressing 1.0 action header to include when accessing web services. The To header is set to the address of the web service as specified in the endpoint URI (default Spring-WS behavior).</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sslContextParameters</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure security using SSLContextParameters</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SSLContextParameters</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_message_headers">Message headers</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSpringWebserviceEndpointUri</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI of the web service your accessing as a client, overrides <em>address</em>
+part of the endpoint URI</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSpringWebserviceSoapAction</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Header to specify the SOAP action of the message, overrides <code>soapAction</code>
+option if present</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelSpringWebserviceSoapHeader</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Source</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.11.1:</strong> Use this header to specify/access the SOAP headers of
+the message.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelSpringWebserviceAddressingAction</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use this header to specify the WS-Addressing action of the message,
+overrides <code>wsAddressingAction</code> option if present</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelSpringWebserviceAddressingFaultTo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use this header to specify the  WS-Addressing FaultTo , overrides
+faultTo option if present</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelSpringWebserviceAddressingReplyTo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use this header to specify the  WS-Addressing ReplyTo , overrides
+replyTo option if present</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelSpringWebserviceAddressingOutputAction</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use this header to specify the WS-Addressing Action , overrides
+outputAction option if present</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelSpringWebserviceAddressingFaultAction</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use this header to specify the WS-Addressing Fault Action , overrides
+faultAction option if present</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_accessing_web_services">Accessing web services</h3>
+<div class="paragraph">
+<p>To call a web service at <code><a href="http://foo.com/bar" class="bare">http://foo.com/bar</a></code> simply define a route:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:example").to("spring-ws:http://foo.com/bar")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And sent a message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">template.requestBody("direct:example", "&lt;foobar xmlns=\"http://foo.com\"&gt;&lt;msg&gt;test message&lt;/msg&gt;&lt;/foobar&gt;");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Remember if it&#8217;s a SOAP service you&#8217;re calling you don&#8217;t have to include
+SOAP tags. Spring-WS will perform the XML-to-SOAP marshaling.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sending_soap_and_ws_addressing_action_headers">Sending SOAP and WS-Addressing action headers</h3>
+<div class="paragraph">
+<p>When a remote web service requires a SOAP action or use of the
+WS-Addressing standard you define your route as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:example")
+.to("spring-ws:http://foo.com/bar?soapAction=http://foo.com&amp;wsAddressingAction=http://bar.com")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Optionally you can override the endpoint options with header values:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">template.requestBodyAndHeader("direct:example",
+"&lt;foobar xmlns=\"http://foo.com\"&gt;&lt;msg&gt;test message&lt;/msg&gt;&lt;/foobar&gt;",
+SpringWebserviceConstants.SPRING_WS_SOAP_ACTION, "http://baz.com");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_soap_headers">Using SOAP headers</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.11.1</strong></p>
+</div>
+<div class="paragraph">
+<p>You can provide the SOAP header(s) as a Camel Message header when
+sending a message to a spring-ws endpoint, for example given the
+following SOAP header in a String</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">String body = ...
+String soapHeader = "&lt;h:Header xmlns:h=\"http://www.webserviceX.NET/\"&gt;&lt;h:MessageID&gt;1234567890&lt;/h:MessageID&gt;&lt;h:Nested&gt;&lt;h:NestedID&gt;1111&lt;/h:NestedID&gt;&lt;/h:Nested&gt;&lt;/h:Header&gt;";</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We can set the body and header on the Camel Message as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">exchange.getIn().setBody(body);
+exchange.getIn().setHeader(SpringWebserviceConstants.SPRING_WS_SOAP_HEADER, soapHeader);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And then send the Exchange to a <code>spring-ws</code> endpoint to call the Web
+Service.</p>
+</div>
+<div class="paragraph">
+<p>Likewise the spring-ws consumer will also enrich the Camel Message with
+the SOAP header.</p>
+</div>
+<div class="paragraph">
+<p>For an example see this
+<a href="https://svn.apache.org/repos/asf/camel/trunk/components/camel-spring-ws/src/test/java/org/apache/camel/component/spring/ws/SoapHeaderTest.java">unit
+test</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_header_and_attachment_propagation">The header and attachment propagation</h3>
+<div class="paragraph">
+<p>Spring WS Camel supports propagation of the headers and attachments into
+Spring-WS WebServiceMessage response since version <strong>2.10.3</strong>. The
+endpoint will use so called "hook" the MessageFilter (default
+implementation is provided by BasicMessageFilter) to propagate the
+exchange headers and attachments into WebServiceMessage response. Now
+you can use</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">exchange.getOut().getHeaders().put("myCustom","myHeaderValue")
+exchange.getIn().addAttachment("myAttachment", new DataHandler(...))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note: If the exchange header in the pipeline contains text, it generates
+Qname(key)=value attribute in the soap header. Recommended is to create
+a QName class directly and put into any key into header.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_how_to_use_mtom_attachments">How to use MTOM attachments</h3>
+<div class="paragraph">
+<p>The BasicMessageFilter provides all required information for Apache
+Axiom in order to produce MTOM message. If you want to use Apache Camel
+Spring WS within Apache Axiom, here is an example:
+- Simply define the messageFactory as is bellow and Spring-WS will use
+MTOM strategy to populate your SOAP message with optimized attachments.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;bean id="axiomMessageFactory"
+class="org.springframework.ws.soap.axiom.AxiomSoapMessageFactory"&gt;
+&lt;property name="payloadCaching" value="false" /&gt;
+&lt;property name="attachmentCaching" value="true" /&gt;
+&lt;property name="attachmentCacheThreshold" value="1024" /&gt;
+&lt;/bean&gt;</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Add into your pom.xml the following dependencies</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;dependency&gt;
+&lt;groupId&gt;org.apache.ws.commons.axiom&lt;/groupId&gt;
+&lt;artifactId&gt;axiom-api&lt;/artifactId&gt;
+&lt;version&gt;1.2.13&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.apache.ws.commons.axiom&lt;/groupId&gt;
+&lt;artifactId&gt;axiom-impl&lt;/artifactId&gt;
+&lt;version&gt;1.2.13&lt;/version&gt;
+&lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Add your attachment into the pipeline, for example using a Processor
+implementation.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">private class Attachement implements Processor {
+public void process(Exchange exchange) throws Exception
+{ exchange.getOut().copyFrom(exchange.getIn()); File file = new File("testAttachment.txt"); exchange.getOut().addAttachment("test", new DataHandler(new FileDataSource(file)));  }
+}</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Define endpoint (producer) as ussual, for example like this:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:send")
+.process(new Attachement())
+.to("spring-ws:http://localhost:8089/mySoapService?soapAction=mySoap&amp;messageFactory=axiomMessageFactory");</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Now, your producer will generate MTOM message with otpmized
+attachments.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_custom_header_and_attachment_filtering">The custom header and attachment filtering</h3>
+<div class="paragraph">
+<p>If you need to provide your custom processing of either headers or
+attachments, extend existing BasicMessageFilter and override the
+appropriate methods or write a brand new implementation of the
+MessageFilter interface.<br>
+ To use your custom filter, add this into your spring context:</p>
+</div>
+<div class="paragraph">
+<p>You can specify either a global a or a local message filter as
+follows:
+ a) the global custom filter that provides the global configuration for
+all Spring-WS endpoints</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;bean id="messageFilter" class="your.domain.myMessageFiler" scope="singleton" /&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or
+ b) the local messageFilter directly on the endpoint as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">to("spring-ws:http://yourdomain.com?messageFilter=#myEndpointSpecificMessageFilter");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For more information see
+<a href="https://issues.apache.org/jira/browse/CAMEL-5724">CAMEL-5724</a></p>
+</div>
+<div class="paragraph">
+<p>If you want to create your own MessageFilter, consider overriding the
+following methods in the default implementation of MessageFilter in
+class BasicMessageFilter:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">protected void doProcessSoapHeader(Message inOrOut, SoapMessage soapMessage)
+{your code /*no need to call super*/ }
+
+protected void doProcessSoapAttachements(Message inOrOut, SoapMessage response)
+{ your code /*no need to call super*/ }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_a_custom_messagesender_and_messagefactory">Using a custom MessageSender and MessageFactory</h3>
+<div class="paragraph">
+<p>A custom message sender or factory in the registry can be referenced
+like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:example")
+.to("spring-ws:http://foo.com/bar?messageFactory=#messageFactory&amp;messageSender=#messageSender")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Spring configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;!-- authenticate using HTTP Basic Authentication --&gt;
+&lt;bean id="messageSender" class="org.springframework.ws.transport.http.HttpComponentsMessageSender"&gt;
+    &lt;property name="credentials"&gt;
+        &lt;bean class="org.apache.commons.httpclient.UsernamePasswordCredentials"&gt;
+            &lt;constructor-arg index="0" value="admin"/&gt;
+            &lt;constructor-arg index="1" value="secret"/&gt;
+        &lt;/bean&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;!-- force use of Sun SAAJ implementation, http://static.springsource.org/spring-ws/sites/1.5/faq.html#saaj-jboss --&gt;
+&lt;bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"&gt;
+    &lt;property name="messageFactory"&gt;
+        &lt;bean class="com.sun.xml.messaging.saaj.soap.ver1_1.SOAPMessageFactory1_1Impl"&gt;&lt;/bean&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exposing_web_services">Exposing web services</h3>
+<div class="paragraph">
+<p>In order to expose a web service using this component you first need to
+set-up a
+<a href="http://static.springsource.org/spring-ws/sites/1.5/reference/html/server.html">MessageDispatcher</a>
+to look for endpoint mappings in a Spring XML file. If you plan on
+running inside a servlet container you probably want to use a
+<code>MessageDispatcherServlet</code> configured in <code>web.xml</code>.</p>
+</div>
+<div class="paragraph">
+<p>By default the <code>MessageDispatcherServlet</code> will look for a Spring XML
+named <code>/WEB-INF/spring-ws-servlet.xml</code>. To use Camel with Spring-WS the
+only mandatory bean in that XML file is <code>CamelEndpointMapping</code>. This
+bean allows the <code>MessageDispatcher</code> to dispatch web service requests to
+your routes.</p>
+</div>
+<div class="paragraph">
+<p><em>web.xml</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;web-app&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;spring-ws&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.ws.transport.http.MessageDispatcherServlet&lt;/servlet-class&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;spring-ws&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><em>spring-ws-servlet.xml</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;bean id="endpointMapping" class="org.apache.camel.component.spring.ws.bean.CamelEndpointMapping" /&gt;
+
+&lt;bean id="wsdl" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition"&gt;
+    &lt;property name="schema"&gt;
+        &lt;bean class="org.springframework.xml.xsd.SimpleXsdSchema"&gt;
+            &lt;property name="xsd" value="/WEB-INF/foobar.xsd"/&gt;
+        &lt;/bean&gt;
+    &lt;/property&gt;
+    &lt;property name="portTypeName" value="FooBar"/&gt;
+    &lt;property name="locationUri" value="/"/&gt;
+    &lt;property name="targetNamespace" value="http://example.com/"/&gt;
+&lt;/bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>More information on setting up Spring-WS can be found in
+<a href="http://static.springsource.org/spring-ws/sites/1.5/reference/html/tutorial.html">Writing
+Contract-First Web Services</a>. Basically paragraph 3.6 "Implementing the
+Endpoint" is handled by this component (specifically paragraph 3.6.2
+"Routing the Message to the Endpoint" is where <code>CamelEndpointMapping</code>
+comes in). Also don&#8217;t forget to check out the
+<a href="spring-ws-example.html">Spring Web Services Example</a> included in the
+Camel distribution.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_endpoint_mapping_in_routes">Endpoint mapping in routes</h3>
+<div class="paragraph">
+<p>With the XML configuration in-place you can now use Camel&#8217;s DSL to
+define what web service requests are handled by your endpoint:</p>
+</div>
+<div class="paragraph">
+<p>The following route will receive all web service requests that have a
+root element named "GetFoo" within the <code><a href="http://example.com/" class="bare">http://example.com/</a></code> namespace.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("spring-ws:rootqname:{http://example.com/}GetFoo?endpointMapping=#endpointMapping")
+.convertBodyTo(String.class).to(mock:example)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following route will receive web service requests containing the
+<code><a href="http://example.com/GetFoo" class="bare">http://example.com/GetFoo</a></code> SOAP action.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("spring-ws:soapaction:http://example.com/GetFoo?endpointMapping=#endpointMapping")
+.convertBodyTo(String.class).to(mock:example)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following route will receive all requests sent to
+<code><a href="http://example.com/foobar" class="bare">http://example.com/foobar</a></code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("spring-ws:uri:http://example.com/foobar?endpointMapping=#endpointMapping")
+.convertBodyTo(String.class).to(mock:example)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The route below will receive requests that contain the element
+<code>&lt;foobar&gt;abc&lt;/foobar&gt;</code> anywhere inside the message (and the default
+namespace).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("spring-ws:xpathresult:abc?expression=//foobar&amp;endpointMapping=#endpointMapping")
+.convertBodyTo(String.class).to(mock:example)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_alternative_configuration_using_existing_endpoint_mappings">Alternative configuration, using existing endpoint mappings</h3>
+<div class="paragraph">
+<p>For every endpoint with mapping-type <code>beanname</code> one bean of type
+<code>CamelEndpointDispatcher</code> with a corresponding name is required in the
+Registry/ApplicationContext. This bean acts as a bridge between the
+Camel endpoint and an existing
+<a href="http://static.springsource.org/spring-ws/sites/1.5/reference/html/server.html#server-endpoint-mapping">endpoint
+mapping</a> like <code>PayloadRootQNameEndpointMapping</code>.</p>
+</div>
+<div class="paragraph">
+<p>NOTE:The use of the <code>beanname</code> mapping-type is primarily meant for (legacy)
+situations where you&#8217;re already using Spring-WS and have endpoint
+mappings defined in a Spring XML file. The <code>beanname</code> mapping-type
+allows you to wire your Camel route into an existing endpoint mapping.
+When you&#8217;re starting from scratch it&#8217;s recommended to define your
+endpoint mappings as Camel URI&#8217;s (as illustrated above with
+<code>endpointMapping</code>) since it requires less configuration and is more
+expressive. Alternatively you could use vanilla Spring-WS with the help
+of annotations.</p>
+</div>
+<div class="paragraph">
+<p>An example of a route using <code>beanname</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;camelContext xmlns="http://camel.apache.org/schema/spring"&gt;
+    &lt;route&gt;
+        &lt;from uri="spring-ws:beanname:QuoteEndpointDispatcher" /&gt;
+        &lt;to uri="mock:example" /&gt;
+    &lt;/route&gt;
+&lt;/camelContext&gt;
+
+&lt;bean id="legacyEndpointMapping" class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping"&gt;
+    &lt;property name="mappings"&gt;
+        &lt;props&gt;
+            &lt;prop key="{http://example.com/}GetFuture"&gt;FutureEndpointDispatcher&lt;/prop&gt;
+            &lt;prop key="{http://example.com/}GetQuote"&gt;QuoteEndpointDispatcher&lt;/prop&gt;
+        &lt;/props&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;bean id="QuoteEndpointDispatcher" class="org.apache.camel.component.spring.ws.bean.CamelEndpointDispatcher" /&gt;
+&lt;bean id="FutureEndpointDispatcher" class="org.apache.camel.component.spring.ws.bean.CamelEndpointDispatcher" /&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pojo_un_marshalling">POJO (un)marshalling</h3>
+<div class="paragraph">
+<p>Camel&#8217;s <a href="data-format.html">pluggable data formats</a> offer support for
+pojo/xml marshalling using libraries such as JAXB, XStream, JibX, Castor
+and XMLBeans. You can use these data formats in your route to sent and
+receive pojo&#8217;s, to and from web services.</p>
+</div>
+<div class="paragraph">
+<p>When <em>accessing</em> web services you can marshal the request and unmarshal
+the response message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">JaxbDataFormat jaxb = new JaxbDataFormat(false);
+jaxb.setContextPath("com.example.model");
+
+from("direct:example").marshal(jaxb).to("spring-ws:http://foo.com/bar").unmarshal(jaxb);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Similarly when <em>providing</em> web services, you can unmarshal XML requests
+to POJO&#8217;s and marshal the response message back to XML:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("spring-ws:rootqname:{http://example.com/}GetFoo?endpointMapping=#endpointMapping").unmarshal(jaxb)
+.to("mock:example").marshal(jaxb);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/spring/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/spring-security/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

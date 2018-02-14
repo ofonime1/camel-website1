@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='SIP Component Available as of Camel version 2.5
+ The sip component in Camel is a communication component, based on the Jain SIP implementation (available under the JCP license).
+ Session Initiation Protocol (SIP) is an IETF-defined signaling protocol, widely used for controlling multimedia communication sessions such as voice and video calls over Internet Protocol (IP).The SIP protocol is an Application Layer protocol designed to be independent of the underlying transport layer; it can run on Transmission Control Protocol (TCP), User Datagram Protocol (UDP) or Stream Control Transmission Protocol (SCTP).'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='SIP Component Available as of Camel version 2.5
+ The sip component in Camel is a communication component, based on the Jain SIP implementation (available under the JCP license).
+ Session Initiation Protocol (SIP) is an IETF-defined signaling protocol, widely used for controlling multimedia communication sessions such as voice and video calls over Internet Protocol (IP).The SIP protocol is an Application Layer protocol designed to be independent of the underlying transport layer; it can run on Transmission Control Protocol (TCP), User Datagram Protocol (UDP) or Stream Control Transmission Protocol (SCTP).'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/sip-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/sip-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_sip_component">SIP Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.5</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>sip</strong> component in Camel is a communication component, based on the
+Jain SIP implementation (available under the JCP license).</p>
+</div>
+<div class="paragraph">
+<p>Session Initiation Protocol (SIP) is an IETF-defined signaling protocol,
+widely used for controlling multimedia communication sessions such as
+voice and video calls over Internet Protocol (IP).The SIP protocol is an
+Application Layer protocol designed to be independent of the underlying
+transport layer; it can run on Transmission Control Protocol (TCP), User
+Datagram Protocol (UDP) or Stream Control Transmission Protocol (SCTP).</p>
+</div>
+<div class="paragraph">
+<p>The Jain SIP implementation supports TCP and UDP only.</p>
+</div>
+<div class="paragraph">
+<p>The Camel SIP component <strong>only</strong> supports the SIP Publish and Subscribe
+capability as described in the
+<a href="http://www.ietf.org/rfc/rfc3903.txt">RFC3903 - Session Initiation
+Protocol (SIP) Extension for Event</a></p>
+</div>
+<div class="paragraph">
+<p>This camel component supports both producer and consumer endpoints.</p>
+</div>
+<div class="paragraph">
+<p>Camel SIP Producers (Event Publishers) and SIP Consumers (Event
+Subscribers) communicate event &amp; state information to each other using
+an intermediary entity called a SIP Presence Agent (a stateful brokering
+entity).</p>
+</div>
+<div class="paragraph">
+<p>For SIP based communication, a SIP Stack with a listener <strong>must</strong> be
+instantiated on both the SIP Producer and Consumer (using separate ports
+if using localhost). This is necessary in order to support the
+handshakes &amp; acknowledgements exchanged between the SIP Stacks during
+communication.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-sip&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="paragraph">
+<p>The URI scheme for a sip endpoint is as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">sip://johndoe@localhost:99999[?options]
+sips://johndoe@localhost:99999/[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This component supports producer and consumer endpoints for both TCP and
+UDP.</p>
+</div>
+<div class="paragraph">
+<p>You can append query options to the URI in the following format,
+<code>?option=value&amp;option=value&amp;&#8230;&#8203;</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The SIP Component offers an extensive set of configuration options &amp;
+capability to create custom stateful headers needed to propagate state
+via the SIP protocol.</p>
+</div>
+<div class="paragraph">
+<p>The SIP component has no options.</p>
+</div>
+<div class="paragraph">
+<p>The SIP endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sip:uri</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>uri</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> URI of the SIP server to connect to (the username and password can be included such as: john:secretmyserver:9999)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_44_parameters">Query Parameters (44 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>cacheConnections</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Should connections be cached by the SipStack to reduce cost of connection creation. This is useful if the connection is used for long running conversations.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contentSubType</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Setting for contentSubType can be set to any valid MimeSubType.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">plain</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contentType</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Setting for contentType can be set to any valid MimeType.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>eventHeaderName</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Setting for a String based event type.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>eventId</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Setting for a String based event Id. Mandatory setting unless a registry based FromHeader is specified</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>fromHost</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hostname of the message originator. Mandatory setting unless a registry based FromHeader is specified</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>fromPort</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Port of the message originator. Mandatory setting unless a registry based FromHeader is specified</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>fromUser</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Username of the message originator. Mandatory setting unless a registry based custom FromHeader is specified.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>msgExpiration</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The amount of time a message received at an endpoint is considered valid</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">3600</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>receiveTimeoutMillis</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Setting for specifying amount of time to wait for a Response and/or Acknowledgement can be received from another SIP stack</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">10000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>stackName</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the SIP Stack instance associated with an SIP Endpoint.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">NAME_NOT_SET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>toHost</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hostname of the message receiver. Mandatory setting unless a registry based ToHeader is specified</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>toPort</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Portname of the message receiver. Mandatory setting unless a registry based ToHeader is specified</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>toUser</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Username of the message receiver. Mandatory setting unless a registry based custom ToHeader is specified.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transport</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Setting for choice of transport protocol. Valid choices are tcp or udp.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">tcp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>consumer</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This setting is used to determine whether the kind of header (FromHeaderToHeader etc) that needs to be created for this endpoint</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>presenceAgent</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This setting is used to distinguish between a Presence Agent &amp; a consumer. This is due to the fact that the SIP Camel component ships with a basic Presence Agent (for testing purposes only). Consumers have to set this flag to true.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>addressFactory</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom AddressFactory</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AddressFactory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>callIdHeader</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A custom Header object containing call details. Must implement the type javax.sip.header.CallIdHeader</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CallIdHeader</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contactHeader</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An optional custom Header object containing verbose contact details (email phone number etc). Must implement the type javax.sip.header.ContactHeader</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ContactHeader</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contentTypeHeader</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A custom Header object containing message content details. Must implement the type javax.sip.header.ContentTypeHeader</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ContentTypeHeader</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>eventHeader</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A custom Header object containing event details. Must implement the type javax.sip.header.EventHeader</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EventHeader</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>expiresHeader</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A custom Header object containing message expiration details. Must implement the type javax.sip.header.ExpiresHeader</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExpiresHeader</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>extensionHeader</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A custom Header object containing user/application specific details. Must implement the type javax.sip.header.ExtensionHeader</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExtensionHeader</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>fromHeader</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A custom Header object containing message originator settings. Must implement the type javax.sip.header.FromHeader</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FromHeader</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>headerFactory</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom HeaderFactory</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HeaderFactory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>listeningPoint</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom ListeningPoint implementation</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ListeningPoint</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxForwardsHeader</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A custom Header object containing details on maximum proxy forwards. This header places a limit on the viaHeaders possible. Must implement the type javax.sip.header.MaxForwardsHeader</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MaxForwardsHeader</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxMessageSize</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Setting for maximum allowed Message size in bytes.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1048576</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>messageFactory</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom MessageFactory</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MessageFactory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sipFactory</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom SipFactory to create the SipStack to be used</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SipFactory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sipStack</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom SipStack</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SipStack</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sipUri</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom SipURI. If none configured then the SipUri fallback to use the options toUser toHost:toPort</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SipURI</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>toHeader</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A custom Header object containing message receiver settings. Must implement the type javax.sip.header.ToHeader</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ToHeader</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>viaHeaders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List of custom Header objects of the type javax.sip.header.ViaHeader. Each ViaHeader containing a proxy address for request forwarding. (Note this header is automatically updated by each proxy when the request arrives at its listener)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>implementationDebugLogFile</strong> (logging)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of client debug log file to use for logging</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>implementationServerLogFile</strong> (logging)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of server log file to use for logging</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>implementationTraceLevel</strong> (logging)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Logging level for tracing</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxForwards</strong> (proxy)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of maximum proxy forwards</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useRouterForAllUris</strong> (proxy)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This setting is used when requests are sent to the Presence Agent via a proxy.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sending_messages_to_from_a_sip_endpoint">Sending Messages to/from a SIP endpoint</h3>
+<div class="sect3">
+<h4 id="_creating_a_camel_sip_publisher">Creating a Camel SIP Publisher</h4>
+<div class="paragraph">
+<p>In the example below, a SIP Publisher is created to send SIP Event
+publications to <br>
+ a user "agent@localhost:5152". This is the address of the SIP Presence
+Agent which acts as a broker between the SIP Publisher and Subscriber</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>using a SIP Stack named client</p>
+</li>
+<li>
+<p>using a registry based eventHeader called evtHdrName</p>
+</li>
+<li>
+<p>using a registry based eventId called evtId</p>
+</li>
+<li>
+<p>from a SIP Stack with Listener set up as user2@localhost:3534</p>
+</li>
+<li>
+<p>The Event being published is EVENT_A</p>
+</li>
+<li>
+<p>A Mandatory Header called REQUEST_METHOD is set to Request.Publish
+thereby setting up the endpoint as a Event publisher"</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">producerTemplate.sendBodyAndHeader(
+    "sip://agent@localhost:5152?stackName=client&amp;eventHeaderName=evtHdrName&amp;eventId=evtid&amp;fromUser=user2&amp;fromHost=localhost&amp;fromPort=3534",
+    "EVENT_A",
+    "REQUEST_METHOD",
+    Request.PUBLISH);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_creating_a_camel_sip_subscriber">Creating a Camel SIP Subscriber</h4>
+<div class="paragraph">
+<p>In the example below, a SIP Subscriber is created to receive SIP Event
+publications sent to <br>
+ a user "johndoe@localhost:5154"</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>using a SIP Stack named Subscriber</p>
+</li>
+<li>
+<p>registering with a Presence Agent user called agent@localhost:5152</p>
+</li>
+<li>
+<p>using a registry based eventHeader called evtHdrName. The evtHdrName
+contains the Event which is se to "Event_A"</p>
+</li>
+<li>
+<p>using a registry based eventId called evtId</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Override
+protected RouteBuilder createRouteBuilder() throws Exception {
+    return new RouteBuilder() {
+        @Override
+        public void configure() throws Exception {
+            // Create PresenceAgent
+            from("sip://agent@localhost:5152?stackName=PresenceAgent&amp;presenceAgent=true&amp;eventHeaderName=evtHdrName&amp;eventId=evtid")
+                .to("mock:neverland");
+
+            // Create Sip Consumer(Event Subscriber)
+            from("sip://johndoe@localhost:5154?stackName=Subscriber&amp;toUser=agent&amp;toHost=localhost&amp;toPort=5152&amp;eventHeaderName=evtHdrName&amp;eventId=evtid")
+                .to("log:ReceivedEvent?level=DEBUG")
+                .to("mock:notification");
+
+        }
+    };
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>The Camel SIP component also ships with a Presence Agent that is meant
+to be used for Testing and Demo purposes only.</strong> An example of
+instantiating a Presence Agent is given above.</p>
+</div>
+<div class="paragraph">
+<p>Note that the Presence Agent is set up as a user agent@localhost:5152
+and is capable of communicating with both Publisher as well as
+Subscriber. It has a separate SIP stackName distinct from Publisher as
+well as Subscriber. While it is set up as a Camel Consumer, it does not
+actually send any messages along the route to the endpoint
+"mock:neverland".</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/sjms-batch-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/shiro/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

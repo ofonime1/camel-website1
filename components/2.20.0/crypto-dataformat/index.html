@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Crypto (Java Cryptographic Extension) DataFormat Available as of Camel version 2.3
+ The Crypto Data Format integrates the Java Cryptographic Extension into Camel, allowing simple and flexible encryption and decryption of messages using Camel&#8217;s familiar marshall and unmarshal formatting mechanism. It assumes marshalling to mean encryption to cyphertext and unmarshalling to mean decryption back to the original plaintext. This data format implements only symmetric (shared-key) encryption and decyption.
+ CryptoDataFormat Options The Crypto (Java Cryptographic Extension) dataformat supports 10 options which are listed below.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Crypto (Java Cryptographic Extension) DataFormat Available as of Camel version 2.3
+ The Crypto Data Format integrates the Java Cryptographic Extension into Camel, allowing simple and flexible encryption and decryption of messages using Camel&#8217;s familiar marshall and unmarshal formatting mechanism. It assumes marshalling to mean encryption to cyphertext and unmarshalling to mean decryption back to the original plaintext. This data format implements only symmetric (shared-key) encryption and decyption.
+ CryptoDataFormat Options The Crypto (Java Cryptographic Extension) dataformat supports 10 options which are listed below.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/crypto-dataformat/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/crypto-dataformat/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_crypto_java_cryptographic_extension_dataformat">Crypto (Java Cryptographic Extension) DataFormat</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.3</strong></p>
+</div>
+<div class="paragraph">
+<p>The Crypto <a href="data-format.html">Data Format</a> integrates the Java
+Cryptographic Extension into Camel, allowing simple and flexible
+encryption and decryption of messages using Camel&#8217;s familiar marshall
+and unmarshal formatting mechanism. It assumes marshalling to mean
+encryption to cyphertext and unmarshalling to mean decryption back to
+the original plaintext. This data format implements only symmetric
+(shared-key) encryption and decyption.</p>
+</div>
+<div class="sect2">
+<h3 id="_cryptodataformat_options">CryptoDataFormat Options</h3>
+<div class="paragraph">
+<p>The Crypto (Java Cryptographic Extension) dataformat supports 10 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Java Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>algorithm</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DES/CBC/PKCS5Padding</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The JCE algorithm name indicating the cryptographic algorithm that will be used. Is by default DES/CBC/PKCS5Padding.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>cryptoProvider</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the JCE Security Provider that should be used.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>keyRef</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Refers to the secret key to lookup from the register to use.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>initVectorRef</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Refers to a byte array containing the Initialization Vector that will be used to initialize the Cipher.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>algorithmParameterRef</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A JCE AlgorithmParameterSpec used to initialize the Cipher. Will lookup the type using the given name as a java.security.spec.AlgorithmParameterSpec type.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>buffersize</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The size of the buffer used in the signature process.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>macAlgorithm</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HmacSHA1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The JCE algorithm name indicating the Message Authentication algorithm.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>shouldAppendHMAC</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Flag indicating that a Message Authentication Code should be calculated and appended to the encrypted data.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>inline</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Flag indicating that the configured IV should be inlined into the encrypted data stream. Is by default false.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contentTypeHeader</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML or application/json for data formats marshalling to JSon etc.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_basic_usage">Basic Usage</h3>
+<div class="paragraph">
+<p>At its most basic all that is required to encrypt/decrypt an exchange is a shared secret key.
+If one or more instances of the Crypto data format are configured with this key the format can
+be used to encrypt the payload in one route (or part of one) and decrypted in another.
+For example, using the Java DSL as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">KeyGenerator generator = KeyGenerator.getInstance("DES");
+
+CryptoDataFormat cryptoFormat = new CryptoDataFormat("DES", generator.generateKey());
+
+from("direct:basic-encryption")
+    .marshal(cryptoFormat)
+    .to("mock:encrypted")
+    .unmarshal(cryptoFormat)
+    .to("mock:unencrypted");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In Spring the dataformat is configured first and then used in routes</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
+  &lt;dataFormats&gt;
+    &lt;crypto id="basic" algorithm="DES" keyRef="desKey" /&gt;
+  &lt;/dataFormats&gt;
+    ...
+  &lt;route&gt;
+    &lt;from uri="direct:basic-encryption" /&gt;
+    &lt;marshal ref="basic" /&gt;
+    &lt;to uri="mock:encrypted" /&gt;
+    &lt;unmarshal ref="basic" /&gt;
+    &lt;to uri="mock:unencrypted" /&gt;
+  &lt;/route&gt;
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_specifying_the_encryption_algorithm">Specifying the Encryption Algorithm</h3>
+<div class="paragraph">
+<p>Changing the algorithm is a matter of supplying the JCE algorithm name. If you change the algorithm you will need to use a compatible key.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">KeyGenerator generator = KeyGenerator.getInstance("DES");
+
+CryptoDataFormat cryptoFormat = new CryptoDataFormat("DES", generator.generateKey());
+cryptoFormat.setShouldAppendHMAC(true);
+cryptoFormat.setMacAlgorithm("HmacMD5");
+
+from("direct:hmac-algorithm")
+    .marshal(cryptoFormat)
+    .to("mock:encrypted")
+    .unmarshal(cryptoFormat)
+    .to("mock:unencrypted");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A list of the available algorithms in Java 7 is available via the Java Cryptography Architecture Standard Algorithm Name Documentation.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_specifying_an_initialization_vector">Specifying an Initialization Vector</h3>
+<div class="paragraph">
+<p>Some crypto algorithms, particularly block algorithms, require configuration with an initial block of data known as an Initialization Vector.
+In the JCE this is passed as an AlgorithmParameterSpec when the Cipher is initialized.
+To use such a vector with the CryptoDataFormat you can configure it with a byte[] containing the required data e.g.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">KeyGenerator generator = KeyGenerator.getInstance("DES");
+byte[] initializationVector = new byte[] {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07};
+
+CryptoDataFormat cryptoFormat = new CryptoDataFormat("DES/CBC/PKCS5Padding", generator.generateKey());
+cryptoFormat.setInitializationVector(initializationVector);
+
+from("direct:init-vector")
+    .marshal(cryptoFormat)
+    .to("mock:encrypted")
+    .unmarshal(cryptoFormat)
+    .to("mock:unencrypted");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or with spring, suppling a reference to a byte[]</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;crypto id="initvector" algorithm="DES/CBC/PKCS5Padding" keyRef="desKey" initVectorRef="initializationVector" /&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The same vector is required in both the encryption and decryption phases. As it is not necessary to keep the IV a secret,
+the DataFormat allows for it to be inlined into the encrypted data and subsequently read out in the decryption
+phase to initialize the Cipher. To inline the IV set the /oinline flag.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">KeyGenerator generator = KeyGenerator.getInstance("DES");
+byte[] initializationVector = new byte[] {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07};
+SecretKey key = generator.generateKey();
+
+CryptoDataFormat cryptoFormat = new CryptoDataFormat("DES/CBC/PKCS5Padding", key);
+cryptoFormat.setInitializationVector(initializationVector);
+cryptoFormat.setShouldInlineInitializationVector(true);
+CryptoDataFormat decryptFormat = new CryptoDataFormat("DES/CBC/PKCS5Padding", key);
+decryptFormat.setShouldInlineInitializationVector(true);
+
+from("direct:inline")
+    .marshal(cryptoFormat)
+    .to("mock:encrypted")
+    .unmarshal(decryptFormat)
+    .to("mock:unencrypted");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or with spring.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;crypto id="inline" algorithm="DES/CBC/PKCS5Padding" keyRef="desKey" initVectorRef="initializationVector"
+  inline="true" /&gt;
+&lt;crypto id="inline-decrypt" algorithm="DES/CBC/PKCS5Padding" keyRef="desKey" inline="true" /&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For more information of the use of Initialization Vectors, consult</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/Initialization_vector" class="bare">http://en.wikipedia.org/wiki/Initialization_vector</a></p>
+</li>
+<li>
+<p><a href="http://www.herongyang.com/Cryptography/" class="bare">http://www.herongyang.com/Cryptography/</a></p>
+</li>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/Block_cipher_modes_of_operation" class="bare">http://en.wikipedia.org/wiki/Block_cipher_modes_of_operation</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hashed_message_authentication_codes_hmac">Hashed Message Authentication Codes (HMAC)</h3>
+<div class="paragraph">
+<p>To avoid attacks against the encrypted data while it is in transit the CryptoDataFormat can also calculate a Message Authentication
+Code for the encrypted exchange contents based on a configurable MAC algorithm. The calculated HMAC is appended to the stream after encryption.
+It is separated from the stream in the decryption phase. The MAC is recalculated and verified against the transmitted version to insure nothing
+was tampered with in transit.For more information on Message Authentication Codes see <a href="http://en.wikipedia.org/wiki/HMAC" class="bare">http://en.wikipedia.org/wiki/HMAC</a></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">KeyGenerator generator = KeyGenerator.getInstance("DES");
+
+CryptoDataFormat cryptoFormat = new CryptoDataFormat("DES", generator.generateKey());
+cryptoFormat.setShouldAppendHMAC(true);
+
+from("direct:hmac")
+    .marshal(cryptoFormat)
+    .to("mock:encrypted")
+    .unmarshal(cryptoFormat)
+    .to("mock:unencrypted");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or with spring.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;crypto id="hmac" algorithm="DES" keyRef="desKey" shouldAppendHMAC="true" /&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default the HMAC is calculated using the HmacSHA1 mac algorithm though this can be easily changed by supplying a different algorithm name.
+See here for how to check what algorithms are available through the configured security providers</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">KeyGenerator generator = KeyGenerator.getInstance("DES");
+
+CryptoDataFormat cryptoFormat = new CryptoDataFormat("DES", generator.generateKey());
+cryptoFormat.setShouldAppendHMAC(true);
+cryptoFormat.setMacAlgorithm("HmacMD5");
+
+from("direct:hmac-algorithm")
+    .marshal(cryptoFormat)
+    .to("mock:encrypted")
+    .unmarshal(cryptoFormat)
+    .to("mock:unencrypted");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or with spring.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;crypto id="hmac-algorithm" algorithm="DES" keyRef="desKey" macAlgorithm="HmacMD5" shouldAppendHMAC="true" /&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_supplying_keys_dynamically">Supplying Keys Dynamically</h3>
+<div class="paragraph">
+<p>When using a Recipient list or similar EIP the recipient of an exchange can vary dynamically.
+Using the same key across all recipients may neither be feasible or desirable. It would be useful to be able to specify
+keys dynamically on a per exchange basis. The exchange could then be dynamically enriched with the key of its target
+recipient before being processed by the data format. To facilitate this the DataFormat allow for keys to be supplied
+dynamically via the message headers below</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CryptoDataFormat.KEY "CamelCryptoKey"</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CryptoDataFormat cryptoFormat = new CryptoDataFormat("DES", null);
+/**
+ * Note: the header containing the key should be cleared after
+ * marshalling to stop it from leaking by accident and
+ * potentially being compromised. The processor version below is
+ * arguably better as the key is left in the header when you use
+ * the DSL leaks the fact that camel encryption was used.
+ */
+from("direct:key-in-header-encrypt")
+    .marshal(cryptoFormat)
+    .removeHeader(CryptoDataFormat.KEY)
+    .to("mock:encrypted");
+
+from("direct:key-in-header-decrypt").unmarshal(cryptoFormat).process(new Processor() {
+    public void process(Exchange exchange) throws Exception {
+        exchange.getIn().getHeaders().remove(CryptoDataFormat.KEY);
+        exchange.getOut().copyFrom(exchange.getIn());
+    }
+}).to("mock:unencrypted");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or with spring.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;crypto id="nokey" algorithm="DES" /&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dependencies">Dependencies</h3>
+<div class="paragraph">
+<p>To use the <a href="crypto.html">Crypto</a> dataformat in your camel routes you
+need to add the following dependency to your pom.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-crypto&lt;/artifactId&gt;
+  &lt;version&gt;x.x.x&lt;/version&gt;
+  &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="data-format.html">Data Format</a></p>
+</li>
+<li>
+<p><a href="crypto-digital-signatures.html">Crypto (Digital Signatures)</a></p>
+</li>
+<li>
+<p><a href="http://www.bouncycastle.org/java.html">http://www.bouncycastle.org/java.html</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/csv-dataformat/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/crypto-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

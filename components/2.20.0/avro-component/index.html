@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Avro Component Available as of Camel version 2.10
+ This component provides a dataformat for avro, which allows serialization and deserialization of messages using Apache Avro&#8217;s binary dataformat. Moreover, it provides support for Apache Avro&#8217;s rpc, by providing producers and consumers endpoint for using avro over netty or http.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-avro&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Avro Component Available as of Camel version 2.10
+ This component provides a dataformat for avro, which allows serialization and deserialization of messages using Apache Avro&#8217;s binary dataformat. Moreover, it provides support for Apache Avro&#8217;s rpc, by providing producers and consumers endpoint for using avro over netty or http.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-avro&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/avro-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/avro-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_avro_component">Avro Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.10</strong></p>
+</div>
+<div class="paragraph">
+<p>This component provides a dataformat for avro, which allows
+serialization and deserialization of messages using Apache Avro&#8217;s binary
+dataformat. Moreover, it provides support for Apache Avro&#8217;s rpc, by
+providing producers and consumers endpoint for using avro over netty or
+http.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-avro&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_apache_avro_overview">Apache Avro Overview</h3>
+<div class="paragraph">
+<p>Avro allows you to define message types and a protocol using a json like
+format and then generate java code for the specified types and messages.
+An example of how a schema looks like is below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">{"namespace": "org.apache.camel.avro.generated",
+ "protocol": "KeyValueProtocol",
+
+ "types": [
+     {"name": "Key", "type": "record",
+      "fields": [
+          {"name": "key",   "type": "string"}
+      ]
+     },
+     {"name": "Value", "type": "record",
+      "fields": [
+          {"name": "value",   "type": "string"}
+      ]
+     }
+ ],
+
+ "messages": {
+     "put": {
+         "request": [{"name": "key", "type": "Key"}, {"name": "value", "type": "Value"} ],
+         "response": "null"
+     },
+     "get": {
+         "request": [{"name": "key", "type": "Key"}],
+         "response": "Value"
+     }
+ }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can easily generate classes from a schema, using maven, ant etc.
+More details can be found at the
+<a href="http://avro.apache.org/docs/current/">Apache Avro documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>However, it doesn&#8217;t enforce a schema first approach and you can create
+schema for your existing classes. <strong>Since 2.12</strong> you can use existing
+protocol interfaces to make RCP calls. You should use interface for the
+protocol itself and POJO beans or primitive/String classes for parameter
+and result types. Here is an example of the class that corresponds to
+schema above:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package org.apache.camel.avro.reflection;
+
+public interface KeyValueProtocol {
+    void put(String key, Value value);
+    Value get(String key);
+}
+
+class Value {
+    private String value;
+    public String getValue() { return value; }
+    public void setValue(String value) { this.value = value; }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><em>Note: Existing classes can be used only for RPC (see below), not in
+data format.</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_the_avro_data_format">Using the Avro data format</h3>
+<div class="paragraph">
+<p>Using the avro data format is as easy as specifying that the class that
+you want to marshal or unmarshal in your route.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
+        &lt;route&gt;
+            &lt;from uri="direct:in"/&gt;
+            &lt;marshal&gt;
+                &lt;avro instanceClass="org.apache.camel.dataformat.avro.Message"/&gt;
+            &lt;/marshal&gt;
+            &lt;to uri="log:out"/&gt;
+        &lt;/route&gt;
+    &lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An alternative can be to specify the dataformat inside the context and
+reference it from your route.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
+         &lt;dataFormats&gt;
+            &lt;avro id="avro" instanceClass="org.apache.camel.dataformat.avro.Message"/&gt;
+        &lt;/dataFormats&gt;
+        &lt;route&gt;
+            &lt;from uri="direct:in"/&gt;
+            &lt;marshal ref="avro"/&gt;
+            &lt;to uri="log:out"/&gt;
+        &lt;/route&gt;
+    &lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the same manner you can umarshal using the avro data format.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_avro_rpc_in_camel">Using Avro RPC in Camel</h3>
+<div class="paragraph">
+<p>As mentioned above Avro also provides RPC support over multiple
+transports such as http and netty. Camel provides consumers and
+producers for these two transports.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">avro:[transport]:[host]:[port][?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The supported transport values are currently http or netty.</p>
+</div>
+<div class="paragraph">
+<p><strong>Since 2.12</strong> you can specify message name right in the URI:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">avro:[transport]:[host]:[port][/messageName][?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For consumers this allows you to have multiple routes attached to the
+same socket. Dispatching to correct route will be done by the avro
+component automatically. Route with no messageName specified (if any)
+will be used as default.</p>
+</div>
+<div class="paragraph">
+<p>When using camel producers for avro ipc, the "in" message body needs to
+contain the parameters of the operation specified in the avro protocol.
+The response will be added in the body of the "out" message.</p>
+</div>
+<div class="paragraph">
+<p>In a similar manner when using camel avro consumers for avro ipc, the
+requests parameters will be placed inside the "in" message body of the
+created exchange and once the exchange is processed the body of the
+"out" message will be send as a response.</p>
+</div>
+<div class="paragraph">
+<p><strong>Note:</strong> By default consumer parameters are wrapped into array. If you&#8217;ve
+got only one parameter, <strong>since 2.12</strong> you can use <code>singleParameter</code> URI
+option to receive it direcly in the "in" message body without array
+wrapping.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_avro_rpc_uri_options">Avro RPC URI Options</h3>
+<div class="paragraph">
+<p>The Avro component supports 2 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>configuration</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a shared AvroConfiguration to configure options once</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AvroConfiguration</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Avro endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>avro:transport:host:port/messageName</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_4_parameters">Path Parameters (4 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transport</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Transport to use</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AvroTransport</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>port</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Port number to use</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>host</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Hostname to use</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>messageName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the message to send.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_10_parameters">Query Parameters (10 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>protocol</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Avro protocol to use</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Protocol</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>protocolClassName</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Avro protocol to use defined by the FQN class name</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>protocolLocation</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Avro protocol location</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>reflectionProtocol</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If protocol object provided is reflection protocol. Should be used only with protocol parameter because for protocolClassName protocol type will be auto detected</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>singleParameter</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If true consumer parameter won&#8217;t be wrapped into array. Will fail if protocol specifies more then 1 parameter for the message</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>uriAuthority</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Authority to use (username and password)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_avro_rpc_headers">Avro RPC Headers</h3>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelAvroMessageName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the message to send. In consumer overrides message name from
+URI (if any)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_examples">Examples</h3>
+<div class="paragraph">
+<p>An example of using camel avro producers via http:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">        &lt;route&gt;
+            &lt;from uri="direct:start"/&gt;
+            &lt;to uri="avro:http:localhost:{{avroport}}?protocolClassName=org.apache.camel.avro.generated.KeyValueProtocol"/&gt;
+            &lt;to uri="log:avro"/&gt;
+        &lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the example above you need to fill <code>CamelAvroMessageName</code> header.
+<strong>Since 2.12</strong> you can use following syntax to call constant messages:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">        &lt;route&gt;
+            &lt;from uri="direct:start"/&gt;
+            &lt;to uri="avro:http:localhost:{{avroport}}/put?protocolClassName=org.apache.camel.avro.generated.KeyValueProtocol"/&gt;
+            &lt;to uri="log:avro"/&gt;
+        &lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An example of consuming messages using camel avro consumers via netty:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">        &lt;route&gt;
+            &lt;from uri="avro:netty:localhost:{{avroport}}?protocolClassName=org.apache.camel.avro.generated.KeyValueProtocol"/&gt;
+            &lt;choice&gt;
+                &lt;when&gt;
+                    &lt;el&gt;${in.headers.CamelAvroMessageName == 'put'}&lt;/el&gt;
+                    &lt;process ref="putProcessor"/&gt;
+                &lt;/when&gt;
+                &lt;when&gt;
+                    &lt;el&gt;${in.headers.CamelAvroMessageName == 'get'}&lt;/el&gt;
+                    &lt;process ref="getProcessor"/&gt;
+                &lt;/when&gt;
+            &lt;/choice&gt;
+        &lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Since 2.12</strong> you can set up two distinct routes to perform the same
+task:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">        &lt;route&gt;
+            &lt;from uri="avro:netty:localhost:{{avroport}}/put?protocolClassName=org.apache.camel.avro.generated.KeyValueProtocol"&gt;
+            &lt;process ref="putProcessor"/&gt;
+        &lt;/route&gt;
+        &lt;route&gt;
+            &lt;from uri="avro:netty:localhost:{{avroport}}/get?protocolClassName=org.apache.camel.avro.generated.KeyValueProtocol&amp;singleParameter=true"/&gt;
+            &lt;process ref="getProcessor"/&gt;
+        &lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the example above, get takes only one parameter, so <code>singleParameter</code>
+is used and <code>getProcessor</code> will receive Value class directly in body,
+while <code>putProcessor</code> will receive an array of size 2 with String key and
+Value value filled as array contents.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/avro-dataformat/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/atomix-value-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

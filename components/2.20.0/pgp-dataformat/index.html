@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='PGP DataFormat Available as of Camel version 2.9
+ The PGP Data Format integrates the Java Cryptographic Extension into Camel, allowing simple and flexible encryption and decryption of messages using Camel&#8217;s familiar marshall and unmarshal formatting mechanism. It assumes marshalling to mean encryption to cyphertext and unmarshalling to mean decryption back to the original plaintext. This data format implements only symmetric (shared-key) encryption and decyption.
+ PGPDataFormat Options The PGP dataformat supports 15 options which are listed below.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='PGP DataFormat Available as of Camel version 2.9
+ The PGP Data Format integrates the Java Cryptographic Extension into Camel, allowing simple and flexible encryption and decryption of messages using Camel&#8217;s familiar marshall and unmarshal formatting mechanism. It assumes marshalling to mean encryption to cyphertext and unmarshalling to mean decryption back to the original plaintext. This data format implements only symmetric (shared-key) encryption and decyption.
+ PGPDataFormat Options The PGP dataformat supports 15 options which are listed below.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/pgp-dataformat/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/pgp-dataformat/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_pgp_dataformat">PGP DataFormat</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.9</strong></p>
+</div>
+<div class="paragraph">
+<p>The PGP <a href="data-format.html">Data Format</a> integrates the Java
+Cryptographic Extension into Camel, allowing simple and flexible
+encryption and decryption of messages using Camel&#8217;s familiar marshall
+and unmarshal formatting mechanism. It assumes marshalling to mean
+encryption to cyphertext and unmarshalling to mean decryption back to
+the original plaintext. This data format implements only symmetric
+(shared-key) encryption and decyption.</p>
+</div>
+<div class="sect2">
+<h3 id="_pgpdataformat_options">PGPDataFormat Options</h3>
+<div class="paragraph">
+<p>The PGP dataformat supports 15 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Java Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>keyUserid</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user ID of the key in the PGP keyring used during encryption. Can also be only a part of a user ID. For example if the user ID is Test User then you can use the part Test User or to address the user ID.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>signatureKeyUserid</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User ID of the key in the PGP keyring used for signing (during encryption) or signature verification (during decryption). During the signature verification process the specified User ID restricts the public keys from the public keyring which can be used for the verification. If no User ID is specified for the signature verficiation then any public key in the public keyring can be used for the verification. Can also be only a part of a user ID. For example if the user ID is Test User then you can use the part Test User or to address the User ID.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>password</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Password used when opening the private key (not used for encryption).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>signaturePassword</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Password used when opening the private key used for signing (during encryption).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>keyFileName</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filename of the keyring; must be accessible as a classpath resource (but you can specify a location in the file system by using the file: prefix).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>signatureKeyFileName</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filename of the keyring to use for signing (during encryption) or for signature verification (during decryption); must be accessible as a classpath resource (but you can specify a location in the file system by using the file: prefix).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>signatureKeyRing</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keyring used for signing/verifying as byte array. You can not set the signatureKeyFileName and signatureKeyRing at the same time.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>armored</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This option will cause PGP to base64 encode the encrypted text making it available for copy/paste etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>integrity</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds an integrity check/sign into the encryption file. The default value is true.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>provider</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Java Cryptography Extension (JCE) provider default is Bouncy Castle (BC). Alternatively you can use for example the IAIK JCE provider; in this case the provider must be registered beforehand and the Bouncy Castle provider must not be registered beforehand. The Sun JCE provider does not work.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>algorithm</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Symmetric key encryption algorithm; possible values are defined in org.bouncycastle.bcpg.SymmetricKeyAlgorithmTags; for example 2 (= TRIPLE DES) 3 (= CAST5) 4 (= BLOWFISH) 6 (= DES) 7 (= AES_128). Only relevant for encrypting.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>compressionAlgorithm</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Compression algorithm; possible values are defined in org.bouncycastle.bcpg.CompressionAlgorithmTags; for example 0 (= UNCOMPRESSED) 1 (= ZIP) 2 (= ZLIB) 3 (= BZIP2). Only relevant for encrypting.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>hashAlgorithm</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Signature hash algorithm; possible values are defined in org.bouncycastle.bcpg.HashAlgorithmTags; for example 2 (= SHA1) 8 (= SHA256) 9 (= SHA384) 10 (= SHA512) 11 (=SHA224). Only relevant for signing.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>signatureVerificationOption</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Controls the behavior for verifying the signature during unmarshaling. There are 4 values possible: optional: The PGP message may or may not contain signatures; if it does contain signatures then a signature verification is executed. required: The PGP message must contain at least one signature; if this is not the case an exception (PGPException) is thrown. A signature verification is executed. ignore: Contained signatures in the PGP message are ignored; no signature verification is executed. no_signature_allowed: The PGP message must not contain a signature; otherwise an exception (PGPException) is thrown.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contentTypeHeader</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML or application/json for data formats marshalling to JSon etc.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_pgpdataformat_message_headers">PGPDataFormat Message Headers</h3>
+<div class="paragraph">
+<p>You can override the PGPDataFormat options by applying below headers
+into message dynamically.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 70%;">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelPGPDataFormatKeyFileName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Since Camel 2.11.0</strong>; filename of the keyring; will override existing
+setting directly on the PGPDataFormat.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelPGPDataFormatEncryptionKeyRing</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>byte[]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Since Camel 2.12.1</strong>; the encryption keyring; will override existing
+setting directly on the PGPDataFormat.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelPGPDataFormatKeyUserid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Since Camel 2.11.0</strong>; the User ID of the key in the PGP keyring; will
+override existing setting directly on the PGPDataFormat.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelPGPDataFormatKeyUserids</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Since camel 2.12.2</strong>: the User IDs of the key in the PGP keyring; will
+override existing setting directly on the PGPDataFormat.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelPGPDataFormatKeyPassword</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Since Camel 2.11.0</strong>; password used when opening the private key; will
+override existing setting directly on the PGPDataFormat.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelPGPDataFormatSignatureKeyFileName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Since Camel 2.11.0</strong>; filename of the signature keyring; will override
+existing setting directly on the PGPDataFormat.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelPGPDataFormatSignatureKeyRing</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>byte[]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Since Camel 2.12.1</strong>; the signature keyring; will override existing
+setting directly on the PGPDataFormat.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelPGPDataFormatSignatureKeyUserid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Since Camel 2.11.0</strong>; the User ID of the signature key in the PGP
+keyring; will override existing setting directly on the PGPDataFormat.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelPGPDataFormatSignatureKeyUserids</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Since Camel 2.12.3</strong>; the User IDs of the signature keys in the PGP
+keyring; will override existing setting directly on the PGPDataFormat.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelPGPDataFormatSignatureKeyPassword</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Since Camel 2.11.0</strong>; password used when opening the signature private
+key; will override existing setting directly on the PGPDataFormat.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelPGPDataFormatEncryptionAlgorithm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Since Camel 2.12.2</strong>; symmetric key encryption algorithm; will override
+existing setting directly on the PGPDataFormat.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelPGPDataFormatSignatureHashAlgorithm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Since Camel 2.12.2</strong>; signature hash algorithm; will override existing
+setting directly on the PGPDataFormat.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelPGPDataFormatCompressionAlgorithm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Since Camel 2.12.2</strong>; compression algorithm; will override existing
+setting directly on the PGPDataFormat.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelPGPDataFormatNumberOfEncryptionKeys</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Since</strong> *Camel 2.12.3; *number of public keys used for encrypting the
+symmectric key, set by PGPDataFormat during encryptiion process</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelPGPDataFormatNumberOfSigningKeys</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Since</strong> *Camel 2.12.3; *number of private keys used for creating
+signatures, set by PGPDataFormat during signing process</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_encrypting_with_pgpdataformat">Encrypting with PGPDataFormat</h3>
+<div class="paragraph">
+<p>The following sample uses the popular PGP format for
+encrypting/decrypting files using the
+<a href="http://www.bouncycastle.org/java.html">Bouncy Castle Java libraries</a>:</p>
+</div>
+<div class="paragraph">
+<p>The following sample performs signing + encryption, and then signature
+verification + decryption. It uses the same keyring for both signing and
+encryption, but you can obviously use different keys:</p>
+</div>
+<div class="paragraph">
+<p>Or using Spring:</p>
+</div>
+<div class="sect3">
+<h4 id="_to_work_with_the_previous_example_you_need_the_following">To work with the previous example you need the following</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>A public keyring file which contains the public keys used to encrypt
+the data</p>
+</li>
+<li>
+<p>A private keyring file which contains the keys used to decrypt the
+data</p>
+</li>
+<li>
+<p>The keyring password</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_managing_your_keyring">Managing your keyring</h4>
+<div class="paragraph">
+<p>To manage the keyring, I use the command line tools, I find this to be
+the simplest approach in managing the keys. There are also Java
+libraries available from
+<a href="http://www.bouncycastle.org/java.html">http://www.bouncycastle.org/java.html</a>
+if you would prefer to do it that way.</p>
+</div>
+<div class="paragraph">
+<p>Install the command line utilities on linux</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">apt-get install gnupg</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create your keyring, entering a secure password</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">gpg --gen-key</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you need to import someone elses public key so that you can encrypt a file for them.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">gpg --import &lt;filename.key</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following files should now exist and can be used to run the example</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">ls -l ~/.gnupg/pubring.gpg ~/.gnupg/secring.gpg</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>[[Crypto-PGPDecrypting/VerifyingofMessagesEncrypted/SignedbyDifferentPrivate/PublicKeys]]
+PGP Decrypting/Verifying of Messages Encrypted/Signed by Different
+<mark>#</mark> Private/Public Keys</p>
+</div>
+<div class="paragraph">
+<p>Since <strong>Camel 2.12.2</strong>.</p>
+</div>
+<div class="paragraph">
+<p>A PGP Data Formater can decrypt/verify messages which have been
+encrypted by different public keys or signed by different private keys.
+Just, provide the corresponding private keys in the secret keyring, the
+corresponding public keys in the public keyring, and the passphrases in
+the passphrase accessor.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Map&lt;String, String&gt; userId2Passphrase = new HashMap&lt;String, String&gt;(2);
+// add passphrases of several private keys whose corresponding public keys have been used to encrypt the messages
+userId2Passphrase.put("UserIdOfKey1","passphrase1"); // you must specify the exact User ID!
+userId2Passphrase.put("UserIdOfKey2","passphrase2");
+PGPPassphraseAccessor passphraseAccessor = new PGPPassphraseAccessorDefault(userId2Passphrase);
+
+PGPDataFormat pgpVerifyAndDecrypt = new PGPDataFormat();
+pgpVerifyAndDecrypt.setPassphraseAccessor(passphraseAccessor);
+// the method getSecKeyRing() provides the secret keyring as byte array containing the private keys
+pgpVerifyAndDecrypt.setEncryptionKeyRing(getSecKeyRing()); // alternatively you can use setKeyFileName(keyfileName)
+// the method getPublicKeyRing() provides the public keyring as byte array containing the public keys
+pgpVerifyAndDecrypt.setSignatureKeyRing((getPublicKeyRing());  // alternatively you can use setSignatureKeyFileName(signatgureKeyfileName)
+// it is not necessary to specify the encryption or signer  User Id
+
+from("direct:start")
+         ...
+        .unmarshal(pgpVerifyAndDecrypt) // can decrypt/verify messages encrypted/signed by different private/public keys
+        ...</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The functionality is especially useful to support the key exchange. If
+you want to exchange the private key for decrypting you can accept for a
+period of time messages which are either encrypted with the old or new
+corresponding public key. Or if the sender wants to exchange his signer
+private key, you can accept for a period of time, the old or new signer
+key.</p>
+</li>
+<li>
+<p>Technical background: The PGP encrypted data contains a Key ID of the
+public key which was used to encrypt the data. This Key ID can be used
+to locate the private key in the secret keyring to decrypt the data. The
+same mechanism is also used to locate the public key for verifying a
+signature. Therefore you no longer must specify User IDs for the
+unmarshaling.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_restricting_the_signer_identities_during_pgp_signature_verification">Restricting the Signer Identities during PGP Signature Verification</h3>
+<div class="paragraph">
+<p>Since <strong>Camel 2.12.3.</strong></p>
+</div>
+<div class="paragraph">
+<p>If you verify a signature you not only want to verify the correctness of
+the signature but you also want check that the signature comes from a
+certain identity or a specific set of identities. Therefore it is
+possible to restrict the number of public keys from the public keyring
+which can be used for the verification of a signature.</p>
+</div>
+<div class="paragraph">
+<p><strong>Signature User IDs</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// specify the User IDs of the expected signer identities
+ List&lt;String&gt; expectedSigUserIds = new ArrayList&lt;String&gt;();
+ expectedSigUserIds.add("Trusted company1");
+ expectedSigUserIds.add("Trusted company2");
+
+ PGPDataFormat pgpVerifyWithSpecificKeysAndDecrypt = new PGPDataFormat();
+ pgpVerifyWithSpecificKeysAndDecrypt.setPassword("my password"); // for decrypting with private key
+ pgpVerifyWithSpecificKeysAndDecrypt.setKeyFileName(keyfileName);
+ pgpVerifyWithSpecificKeysAndDecrypt.setSignatureKeyFileName(signatgureKeyfileName);
+ pgpVerifyWithSpecificKeysAndDecrypt.setSignatureKeyUserids(expectedSigUserIds); // if you have only one signer identity then you can also use setSignatureKeyUserid("expected Signer")
+
+from("direct:start")
+         ...
+        .unmarshal(pgpVerifyWithSpecificKeysAndDecrypt)
+        ...</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If the PGP content has several signatures the verification is
+successful as soon as one signature can be verified.</p>
+</li>
+<li>
+<p>If you do not want to restrict the signer identities for verification
+then do not specify the signature key User IDs. In this case all public
+keys in the public keyring are taken into account.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_several_signatures_in_one_pgp_data_format">Several Signatures in One PGP Data Format</h3>
+<div class="paragraph">
+<p>Since <strong>Camel 2.12.3.</strong></p>
+</div>
+<div class="paragraph">
+<p>The PGP specification allows that one PGP data format can contain
+several signatures from different keys. Since Camel 2.13.3 it is
+possible to create such kind of PGP content via specifying signature
+User IDs which relate to several private keys in the secret keyring.</p>
+</div>
+<div class="paragraph">
+<p><strong>Several Signatures</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java"> PGPDataFormat pgpSignAndEncryptSeveralSignerKeys = new PGPDataFormat();
+ pgpSignAndEncryptSeveralSignerKeys.setKeyUserid(keyUserid); // for encrypting, you can also use setKeyUserids if you want to encrypt with several keys
+ pgpSignAndEncryptSeveralSignerKeys.setKeyFileName(keyfileName);
+ pgpSignAndEncryptSeveralSignerKeys.setSignatureKeyFileName(signatgureKeyfileName);
+ pgpSignAndEncryptSeveralSignerKeys.setSignaturePassword("sdude"); // here we assume that all private keys have the same password, if this is not the case then you can use setPassphraseAccessor
+
+ List&lt;String&gt; signerUserIds = new ArrayList&lt;String&gt;();
+ signerUserIds.add("company old key");
+ signerUserIds.add("company new key");
+ pgpSignAndEncryptSeveralSignerKeys.setSignatureKeyUserids(signerUserIds);
+
+from("direct:start")
+         ...
+        .marshal(pgpSignAndEncryptSeveralSignerKeys)
+        ...</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_support_of_sub_keys_and_key_flags_in_pgp_data_format_marshaler">Support of Sub-Keys and Key Flags in PGP Data Format Marshaler</h3>
+<div class="paragraph">
+<p>Since *Camel 2.12.3.<br>
+*An <a href="https://tools.ietf.org/html/rfc4880#section-12.1">OpenPGP V4 key</a> can
+have a primary key and sub-keys. The usage of the keys is indicated by
+the so called <a href="https://tools.ietf.org/html/rfc4880#section-5.2.3.21">Key
+Flags</a>. For example, you can have a primary key with two sub-keys; the
+primary key shall only be used for certifying other keys (Key Flag
+0x01), the first sub-key  shall only be used for signing (Key Flag
+0x02), and the second sub-key shall only be used for encryption (Key
+Flag 0x04 or 0x08). The PGP Data Format marshaler takes into account
+these Key Flags of the primary key and sub-keys in order to determine
+the right key for signing and encryption. This is necessary because the
+primary key and its sub-keys have the same User IDs.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_support_of_custom_key_accessors">Support of Custom Key Accessors</h3>
+<div class="paragraph">
+<p>Since *Camel 2.13.0.<br>
+*You can implement custom key accessors for encryption/signing. The
+above PGPDataFormat class selects in a certain predefined way the keys
+which should be used for signing/encryption or verifying/decryption. If
+you have special requirements how your keys should be selected you
+should use the
+<a href="https://github.com/apache/camel/blob/master/components/camel-crypto/src/main/java/org/apache/camel/converter/crypto/PGPKeyAccessDataFormat.java">PGPKeyAccessDataFormat</a>
+class instead and implement the interfaces
+<a href="https://github.com/apache/camel/blob/master/components/camel-crypto/src/main/java/org/apache/camel/converter/crypto/PGPPublicKeyAccessor.java">PGPPublicKeyAccessor</a>
+and
+<a href="https://github.com/apache/camel/blob/master/components/camel-crypto/src/main/java/org/apache/camel/converter/crypto/PGPSecretKeyAccessor.java">PGPSecretKeyAccessor</a>
+as beans. There are default implementations
+<a href="https://github.com/apache/camel/blob/master/components/camel-crypto/src/main/java/org/apache/camel/converter/crypto/DefaultPGPPublicKeyAccessor.java">DefaultPGPPublicKeyAccessor</a>
+and
+<a href="https://github.com/apache/camel/blob/master/components/camel-crypto/src/main/java/org/apache/camel/converter/crypto/DefaultPGPSecretKeyAccessor.java">DefaultPGPSecretKeyAccessor</a>
+which cache the keys, so that not every time the keyring is parsed when
+the processor is called.</p>
+</div>
+<div class="paragraph">
+<p>PGPKeyAccessDataFormat has the same options as PGPDataFormat except
+password, keyFileName, encryptionKeyRing, signaturePassword,
+signatureKeyFileName, and signatureKeyRing.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dependencies">Dependencies</h3>
+<div class="paragraph">
+<p>To use the PGP dataformat in your camel routes you
+need to add the following dependency to your pom.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-crypto&lt;/artifactId&gt;
+  &lt;version&gt;x.x.x&lt;/version&gt;
+  &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="data-format.html">Data Format</a></p>
+</li>
+<li>
+<p><a href="crypto-digital-signatures.html">Crypto (Digital Signatures)</a></p>
+</li>
+<li>
+<p><a href="http://www.bouncycastle.org/java.html">http://www.bouncycastle.org/java.html</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/php-language/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/pgevent-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

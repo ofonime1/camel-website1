@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='JT400 Component Available as of Camel version 1.5
+ The jt400 component allows you to exchanges messages with an AS/400 system using data queues.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-jt400&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   URI format jt400://user:password@system/QSYS.LIB/LIBRARY.LIB/QUEUE.DTAQ[?options]   To call remote program (Camel 2.7)'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='JT400 Component Available as of Camel version 1.5
+ The jt400 component allows you to exchanges messages with an AS/400 system using data queues.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-jt400&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   URI format jt400://user:password@system/QSYS.LIB/LIBRARY.LIB/QUEUE.DTAQ[?options]   To call remote program (Camel 2.7)'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/jt400-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/jt400-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_jt400_component">JT400 Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 1.5</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong><code>jt400</code></strong> component allows you to exchanges messages with an AS/400
+system using data queues.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-jt400&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">jt400://user:password@system/QSYS.LIB/LIBRARY.LIB/QUEUE.DTAQ[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To call remote program (<strong>Camel 2.7</strong>)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">jt400://user:password@system/QSYS.LIB/LIBRARY.LIB/program.PGM[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can append query options to the URI in the following format,
+<code>?option=value&amp;option=value&amp;&#8230;&#8203;</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_jt400_options">JT400 options</h3>
+<div class="paragraph">
+<p>The JT400 component supports 2 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionPool</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns the default connection pool used by this component.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AS400ConnectionPool</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The JT400 endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>jt400:userID:password/systemName/objectPath.type</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_5_parameters">Path Parameters (5 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>userID</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Returns the ID of the AS/400 user.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>password</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Returns the password of the AS/400 user.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>systemName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Returns the name of the AS/400 system.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>objectPath</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Returns the fully qualified integrated file system path name of the target object of this endpoint.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>type</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Whether to work with data queues or remote program call</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jt400Type</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_29_parameters">Query Parameters (29 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>ccsid</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the CCSID to use for the connection with the AS/400 system.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>format</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the data format for sending messages.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Format</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>guiAvailable</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether AS/400 prompting is enabled in the environment running Camel.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>keyed</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to use keyed or non-keyed data queues.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>outputFieldsIdxArray</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies which fields (program parameters) are output parameters.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer[]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>outputFieldsLengthArray</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the fields (program parameters) length as in the AS/400 program definition.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer[]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>searchKey</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Search key for keyed data queues.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>searchType</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Search type such as EQ for equal etc.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">EQ</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SearchType</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>readTimeout</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout in millis the consumer will wait while trying to read a new message of the data queue.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">30000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sendEmptyMessageWhenIdle</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the polling consumer did not poll any files you can enable this option to send an empty message (no body) instead.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>pollStrategy</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pluggable org.apache.camel.PollingConsumerPollingStrategy allowing you to provide your custom implementation to control error handling usually occurred during the poll operation before an Exchange have been created and being routed in Camel.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PollingConsumerPoll Strategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backoffErrorThreshold</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of subsequent error polls (failed due some error) that should happen before the backoffMultipler should kick-in.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backoffIdleThreshold</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of subsequent idle polls that should happen before the backoffMultipler should kick-in.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backoffMultiplier</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the scheduled polling consumer backoff if there has been a number of subsequent idles/errors in a row. The multiplier is then the number of polls that will be skipped before the next actual attempt is happening again. When this option is in use then backoffIdleThreshold and/or backoffErrorThreshold must also be configured.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>delay</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Milliseconds before the next poll. You can also specify time values using units such as 60s (60 seconds) 5m30s (5 minutes and 30 seconds) and 1h (1 hour).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">500</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>greedy</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If greedy is enabled then the ScheduledPollConsumer will run immediately again if the previous run polled 1 or more messages.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>initialDelay</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Milliseconds before the first poll starts. You can also specify time values using units such as 60s (60 seconds) 5m30s (5 minutes and 30 seconds) and 1h (1 hour).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>runLoggingLevel</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The consumer logs a start/complete log line when it polls. This option allows you to configure the logging level for that.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">TRACE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LoggingLevel</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>scheduledExecutorService</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for configuring a custom/shared thread pool to use for the consumer. By default each consumer has its own single threaded thread pool.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ScheduledExecutor Service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>scheduler</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a cron scheduler from either camel-spring or camel-quartz2 component</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ScheduledPollConsumer Scheduler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>schedulerProperties</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure additional properties when using a custom scheduler or any of the Quartz2 Spring based scheduler.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>startScheduler</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the scheduler should be auto started.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>timeUnit</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time unit for initialDelay and delay options.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">MILLISECONDS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TimeUnit</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useFixedDelay</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Controls if fixed delay or fixed rate is used. See ScheduledExecutorService in JDK for details.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>secured</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether connections to AS/400 are secured with SSL.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_usage">Usage</h3>
+<div class="paragraph">
+<p>When configured as a consumer endpoint, the endpoint will poll a data
+queue on a remote system. For every entry on the data queue, a new
+<code>Exchange</code> is sent with the entry&#8217;s data in the <em>In</em> message&#8217;s body,
+formatted either as a <code>String</code> or a <code>byte[]</code>, depending on the format.
+For a provider endpoint, the <em>In</em> message body contents will be put on
+the data queue as either raw bytes or text.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_connection_pool">Connection pool</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.10</strong></p>
+</div>
+<div class="paragraph">
+<p>Connection pooling is in use from Camel 2.10 onwards. You can explicit
+configure a connection pool on the Jt400Component, or as an uri option
+on the endpoint.</p>
+</div>
+<div class="sect3">
+<h4 id="_remote_program_call_strong_camel_2_7_strong">Remote program call (<strong>Camel 2.7</strong>)</h4>
+<div class="paragraph">
+<p>This endpoint expects the input to be either a String array or byte[]
+array (depending on format) and handles all the CCSID handling through
+the native jt400 library mechanisms. A parameter can be <em>omitted</em> by
+passing null as the value in its position (the remote program has to
+support it). After the program execution the endpoint returns either a
+String array or byte[] array with the values as they were returned by
+the program (the input only parameters will contain the same data as the
+beginning of the invocation). This endpoint does not implement a provider endpoint!</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_example">Example</h3>
+<div class="paragraph">
+<p>In the snippet below, the data for an exchange sent to the
+<code>direct:george</code> endpoint will be put in the data queue <code>PENNYLANE</code> in
+library <code>BEATLES</code> on a system named <code>LIVERPOOL</code>. <br>
+ Another user connects to the same data queue to receive the information
+from the data queue and forward it to the <code>mock:ringo</code> endpoint.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class Jt400RouteBuilder extends RouteBuilder {
+    @Override
+    public void configure() throws Exception {
+       from("direct:george").to("jt400://GEORGE:EGROEG@LIVERPOOL/QSYS.LIB/BEATLES.LIB/PENNYLANE.DTAQ");
+       from("jt400://RINGO:OGNIR@LIVERPOOL/QSYS.LIB/BEATLES.LIB/PENNYLANE.DTAQ").to("mock:ringo");
+    }
+}</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_remote_program_call_example_strong_camel_2_7_strong">Remote program call example (<strong>Camel 2.7</strong>)</h4>
+<div class="paragraph">
+<p>In the snippet below, the data Exchange sent to the direct:work endpoint
+will contain three string that will be used as the arguments for the
+program “compute” in the library “assets”. This program will write the
+output values in the 2nd and 3rd parameters. All the parameters will be
+sent to the direct:play endpoint.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class Jt400RouteBuilder extends RouteBuilder {
+    @Override
+    public void configure() throws Exception {
+       from("direct:work").to("jt400://GRUPO:ATWORK@server/QSYS.LIB/assets.LIB/compute.PGM?fieldsLength=10,10,512&amp;ouputFieldsIdx=2,3").to(“direct:play”);
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_writing_to_keyed_data_queues">Writing to keyed data queues</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("jms:queue:input")
+.to("jt400://username:password@system/lib.lib/MSGINDQ.DTAQ?keyed=true");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_reading_from_keyed_data_queues">Reading from keyed data queues</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("jt400://username:password@system/lib.lib/MSGOUTDQ.DTAQ?keyed=true&amp;searchKey=MYKEY&amp;searchType=GE")
+.to("jms:queue:output");</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/jxpath-language/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/jsonpath-language/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

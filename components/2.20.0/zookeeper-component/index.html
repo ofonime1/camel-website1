@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='ZooKeeper Component Available as of Camel version 2.9
+ The ZooKeeper component allows interaction with a ZooKeeper cluster and exposes the following features to Camel:
+  Creation of nodes in any of the ZooKeeper create modes.
+  Get and Set the data contents of arbitrary cluster nodes (data being set must be convertible to byte[]).
+  Create and retrieve the list the child nodes attached to a particular node.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='ZooKeeper Component Available as of Camel version 2.9
+ The ZooKeeper component allows interaction with a ZooKeeper cluster and exposes the following features to Camel:
+  Creation of nodes in any of the ZooKeeper create modes.
+  Get and Set the data contents of arbitrary cluster nodes (data being set must be convertible to byte[]).
+  Create and retrieve the list the child nodes attached to a particular node.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/zookeeper-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/zookeeper-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_zookeeper_component">ZooKeeper Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.9</strong></p>
+</div>
+<div class="paragraph">
+<p>The ZooKeeper component allows interaction with a
+<a href="http://hadoop.apache.org/zookeeper/">ZooKeeper</a> cluster and exposes the
+following features to Camel:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Creation of nodes in any of the ZooKeeper create modes.</p>
+</li>
+<li>
+<p>Get and Set the data contents of arbitrary cluster nodes (data
+being set must be convertible to <code>byte[]</code>).</p>
+</li>
+<li>
+<p>Create and retrieve the list the child nodes attached to a
+particular node.</p>
+</li>
+<li>
+<p>A Distributed <a href="routepolicy.html"><code>RoutePolicy</code></a> that leverages a
+Leader election coordinated by ZooKeeper to determine if exchanges
+should get processed.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-zookeeper&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>zookeeper://zookeeper-server[:port][/path][?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The path from the URI specifies the node in the ZooKeeper server (a.k.a.
+<em>znode</em>) that will be the target of the endpoint:</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The ZooKeeper component supports 2 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>configuration</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a shared ZooKeeperConfiguration</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ZooKeeperConfiguration</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The ZooKeeper endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>zookeeper:serverUrls/path</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_2_parameters">Path Parameters (2 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>serverUrls</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The zookeeper server hosts (multiple servers can be separated by comma)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>path</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The node in the ZooKeeper server (aka znode)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_12_parameters">Query Parameters (12 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>awaitExistence</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Not in use</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>listChildren</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the children of the node should be listed</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>timeout</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The time interval to wait on connection before timing out.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backoff</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The time interval to backoff for after an error before retrying.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>repeat</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Should changes to the znode be 'watched' and repeatedly processed.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sendEmptyMessageOnDelete</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Upon the delete of a znode should an empty message be send to the consumer</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>create</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Should the endpoint create the node if it does not currently exist.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>createMode</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The create mode that should be used for the newly created node</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">EPHEMERAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_use_cases">Use cases</h3>
+<div class="sect3">
+<h4 id="_reading_from_a_em_znode_em">Reading from a <em>znode</em></h4>
+<div class="paragraph">
+<p>The following snippet will read the data from the <em>znode</em>
+<code>/somepath/somenode/</code> provided that it already exists. The data
+retrieved will be placed into an exchange and passed onto
+the rest of the route:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("zookeeper://localhost:39913/somepath/somenode").to("mock:result");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the node does not yet exist then a flag can be supplied to have the
+endpoint await its creation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("zookeeper://localhost:39913/somepath/somenode?awaitCreation=true").to("mock:result");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_reading_from_a_em_znode_em_additional_camel_2_10_onwards">Reading from a <em>znode</em> (additional Camel 2.10 onwards)</h4>
+<div class="paragraph">
+<p>When data is read due to a <code>WatchedEvent</code> received from the ZooKeeper
+ensemble, the <code>CamelZookeeperEventType</code> header holds ZooKeeper&#8217;s
+<a href="http://zookeeper.apache.org/doc/current/api/org/apache/zookeeper/Watcher.Event.EventType.html"><code>EventType</code></a>
+value from that <code>WatchedEvent</code>. If the data is read initially (not
+triggered by a <code>WatchedEvent</code>) the <code>CamelZookeeperEventType</code> header will not
+be set.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_writing_to_a_em_znode_em">Writing to a <em>znode</em></h4>
+<div class="paragraph">
+<p>The following snippet will write the payload of the exchange into the
+znode at <code>/somepath/somenode/</code> provided that it already exists:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:write-to-znode")
+    .to("zookeeper://localhost:39913/somepath/somenode");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For flexibility, the endpoint allows the target <em>znode</em> to be specified
+dynamically as a message header. If a header keyed by the string
+<code>CamelZooKeeperNode</code> is present then the value of the header will be
+used as the path to the <em>znode</em> on the server. For instance using the same
+route definition above, the following code snippet will write the data
+not to <code>/somepath/somenode</code> but to the path from the header
+<code>/somepath/someothernode</code>.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+the <code>testPayload</code> must be convertible
+to <code>byte[]</code> as the data stored in ZooKeeper is byte based.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Object testPayload = ...
+template.sendBodyAndHeader("direct:write-to-znode", testPayload, "CamelZooKeeperNode", "/somepath/someothernode");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To also create the node if it does not exist the <code>create</code> option should
+be used.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:create-and-write-to-znode")
+    .to("zookeeper://localhost:39913/somepath/somenode?create=true");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Starting <strong>version 2.11</strong> it is also possible to <strong>delete</strong> a node using the
+header <code>CamelZookeeperOperation</code> by setting it to <code>DELETE</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:delete-znode")
+    .setHeader(ZooKeeperMessage.ZOOKEEPER_OPERATION, constant("DELETE"))
+    .to("zookeeper://localhost:39913/somepath/somenode");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or equivalently:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+  &lt;from uri="direct:delete-znode" /&gt;
+  &lt;setHeader headerName="CamelZookeeperOperation"&gt;
+     &lt;constant&gt;DELETE&lt;/constant&gt;
+  &lt;/setHeader&gt;
+  &lt;to uri="zookeeper://localhost:39913/somepath/somenode" /&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>ZooKeeper nodes can have different types; they can be 'Ephemeral' or
+'Persistent' and 'Sequenced' or 'Unsequenced'. For further information
+of each type you can check
+<a href="http://zookeeper.apache.org/doc/trunk/zookeeperProgrammers.html#Ephemeral+Nodes">here</a>.
+By default endpoints will create unsequenced, ephemeral nodes, but the
+type can be easily manipulated via a uri config parameter or via a
+special message header. The values expected for the create mode are
+simply the names from the <code>CreateMode</code> enumeration:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>PERSISTENT</code></p>
+</li>
+<li>
+<p><code>PERSISTENT_SEQUENTIAL</code></p>
+</li>
+<li>
+<p><code>EPHEMERAL</code></p>
+</li>
+<li>
+<p><code>EPHEMERAL_SEQUENTIAL</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example to create a persistent <em>znode</em> via the URI config:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:create-and-write-to-persistent-znode")
+    .to("zookeeper://localhost:39913/somepath/somenode?create=true&amp;createMode=PERSISTENT");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or using the header <code>CamelZookeeperCreateMode</code>.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+the <code>testPayload</code> must be convertible to <code>byte[]</code> as the data stored in
+ZooKeeper is byte based.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Object testPayload = ...
+template.sendBodyAndHeader("direct:create-and-write-to-persistent-znode", testPayload, "CamelZooKeeperCreateMode", "PERSISTENT");</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_zookeeper_enabled_route_policies">ZooKeeper enabled Route policies</h3>
+<div class="paragraph">
+<p>ZooKeeper allows for very simple and effective leader election out of
+the box. This component exploits this election capability in a
+<a href="routepolicy.html"><code>RoutePolicy</code></a> to control when and how routes are
+enabled. This policy would typically be used in fail-over scenarios, to
+control identical instances of a route across a cluster of Camel based
+servers. A very common scenario is a simple 'Master-Slave' setup where
+there are multiple instances of a route distributed across a cluster but
+only one of them, that of the master, should be running at a time. If
+the master fails, a new master should be elected from the available
+slaves and the route in this new master should be started.</p>
+</div>
+<div class="paragraph">
+<p>The policy uses a common <em>znode</em> path across all instances of the
+<code>RoutePolicy</code> that will be involved in the election. Each policy writes
+its id into this node and Zookeeper will order the writes in the order
+it received them. The policy then reads the listing of the node to see
+what position of its id; this position is used to determine if the route
+should be started or not. The policy is configured at startup with the
+number of route instances that should be started across the cluster and
+if its position in the list is less than this value then its route will
+be started. For a Master-slave scenario, the route is configured with 1
+route instance and only the first entry in the listing will start its
+route. All policies watch for updates to the listing and if the listing
+changes they recalculate if their route should be started. For more info
+on Zookeeper&#8217;s leader election capability see
+<a href="http://zookeeper.apache.org/doc/trunk/recipes.html#sc_leaderElection">this
+page</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following example uses the node <code>/someapplication/somepolicy</code> for
+the election and is set up to start only the top '1' entries in the node
+listing i.e. elect a master:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">ZooKeeperRoutePolicy policy = new ZooKeeperRoutePolicy("zookeeper:localhost:39913/someapp/somepolicy", 1);
+from("direct:policy-controlled")
+    .routePolicy(policy)
+    .to("mock:controlled");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There are currently 3 policies defined in the component, with different SLAs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ZooKeeperRoutePolicy</code></p>
+</li>
+<li>
+<p><code>CuratorLeaderRoutePolicy</code> (since <strong>2.19</strong>)</p>
+</li>
+<li>
+<p><code>MultiMasterCuratorLeaderRoutePolicy</code> (since <strong>2.19</strong>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>ZooKeeperRoutePolicy</strong> supports multiple active nodes, but it&#8217;s activation kicks in only after a Camel component and its correspondent Consumer have already been started,
+ this introduces, depending on your routes definition, the risk that you component can already start consuming events and producing `Exchange`s, before the policy could estabilish
+ that the node should not be activated.</p>
+</div>
+<div class="paragraph">
+<p><strong>CuratorLeaderRoutePolicy</strong> supports only a single active node, but it&#8217;s bound to a different <code>CamelContext</code> lifecycle method; this Policy kicks in before any route or consumer is started
+ thus you can be sure that no even is processed before the Policy takes its decision.</p>
+</div>
+<div class="paragraph">
+<p><strong>MultiMasterCuratorLeaderRoutePolicy</strong> support multiple active nodes, and it&#8217;s bound to the same lifecycle method as <code>CuratorLeaderRoutePolicy</code>; this Policy kicks in before any route or consumer is started
+ thus you can be sure that no even is processed before the Policy takes its decision.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/zookeeper-master-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/zipkin/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

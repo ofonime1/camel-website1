@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Cassandra CQL Component Available as of Camel version 2.15
+ Apache Cassandra is an open source NoSQL database designed to handle large amounts on commodity hardware. Like Amazon&#8217;s DynamoDB, Cassandra has a peer-to-peer and master-less architecture to avoid single point of failure and garanty high availability. Like Google&#8217;s BigTable, Cassandra data is structured using column families which can be accessed through the Thrift RPC API or a SQL-like API called CQL.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Cassandra CQL Component Available as of Camel version 2.15
+ Apache Cassandra is an open source NoSQL database designed to handle large amounts on commodity hardware. Like Amazon&#8217;s DynamoDB, Cassandra has a peer-to-peer and master-less architecture to avoid single point of failure and garanty high availability. Like Google&#8217;s BigTable, Cassandra data is structured using column families which can be accessed through the Thrift RPC API or a SQL-like API called CQL.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/cql-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/cql-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_cassandra_cql_component">Cassandra CQL Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.15</strong></p>
+</div>
+<div class="paragraph">
+<p><a href="http://cassandra.apache.org">Apache Cassandra</a> is an open source NoSQL
+database designed to handle large amounts on commodity hardware. Like
+Amazon&#8217;s DynamoDB, Cassandra has a peer-to-peer and master-less
+architecture to avoid single point of failure and garanty high
+availability. Like Google&#8217;s BigTable, Cassandra data is structured using
+column families which can be accessed through the Thrift RPC API or a
+SQL-like API called CQL.</p>
+</div>
+<div class="paragraph">
+<p>This component aims at integrating Cassandra 2.0+ using the CQL3 API
+(not the Thrift API). It&#8217;s based on
+<a href="https://github.com/datastax/java-driver">Cassandra Java Driver</a> provided
+by DataStax.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their
+<code>pom.xml</code>:</p>
+</div>
+<div class="paragraph">
+<p><strong>pom.xml</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-cassandraql&lt;/artifactId&gt;
+    &lt;version&gt;x.y.z&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="paragraph">
+<p>The endpoint can initiate the Cassandra connection or use an existing
+one.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">URI</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cql:localhost/keyspace</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Single host, default port, usual for testing</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cql:host1,host2/keyspace</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Multi host, default port</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cql:host1,host2:9042/keyspace</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Multi host, custom port</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cql:host1,host2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default port and keyspace</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cql:bean:sessionRef</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provided Session reference</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cql:bean:clusterRef/keyspace</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provided Cluster reference</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>To fine tune the Cassandra connection (SSL options, pooling options,
+load balancing policy, retry policy, reconnection policy&#8230;&#8203;), create
+your own Cluster instance and give it to the Camel endpoint.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cassandra_options">Cassandra Options</h3>
+<div class="paragraph">
+<p>The Cassandra CQL component has no options.</p>
+</div>
+<div class="paragraph">
+<p>The Cassandra CQL endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>cql:beanRef:hosts:port/keyspace</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_4_parameters">Path Parameters (4 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>beanRef</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">beanRef is defined using bean:id</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>hosts</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hostname(s) cassansdra server(s). Multiple hosts can be separated by comma.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>port</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Port number of cassansdra server(s)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>keyspace</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keyspace to use</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_14_parameters">Query Parameters (14 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>cluster</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the Cluster instance (you would normally not use this option)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cluster</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>clusterName</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cluster name</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>consistencyLevel</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consistency level to use</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ConsistencyLevel</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>cql</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CQL query to perform. Can be overridden with the message header with key CamelCqlQuery.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>loadBalancingPolicy</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a specific LoadBalancingPolicy</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>password</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Password for session authentication</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>prepareStatements</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to use PreparedStatements or regular Statements</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resultSetConversionStrategy</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom class that implements logic for converting ResultSet into message body ALL ONE LIMIT_10 LIMIT_100&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>session</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the Session instance (you would normally not use this option)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Session</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>username</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Username for session authentication</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_messages">Messages</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_incoming_message">Incoming Message</h3>
+<div class="paragraph">
+<p>The Camel Cassandra endpoint expects a bunch of simple objects (<code>Object</code>
+or <code>Object[]</code> or <code>Collection&lt;Object&gt;</code>) which will be bound to the CQL
+statement as query parameters. If message body is null or empty, then
+CQL query will be executed without binding parameters.</p>
+</div>
+<div class="paragraph">
+<p>Headers:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>CamelCqlQuery</code> (optional, <code>String</code> or <code>RegularStatement</code>): CQL query
+either as a plain String or built using the <code>QueryBuilder</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_outgoing_message">Outgoing Message</h3>
+<div class="paragraph">
+<p>The Camel Cassandra endpoint produces one or many a Cassandra Row
+objects depending on the <code>resultSetConversionStrategy</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>List&lt;Row&gt;</code> if <code>resultSetConversionStrategy</code> is <code>ALL</code> or
+<code>LIMIT_[0-9]+</code></p>
+</li>
+<li>
+<p>Single` Row` if <code>resultSetConversionStrategy</code> is <code>ONE</code></p>
+</li>
+<li>
+<p>Anything else, if <code>resultSetConversionStrategy</code> is a custom
+implementation of the <code>ResultSetConversionStrategy</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_repositories">Repositories</h3>
+<div class="paragraph">
+<p>Cassandra can be used to store message keys or messages for the
+idempotent and aggregation EIP.</p>
+</div>
+<div class="paragraph">
+<p>Cassandra might not be the best tool for queuing use cases yet, read
+<a href="http://www.datastax.com/dev/blog/cassandra-anti-patterns-queues-and-queue-like-datasets">Cassandra
+anti-patterns queues and queue like datasets</a>. It&#8217;s advised to use
+LeveledCompaction and a small GC grace setting for these tables to allow
+tombstoned rows to be removed quickly.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_idempotent_repository">Idempotent repository</h3>
+<div class="paragraph">
+<p>The <code>NamedCassandraIdempotentRepository</code> stores messages keys in a
+Cassandra table like this:</p>
+</div>
+<div class="paragraph">
+<p><strong>CAMEL_IDEMPOTENT.cql</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-sql" data-lang="sql">CREATE TABLE CAMEL_IDEMPOTENT (
+  NAME varchar,   -- Repository name
+  KEY varchar,    -- Message key
+  PRIMARY KEY (NAME, KEY)
+) WITH compaction = {'class':'LeveledCompactionStrategy'}
+  AND gc_grace_seconds = 86400;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This repository implementation uses lightweight transactions (also known
+as Compare and Set) and requires Cassandra 2.0.7+.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, the <code>CassandraIdempotentRepository</code> does not have a
+<code>NAME</code> column and can be extended to use a different data model.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 34%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>table</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CAMEL_IDEMPOTENT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Table name</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pkColumns</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NAME</code>,` KEY`</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Primary key columns</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Repository name, value used for <code>NAME</code> column</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ttl</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key time to live</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>writeConsistencyLevel</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consistency level used to insert/delete key: <code>ANY</code>, <code>ONE</code>, <code>TWO</code>,
+<code>QUORUM</code>, <code>LOCAL_QUORUM</code>…</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>readConsistencyLevel</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consistency level used to read/check key: <code>ONE</code>, <code>TWO</code>, <code>QUORUM</code>,
+<code>LOCAL_QUORUM</code>…</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_aggregation_repository">Aggregation repository</h3>
+<div class="paragraph">
+<p>The <code>NamedCassandraAggregationRepository</code> stores exchanges by
+correlation key in a Cassandra table like this:</p>
+</div>
+<div class="paragraph">
+<p><strong>CAMEL_AGGREGATION.cql</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-sql" data-lang="sql">CREATE TABLE CAMEL_AGGREGATION (
+  NAME varchar,        -- Repository name
+  KEY varchar,         -- Correlation id
+  EXCHANGE_ID varchar, -- Exchange id
+  EXCHANGE blob,       -- Serialized exchange
+  PRIMARY KEY (NAME, KEY)
+) WITH compaction = {'class':'LeveledCompactionStrategy'}
+  AND gc_grace_seconds = 86400;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, the <code>CassandraAggregationRepository</code> does not have a
+<code>NAME</code> column and can be extended to use a different data model.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 34%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>table</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CAMEL_AGGREGATION</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Table name</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pkColumns</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NAME</code>,<code>KEY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Primary key columns</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>exchangeIdColumn</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>EXCHANGE_ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exchange Id column</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>exchangeColumn</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>EXCHANGE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exchange content column</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Repository name, value used for <code>NAME</code> column</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ttl</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exchange time to live</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>writeConsistencyLevel</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consistency level used to insert/delete exchange: <code>ANY</code>, <code>ONE</code>, <code>TWO</code>,
+<code>QUORUM</code>, <code>LOCAL_QUORUM</code>…</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>readConsistencyLevel</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consistency level used to read/check exchange: <code>ONE</code>, <code>TWO</code>, <code>QUORUM</code>,
+<code>LOCAL_QUORUM</code>…</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/crypto-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/couchdb-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

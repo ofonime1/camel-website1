@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='About the Groovy DSL The Groovy DSL implementation is built on top of the existing Java-based DSL, but it additionally allows to use Groovy language features in your routes, particularly Closures acting as Processor, Expression, Predicate, or Aggregation Strategy.
+With the Groovy DSL you write your RouteBuilder classes entirely in Groovy, while the scripting component allows to embed small scripts into Java routes. The Groovy DSL requires Groovy 2.0 or newer and is available as of Camel 2.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='About the Groovy DSL The Groovy DSL implementation is built on top of the existing Java-based DSL, but it additionally allows to use Groovy language features in your routes, particularly Closures acting as Processor, Expression, Predicate, or Aggregation Strategy.
+With the Groovy DSL you write your RouteBuilder classes entirely in Groovy, while the scripting component allows to embed small scripts into Java routes. The Groovy DSL requires Groovy 2.0 or newer and is available as of Camel 2.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/groovy-dsl/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/groovy-dsl/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect3">
+<h4 id="GroovyDSL-AbouttheGroovyDSL">About the Groovy DSL</h4>
+<div class="paragraph">
+<p>The Groovy DSL implementation is built on top of the existing Java-based
+<a href="dsl.html">DSL</a>, but it additionally allows to use Groovy language
+features in your routes, particularly
+<a href="http://www.groovy-lang.org/closures.html">Closures</a> acting as
+<a href="processor.html">Processor</a>, <a href="expression.html">Expression</a>,
+<a href="predicate.html">Predicate</a>, or <a href="aggregator.html">Aggregation
+Strategy</a>.<br>
+ With the Groovy DSL you write your RouteBuilder classes entirely in
+Groovy, while the <a href="scripting-languages.html">scripting component</a>
+allows to embed small scripts into Java routes. The Groovy DSL requires
+Groovy 2.0 or newer and is available as of <strong>Camel 2.11</strong>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="GroovyDSL-Introduction">Introduction</h4>
+<div class="paragraph">
+<p>Because Groovy is syntactically very similar to Java, you can write your
+Groovy routes just like Java routes. The same Java DSL classes are being
+used, with the exception that some of the DSL classes get extended with
+a bunch of new methods at runtime. This is achieved by turning
+camel-groovy into a Groovy
+<a href="http://docs.codehaus.org/display/GROOVY/Creating+an+extension+module">Extension
+Module</a> that defines extension methods on existing classes.</p>
+</div>
+<div class="paragraph">
+<p>The majority of the extension methods allow
+<a href="http://www.groovy-lang.org/closures.html">Closures</a> to be used as
+parameters e.g. for expressions, predicates, processors. The following
+example reverses a string in the message body and then prints the value
+to System.out:</p>
+</div>
+<div class="paragraph">
+<p><strong>MyRouteBuilder.groovy</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">...
+   from('direct:test')
+      .transform { it.in.body.reverse() }
+      .process { println it.in.body }
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The corresponding route in Java would look something like this:</p>
+</div>
+<div class="paragraph">
+<p><strong>MyRouteBuilder.java</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">...
+   from("direct:test")
+      .transform(new Expression() {
+         @Override
+         public Object evaluate(Exchange e) {
+            return new StringBuffer(e.getIn().getBody().toString()).reverse().toString();
+         }
+      })
+      .process(new Processor() {
+         @Override
+         public void process(Exchange e) {
+           System.out.println(e.getIn().getBody());
+         }
+      });
+...</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="GroovyDSL-DevelopingwiththeGroovyDSL">Developing with the Groovy DSL</h4>
+<div class="paragraph">
+<p>To be able to use the Groovy DSL in your camel routes you need to add
+the a dependency on <strong>camel-groovy</strong> which implements the Groovy DSL.</p>
+</div>
+<div class="paragraph">
+<p>If you use Maven you can just add the following to your pom.xml,
+substituting the version number for the latest &amp; greatest release (see
+the download page for the latest versions).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-groovy&lt;/artifactId&gt;
+  &lt;version&gt;2.11.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Additionally you need to make sure that the Groovy classes will be
+compiled. You can either use gmaven for this or, particularly with mixed
+projects containing Java and Groovy code, you might want to use the
+<a href="http://groovy.codehaus.org/Groovy-Eclipse+compiler+plugin+for+Maven">Groovy
+Eclipse compiler</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">  &lt;plugin&gt;
+    &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+    &lt;configuration&gt;
+      &lt;compilerId&gt;groovy-eclipse-compiler&lt;/compilerId&gt;
+    &lt;/configuration&gt;
+    &lt;dependencies&gt;
+      &lt;dependency&gt;
+        &lt;groupId&gt;org.codehaus.groovy&lt;/groupId&gt;
+        &lt;artifactId&gt;groovy-eclipse-compiler&lt;/artifactId&gt;
+    &lt;version&gt;2.7.0-01&lt;/version&gt;
+      &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+  &lt;/plugin&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As Eclipse user, you might want to configure the Maven Eclipse plugin in
+a way so that your project is set up correctly for using
+<a href="http://groovy.codehaus.org/Eclipse+Plugin">Eclipse Plugin for Groovy</a>
+when <code>mvn eclipse:eclipse</code> is executed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">  &lt;plugin&gt;
+    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;maven-eclipse-plugin&lt;/artifactId&gt;
+    &lt;configuration&gt;
+      &lt;additionalProjectnatures&gt;
+        &lt;projectnature&gt;org.eclipse.jdt.groovy.core.groovyNature&lt;/projectnature&gt;
+      &lt;/additionalProjectnatures&gt;
+      &lt;classpathContainers&gt;
+        &lt;classpathContainer&gt;org.eclipse.jdt.launching.JRE_CONTAINER&lt;/classpathContainer&gt;
+        &lt;classpathContainer&gt;GROOVY_DSL_SUPPORT&lt;/classpathContainer&gt;
+      &lt;/classpathContainers&gt;
+    &lt;/configuration&gt;
+  &lt;/plugin&gt;</code></pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="GroovyDSL-UsingClosuresinyourroutes">Using Closures in your routes</h5>
+<div class="paragraph">
+<p>Groovy closures can be used to write concise implementations of Camel
+processors, expressions, predicates, and aggregation strategies. It is
+recommended to keep more complicated implementations of these objects in
+their own classes, e.g. to be able to test them more easily and not to
+clutter up your routes with business logic.</p>
+</div>
+<div id="GroovyDSL-ProcessorClosures" class="paragraph">
+<p>Processor Closures</p>
+</div>
+<div class="paragraph">
+<p>All Java DSL parameters of type <code>org.apache.camel.Processor</code> can be
+replaced by a closure that accepts an object of type
+<code>org.apache.camel.Exchange</code> as only parameter. The return value of the
+closure is disregarded. All closures may also refer to variables not
+listed in their parameter list. Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">...
+   private String someValue
+...
+   from('direct:test')
+      .process { Exchange exchange -&gt; println (exchange.in.body + someValue) }
+      .process { println (it.in.body + someValue) } // equivalent
+...</code></pre>
+</div>
+</div>
+<div id="GroovyDSL-ExpressionClosures" class="paragraph">
+<p>Expression Closures</p>
+</div>
+<div class="paragraph">
+<p>All Java DSL parameters of type <code>org.apache.camel.Expression</code> can be
+replaced by a closure that accepts an object of type
+<code>org.apache.camel.Exchange</code> as only parameter. The return value of the
+closure is the result of the expression. Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">...
+   private String someValue
+...
+   from('direct:test')
+      .transform { it.in.body.reverse() + someValue }
+      .setHeader("myHeader") { someValue.reverse() }
+...</code></pre>
+</div>
+</div>
+<div id="GroovyDSL-PredicateClosures" class="paragraph">
+<p>Predicate Closures</p>
+</div>
+<div class="paragraph">
+<p>All Java DSL parameters of type <code>org.apache.camel.Predicate</code> can be
+replaced by a closure that accepts an object of type
+<code>org.apache.camel.Exchange</code> as only parameter. The return value of the
+closure is translated into a boolean value representing the result of
+the predicate. Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">...
+   private String someValue
+
+   // This time, the closure is stored in a variable
+   def pred = { Exchange e -&gt; e.in.body != someValue }
+...
+   from('direct:test')
+      .filter(pred)
+...</code></pre>
+</div>
+</div>
+<div id="GroovyDSL-AggregationStrategyClosures" class="paragraph">
+<p>Aggregation Strategy Closures</p>
+</div>
+<div class="paragraph">
+<p>Java DSL parameters of type
+<code>org.apache.camel.processor.aggregate.AggregationStrategy</code> can be
+replaced by a closure that accepts two objects of type
+<code>org.apache.camel.Exchange</code> representing the two Exchanges to be
+aggregated. The return value of the closure must be the aggregated
+Exchange. Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">...
+   private String separator
+...
+   from('direct:test1')
+      .enrich('direct:enrich') { Exchange original, Exchange resource -&gt;
+         original.in.body += resource.in.body + separator
+         original  // don't forget to return resulting exchange
+      }
+...</code></pre>
+</div>
+</div>
+<div id="GroovyDSL-Genericclosurebridges" class="paragraph">
+<p>Generic closure bridges</p>
+</div>
+<div class="paragraph">
+<p>In addition to the above-mentioned DSL extensions, you can use closures
+even if no DSL method signature with closure parameters is available.
+Assuming there&#8217;s no <code>filter(Closure)</code> method, you could instead write:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">...
+   private String someValue
+
+   // This time, the closure is stored in a variable
+   def pred = { Exchange e -&gt; e.in.body != someValue }
+...
+   from('direct:test')
+      // predicate(Closure) -&gt; org.apache.camel.Predicate
+      .filter(predicate(pred))
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Similarly, <code>expression(Closure)</code> returns a Camel expression,
+<code>processor(Closure)</code> returns a Processor, and <code>aggregator(Closure)</code>
+returns an AggregationStrategy.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="GroovyDSL-UsingGroovyXMLprocessing">Using Groovy XML processing</h5>
+<div class="paragraph">
+<p>Groovy provides special <a href="http://groovy-lang.org/processing-xml.html">XML
+processing support</a> through its <code>XmlParser</code>, <code>XmlNodePrinter</code> and
+<code>XmlSlurper</code> classes. camel-groovy provides two
+<a href="data-format.html">data formats</a> to use these classes directly in
+your routes.</p>
+</div>
+<div class="paragraph">
+<p><strong>Unmarshal XML with XmlParser</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">...
+   from('direct:test1')
+      .unmarshal().gnode()
+      // message body is now of type groovy.util.Node
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default, XML processing is <em>namespace-aware</em>. You can change this by
+providing a boolean <code>false</code> parameter.</p>
+</div>
+<div class="paragraph">
+<p><strong>Unmarshal XML with XmlSlurper</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">...
+   from('direct:test1')
+      .unmarshal().gpath(false) // explicitly namespace-unaware
+      // message body is now of type groovy.util.slurpersupport.GPathResult
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Currently, marshalling is only supported for <code>groovy.util.Node</code> objects.</p>
+</div>
+<div class="paragraph">
+<p><strong>Marshal XML with XmlNodePrinter</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">...
+   from('direct:test1')
+      // message body must be of type groovy.util.Node
+      .marshal().gnode()
+...</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="GroovyDSL-UsingGroovyGStrings">Using Groovy GStrings</h5>
+<div class="paragraph">
+<p>Groovy
+<a href="http://docs.groovy-lang.org/latest/html/documentation/index.html#all-strings">GStrings</a>
+are declared inside double-quotes and can contain arbitrary Groovy
+expressions like accessing properties or calling methods, e.g.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">def x = "It is currently ${ new Date() }"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Because GStrings aren&#8217;t Strings, camel-groovy adds the necessary
+<a href="type-converter.html">TypeConverter</a> to automatically turn them into
+the required type.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="GroovyDSL-CustomDSLextensions">Custom DSL extensions</h5>
+<div class="paragraph">
+<p>You can easily define your custom extensions - be it as a Java DSL
+extension for your Groovy routes or for any other class unrelated to
+Camel. All you have to do is to write your extension methods and provide
+a extension module descriptor - the details are described in the
+<a href="http://www.groovy-lang.org/metaprogramming.html#_extension_modules">Groovy
+documentation</a>. And as long as you don&#8217;t require other extension
+methods, you can even use plain Java code to achieve this!<br>
+ As an example, let&#8217;s write two DSL extensions to make commonly used DSL
+methods more concise:</p>
+</div>
+<div class="paragraph">
+<p><strong>MyExtension.java</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import org.apache.camel.Endpoint;
+import org.apache.camel.Predicate;
+
+public final class MyExtension {
+    private MyExtension() {
+        // Utility Class
+    }
+
+    // Set the id of a route to its consumer URI
+    public static RouteDefinition fromId(RouteDefinition delegate, String uri) {
+       return delegate.from(uri).routeId(uri);
+    }
+
+    public static RouteDefinition fromId(RouteDefinition delegate, Endpoint endpoint) {
+       return delegate.from(endpoint).routeId(endpoint.getEndpointUri());
+    }
+
+    // Make common choice pattern more concise
+
+    public static ProcessorDefinition&lt;?&gt; fork(ProcessorDefinition&lt;?&gt; delegate, String uri1, String uri2, Predicate predicate) {
+       return delegate.choice().when(predicate).to(uri1).otherwise().to(uri2);
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add a corresponding extension module descriptor to <code>META-INF/services</code>:</p>
+</div>
+<div class="paragraph">
+<p><strong>META-INF/services/org.codehaus.groovy.runtime.ExtensionModule</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">moduleName=my-extension
+moduleVersion=2.11
+extensionClasses=MyExtension
+staticExtensionClasses=</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And now your Groovy route can look like this:</p>
+</div>
+<div class="paragraph">
+<p><strong>MyRoute.groovy</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">...
+   fromId('direct:test1')
+      .fork('direct:null','direct:not-null',body().isNull())
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Using the plain Java DSL, the route would look something like this:</p>
+</div>
+<div class="paragraph">
+<p><strong>MyRoute.java</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">...
+   from("direct:test1")
+      .routeId("direct:test1")
+      .choice()
+         .when(body().isNull())
+            .to("direct:null")
+         .otherwise()
+            .to("direct:not-null");
+...</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/groovy-language/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/grape-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Exec Component Available as of Camel version 2.3
+ The exec component can be used to execute system commands.
+ Dependencies Maven users need to add the following dependency to their pom.xml
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-exec&lt;/artifactId&gt; &lt;version&gt;${camel-version}&lt;/version&gt; &lt;/dependency&gt;   where ${camel-version} must be replaced by the actual version of Camel (2.3.0 or higher).
+  URI format exec://executable[?options]   where executable is the name, or file path, of the system command that will be executed.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Exec Component Available as of Camel version 2.3
+ The exec component can be used to execute system commands.
+ Dependencies Maven users need to add the following dependency to their pom.xml
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-exec&lt;/artifactId&gt; &lt;version&gt;${camel-version}&lt;/version&gt; &lt;/dependency&gt;   where ${camel-version} must be replaced by the actual version of Camel (2.3.0 or higher).
+  URI format exec://executable[?options]   where executable is the name, or file path, of the system command that will be executed.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/exec-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/exec-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_exec_component">Exec Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.3</strong></p>
+</div>
+<div class="paragraph">
+<p>The <code>exec</code> component can be used to execute system commands.</p>
+</div>
+<div class="sect2">
+<h3 id="_dependencies">Dependencies</h3>
+<div class="paragraph">
+<p>Maven users need to add the following dependency to their <code>pom.xml</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-exec&lt;/artifactId&gt;
+  &lt;version&gt;${camel-version}&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>${camel-version</code>} must be replaced by the actual version of Camel
+(2.3.0 or higher).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">exec://executable[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>executable</code> is the name, or file path, of the system command that
+will be executed. If executable name is used (e.g. <code>exec:java</code>), the
+executable must in the system path.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_options">URI options</h3>
+<div class="paragraph">
+<p>The Exec component has no options.</p>
+</div>
+<div class="paragraph">
+<p>The Exec endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>exec:executable</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>executable</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Sets the executable to be executed. The executable must not be empty or null.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_8_parameters">Query Parameters (8 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>args</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The arguments may be one or many whitespace-separated tokens.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>binding</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A reference to a org.apache.commons.exec.ExecBinding in the Registry.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExecBinding</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>commandExecutor</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A reference to a org.apache.commons.exec.ExecCommandExecutor in the Registry that customizes the command execution. The default command executor utilizes the commons-exec library which adds a shutdown hook for every executed command.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExecCommandExecutor</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>outFile</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of a file created by the executable that should be considered as its output. If no outFile is set the standard output (stdout) of the executable will be used instead.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>timeout</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timeout in milliseconds after which the executable should be terminated. If execution has not completed within the timeout the component will send a termination request.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useStderrOnEmptyStdout</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A boolean indicating that when stdout is empty this component will populate the Camel Message Body with stderr. This behavior is disabled (false) by default.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>workingDir</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The directory in which the command should be executed. If null the working directory of the current process will be used.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message_headers">Message headers</h3>
+<div class="paragraph">
+<p>The supported headers are defined in
+<code>org.apache.camel.component.exec.ExecBinding</code>.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Message</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecBinding.EXEC_COMMAND_EXECUTABLE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>in</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the system command that will be executed. Overrides
+<code>executable</code> in the URI.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecBinding.EXEC_COMMAND_ARGS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.util.List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>in</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Command-line arguments to pass to the executed process. The arguments
+are used literally - no quoting is applied. Overrides any existing
+<code>args</code> in the URI.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecBinding.EXEC_COMMAND_ARGS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>in</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.5:</strong> The arguments of the executable as a Single string where
+each argument is whitespace separated (see <code>args</code> in URI option). The
+arguments are used literally, no quoting is applied. Overrides any
+existing <code>args</code> in the URI.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecBinding.EXEC_COMMAND_OUT_FILE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>in</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of a file, created by the executable, that should be considered
+as its output. Overrides any existing <code>outFile</code> in the URI.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecBinding.EXEC_COMMAND_TIMEOUT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>long</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>in</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timeout, in milliseconds, after which the executable should be
+terminated. Overrides any existing <code>timeout</code> in the URI.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecBinding.EXEC_COMMAND_WORKING_DIR</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>in</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The directory in which the command should be executed. Overrides any
+existing <code>workingDir</code> in the URI.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecBinding.EXEC_EXIT_VALUE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>out</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of this header is the <em>exit value</em> of the executable. Non-zero
+exit values typically indicate abnormal termination. Note that the exit
+value is OS-dependent.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecBinding.EXEC_STDERR</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.io.InputStream</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>out</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of this header points to the standard error stream (stderr) of
+the executable. If no stderr is written, the value is <code>null</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecBinding.EXEC_USE_STDERR_ON_EMPTY_STDOUT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>in</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates that when <code>stdout</code> is empty, this component will populate the
+Camel Message Body with <code>stderr</code>. This behavior is disabled (<code>false</code>) by
+default.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_message_body">Message body</h3>
+<div class="paragraph">
+<p>If the <code>Exec</code> component receives an <code>in</code> message body that is
+convertible to <code>java.io.InputStream</code>, it is used to feed input to the
+executable via its stdin. After execution,
+<a href="http://camel.apache.org/exchange.html">the message body</a> is the result of
+the execution,- that is, an
+<code>org.apache.camel.components.exec.ExecResult</code> instance containing the
+stdout, stderr, exit value, and out file. This component supports the
+following <code>ExecResult</code> <a href="http://camel.apache.org/type-converter.html">type
+converters</a> for convenience:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">From</th>
+<th class="tableblock halign-left valign-top">To</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecResult</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.io.InputStream</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecResult</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecResult</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>byte []</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecResult</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.w3c.dom.Document</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>If an out file is specified (in the endpoint via <code>outFile</code> or the
+message headers via <code>ExecBinding.EXEC_COMMAND_OUT_FILE</code>), converters
+will return the content of the out file. If no out file is used, then
+this component will convert the stdout of the process to the target
+type. For more details, please refer to the <a href="exec.html">usage
+examples</a> below.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_usage_examples">Usage examples</h3>
+<div class="sect3">
+<h4 id="_executing_word_count_linux">Executing word count (Linux)</h4>
+<div class="paragraph">
+<p>The example below executes <code>wc</code> (word count, Linux) to count the words
+in file <code>/usr/share/dict/words</code>. The word count (output) is written to
+the standard output stream of <code>wc</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:exec")
+.to("exec:wc?args=--words /usr/share/dict/words")
+.process(new Processor() {
+     public void process(Exchange exchange) throws Exception {
+       // By default, the body is ExecResult instance
+       assertIsInstanceOf(ExecResult.class, exchange.getIn().getBody());
+       // Use the Camel Exec String type converter to convert the ExecResult to String
+       // In this case, the stdout is considered as output
+       String wordCountOutput = exchange.getIn().getBody(String.class);
+       // do something with the word count
+     }
+});</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_executing_code_java_code">Executing <code>java</code></h4>
+<div class="paragraph">
+<p>The example below executes <code>java</code> with 2 arguments: <code>-server</code> and
+<code>-version</code>, provided that <code>java</code> is in the system path.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:exec")
+.to("exec:java?args=-server -version")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The example below executes <code>java</code> in <code>c:\temp</code> with 3 arguments:
+<code>-server</code>, <code>-version</code> and the sytem property <code>user.name</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:exec")
+.to("exec:c:/program files/jdk/bin/java?args=-server -version -Duser.name=Camel&amp;workingDir=c:/temp")</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_executing_ant_scripts">Executing Ant scripts</h4>
+<div class="paragraph">
+<p>The following example executes <a href="http://ant.apache.org/">Apache Ant</a>
+(Windows only) with the build file <code>CamelExecBuildFile.xml</code>, provided
+that <code>ant.bat</code> is in the system path, and that <code>CamelExecBuildFile.xml</code>
+is in the current directory.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:exec")
+.to("exec:ant.bat?args=-f CamelExecBuildFile.xml")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the next example, the <code>ant.bat</code> command redirects its output to
+<code>CamelExecOutFile.txt</code> with <code>-l</code>. The file <code>CamelExecOutFile.txt</code> is
+used as the out file with <code>outFile=CamelExecOutFile.txt</code>. The example
+assumes that <code>ant.bat</code> is in the system path, and that
+<code>CamelExecBuildFile.xml</code> is in the current directory.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:exec")
+.to("exec:ant.bat?args=-f CamelExecBuildFile.xml -l CamelExecOutFile.txt&amp;outFile=CamelExecOutFile.txt")
+.process(new Processor() {
+     public void process(Exchange exchange) throws Exception {
+        InputStream outFile = exchange.getIn().getBody(InputStream.class);
+        assertIsInstanceOf(InputStream.class, outFile);
+        // do something with the out file here
+     }
+  });</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_executing_code_echo_code_windows">Executing <code>echo</code> (Windows)</h4>
+<div class="paragraph">
+<p>Commands such as <code>echo</code> and <code>dir</code> can be executed only with the command
+interpreter of the operating system. This example shows how to execute
+such a command - <code>echo</code> - in Windows.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:exec").to("exec:cmd?args=/C echo echoString")</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/facebook-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/eventadmin-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

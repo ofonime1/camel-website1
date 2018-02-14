@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='JSonPath Language Available as of Camel version 2.13
+ Camel supports JSonPath to allow using Expression or Predicate on json messages.
+ from(&#34;queue:books.new&#34;) .choice() .when().jsonpath(&#34;$.store.book[?(@.price &lt; 10)]&#34;) .to(&#34;jms:queue:book.cheap&#34;) .when().jsonpath(&#34;$.store.book[?(@.price &lt; 30)]&#34;) .to(&#34;jms:queue:book.average&#34;) .otherwise() .to(&#34;jms:queue:book.expensive&#34;)   JSonPath Options The JSonPath language supports 5 options which are listed below.
+     Name Default Java Type Description     resultType
+  String
+ Sets the class name of the result type (type from output)'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='JSonPath Language Available as of Camel version 2.13
+ Camel supports JSonPath to allow using Expression or Predicate on json messages.
+ from(&#34;queue:books.new&#34;) .choice() .when().jsonpath(&#34;$.store.book[?(@.price &lt; 10)]&#34;) .to(&#34;jms:queue:book.cheap&#34;) .when().jsonpath(&#34;$.store.book[?(@.price &lt; 30)]&#34;) .to(&#34;jms:queue:book.average&#34;) .otherwise() .to(&#34;jms:queue:book.expensive&#34;)   JSonPath Options The JSonPath language supports 5 options which are listed below.
+     Name Default Java Type Description     resultType
+  String
+ Sets the class name of the result type (type from output)'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/jsonpath-language/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/jsonpath-language/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_jsonpath_language">JSonPath Language</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.13</strong></p>
+</div>
+<div class="paragraph">
+<p>Camel supports <a href="https://code.google.com/p/json-path/">JSonPath</a> to allow
+using <a href="expression.html">Expression</a> or <a href="predicate.html">Predicate</a>
+on json messages.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("queue:books.new")
+  .choice()
+    .when().jsonpath("$.store.book[?(@.price &lt; 10)]")
+      .to("jms:queue:book.cheap")
+    .when().jsonpath("$.store.book[?(@.price &lt; 30)]")
+      .to("jms:queue:book.average")
+    .otherwise()
+      .to("jms:queue:book.expensive")</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_jsonpath_options">JSonPath Options</h3>
+<div class="paragraph">
+<p>The JSonPath language supports 5 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Java Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">resultType</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the class name of the result type (type from output)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">suppressExceptions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to suppress exceptions such as PathNotFoundException.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">allowSimple</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to allow in inlined simple exceptions in the json path expression</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">allowEasyPredicate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to allow using the easy predicate parser to pre-parse predicates.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">trim</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to trim the value to remove leading and trailing whitespaces and line breaks</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_using_xml_configuration">Using XML configuration</h3>
+<div class="paragraph">
+<p>If you prefer to configure your routes in your <a href="spring.html">Spring</a>
+XML file then you can use <a href="jsonpath.html">JSonPath</a> expressions as
+follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">  &lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
+    &lt;route&gt;
+      &lt;from uri="direct:start"/&gt;
+      &lt;choice&gt;
+        &lt;when&gt;
+          &lt;jsonpath&gt;$.store.book[?(@.price &amp;lt; 10)]&lt;/jsonpath&gt;
+          &lt;to uri="mock:cheap"/&gt;
+        &lt;/when&gt;
+        &lt;when&gt;
+          &lt;jsonpath&gt;$.store.book[?(@.price &amp;lt; 30)]&lt;/jsonpath&gt;
+          &lt;to uri="mock:average"/&gt;
+        &lt;/when&gt;
+        &lt;otherwise&gt;
+          &lt;to uri="mock:expensive"/&gt;
+        &lt;/otherwise&gt;
+      &lt;/choice&gt;
+    &lt;/route&gt;
+  &lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_syntax">Syntax</h3>
+<div class="paragraph">
+<p>See the <a href="https://code.google.com/p/json-path/">JSonPath</a> project page for
+further examples.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_easy_syntax">Easy Syntax</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.19</strong></p>
+</div>
+<div class="paragraph">
+<p>When you just want to define a basic predicate using jsonpath syntax it can be a bit hard to remember the syntax.
+ So for example to find out all the cheap books you have to do</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$.store.book[?(@.price &lt; 20)]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>However what if you could just write it as</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>store.book.price &lt; 20</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And you can omit the path if you just want to look at nodes with a price key</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>price &lt; 20</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To support this there is a <code>EasyPredicateParser</code> which kicks-in if you have define the predicate
+  using a basic style. That means the predicate must not start with the <code>$</code> sign, and only include one operator.</p>
+</div>
+<div class="paragraph">
+<p>The easy syntax is:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>left OP right</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can use Camel simple language in the right operator, eg</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>store.book.price &lt; ${header.limit}</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_supported_message_body_types">Supported message body types</h3>
+<div class="paragraph">
+<p>Camel JSonPath supports message body using the following types:</p>
+</div>
+<div class="paragraph">
+<p>{% raw %}</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>File</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reading from files</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Plain strings</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Map</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message bodies as <code>java.util.Map</code> types</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message bodies as <code>java.util.List</code> types</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>POJO</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Optional</strong> If Jackson is on the classpath, then camel-jsonpath
+  is able to use Jackson to read the message body as POJO and convert to <code>java.util.Map</code>
+  which is supported by JSonPath. For example you can add <code>camel-jackson</code> as dependency to include Jackson.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>InputStream</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If none of the above types matches, then Camel will attempt to read the message body as an <code>java.io.InputStream</code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>{% endraw %}</p>
+</div>
+<div class="paragraph">
+<p>If a message body is of unsupported type then an exception is thrown by default, however you
+can configure JSonPath to suppress exceptions (see below)</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_suppress_exceptions">Suppress exceptions</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.16</strong></p>
+</div>
+<div class="paragraph">
+<p>By default jsonpath will throw an exception if the json payload does not
+have a valid path accordingly to the configured jsonpath expression. In
+some use-cases you may want to ignore this in case the json payload
+contains optional data. Therefore you can set the option
+suppressExceptions to true to ignore this as shown:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start")
+    .choice()
+        // use true to suppress exceptions
+        .when().jsonpath("person.middlename", true)
+            .to("mock:middle")
+        .otherwise()
+            .to("mock:other");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And in XML DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;route&gt;
+      &lt;from uri="direct:start"/&gt;
+      &lt;choice&gt;
+        &lt;when&gt;
+          &lt;jsonpath suppressExceptions="true"&gt;person.middlename&lt;/jsonpath&gt;
+          &lt;to uri="mock:middle"/&gt;
+        &lt;/when&gt;
+        &lt;otherwise&gt;
+          &lt;to uri="mock:other"/&gt;
+        &lt;/otherwise&gt;
+      &lt;/choice&gt;
+    &lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This option is also available on the <code>@JsonPath</code> annotation.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_inline_simple_exceptions">Inline Simple exceptions</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.18</strong></p>
+</div>
+<div class="paragraph">
+<p>Its now possible to inlined Simple language expressions in the JSonPath expression using the simple syntax ${xxx}.
+An example is shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start")
+  .choice()
+    .when().jsonpath("$.store.book[?(@.price &lt; ${header.cheap})]")
+      .to("mock:cheap")
+    .when().jsonpath("$.store.book[?(@.price &lt; ${header.average})]")
+      .to("mock:average")
+    .otherwise()
+      .to("mock:expensive");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And in XML DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+  &lt;from uri="direct:start"/&gt;
+  &lt;choice&gt;
+    &lt;when&gt;
+      &lt;jsonpath&gt;$.store.book[?(@.price &lt; ${header.cheap})]&lt;/jsonpath&gt;
+      &lt;to uri="mock:cheap"/&gt;
+    &lt;/when&gt;
+    &lt;when&gt;
+      &lt;jsonpath&gt;$.store.book[?(@.price &lt; ${header.average})]&lt;/jsonpath&gt;
+      &lt;to uri="mock:average"/&gt;
+    &lt;/when&gt;
+    &lt;otherwise&gt;
+      &lt;to uri="mock:expensive"/&gt;
+    &lt;/otherwise&gt;
+  &lt;/choice&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can turn off support for inlined simple expression by setting the option allowSimple to false as shown:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">.when().jsonpath("$.store.book[?(@.price &lt; 10)]", false, false)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And in XML DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;jsonpath allowSimple="false"&gt;$.store.book[?(@.price &lt; 10)]&lt;/jsonpath&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_jsonpath_injection">JSonPath injection</h3>
+<div class="paragraph">
+<p>You can use <a href="bean-integration.html">Bean Integration</a> to invoke a
+method on a bean and use various languages such as JSonPath to extract a
+value from the message and bind it to a method parameter.</p>
+</div>
+<div class="paragraph">
+<p>For example</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class Foo {
+
+    @Consume(uri = "activemq:queue:books.new")
+    public void doSomething(@JsonPath("$.store.book[*].author") String author, @Body String json) {
+      // process the inbound message here
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_encoding_detection">Encoding Detection</h3>
+<div class="paragraph">
+<p><strong>Since Camel version 2.16</strong>, the encoding of the JSON document is
+detected automatically, if the document is encoded in unicode  (UTF-8,
+UTF-16LE, UTF-16BE, UTF-32LE, UTF-32BE ) as specified in  RFC-4627. If
+the encoding is a non-unicode encoding, you can either make sure that
+you enter the document in String format to the JSONPath component or you
+can specify the encoding in the header "<strong>CamelJsonPathJsonEncoding</strong>"
+(JsonpathConstants.HEADER_JSON_ENCODING).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dependencies">Dependencies</h3>
+<div class="paragraph">
+<p>To use JSonPath in your camel routes you need to add the a dependency on
+<strong>camel-jsonpath</strong> which implements the JSonPath language.</p>
+</div>
+<div class="paragraph">
+<p>If you use maven you could just add the following to your pom.xml,
+substituting the version number for the latest &amp; greatest release (see
+<a href="download.html">the download page for the latest versions</a>).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-jsonpath&lt;/artifactId&gt;
+  &lt;version&gt;x.x.x&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/jt400-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/json-xstream-dataformat/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

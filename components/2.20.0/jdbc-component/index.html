@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='JDBC Component Available as of Camel version 1.2
+ The jdbc component enables you to access databases through JDBC, where SQL queries (SELECT) and operations (INSERT, UPDATE, etc) are sent in the message body. This component uses the standard JDBC API, unlike the SQL Component component, which uses spring-jdbc.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-jdbc&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='JDBC Component Available as of Camel version 1.2
+ The jdbc component enables you to access databases through JDBC, where SQL queries (SELECT) and operations (INSERT, UPDATE, etc) are sent in the message body. This component uses the standard JDBC API, unlike the SQL Component component, which uses spring-jdbc.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-jdbc&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/jdbc-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/jdbc-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_jdbc_component">JDBC Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 1.2</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>jdbc</strong> component enables you to access databases through JDBC, where
+SQL queries (SELECT) and operations (INSERT, UPDATE, etc) are sent in
+the message body. This component uses the standard JDBC API, unlike the
+<a href="sql-component.html">SQL Component</a> component, which uses
+spring-jdbc.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-jdbc&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This component can only be used to define producer endpoints, which
+means that you cannot use the JDBC component in a <code>from()</code> statement.</p>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">jdbc:dataSourceName[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This component only supports producer endpoints.</p>
+</div>
+<div class="paragraph">
+<p>You can append query options to the URI in the following format,
+<code>?option=value&amp;option=value&amp;&#8230;&#8203;</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The JDBC component supports 2 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>dataSource</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the DataSource instance instead of looking up the data source by name from the registry.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DataSource</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The JDBC endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>jdbc:dataSourceName</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>dataSourceName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Name of DataSource to lookup in the Registry.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_13_parameters">Query Parameters (13 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>allowNamedParameters</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to allow using named parameters in the queries.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>outputClass</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specify the full package and class name to use as conversion when outputType=SelectOne or SelectList.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>outputType</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines the output the producer should use.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">SelectList</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JdbcOutputType</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>parameters</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional parameters to the java.sql.Statement. For example to set maxRows fetchSize etc.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>readSize</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The default maximum number of rows that can be read by a polling query. The default value is 0.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resetAutoCommit</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Camel will set the autoCommit on the JDBC connection to be false commit the change after executed the statement and reset the autoCommit flag of the connection at the end if the resetAutoCommit is true. If the JDBC connection doesn&#8217;t support to reset the autoCommit flag you can set the resetAutoCommit flag to be false and Camel will not try to reset the autoCommit flag. When used with XA transactions you most likely need to set it to false so that the transaction manager is in charge of committing this tx.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transacted</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether transactions are in use.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useGetBytesForBlob</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To read BLOB columns as bytes instead of string data. This may be needed for certain databases such as Oracle where you must read BLOB columns as bytes.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useHeadersAsParameters</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set this option to true to use the prepareStatementStrategy with named parameters. This allows to define queries with named placeholders and use headers with the dynamic values for the query placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useJDBC4ColumnNameAnd LabelSemantics</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether to use JDBC 4 or JDBC 3.0 or older semantic when retrieving column name. JDBC 4.0 uses columnLabel to get the column name where as JDBC 3.0 uses both columnName or columnLabel. Unfortunately JDBC drivers behave differently so you can use this option to work out issues around your JDBC driver if you get problem using this component This option is default true.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>beanRowMapper</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom org.apache.camel.component.jdbc.BeanRowMapper when using outputClass. The default implementation will lower case the row names and skip underscores and dashes. For example CUST_ID is mapped as custId.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BeanRowMapper</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>prepareStatementStrategy</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows to plugin to use a custom org.apache.camel.component.jdbc.JdbcPrepareStatementStrategy to control preparation of the query and prepared statement.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JdbcPrepareStatement Strategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_result">Result</h3>
+<div class="paragraph">
+<p>By default the result is returned in the OUT body as an
+<code>ArrayList&lt;HashMap&lt;String, Object&gt;&gt;</code>. The <code>List</code> object contains the
+list of rows and the <code>Map</code> objects contain each row with the <code>String</code>
+key as the column name. You can use the option <code>outputType</code> to control
+the result.</p>
+</div>
+<div class="paragraph">
+<p><strong>Note:</strong> This component fetches <code>ResultSetMetaData</code> to be able to return
+the column name as the key in the <code>Map</code>.</p>
+</div>
+<div class="sect3">
+<h4 id="_message_headers">Message Headers</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Header</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelJdbcRowCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the query is a <code>SELECT</code>, query the row count is returned in this OUT
+header.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelJdbcUpdateCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the query is an <code>UPDATE</code>, query the update count is returned in this
+OUT header.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelGeneratedKeysRows</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.10:</strong> Rows that contains the generated kets.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelGeneratedKeysRowCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.10:</strong> The number of rows in the header that contains generated
+keys.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelJdbcColumnNames</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.11.1:</strong> The column names from the ResultSet as a <code>java.util.Set</code>
+type.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelJdbcParametes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.12:</strong> A <code>java.util.Map</code> which has the headers to be used if
+<code>useHeadersAsParameters</code> has been enabled.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_generated_keys">Generated keys</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.10</strong></p>
+</div>
+<div class="paragraph">
+<p>If you insert data using SQL INSERT, then the RDBMS may support auto
+generated keys. You can instruct the <a href="jdbc.html">JDBC</a> producer to
+return the generated keys in headers.<br>
+ To do that set the header <code>CamelRetrieveGeneratedKeys=true</code>. Then the
+generated keys will be provided as headers with the keys listed in the
+table above.</p>
+</div>
+<div class="paragraph">
+<p>You can see more details in this
+<a href="https://svn.apache.org/repos/asf/camel/trunk/components/camel-jdbc/src/test/java/org/apache/camel/component/jdbc/JdbcGeneratedKeysTest.java">unit
+test</a>.</p>
+</div>
+<div class="paragraph">
+<p>Using generated keys does not work with together with named parameters.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_named_parameters">Using named parameters</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.12</strong></p>
+</div>
+<div class="paragraph">
+<p>In the given route below, we want to get all the projects from the
+projects table. Notice the SQL query has 2 named parameters, :?lic and
+:?min.<br>
+ Camel will then lookup these parameters from the message headers.
+Notice in the example above we set two headers with constant value<br>
+ for the named parameters:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">  from("direct:projects")
+     .setHeader("lic", constant("ASF"))
+     .setHeader("min", constant(123))
+     .setBody("select * from projects where license = :?lic and id &gt; :?min order by id")
+     .to("jdbc:myDataSource?useHeadersAsParameters=true")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also store the header values in a <code>java.util.Map</code> and store the
+map on the headers with the key <code>CamelJdbcParameters</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_samples">Samples</h3>
+<div class="paragraph">
+<p>In the following example, we fetch the rows from the customer table.</p>
+</div>
+<div class="paragraph">
+<p>First we register our datasource in the Camel registry as <code>testdb</code>:</p>
+</div>
+<div class="paragraph">
+<p>Then we configure a route that routes to the JDBC component, so the SQL
+will be executed. Note how we refer to the <code>testdb</code> datasource that was
+bound in the previous step:</p>
+</div>
+<div class="paragraph">
+<p>Or you can create a <code>DataSource</code> in Spring like this:</p>
+</div>
+<div class="paragraph">
+<p>We create an endpoint, add the SQL query to the body of the IN message,
+and then send the exchange. The result of the query is returned in the
+OUT body:</p>
+</div>
+<div class="paragraph">
+<p>If you want to work on the rows one by one instead of the entire
+ResultSet at once you need to use the <a href="splitter.html">Splitter</a> EIP
+such as:</p>
+</div>
+<div class="paragraph">
+<p>In Camel 2.13.x or older</p>
+</div>
+<div class="paragraph">
+<p>In Camel 2.14.x or newer</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:hello")
+// here we split the data from the testdb into new messages one by one
+// so the mock endpoint will receive a message per row in the table
+// the StreamList option allows to stream the result of the query without creating a List of rows
+// and notice we also enable streaming mode on the splitter
+.to("jdbc:testdb?outputType=StreamList")
+  .split(body()).streaming()
+  .to("mock:result");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sample_polling_the_database_every_minute">Sample - Polling the database every minute</h3>
+<div class="paragraph">
+<p>If we want to poll a database using the JDBC component, we need to
+combine it with a polling scheduler such as the <a href="timer.html">Timer</a>
+or <a href="quartz.html">Quartz</a> etc. In the following example, we retrieve
+data from the database every 60 seconds:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("timer://foo?period=60000").setBody(constant("select * from customer")).to("jdbc:testdb").to("activemq:queue:customers");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sample_move_data_between_data_sources_br">Sample - Move Data Between Data Sources<br></h3>
+<div class="paragraph">
+<p>A common use case is to query for data, process it and move it to
+another data source (ETL operations). In the following example, we
+retrieve new customer records from the source table every hour,
+filter/transform them and move them to a destination table:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("timer://MoveNewCustomersEveryHour?period=3600000")
+    .setBody(constant("select * from customer where create_time &gt; (sysdate-1/24)"))
+    .to("jdbc:testdb")
+    .split(body())
+        .process(new MyCustomerProcessor()) //filter/transform results as needed
+        .setBody(simple("insert into processed_customer values('${body[ID]}','${body[NAME]}')"))
+        .to("jdbc:testdb");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+<li>
+<p><a href="sql.html">SQL</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/jetty-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/jcr-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

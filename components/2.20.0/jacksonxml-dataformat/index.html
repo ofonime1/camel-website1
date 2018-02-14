@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='JacksonXML DataFormat Available as of Camel version 2.16
+ Jackson XML is a Data Format which uses the Jackson library with the XMLMapper extension to unmarshal an XML payload into Java objects or to marshal Java objects into an XML payload.
+ INFO:If you are familiar with Jackson, this XML data format behaves in the same way as its JSON counterpart, and thus can be used with classes annotated for JSON serialization/deserialization.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='JacksonXML DataFormat Available as of Camel version 2.16
+ Jackson XML is a Data Format which uses the Jackson library with the XMLMapper extension to unmarshal an XML payload into Java objects or to marshal Java objects into an XML payload.
+ INFO:If you are familiar with Jackson, this XML data format behaves in the same way as its JSON counterpart, and thus can be used with classes annotated for JSON serialization/deserialization.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/jacksonxml-dataformat/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/jacksonxml-dataformat/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_jacksonxml_dataformat">JacksonXML DataFormat</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.16</strong></p>
+</div>
+<div class="paragraph">
+<p>Jackson XML is a <a href="data-format.html">Data Format</a> which uses the
+<a href="http://wiki.fasterxml.com/JacksonHome/">Jackson library</a> with the
+<a href="https://github.com/FasterXML/jackson-dataformat-xml">XMLMapper extension</a>
+to unmarshal an XML payload into Java objects or to marshal Java objects
+into an XML payload.</p>
+</div>
+<div class="paragraph">
+<p>INFO:If you are familiar with Jackson, this XML data format behaves in the
+same way as its JSON counterpart, and thus can be used with classes
+annotated for JSON serialization/deserialization.</p>
+</div>
+<div class="paragraph">
+<p>This extension also mimics
+<a href="https://github.com/FasterXML/jackson-dataformat-xml/blob/master/README.md">JAXB&#8217;s
+"Code first" approach</a>.</p>
+</div>
+<div class="paragraph">
+<p>This data format relies on
+<a href="http://wiki.fasterxml.com/WoodstoxHome">Woodstox</a> (especially for
+features like pretty printing), a fast and efficient XML processor.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("activemq:My.Queue").
+  unmarshal().jacksonxml().
+  to("mqseries:Another.Queue");</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_jacksonxml_options">JacksonXML Options</h3>
+<div class="paragraph">
+<p>The JacksonXML dataformat supports 15 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Java Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>xmlMapper</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lookup and use the existing XmlMapper with the given id.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>prettyPrint</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To enable pretty printing output nicely formatted. Is by default false.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>unmarshalTypeName</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class name of the java type to use when unarmshalling</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>jsonView</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Class&lt;?&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When marshalling a POJO to JSON you might want to exclude certain fields from the JSON output. With Jackson you can use JSON views to accomplish this. This option is to refer to the class which has JsonView annotations</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>include</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If you want to marshal a pojo to JSON and the pojo has some fields with null values. And you want to skip these null values you can set this option to NOT_NULL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>allowJmsType</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used for JMS users to allow the JMSType header from the JMS spec to specify a FQN classname to use to unmarshal to.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>collectionTypeName</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Refers to a custom collection type to lookup in the registry to use. This option should rarely be used but allows to use different collection types than java.util.Collection based as default.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useList</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To unarmshal to a List of Map or a List of Pojo.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>enableJaxbAnnotationModule</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to enable the JAXB annotations module when using jackson. When enabled then JAXB annotations can be used by Jackson.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>moduleClassNames</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use custom Jackson modules com.fasterxml.jackson.databind.Module specified as a String with FQN class names. Multiple classes can be separated by comma.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>moduleRefs</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use custom Jackson modules referred from the Camel registry. Multiple modules can be separated by comma.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>enableFeatures</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set of features to enable on the Jackson com.fasterxml.jackson.databind.ObjectMapper. The features should be a name that matches a enum from com.fasterxml.jackson.databind.SerializationFeature com.fasterxml.jackson.databind.DeserializationFeature or com.fasterxml.jackson.databind.MapperFeature Multiple features can be separated by comma</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>disableFeatures</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set of features to disable on the Jackson com.fasterxml.jackson.databind.ObjectMapper. The features should be a name that matches a enum from com.fasterxml.jackson.databind.SerializationFeature com.fasterxml.jackson.databind.DeserializationFeature or com.fasterxml.jackson.databind.MapperFeature Multiple features can be separated by comma</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>allowUnmarshallType</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If enabled then Jackson is allowed to attempt to use the CamelJacksonUnmarshalType header during the unmarshalling. This should only be enabled when desired to be used.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contentTypeHeader</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML or application/json for data formats marshalling to JSon etc.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_using_jackson_xml_in_spring_dsl">Using Jackson XML in Spring DSL</h4>
+<div class="paragraph">
+<p>When using <a href="data-format.html">Data Format</a> in Spring DSL you need to
+declare the data formats first. This is done in the <strong>DataFormats</strong> XML
+tag.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">        &lt;dataFormats&gt;
+            &lt;!-- here we define a Xml data format with the id jack and that it should use the TestPojo as the class type when
+                 doing unmarshal. The unmarshalTypeName is optional, if not provided Camel will use a Map as the type --&gt;
+            &lt;jacksonxml id="jack" unmarshalTypeName="org.apache.camel.component.jacksonxml.TestPojo"/&gt;
+        &lt;/dataFormats&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And then you can refer to this id in the route:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">       &lt;route&gt;
+            &lt;from uri="direct:back"/&gt;
+            &lt;unmarshal ref="jack"/&gt;
+            &lt;to uri="mock:reverse"/&gt;
+        &lt;/route&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_excluding_pojo_fields_from_marshalling">Excluding POJO fields from marshalling</h3>
+<div class="paragraph">
+<p>When marshalling a POJO to XML you might want to exclude certain fields
+from the XML output. With Jackson you can
+use http://wiki.fasterxml.com/JacksonJsonViews[JSON views] to accomplish
+this. First create one or more marker classes.</p>
+</div>
+<div class="paragraph">
+<p>Use the marker classes with the <code>@JsonView</code> annotation to
+include/exclude certain fields. The annotation also works on getters.</p>
+</div>
+<div class="paragraph">
+<p>Finally use the Camel <code>JacksonXMLDataFormat</code> to marshall the above POJO
+to XML.</p>
+</div>
+<div class="paragraph">
+<p>Note that the weight field is missing in the resulting XML:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;pojo age="30" weight="70"/&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_include_exclude_fields_using_the_code_jsonview_code_attribute_with_jacksonxml_dataformat">Include/Exclude fields using the <code>jsonView</code> attribute with `JacksonXML`DataFormat</h3>
+<div class="paragraph">
+<p>As an example of using this attribute you can instead of:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">JacksonXMLDataFormat ageViewFormat = new JacksonXMLDataFormat(TestPojoView.class, Views.Age.class);
+from("direct:inPojoAgeView").
+  marshal(ageViewFormat);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Directly specify your http://wiki.fasterxml.com/JacksonJsonViews[JSON
+view] inside the Java DSL as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:inPojoAgeView").
+  marshal().jacksonxml(TestPojoView.class, Views.Age.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And the same in XML DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;from uri="direct:inPojoAgeView"/&gt;
+  &lt;marshal&gt;
+    &lt;jacksonxml unmarshalTypeName="org.apache.camel.component.jacksonxml.TestPojoView" jsonView="org.apache.camel.component.jacksonxml.Views$Age"/&gt;
+  &lt;/marshal&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_setting_serialization_include_option">Setting serialization include option</h3>
+<div class="paragraph">
+<p>If you want to marshal a pojo to XML, and the pojo has some fields with
+null values. And you want to skip these null values, then you need to
+set either an annotation on the pojo,</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@JsonInclude(Include.NON_NULL)
+public class MyPojo {
+   ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>But this requires you to include that annotation in your pojo source
+code. You can also configure the Camel JacksonXMLDataFormat to set the
+include option, as shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">JacksonXMLDataFormat format = new JacksonXMLDataFormat();
+format.setInclude("NON_NULL");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or from XML DSL you configure this as</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    &lt;dataFormats&gt;
+      &lt;jacksonxml id="jacksonxml" include="NOT_NULL"/&gt;
+    &lt;/dataFormats&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_unmarshalling_from_xml_to_pojo_with_dynamic_class_name">Unmarshalling from XML to POJO with dynamic class name</h3>
+<div class="paragraph">
+<p>If you use jackson to unmarshal XML to POJO, then you can now specify a
+header in the message that indicate which class name to unmarshal to.<br>
+The header has key <code>CamelJacksonUnmarshalType</code> if that header is present
+in the message, then Jackson will use that as FQN for the POJO class to
+unmarshal the XML payload as.</p>
+</div>
+<div class="paragraph">
+<p> For JMS end users there is the JMSType header from the JMS spec that
+indicates that also. To enable support for JMSType you would need to
+turn that on, on the jackson data format as shown:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">JacksonDataFormat format = new JacksonDataFormat();
+format.setAllowJmsType(true);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or from XML DSL you configure this as</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    &lt;dataFormats&gt;
+      &lt;jacksonxml id="jacksonxml" allowJmsType="true"/&gt;
+    &lt;/dataFormats&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_unmarshalling_from_xml_to_list_map_or_list_pojo">Unmarshalling from XML to List&lt;Map&gt; or List&lt;pojo&gt;</h3>
+<div class="paragraph">
+<p>If you are using Jackson to unmarshal XML to a list of map/pojo, you can
+now specify this by setting <code>useList="true"</code> or use
+the <code>org.apache.camel.component.jacksonxml.ListJacksonXMLDataFormat</code>.
+For example with Java you can do as shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">JacksonXMLDataFormat format = new ListJacksonXMLDataFormat();
+// or
+JacksonXMLDataFormat format = new JacksonXMLDataFormat();
+format.useList();
+// and you can specify the pojo class type also
+format.setUnmarshalType(MyPojo.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And if you use XML DSL then you configure to use list
+using <code>useList</code> attribute as shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    &lt;dataFormats&gt;
+      &lt;jacksonxml id="jack" useList="true"/&gt;
+    &lt;/dataFormats&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And you can specify the pojo type also</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    &lt;dataFormats&gt;
+      &lt;jacksonxml id="jack" useList="true" unmarshalTypeName="com.foo.MyPojo"/&gt;
+    &lt;/dataFormats&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_custom_jackson_modules">Using custom Jackson modules</h3>
+<div class="paragraph">
+<p>You can use custom Jackson modules by specifying the class names of
+those using the moduleClassNames option as shown below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    &lt;dataFormats&gt;
+      &lt;jacksonxml id="jack" useList="true" unmarshalTypeName="com.foo.MyPojo" moduleClassNames="com.foo.MyModule,com.foo.MyOtherModule"/&gt;
+    &lt;/dataFormats&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When using moduleClassNames then the custom jackson modules are not
+configured, by created using default constructor and used as-is. If a
+custom module needs any custom configuration, then an instance of the
+module can be created and configured, and then use modulesRefs to refer
+to the module as shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    &lt;bean id="myJacksonModule" class="com.foo.MyModule"&gt;
+      ... // configure the module as you want
+    &lt;/bean&gt;
+
+    &lt;dataFormats&gt;
+      &lt;jacksonxml id="jacksonxml" useList="true" unmarshalTypeName="com.foo.MyPojo" moduleRefs="myJacksonModule"/&gt;
+    &lt;/dataFormats&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p> Multiple modules can be specified separated by comma, such as
+moduleRefs="myJacksonModule,myOtherModule"</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_enabling_or_disable_features_using_jackson">Enabling or disable features using Jackson</h3>
+<div class="paragraph">
+<p>Jackson has a number of features you can enable or disable, which its
+ObjectMapper uses. For example to disable failing on unknown properties
+when marshalling, you can configure this using the disableFeatures:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java"> &lt;dataFormats&gt;
+      &lt;jacksonxml id="jacksonxml" unmarshalTypeName="com.foo.MyPojo" disableFeatures="FAIL_ON_UNKNOWN_PROPERTIES"/&gt;
+ &lt;/dataFormats&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can disable multiple features by separating the values using comma.
+The values for the features must be the name of the enums from Jackson
+from the following enum classes</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>com.fasterxml.jackson.databind.SerializationFeature</p>
+</li>
+<li>
+<p>com.fasterxml.jackson.databind.DeserializationFeature</p>
+</li>
+<li>
+<p>com.fasterxml.jackson.databind.MapperFeature</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To enable a feature use the enableFeatures options instead.</p>
+</div>
+<div class="paragraph">
+<p>From Java code you can use the type safe methods from camel-jackson
+module:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">JacksonDataFormat df = new JacksonDataFormat(MyPojo.class);
+df.disableFeature(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+df.disableFeature(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_converting_maps_to_pojo_using_jackson">Converting Maps to POJO using Jackson</h3>
+<div class="paragraph">
+<p>Jackson <code>ObjectMapper</code> can be used to convert maps to POJO objects.
+Jackson component comes with the data converter that can be used to
+convert <code>java.util.Map</code> instance to non-String, non-primitive and
+non-Number objects.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Map&lt;String, Object&gt; invoiceData = new HashMap&lt;String, Object&gt;();
+invoiceData.put("netValue", 500);
+producerTemplate.sendBody("direct:mapToInvoice", invoiceData);
+...
+// Later in the processor
+Invoice invoice = exchange.getIn().getBody(Invoice.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If there is a single <code>ObjectMapper</code> instance available in the Camel
+registry, it will used by the converter to perform the conversion.
+Otherwise the default mapper will be used.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_formatted_xml_marshalling_pretty_printing">Formatted XML marshalling (pretty-printing)</h3>
+<div class="paragraph">
+<p>Using the <code>prettyPrint</code> option one can output a well formatted XML while
+marshalling:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java"> &lt;dataFormats&gt;
+      &lt;jacksonxml id="jack" prettyPrint="true"/&gt;
+ &lt;/dataFormats&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And in Java DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:inPretty").marshal().jacksonxml(true);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Please note that there are 5 different overloaded <code>jacksonxml()</code> DSL
+methods which support the <code>prettyPrint</code> option in combination with other
+settings for <code>unmarshalType</code>, <code>jsonView</code> etc.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dependencies">Dependencies</h3>
+<div class="paragraph">
+<p>To use Jackson XML in your camel routes you need to add the dependency
+on <strong>camel-jacksonxml</strong> which implements this data format.</p>
+</div>
+<div class="paragraph">
+<p>If you use maven you could just add the following to your pom.xml,
+substituting the version number for the latest &amp; greatest release (see
+<a href="download.html">the download page for the latest versions</a>).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-jacksonxml&lt;/artifactId&gt;
+  &lt;version&gt;x.x.x&lt;/version&gt;
+  &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/jasypt/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/ironmq-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Eclipse Kura component Available as of Camel 2.15
+ This documentation page covers the integration options of Camel with the Eclipse Kura M2M gateway. The common reason to deploy Camel routes into the Eclipse Kura is to provide enterprise integration patterns and Camel components to the messaging M2M gateway. For example you might want to install Kura on Raspberry PI, then read temperature from the sensor attached to that Raspberry PI using Kura services and finally forward the current temperature value to your data center service using Camel EIP and components.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Eclipse Kura component Available as of Camel 2.15
+ This documentation page covers the integration options of Camel with the Eclipse Kura M2M gateway. The common reason to deploy Camel routes into the Eclipse Kura is to provide enterprise integration patterns and Camel components to the messaging M2M gateway. For example you might want to install Kura on Raspberry PI, then read temperature from the sensor attached to that Raspberry PI using Kura services and finally forward the current temperature value to your data center service using Camel EIP and components.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/kura/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/kura/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect2">
+<h3 id="Kura-EclipseKuracomponent">Eclipse Kura component</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.15</strong></p>
+</div>
+<div class="paragraph">
+<p>This documentation page covers the integration options of Camel with the
+<a href="https://eclipse.org/kura/">Eclipse Kura</a> M2M gateway. The common reason
+to deploy Camel routes into the Eclipse Kura is to provide enterprise
+integration patterns and Camel components to the messaging M2M gateway.
+For example you might want to install Kura on Raspberry PI, then read
+temperature from the sensor attached to that Raspberry PI using Kura
+services and finally forward the current temperature value to your data
+center service using Camel EIP and components.</p>
+</div>
+<div class="sect3">
+<h4 id="Kura-KuraRouteractivator">KuraRouter activator</h4>
+<div class="paragraph">
+<p>Bundles deployed to the Eclipse Kura are usually
+<a href="http://eclipse.github.io/kura/doc/hello-example.html#create-java-class">developed
+as bundle activators</a>. So the easiest way to deploy Apache Camel routes
+into the Kura is to create an OSGi bundle containing the class extending
+<code>org.apache.camel.kura.KuraRouter</code> class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class MyKuraRouter extends KuraRouter {
+
+  @Override
+  public void configure() throws Exception {
+    from("timer:trigger").
+      to("netty-http:http://app.mydatacenter.com/api");
+  }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Keep in mind that <code>KuraRouter</code> implements
+the <code>org.osgi.framework.BundleActivator</code> interface, so you need to
+register its <code>start</code> and <code>stop</code> lifecycle methods
+while http://eclipse.github.io/kura/doc/hello-example.html#create-component-class[creating
+Kura bundle component class].</p>
+</div>
+<div class="paragraph">
+<p>Kura router starts its own OSGi-aware <code>CamelContext</code>. It means that for
+every class extending <code>KuraRouter</code>, there will be a dedicated
+<code>CamelContext</code> instance. Ideally we recommend to deploy one <code>KuraRouter</code>
+per OSGi bundle.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Kura-DeployingKuraRouter">Deploying KuraRouter</h4>
+<div class="paragraph">
+<p>Bundle containing your Kura router class should import the following
+packages in the OSGi manifest:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">Import-Package: org.osgi.framework;version="1.3.0",
+  org.slf4j;version="1.6.4",
+  org.apache.camel,org.apache.camel.impl,org.apache.camel.core.osgi,org.apache.camel.builder,org.apache.camel.model,
+  org.apache.camel.component.kura</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Keep in mind that you don&#8217;t have to import every Camel component bundle
+you plan to use in your routes, as Camel components are resolved as the
+services on the runtime level.</p>
+</div>
+<div class="paragraph">
+<p>Before you deploy your router bundle, be sure that you have deployed
+(and started) the following Camel core bundles (using Kura GoGo
+shell)&#8230;&#8203;</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">install file:///home/user/.m2/repository/org/apache/camel/camel-core/2.15.0/camel-core-2.15.0.jar
+start &lt;camel-core-bundle-id&gt;
+install file:///home/user/.m2/repository/org/apache/camel/camel-core-osgi/2.15.0/camel-core-osgi-2.15.0.jar
+start &lt;camel-core-osgi-bundle-id&gt;
+install file:///home/user/.m2/repository/org/apache/camel/camel-kura/2.15.0/camel-kura-2.15.0.jar
+start &lt;camel-kura-bundle-id&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>&#8230;&#8203;and all the components you plan to use in your routes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">install file:///home/user/.m2/repository/org/apache/camel/camel-stream/2.15.0/camel-stream-2.15.0.jar
+start &lt;camel-stream-bundle-id&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then finally deploy your router bundle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">install file:///home/user/.m2/repository/com/example/myrouter/1.0/myrouter-1.0.jar
+start &lt;your-bundle-id&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Kura-KuraRouterutilities">KuraRouter utilities</h4>
+<div class="paragraph">
+<p> Kura router base class provides many useful utilities. This section
+explores each of them.</p>
+</div>
+<div class="sect4">
+<h5 id="Kura-SLF4Jlogger">SLF4J logger</h5>
+<div class="paragraph">
+<p>Kura uses SLF4J facade for logging purposes. Protected member <code>log</code>
+returns SLF4J logger instance associated with the given Kura router.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class MyKuraRouter extends KuraRouter {
+
+    @Override
+    public void configure() throws Exception {
+        log.info("Configuring Camel routes!");
+        ...
+    }
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="Kura-BundleContext">BundleContext</h5>
+<div class="paragraph">
+<p>Protected member <code>bundleContext</code> returns bundle context associated with
+the given Kura router.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class MyKuraRouter extends KuraRouter {
+
+    @Override
+    public void configure() throws Exception {
+        ServiceReference&lt;MyService&gt; serviceRef = bundleContext.getServiceReference(LogService.class.getName());
+        MyService myService = bundleContext.getService(serviceRef);
+        ...
+    }
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="Kura-CamelContext">CamelContext</h5>
+<div class="paragraph">
+<p>Protected member <code>camelContext</code> is the <code>CamelContext</code> associated with
+the given Kura router.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class MyKuraRouter extends KuraRouter {
+
+    @Override
+    public void configure() throws Exception {
+        camelContext.getStatus();
+        ...
+    }
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="Kura-ProducerTemplate">ProducerTemplate</h5>
+<div class="paragraph">
+<p>Protected member <code>producerTemplate</code> is the <code>ProducerTemplate</code> instance
+associated with the given Camel context.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class MyKuraRouter extends KuraRouter {
+
+    @Override
+    public void configure() throws Exception {
+        producerTemplate.sendBody("jms:temperature", 22.0);
+        ...
+    }
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="Kura-ConsumerTemplate">ConsumerTemplate</h5>
+<div class="paragraph">
+<p>Protected member <code>consumerTemplate</code> is the <code>ConsumerTemplate</code> instance
+associated with the given Camel context.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class MyKuraRouter extends KuraRouter {
+
+    @Override
+    public void configure() throws Exception {
+        double currentTemperature = producerTemplate.receiveBody("jms:temperature", Double.class);
+        ...
+    }
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="Kura-OSGiserviceresolver">OSGi service resolver</h5>
+<div class="paragraph">
+<p>OSGi service resolver (<code>service(Class&lt;T&gt; serviceType)</code>) can be used to
+easily retrieve service by type from the OSGi bundle context.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class MyKuraRouter extends KuraRouter {
+
+    @Override
+    public void configure() throws Exception {
+        MyService myService = service(MyService.class);
+        ...
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If service is not found, a <code>null</code> value is returned. If you want your
+application to fail if the service is not available, use
+<code>requiredService(Class)</code> method instead. The <code>requiredService</code> throws
+<code>IllegalStateException</code> if a service cannot be found.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class MyKuraRouter extends KuraRouter {
+
+    @Override
+    public void configure() throws Exception {
+        MyService myService = requiredService(MyService.class);
+        ...
+    }
+
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Kura-KuraRouteractivatorcallbacks">KuraRouter activator callbacks</h4>
+<div class="paragraph">
+<p>Kura router comes with the lifecycle callbacks that can be used to
+customize the way the Camel router works. For example to configure the
+<code>CamelContext</code> instance associated with the router just before the
+former is started, override <code>beforeStart</code> method of the <code>KuraRouter</code>
+class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class MyKuraRouter extends KuraRouter {
+
+  ...
+
+  protected void beforeStart(CamelContext camelContext) {
+    OsgiDefaultCamelContext osgiContext = (OsgiCamelContext) camelContext;
+    osgiContext.setName("NameOfTheRouter");
+  }
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Kura-LoadingXMLroutesfromConfigurationAdmin">Loading XML routes from ConfigurationAdmin</h4>
+<div class="paragraph">
+<p>Sometimes it is desired to read the XML definition of the routes from
+the server configuration. This a common scenario for IoT gateways where
+over-the-air redeployment cost may be significant. To address this
+requirement each <code>KuraRouter</code> looks for the
+<code>kura.camel.BUNDLE-SYMBOLIC-NAME.route</code> property from the <code>kura.camel</code>
+PID using the OSGi ConfigurationAdmin. This approach allows you to
+define Camel XML routes file per deployed <code>KuraRouter</code>. In order to
+update a route, just edit an appropriate configuration property and
+restart a bundle associated with it. The content of
+the <code>kura.camel.BUNDLE-SYMBOLIC-NAME.route</code> property is expected to be
+Camel XML route file, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;routes xmlns="http://camel.apache.org/schema/spring"&gt;
+    &lt;route id="loaded"&gt;
+        &lt;from uri="direct:bar"/&gt;
+        &lt;to uri="mock:bar"/&gt;
+    &lt;/route&gt;
+&lt;/routes&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Kura-DeployingKurarouterasadeclarativeOSGiservice">Deploying Kura router as a declarative OSGi service</h4>
+<div class="paragraph">
+<p>If you would like to deploy your Kura router as a declarative OSGi
+service, you can use <code>activate</code> and <code>deactivate</code> methods provided by
+<code>KuraRouter</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;scr:component name="org.eclipse.kura.example.camel.MyKuraRouter" activate="activate" deactivate="deactivate" enabled="true" immediate="true"&gt;
+  &lt;implementation class="org.eclipse.kura.example.camel.MyKuraRouter"/&gt;
+&lt;/scr:component&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Kura-SeeAlso">See Also</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/ldap-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/kubernetes/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

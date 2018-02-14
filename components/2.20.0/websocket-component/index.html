@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Jetty Websocket Component Available as of Camel version 2.10
+ The websocket component provides websocket endpoints for communicating with clients using websocket. The component uses Eclipse Jetty Server which implements the IETF specification (drafts and RFC 6455). It supports the protocols ws:// and wss://. To use wss:// protocol, the SSLContextParameters must be defined.
+ Version currently supported
+ Camel 2.18 uses Jetty 9
+ URI format websocket://hostname[:port][/resourceUri][?options]   You can append query options to the URI in the following format, ?'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Jetty Websocket Component Available as of Camel version 2.10
+ The websocket component provides websocket endpoints for communicating with clients using websocket. The component uses Eclipse Jetty Server which implements the IETF specification (drafts and RFC 6455). It supports the protocols ws:// and wss://. To use wss:// protocol, the SSLContextParameters must be defined.
+ Version currently supported
+ Camel 2.18 uses Jetty 9
+ URI format websocket://hostname[:port][/resourceUri][?options]   You can append query options to the URI in the following format, ?'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/websocket-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/websocket-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_jetty_websocket_component">Jetty Websocket Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.10</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>websocket</strong> component provides websocket
+<a href="endpoint.html">endpoints</a> for communicating with clients using
+websocket. The component uses Eclipse Jetty Server which implements the
+<a href="http://tools.ietf.org/html/rfc6455">IETF</a> specification (drafts and RFC
+6455). It supports the protocols ws:// and wss://. To use wss://
+protocol, the SSLContextParameters must be defined.</p>
+</div>
+<div class="paragraph">
+<p><strong>Version currently supported</strong></p>
+</div>
+<div class="paragraph">
+<p>Camel 2.18 uses Jetty 9</p>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">websocket://hostname[:port][/resourceUri][?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can append query options to the URI in the following format,
+<code>?option=value&amp;option=value&amp;&#8230;&#8203;</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_websocket_options">Websocket Options</h3>
+<div class="paragraph">
+<p>The Jetty Websocket component supports 14 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>staticResources</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set a resource path for static resources (such as .html files etc). The resources can be loaded from classpath if you prefix with classpath: otherwise the resources is loaded from file system or from JAR files. For example to load from root classpath use classpath:. or classpath:WEB-INF/static If not configured (eg null) then no static resource is in use.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>host</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The hostname. The default value is 0.0.0.0</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0.0.0.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>port</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The port number. The default value is 9292</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">9292</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sslKeyPassword</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The password for the keystore when using SSL.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sslPassword</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The password when using SSL.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sslKeystore</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The path to the keystore.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>enableJmx</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If this option is true Jetty JMX support will be enabled for this endpoint. See Jetty JMX support for more details.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>minThreads</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To set a value for minimum number of threads in server thread pool. MaxThreads/minThreads or threadPool fields are required due to switch to Jetty9. The default values for minThreads is 1.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxThreads</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To set a value for maximum number of threads in server thread pool. MaxThreads/minThreads or threadPool fields are required due to switch to Jetty9. The default values for maxThreads is 1 2 noCores.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>threadPool</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom thread pool for the server. MaxThreads/minThreads or threadPool fields are required due to switch to Jetty9.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ThreadPool</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sslContextParameters</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure security using SSLContextParameters</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SSLContextParameters</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useGlobalSslContext Parameters</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable usage of global SSL context parameters.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>socketFactory</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure a map which contains custom WebSocketFactory for sub protocols. The key in the map is the sub protocol. The default key is reserved for the default implementation.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Jetty Websocket endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>websocket:host:port/resourceUri</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_3_parameters">Path Parameters (3 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>host</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The hostname. The default value is 0.0.0.0. Setting this option on the component will use the component configured value as default.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0.0.0.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>port</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The port number. The default value is 9292. Setting this option on the component will use the component configured value as default.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">9292</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resourceUri</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Name of the websocket channel to use</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_18_parameters">Query Parameters (18 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxBinaryMessageSize</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be used to set the size in bytes that the websocket created by the websocketServlet may be accept before closing. (Default is -1 - or unlimited)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">-1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sessionSupport</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to enable session support which enables HttpSession for each http request.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>staticResources</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set a resource path for static resources (such as .html files etc). The resources can be loaded from classpath if you prefix with classpath: otherwise the resources is loaded from file system or from JAR files. For example to load from root classpath use classpath:. or classpath:WEB-INF/static If not configured (eg null) then no static resource is in use.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sendTimeout</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout in millis when sending to a websocket channel. The default timeout is 30000 (30 seconds).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">30000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sendToAll</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To send to all websocket subscribers. Can be used to configure on endpoint level instead of having to use the WebsocketConstants.SEND_TO_ALL header on the message.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bufferSize</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the buffer size of the websocketServlet which is also the max frame byte size (default 8192)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8192</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxIdleTime</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the time in ms that the websocket created by the websocketServlet may be idle before closing. (default is 300000)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">300000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxTextMessageSize</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be used to set the size in characters that the websocket created by the websocketServlet may be accept before closing.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>minVersion</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can be used to set the minimum protocol version accepted for the websocketServlet. (Default 13 - the RFC6455 version)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">13</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>allowedOrigins</strong> (cors)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The CORS allowed origins. Use to allow all.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>crossOriginFilterOn</strong> (cors)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to enable CORS</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>filterPath</strong> (cors)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Context path for filtering CORS</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>enableJmx</strong> (monitoring)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If this option is true Jetty JMX support will be enabled for this endpoint. See Jetty JMX support for more details.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sslContextParameters</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure security using SSLContextParameters</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SSLContextParameters</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message_headers">Message Headers</h3>
+<div class="paragraph">
+<p>The websocket component uses 2 headers to indicate to either send
+messages back to a single/current client, or to all clients.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><code>WebsocketConstants.SEND_TO_ALL</code></th>
+<th class="tableblock halign-left valign-top">Sends the message to all clients which are currently connected. You can
+use the <code>sendToAll</code> option on the endpoint instead of using this header.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WebsocketConstants.CONNECTION_KEY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sends the message to the client with the given connection key.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_usage">Usage</h3>
+<div class="paragraph">
+<p>In this example we let Camel exposes a websocket server which clients
+can communicate with. The websocket server uses the default host and
+port, which would be <code>0.0.0.0:9292</code>.<br>
+ The example will send back an echo of the input. To send back a
+message, we need to send the transformed message to the same endpoint
+<code>"websocket://echo"</code>. This is needed<br>
+ because by default the messaging is InOnly.</p>
+</div>
+<div class="paragraph">
+<p>This example is part of an unit test, which you can find
+<a href="https://svn.apache.org/repos/asf/camel/trunk/components/camel-websocket/src/test/java/org/apache/camel/component/websocket/WebsocketRouteExampleTest.java">here</a>.
+As a client we use the <a href="ahc.html">AHC</a> library which offers support
+for web socket as well.</p>
+</div>
+<div class="paragraph">
+<p>Here is another example where webapp resources location have been
+defined to allow the Jetty Application Server to not only register the
+WebSocket servlet but also to expose web resources for the browser.
+Resources should be defined under the webapp directory.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("activemq:topic:newsTopic")
+   .routeId("fromJMStoWebSocket")
+   .to("websocket://localhost:8443/newsTopic?sendToAll=true&amp;staticResources=classpath:webapp");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_setting_up_ssl_for_websocket_component">Setting up SSL for WebSocket Component</h3>
+<div class="sect3">
+<h4 id="_using_the_jsse_configuration_utility">Using the JSSE Configuration Utility</h4>
+<div class="paragraph">
+<p>As of Camel 2.10, the WebSocket component supports SSL/TLS configuration
+through the <a href="camel-configuration-utilities.html">Camel JSSE
+Configuration Utility</a>.  This utility greatly decreases the amount of
+component specific code you need to write and is configurable at the
+endpoint and component levels.  The following examples demonstrate how
+to use the utility with the Cometd component.</p>
+</div>
+<div id="Websocket-Programmaticconfigurationofthecomponent" class="paragraph">
+<p>Programmatic configuration of the component</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">KeyStoreParameters ksp = new KeyStoreParameters();
+ksp.setResource("/users/home/server/keystore.jks");
+ksp.setPassword("keystorePassword");
+
+KeyManagersParameters kmp = new KeyManagersParameters();
+kmp.setKeyStore(ksp);
+kmp.setKeyPassword("keyPassword");
+
+TrustManagersParameters tmp = new TrustManagersParameters();
+tmp.setKeyStore(ksp);
+
+SSLContextParameters scp = new SSLContextParameters();
+scp.setKeyManagers(kmp);
+scp.setTrustManagers(tmp);
+
+CometdComponent commetdComponent = getContext().getComponent("cometds", CometdComponent.class);
+commetdComponent.setSslContextParameters(scp);</code></pre>
+</div>
+</div>
+<div id="Websocket-SpringDSLbasedconfigurationofendpoint" class="paragraph">
+<p>Spring DSL based configuration of endpoint</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">...
+  &lt;camel:sslContextParameters
+      id="sslContextParameters"&gt;
+    &lt;camel:keyManagers
+        keyPassword="keyPassword"&gt;
+      &lt;camel:keyStore
+          resource="/users/home/server/keystore.jks"
+          password="keystorePassword"/&gt;
+    &lt;/camel:keyManagers&gt;
+    &lt;camel:trustManagers&gt;
+      &lt;camel:keyStore
+          resource="/users/home/server/keystore.jks"
+          password="keystorePassword"/&gt;
+    &lt;/camel:trustManagers&gt;
+  &lt;/camel:sslContextParameters&gt;...
+...
+  &lt;to uri="websocket://127.0.0.1:8443/test?sslContextParameters=#sslContextParameters"/&gt;...</code></pre>
+</div>
+</div>
+<div id="Websocket-JavaDSLbasedconfigurationofendpoint" class="paragraph">
+<p>Java DSL based configuration of endpoint</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">...
+    protected RouteBuilder createRouteBuilder() throws Exception {
+        return new RouteBuilder() {
+            public void configure() {
+
+                String uri = "websocket://127.0.0.1:8443/test?sslContextParameters=#sslContextParameters";
+
+                from(uri)
+                     .log("&gt;&gt;&gt; Message received from WebSocket Client : ${body}")
+                     .to("mock:client")
+                     .loop(10)
+                         .setBody().constant("&gt;&gt; Welcome on board!")
+                         .to(uri);
+...</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+<li>
+<p><a href="ahc.html">AHC</a></p>
+</li>
+<li>
+<p><a href="jetty.html">Jetty</a></p>
+</li>
+<li>
+<p><a href="twitter-websocket-example.html">Twitter Websocket Example</a>
+demonstrates how to poll a constant feed of twitter searches and publish
+results in real time using web socket to a web page.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/xmlbeans-dataformat/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/weather-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

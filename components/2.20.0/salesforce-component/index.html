@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Salesforce Component Available as of Camel version 2.12
+ This component supports producer and consumer endpoints to communicate with Salesforce using Java DTOs. There is a companion maven plugin Camel Salesforce Plugin that generates these DTOs (see further below).
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-salesforce&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;     Note  Developers wishing to contribute to the component are instructed to look at the README.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Salesforce Component Available as of Camel version 2.12
+ This component supports producer and consumer endpoints to communicate with Salesforce using Java DTOs. There is a companion maven plugin Camel Salesforce Plugin that generates these DTOs (see further below).
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-salesforce&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;     Note  Developers wishing to contribute to the component are instructed to look at the README.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/salesforce-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/salesforce-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_salesforce_component">Salesforce Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.12</strong></p>
+</div>
+<div class="paragraph">
+<p>This component supports producer and consumer endpoints to communicate
+with Salesforce using Java DTOs. <br>
+ There is a companion maven plugin Camel Salesforce Plugin that
+generates these DTOs (see further below).</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-salesforce&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Developers wishing to contribute to the component are instructed
+to look at the README.md file on instructions on how to get started and
+setup your environment for running integration tests.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authenticating_to_salesforce">Authenticating to Salesforce</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The component supports three OAuth authentication flows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://help.salesforce.com/articleView?id=remoteaccess_oauth_username_password_flow.htm">OAuth 2.0 Username-Password Flow</a></p>
+</li>
+<li>
+<p><a href="https://help.salesforce.com/articleView?id=remoteaccess_oauth_refresh_token_flow.htm">OAuth 2.0 Refresh Token Flow</a></p>
+</li>
+<li>
+<p><a href="https://help.salesforce.com/articleView?id=remoteaccess_oauth_jwt_flow.htm">OAuth 2.0 JWT Bearer Token Flow</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For each of the flow different set of properties needs to be set:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Properties to set for each authentication flow</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Where to find it on Salesforce</th>
+<th class="tableblock halign-left valign-top">Flow</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clientId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connected App, Consumer Key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All flows</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clientSecret</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connected App, Consumer Secret</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Username-Password, Refresh Token</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">userName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Salesforce user username</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Username-Password, JWT Bearer Token</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">password</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Salesforce user password</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Username-Password</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">refreshToken</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">From OAuth flow callback</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Refresh Token</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keystore</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connected App, Digital Certificate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JWT Bearer Token</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The component auto determines what flow you&#8217;re trying to configure, to
+be remove ambiguity set the <code>authenticationType</code> property.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Using Username-Password Flow in production is not encouraged.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The certificate used in JWT Bearer Token Flow can be a selfsigned
+certificate. The KeyStore holding the certificate and the private key
+must contain only single certificate-private key entry.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="paragraph">
+<p>When used as a consumer, receiving streaming events, the URI scheme is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">salesforce:topic?options</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When used as a producer, invoking the Salesforce RSET APIs, the URI
+scheme is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">salesforce:operationName?options</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can append query options to the URI in the following format,
+<code>?option=value&amp;option=value&amp;&#8230;&#8203;</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_supported_salesforce_apis">Supported Salesforce APIs</h3>
+<div class="paragraph">
+<p>The component supports the following Salesforce APIs</p>
+</div>
+<div class="paragraph">
+<p>Producer endpoints can use the following APIs. Most of the APIs process
+one record at a time, the Query API can retrieve multiple Records.</p>
+</div>
+<div class="sect3">
+<h4 id="_rest_api">Rest API</h4>
+<div class="paragraph">
+<p>You can use the following for <code>operationName</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>getVersions - Gets supported Salesforce REST API versions</p>
+</li>
+<li>
+<p>getResources - Gets available Salesforce REST Resource endpoints</p>
+</li>
+<li>
+<p>getGlobalObjects - Gets metadata for all available SObject types</p>
+</li>
+<li>
+<p>getBasicInfo - Gets basic metadata for a specific SObject type</p>
+</li>
+<li>
+<p>getDescription - Gets comprehensive metadata for a specific SObject
+type</p>
+</li>
+<li>
+<p>getSObject - Gets an SObject using its Salesforce Id</p>
+</li>
+<li>
+<p>createSObject - Creates an SObject</p>
+</li>
+<li>
+<p>updateSObject - Updates an SObject using Id</p>
+</li>
+<li>
+<p>deleteSObject - Deletes an SObject using Id</p>
+</li>
+<li>
+<p>getSObjectWithId - Gets an SObject using an external (user defined) id
+field</p>
+</li>
+<li>
+<p>upsertSObject - Updates or inserts an SObject using an external id</p>
+</li>
+<li>
+<p>deleteSObjectWithId - Deletes an SObject using an external id</p>
+</li>
+<li>
+<p>query - Runs a Salesforce SOQL query</p>
+</li>
+<li>
+<p>queryMore - Retrieves more results (in case of large number of
+results) using result link returned from the 'query' API</p>
+</li>
+<li>
+<p>search - Runs a Salesforce SOSL query</p>
+</li>
+<li>
+<p>limits - fetching organization API usage limits</p>
+</li>
+<li>
+<p>recent - fetching recent items</p>
+</li>
+<li>
+<p>approval - submit a record or records (batch) for approval process</p>
+</li>
+<li>
+<p>approvals - fetch a list of all approval processes</p>
+</li>
+<li>
+<p>composite-tree - create up to 200 records with parent-child relationships (up to 5 levels) in one go</p>
+</li>
+<li>
+<p>composite-batch - submit a composition of requests in batch</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, the following producer endpoint uses the upsertSObject API,
+with the sObjectIdName parameter specifying 'Name' as the external id
+field.
+The request message body should be an SObject DTO generated using the
+maven plugin.
+The response message will either be <code>null</code> if an existing record was
+updated, or <code>CreateSObjectResult</code> with an id of the new record, or a
+list of errors while creating the new object.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">...to("salesforce:upsertSObject?sObjectIdName=Name")...</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_rest_bulk_api">Rest Bulk API</h4>
+<div class="paragraph">
+<p>Producer endpoints can use the following APIs. All Job data formats,
+i.e. xml, csv, zip/xml, and zip/csv are supported. <br>
+ The request and response have to be marshalled/unmarshalled by the
+route. Usually the request will be some stream source like a CSV file,
+<br>
+ and the response may also be saved to a file to be correlated with the
+request.</p>
+</div>
+<div class="paragraph">
+<p>You can use the following for <code>operationName</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>createJob - Creates a Salesforce Bulk Job</p>
+</li>
+<li>
+<p>getJob - Gets a Job using its Salesforce Id</p>
+</li>
+<li>
+<p>closeJob - Closes a Job</p>
+</li>
+<li>
+<p>abortJob - Aborts a Job</p>
+</li>
+<li>
+<p>createBatch - Submits a Batch within a Bulk Job</p>
+</li>
+<li>
+<p>getBatch - Gets a Batch using Id</p>
+</li>
+<li>
+<p>getAllBatches - Gets all Batches for a Bulk Job Id</p>
+</li>
+<li>
+<p>getRequest - Gets Request data (XML/CSV) for a Batch</p>
+</li>
+<li>
+<p>getResults - Gets the results of the Batch when its complete</p>
+</li>
+<li>
+<p>createBatchQuery - Creates a Batch from an SOQL query</p>
+</li>
+<li>
+<p>getQueryResultIds - Gets a list of Result Ids for a Batch Query</p>
+</li>
+<li>
+<p>getQueryResult - Gets results for a Result Id</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, the following producer endpoint uses the createBatch API to
+create a Job Batch. The in message must contain a body that can be converted into an
+<code>InputStream</code> (usually UTF-8 CSV or XML content from a file, etc.) and
+header fields 'jobId' for the Job and 'contentType' for the Job content
+type, which can be XML, CSV, ZIP_XML or ZIP_CSV. The put message body
+will contain <code>BatchInfo</code> on success, or throw a <code>SalesforceException</code> on
+error.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">...to("salesforce:createBatchJob")..</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_rest_streaming_api">Rest Streaming API</h4>
+<div class="paragraph">
+<p>Consumer endpoints can use the following sytax for streaming endpoints
+to receive Salesforce notifications on create/update.</p>
+</div>
+<div class="paragraph">
+<p>To create and subscribe to a topic</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("salesforce:CamelTestTopic?notifyForFields=ALL&amp;notifyForOperations=ALL&amp;sObjectName=Merchandise__c&amp;updateTopic=true&amp;sObjectQuery=SELECT Id, Name FROM Merchandise__c")...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To subscribe to an existing topic</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("salesforce:CamelTestTopic&amp;sObjectName=Merchandise__c")...</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examples">Examples</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_uploading_a_document_to_a_contentworkspace">Uploading a document to a ContentWorkspace</h3>
+<div class="paragraph">
+<p>Create the ContentVersion in Java, using a Processor instance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class ContentProcessor implements Processor {
+    public void process(Exchange exchange) throws Exception {
+        Message message = exchange.getIn();
+
+        ContentVersion cv = new ContentVersion();
+        ContentWorkspace cw = getWorkspace(exchange);
+        cv.setFirstPublishLocationId(cw.getId());
+        cv.setTitle("test document");
+        cv.setPathOnClient("test_doc.html");
+        byte[] document = message.getBody(byte[].class);
+        ObjectMapper mapper = new ObjectMapper();
+        String enc = mapper.convertValue(document, String.class);
+        cv.setVersionDataUrl(enc);
+        message.setBody(cv);
+    }
+
+    protected ContentWorkspace getWorkSpace(Exchange exchange) {
+        // Look up the content workspace somehow, maybe use enrich() to add it to a
+        // header that can be extracted here
+        ....
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Give the output from the processor to the Salesforce component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("file:///home/camel/library")
+    .to(new ContentProcessor())     // convert bytes from the file into a ContentVersion SObject
+                                    // for the salesforce component
+    .to("salesforce:createSObject");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_salesforce_limits_api">Using Salesforce Limits API</h3>
+<div class="paragraph">
+<p>With <code>salesforce:limits</code> operation you can fetch of API limits from Salesforce and then act upon that data received.
+The result of <code>salesforce:limits</code> operation is mapped to <code>org.apache.camel.component.salesforce.api.dto.Limits</code>
+class and can be used in a custom processors or expressions.</p>
+</div>
+<div class="paragraph">
+<p>For instance, consider that you need to limit the API usage of Salesforce so that 10% of daily API requests is left for
+other routes. The body of output message contains an instance of
+<code>org.apache.camel.component.salesforce.api.dto.Limits</code> object that can be used in conjunction with
+<a href="content-based-router.html">Content Based Router</a> and <a href="content-based-router.html">Content Based Router</a> and
+<a href="spel-language.html">Spring Expression Language (SpEL)</a> to choose when to perform queries.</p>
+</div>
+<div class="paragraph">
+<p>Notice how multiplying <code>1.0</code> with the integer value held in <code>body.dailyApiRequests.remaining</code> makes the expression
+evaluate as with floating point arithmetic, without it - it would end up making integral division which would result
+with either <code>0</code> (some API limits consumed) or <code>1</code> (no API limits consumed).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:querySalesforce")
+    .to("salesforce:limits")
+    .choice()
+    .when(spel("#{1.0 * body.dailyApiRequests.remaining / body.dailyApiRequests.max &lt; 0.1}"))
+        .to("salesforce:query?...")
+    .otherwise()
+        .setBody(constant("Used up Salesforce API limits, leaving 10% for critical routes"))
+    .endChoice()</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_working_with_approvals">Working with approvals</h3>
+<div class="paragraph">
+<p>All the properties are named exactly the same as in the Salesforce REST API prefixed with <code>approval.</code>. You can set
+approval properties by setting <code>approval.PropertyName</code> of the Endpoint these will be used as template&#8201;&#8212;&#8201;meaning
+that any property not present in either body or header will be taken from the Endpoint configuration. Or you can set
+the approval template on the Endpoint by assigning <code>approval</code> property to a reference onto a bean in the Registry.</p>
+</div>
+<div class="paragraph">
+<p>You can also provide header values using the same <code>approval.PropertyName</code> in the incoming message headers.</p>
+</div>
+<div class="paragraph">
+<p>And finally body can contain one <code>AprovalRequest</code> or an <code>Iterable</code> of <code>ApprovalRequest</code> objects to process as
+a batch.</p>
+</div>
+<div class="paragraph">
+<p>The important thing to remember is the priority of the values specified in these three mechanisms:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>value in body takes precedence before any other</p>
+</li>
+<li>
+<p>value in message header takes precedence before template value</p>
+</li>
+<li>
+<p>value in template is set if no other value in header or body was given</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>For example to send one record for approval using values in headers use:</p>
+</div>
+<div class="paragraph">
+<p>Given a route:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:example1")//
+        .setHeader("approval.ContextId", simple("${body['contextId']}"))
+        .setHeader("approval.NextApproverIds", simple("${body['nextApproverIds']}"))
+        .to("salesforce:approval?"//
+            + "approval.actionType=Submit"//
+            + "&amp;approval.comments=this is a test"//
+            + "&amp;approval.processDefinitionNameOrId=Test_Account_Process"//
+            + "&amp;approval.skipEntryCriteria=true");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You could send a record for approval using:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">final Map&lt;String, String&gt; body = new HashMap&lt;&gt;();
+body.put("contextId", accountIds.iterator().next());
+body.put("nextApproverIds", userId);
+
+final ApprovalResult result = template.requestBody("direct:example1", body, ApprovalResult.class);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_salesforce_recent_items_api">Using Salesforce Recent Items API</h3>
+<div class="paragraph">
+<p>To fetch the recent items use <code>salesforce:recent</code> operation. This operation returns an <code>java.util.List</code> of
+<code>org.apache.camel.component.salesforce.api.dto.RecentItem</code> objects (<code>List&lt;RecentItem&gt;</code>) that in turn contain
+the <code>Id</code>, <code>Name</code> and <code>Attributes</code> (with <code>type</code> and <code>url</code> properties). You can limit the number of returned items
+by specifying <code>limit</code> parameter set to maximum number of records to return. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:fetchRecentItems")
+    to("salesforce:recent")
+        .split().body()
+            .log("${body.name} at ${body.attributes.url}");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_working_with_approvals_2">Working with approvals</h3>
+<div class="paragraph">
+<p>All the properties are named exactly the same as in the Salesforce REST API prefixed with <code>approval.</code>. You can set
+approval properties by setting <code>approval.PropertyName</code> of the Endpoint these will be used as template&#8201;&#8212;&#8201;meaning
+that any property not present in either body or header will be taken from the Endpoint configuration. Or you can set
+the approval template on the Endpoint by assigning <code>approval</code> property to a reference onto a bean in the Registry.</p>
+</div>
+<div class="paragraph">
+<p>You can also provide header values using the same <code>approval.PropertyName</code> in the incoming message headers.</p>
+</div>
+<div class="paragraph">
+<p>And finally body can contain one <code>AprovalRequest</code> or an <code>Iterable</code> of <code>ApprovalRequest</code> objects to process as
+a batch.</p>
+</div>
+<div class="paragraph">
+<p>The important thing to remember is the priority of the values specified in these three mechanisms:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>value in body takes precedence before any other</p>
+</li>
+<li>
+<p>value in message header takes precedence before template value</p>
+</li>
+<li>
+<p>value in template is set if no other value in header or body was given</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>For example to send one record for approval using values in headers use:</p>
+</div>
+<div class="paragraph">
+<p>Given a route:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:example1")//
+        .setHeader("approval.ContextId", simple("${body['contextId']}"))
+        .setHeader("approval.NextApproverIds", simple("${body['nextApproverIds']}"))
+        .to("salesforce:approval?"//
+            + "approvalActionType=Submit"//
+            + "&amp;approvalComments=this is a test"//
+            + "&amp;approvalProcessDefinitionNameOrId=Test_Account_Process"//
+            + "&amp;approvalSkipEntryCriteria=true");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You could send a record for approval using:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">final Map&lt;String, String&gt; body = new HashMap&lt;&gt;();
+body.put("contextId", accountIds.iterator().next());
+body.put("nextApproverIds", userId);
+
+final ApprovalResult result = template.requestBody("direct:example1", body, ApprovalResult.class);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_salesforce_composite_api_to_submit_sobject_tree">Using Salesforce Composite API to submit SObject tree</h3>
+<div class="paragraph">
+<p>To create up to 200 records including parent-child relationships use <code>salesforce:composite-tree</code> operation. This
+requires an instance of <code>org.apache.camel.component.salesforce.api.dto.composite.SObjectTree</code> in the input
+message and returns the same tree of objects in the output message. The
+<code>org.apache.camel.component.salesforce.api.dto.AbstractSObjectBase</code> instances within the tree get updated with
+the identifier values (<code>Id</code> property) or their corresponding
+<code>org.apache.camel.component.salesforce.api.dto.composite.SObjectNode</code> is populated with <code>errors</code> on failure.</p>
+</div>
+<div class="paragraph">
+<p>Note that for some records operation can succeed and for some it can fail&#8201;&#8212;&#8201;so you need to manually check for errors.</p>
+</div>
+<div class="paragraph">
+<p>Easiest way to use this functionality is to use the DTOs generated by the <code>camel-salesforce-maven-plugin</code>, but you
+also have the option of customizing the references that identify the each object in the tree, for instance primary keys
+from your database.</p>
+</div>
+<div class="paragraph">
+<p>Lets look at an example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Account account = ...
+Contact president = ...
+Contact marketing = ...
+
+Account anotherAccount = ...
+Contact sales = ...
+Asset someAsset = ...
+
+// build the tree
+SObjectTree request = new SObjectTree();
+request.addObject(account).addChildren(president, marketing);
+request.addObject(anotherAccount).addChild(sales).addChild(someAsset);
+
+final SObjectTree response = template.requestBody("salesforce:composite-tree", tree, SObjectTree.class);
+final Map&lt;Boolean, List&lt;SObjectNode&gt;&gt; result = response.allNodes()
+                                                   .collect(Collectors.groupingBy(SObjectNode::hasErrors));
+
+final List&lt;SObjectNode&gt; withErrors = result.get(true);
+final List&lt;SObjectNode&gt; succeeded = result.get(false);
+
+final String firstId = succeeded.get(0).getId();</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_salesforce_composite_api_to_submit_multiple_requests_in_a_batch">Using Salesforce Composite API to submit multiple requests in a batch</h3>
+<div class="paragraph">
+<p>The Composite API batch operation (<code>composite-batch</code>) allows you to accumulate multiple requests in a batch and then
+submit them in one go, saving the round trip cost of multiple individual requests. Each response is then received in a
+list of responses with the order perserved, so that the n-th requests response is in the n-th place of the response.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The results can vary from API to API so the result of the request is given as a <code>java.lang.Object</code>. In most cases
+the result will be a <code>java.util.Map</code> with string keys and values or other <code>java.util.Map</code> as value. Requests made in
+JSON format hold some type information (i.e. it is known what values are strings and what values are numbers), so in
+general those will be more type friendly. Note that the responses will vary between XML and JSON, this is due to the
+responses from Salesforce API being different. So be careful if you switch between formats without changing the response
+handling code.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Lets look at an example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">final String acountId = ...
+final SObjectBatch batch = new SObjectBatch("38.0");
+
+final Account updates = new Account();
+updates.setName("NewName");
+batch.addUpdate("Account", accountId, updates);
+
+final Account newAccount = new Account();
+newAccount.setName("Account created from Composite batch API");
+batch.addCreate(newAccount);
+
+batch.addGet("Account", accountId, "Name", "BillingPostalCode");
+
+batch.addDelete("Account", accountId);
+
+final SObjectBatchResponse response = template.requestBody("salesforce:composite-batch?format=JSON", batch, SObjectBatchResponse.class);
+
+boolean hasErrors = response.hasErrors(); // if any of the requests has resulted in either 4xx or 5xx HTTP status
+final List&lt;SObjectBatchResult&gt; results = response.getResults(); // results of three operations sent in batch
+
+final SObjectBatchResult updateResult = results.get(0); // update result
+final int updateStatus = updateResult.getStatusCode(); // probably 204
+final Object updateResultData = updateResult.getResult(); // probably null
+
+final SObjectBatchResult createResult = results.get(1); // create result
+@SuppressWarnings("unchecked")
+final Map&lt;String, Object&gt; createData = (Map&lt;String, Object&gt;) createResult.getResult();
+final String newAccountId = createData.get("id"); // id of the new account, this is for JSON, for XML it would be createData.get("Result").get("id")
+
+final SObjectBatchResult retrieveResult = results.get(2); // retrieve result
+@SuppressWarnings("unchecked")
+final Map&lt;String, Object&gt; retrieveData = (Map&lt;String, Object&gt;) retrieveResult.getResult();
+final String accountName = retrieveData.get("Name"); // Name of the retrieved account, this is for JSON, for XML it would be createData.get("Account").get("Name")
+final String accountBillingPostalCode = retrieveData.get("BillingPostalCode"); // Name of the retrieved account, this is for JSON, for XML it would be createData.get("Account").get("BillingPostalCode")
+
+final SObjectBatchResult deleteResult = results.get(3); // delete result
+final int updateStatus = deleteResult.getStatusCode(); // probably 204
+final Object updateResultData = deleteResult.getResult(); // probably null</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_camel_salesforce_maven_plugin">Camel Salesforce Maven Plugin</h3>
+<div class="paragraph">
+<p>This Maven plugin generates DTOs for the Camel
+<a href="salesforce.html">Salesforce</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The Salesforce component supports 28 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>authenticationType</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Explicit authentication method to be used one of USERNAME_PASSWORD REFRESH_TOKEN or JWT. Salesforce component can auto-determine the authentication method to use from the properties set set this property to eliminate any ambiguity.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AuthenticationType</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>loginConfig</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All authentication configuration in one nested bean all properties set there can be set directly on the component as well</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SalesforceLoginConfig</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>instanceUrl</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URL of the Salesforce instance used after authantication by default received from Salesforce on successful authentication</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>loginUrl</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> URL of the Salesforce instance used for authentication by default set to <a href="https://login.salesforce.com" class="bare">https://login.salesforce.com</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://login.salesforce.com" class="bare">https://login.salesforce.com</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>clientId</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> OAuth Consumer Key of the connected app configured in the Salesforce instance setup. Typically a connected app needs to be configured but one can be provided by installing a package.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>clientSecret</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OAuth Consumer Secret of the connected app configured in the Salesforce instance setup.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>keystore</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KeyStore parameters to use in OAuth JWT flow. The KeyStore should contain only one entry with private key and certificate. Salesforce does not verify the certificate chain so this can easily be a selfsigned certificate. Make sure that you upload the certificate to the corresponding connected app.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KeyStoreParameters</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>refreshToken</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Refresh token already obtained in the refresh token OAuth flow. One needs to setup a web application and configure a callback URL to receive the refresh token or configure using the builtin callback at <a href="https://login.salesforce.com/services/oauth2/success" class="bare">https://login.salesforce.com/services/oauth2/success</a> or <a href="https://test.salesforce.com/services/oauth2/success" class="bare">https://test.salesforce.com/services/oauth2/success</a> and then retrive the refresh_token from the URL at the end of the flow. Note that in development organizations Salesforce allows hosting the callback web application at localhost.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>userName</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Username used in OAuth flow to gain access to access token. It&#8217;s easy to get started with password OAuth flow but in general one should avoid it as it is deemed less secure than other flows.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>password</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Password used in OAuth flow to gain access to access token. It&#8217;s easy to get started with password OAuth flow but in general one should avoid it as it is deemed less secure than other flows. Make sure that you append security token to the end of the password if using one.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>lazyLogin</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set to true prevents the component from authenticating to Salesforce with the start of the component. You would generaly set this to the (default) false and authenticate early and be immediately aware of any authentication issues.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>config</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Global endpoint configuration - use to set values that are common to all endpoints</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SalesforceEndpoint Config</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpClientProperties</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to set any properties that can be configured on the underlying HTTP client. Have a look at properties of SalesforceHttpClient and the Jetty HttpClient for all available options.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sslContextParameters</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SSL parameters to use see SSLContextParameters class for all available options.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SSLContextParameters</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useGlobalSslContext Parameters</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable usage of global SSL context parameters</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpProxyHost</strong> (proxy)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hostname of the HTTP proxy server to use.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpProxyPort</strong> (proxy)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Port number of the HTTP proxy server to use.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpProxyUsername</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Username to use to authenticate against the HTTP proxy server.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpProxyPassword</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Password to use to authenticate against the HTTP proxy server.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>isHttpProxySocks4</strong> (proxy)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set to true the configures the HTTP proxy to use as a SOCKS4 proxy.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>isHttpProxySecure</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set to false disables the use of TLS when accessing the HTTP proxy.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpProxyIncluded Addresses</strong> (proxy)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A list of addresses for which HTTP proxy server should be used.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpProxyExcluded Addresses</strong> (proxy)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A list of addresses for which HTTP proxy server should not be used.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpProxyAuthUri</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used in authentication against the HTTP proxy server needs to match the URI of the proxy server in order for the httpProxyUsername and httpProxyPassword to be used for authentication.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpProxyRealm</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Realm of the proxy server used in preemptive Basic/Digest authentication methods against the HTTP proxy server.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpProxyUseDigest Auth</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set to true Digest authentication will be used when authenticating to the HTTP proxyotherwise Basic authorization method will be used</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>packages</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In what packages are the generated DTO classes. Typically the classes would be generated using camel-salesforce-maven-plugin. Set it if using the generated DTOs to gain the benefit of using short SObject names in parameters/header values.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String[]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Salesforce endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>salesforce:operationName:topicName</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_2_parameters">Path Parameters (2 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>operationName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The operation to use</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OperationName</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>topicName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the topic to use</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_42_parameters">Query Parameters (42 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>apexMethod</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">APEX method name</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>apexQueryParams</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Query params for APEX method</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>apexUrl</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">APEX method URL</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>apiVersion</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Salesforce API version defaults to SalesforceEndpointConfig.DEFAULT_VERSION</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backoffIncrement</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Backoff interval increment for Streaming connection restart attempts for failures beyond CometD auto-reconnect.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>batchId</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bulk API Batch ID</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contentType</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bulk API content type one of XML CSV ZIP_XML ZIP_CSV</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ContentType</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>defaultReplayId</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default replayId setting if no value is found in link initialReplayIdMap</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>format</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Payload format to use for Salesforce API calls either JSON or XML defaults to JSON</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PayloadFormat</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpClient</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Custom Jetty Http Client to use to connect to Salesforce.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SalesforceHttpClient</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>includeDetails</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Include details in Salesforce1 Analytics report defaults to false.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>initialReplayIdMap</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Replay IDs to start from per channel name.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>instanceId</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Salesforce1 Analytics report execution instance ID</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>jobId</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bulk API Job ID</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>limit</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Limit on number of returned records. Applicable to some of the API check the Salesforce documentation.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxBackoff</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum backoff interval for Streaming connection restart attempts for failures beyond CometD auto-reconnect.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>notFoundBehaviour</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the behaviour of 404 not found status received from Salesforce API. Should the body be set to NULL link NotFoundBehaviourNULL or should a exception be signaled on the exchange link NotFoundBehaviourEXCEPTION - the default.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NotFoundBehaviour</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>notifyForFields</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Notify for fields options are ALL REFERENCED SELECT WHERE</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NotifyForFieldsEnum</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>notifyForOperationCreate</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Notify for create operation defaults to false (API version = 29.0)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>notifyForOperationDelete</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Notify for delete operation defaults to false (API version = 29.0)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>notifyForOperations</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Notify for operations options are ALL CREATE EXTENDED UPDATE (API version 29.0)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NotifyForOperations Enum</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>notifyForOperationUndelete</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Notify for un-delete operation defaults to false (API version = 29.0)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>notifyForOperationUpdate</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Notify for update operation defaults to false (API version = 29.0)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>objectMapper</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Custom Jackson ObjectMapper to use when serializing/deserializing Salesforce objects.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ObjectMapper</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>reportId</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Salesforce1 Analytics report Id</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>reportMetadata</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Salesforce1 Analytics report metadata for filtering</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ReportMetadata</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resultId</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bulk API Result ID</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sObjectBlobFieldName</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SObject blob field name</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sObjectClass</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fully qualified SObject class name usually generated using camel-salesforce-maven-plugin</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sObjectFields</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SObject fields to retrieve</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sObjectId</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SObject ID if required by API</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sObjectIdName</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SObject external ID field name</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sObjectIdValue</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SObject external ID field value</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sObjectName</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SObject name if required or supported by API</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sObjectQuery</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Salesforce SOQL query string</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sObjectSearch</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Salesforce SOSL search string</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>updateTopic</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to update an existing Push Topic when using the Streaming API defaults to false</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>replayId</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The replayId value to use when subscribing</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>For obvious security reasons it is recommended that the clientId,
+clientSecret, userName and password fields be not set in the pom.xml.
+The plugin should be configured for the rest of the properties, and can
+be executed using the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">mvn camel-salesforce:generate -DcamelSalesforce.clientId=&lt;clientid&gt; -DcamelSalesforce.clientSecret=&lt;clientsecret&gt; \
+    -DcamelSalesforce.userName=&lt;username&gt; -DcamelSalesforce.password=&lt;password&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The generated DTOs use Jackson and XStream annotations. All Salesforce
+field types are supported. Date and time fields are mapped to Joda
+DateTime, and picklist fields are mapped to generated Java Enumerations.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/sap-netweaver-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/rx/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

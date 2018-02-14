@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='XQuery Language Available as of Camel version 1.0
+ Camel supports XQuery to allow an Expression or Predicate to be used in the DSL or Xml Configuration. For example you could use XQuery to create an Predicate in a Message Filter or as an Expression for a Recipient List.
+ XQuery Language options The XQuery language supports 3 options which are listed below.
+     Name Default Java Type Description     type'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='XQuery Language Available as of Camel version 1.0
+ Camel supports XQuery to allow an Expression or Predicate to be used in the DSL or Xml Configuration. For example you could use XQuery to create an Predicate in a Message Filter or as an Expression for a Recipient List.
+ XQuery Language options The XQuery language supports 3 options which are listed below.
+     Name Default Java Type Description     type'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/xquery-language/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/xquery-language/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_xquery_language">XQuery Language</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 1.0</strong></p>
+</div>
+<div class="paragraph">
+<p>Camel supports <a href="http://www.w3.org/TR/xquery/">XQuery</a> to allow an
+<a href="expression.html">Expression</a> or <a href="predicate.html">Predicate</a> to be
+used in the <a href="dsl.html">DSL</a> or <a href="xml-configuration.html">Xml
+Configuration</a>. For example you could use XQuery to create an
+<a href="predicate.html">Predicate</a> in a <a href="message-filter.html">Message
+Filter</a> or as an <a href="expression.html">Expression</a> for a
+<a href="recipient-list.html">Recipient List</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="_xquery_language_options">XQuery Language options</h3>
+<div class="paragraph">
+<p>The XQuery language supports 3 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Java Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the class name of the result type (type from output) The default result type is NodeSet</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">headerName</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of header to use as input instead of the message body</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">trim</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to trim the value to remove leading and trailing whitespaces and line breaks</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_examples">Examples</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("queue:foo").filter().
+  xquery("//foo").
+  to("queue:bar")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also use functions inside your query, in which case you need an
+explicit type conversion (or you will get a org.w3c.dom.DOMException:
+HIERARCHY_REQUEST_ERR) by passing the Class as a second argument to the
+<strong>xquery()</strong> method.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start").
+  recipientList().xquery("concat('mock:foo.', /person/@city)", String.class);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_variables">Variables</h3>
+<div class="paragraph">
+<p>The IN message body will be set as the <code>contextItem</code>. Besides this these
+Variables is also added as parameters:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">exchange</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exchange</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The current Exchange</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in.body</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The In message&#8217;s body</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">out.body</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The OUT message&#8217;s body (if any)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in.headers.*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">You can access the value of exchange.in.headers with key <strong>foo</strong> by using
+the variable which name is in.headers.foo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">out.headers.*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">You can access the value of exchange.out.headers with key <strong>foo</strong> by using
+the variable which name is out.headers.foo variable</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>key name</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any exchange.properties and exchange.in.headers and any additional
+parameters set using <code>setParameters(Map)</code>. These parameters is added
+with they own key name, for instance if there is an IN header with the
+key name <strong>foo</strong> then its added as <strong>foo</strong>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_using_xml_configuration">Using XML configuration</h3>
+<div class="paragraph">
+<p>If you prefer to configure your routes in your <a href="spring.html">Spring</a>
+XML file then you can use XPath expressions as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:foo="http://example.com/person"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd"&gt;
+
+  &lt;camelContext id="camel" xmlns="http://activemq.apache.org/camel/schema/spring"&gt;
+    &lt;route&gt;
+      &lt;from uri="activemq:MyQueue"/&gt;
+      &lt;filter&gt;
+        &lt;xquery&gt;/foo:person[@name='James']&lt;/xquery&gt;
+        &lt;to uri="mqseries:SomeOtherQueue"/&gt;
+      &lt;/filter&gt;
+    &lt;/route&gt;
+  &lt;/camelContext&gt;
+&lt;/beans&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice how we can reuse the namespace prefixes, <strong>foo</strong> in this case, in
+the XPath expression for easier namespace based XQuery expressions!</p>
+</div>
+<div class="paragraph">
+<p>When you use functions in your XQuery expression you need an explicit
+type conversion which is done in the xml configuration via the <strong>@type</strong>
+attribute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;xquery type="java.lang.String"&gt;concat('mock:foo.', /person/@city)&lt;/xquery&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_xquery_as_transformation">Using XQuery as transformation</h3>
+<div class="paragraph">
+<p>We can do a message translation using transform or setBody in the route,
+as shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start").
+   transform().xquery("/people/person");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice that xquery will use DOMResult by default, so if we want to grab
+the value of the person node, using text() we need to tell xquery to use
+String as result type, as shown:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start").
+   transform().xquery("/people/person/text()", String.class);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_xquery_as_an_endpoint">Using XQuery as an endpoint</h3>
+<div class="paragraph">
+<p>Sometimes an XQuery expression can be quite large; it can essentally be
+used for <a href="templating.html">Templating</a>. So you may want to use an
+<a href="xquery-endpoint.html">XQuery Endpoint</a> so you can route using XQuery
+templates.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows how to take a message of an ActiveMQ queue
+(MyQueue) and transform it using XQuery and send it to MQSeries.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">  &lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
+    &lt;route&gt;
+      &lt;from uri="activemq:MyQueue"/&gt;
+      &lt;to uri="xquery:com/acme/someTransform.xquery"/&gt;
+      &lt;to uri="mqseries:SomeOtherQueue"/&gt;
+    &lt;/route&gt;
+  &lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examples_2">Examples</h3>
+<div class="paragraph">
+<p>Here is a simple
+<a href="http://svn.apache.org/repos/asf/camel/trunk/components/camel-saxon/src/test/java/org/apache/camel/builder/saxon/XQueryFilterTest.java">example</a>
+using an XQuery expression as a predicate in a
+<a href="message-filter.html">Message Filter</a></p>
+</div>
+<div class="paragraph">
+<p>This
+<a href="http://svn.apache.org/repos/asf/camel/trunk/components/camel-saxon/src/test/java/org/apache/camel/builder/saxon/XQueryWithNamespacesFilterTest.java">example</a>
+uses XQuery with namespaces as a predicate in a
+<a href="message-filter.html">Message Filter</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_learning_xquery">Learning XQuery</h3>
+<div class="paragraph">
+<p>XQuery is a very powerful language for querying, searching, sorting and
+returning XML. For help learning XQuery try these tutorials</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Mike Kay&#8217;s <a href="http://www.stylusstudio.com/xquery_primer.html">XQuery
+Primer</a></p>
+</li>
+<li>
+<p>the W3Schools <a href="http://www.w3schools.com/xquery/default.asp">XQuery
+Tutorial</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You might also find the <a href="http://www.w3.org/TR/xpath-functions/">XQuery
+function reference</a> useful</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_loading_script_from_external_resource">Loading script from external resource</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.11</strong></p>
+</div>
+<div class="paragraph">
+<p>You can externalize the script and have Camel load it from a resource
+such as <code>"classpath:"</code>, <code>"file:"</code>, or <code>"http:"</code>.<br>
+ This is done using the following syntax: <code>"resource:scheme:location"</code>,
+eg to refer to a file on the classpath you can do:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">.setHeader("myHeader").xquery("resource:classpath:myxquery.txt", String.class)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dependencies">Dependencies</h3>
+<div class="paragraph">
+<p>To use XQuery in your camel routes you need to add the a dependency on
+<strong>camel-saxon</strong> which implements the XQuery language.</p>
+</div>
+<div class="paragraph">
+<p>If you use maven you could just add the following to your pom.xml,
+substituting the version number for the latest &amp; greatest release (see
+<a href="download.html">the download page for the latest versions</a>).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-saxon&lt;/artifactId&gt;
+  &lt;version&gt;x.x.x&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/xstream-dataformat/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/xquery-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='SQL Stored Procedure Component Available as of Camel version 2.17
+ The sql-stored: component allows you to work with databases using JDBC Stored Procedure queries. This component is an extension to the SQL Component but specialized for calling stored procedures.
+ This component uses spring-jdbc behind the scenes for the actual SQL handling.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='SQL Stored Procedure Component Available as of Camel version 2.17
+ The sql-stored: component allows you to work with databases using JDBC Stored Procedure queries. This component is an extension to the SQL Component but specialized for calling stored procedures.
+ This component uses spring-jdbc behind the scenes for the actual SQL handling.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/sql-stored-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/sql-stored-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_sql_stored_procedure_component">SQL Stored Procedure Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.17</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>sql-stored:</strong> component allows you to work with databases using JDBC
+Stored Procedure queries. This component is an extension to
+the <a href="sql-component.html">SQL Component</a> but specialized for calling
+stored procedures.</p>
+</div>
+<div class="paragraph">
+<p>This component uses <code>spring-jdbc</code> behind the scenes for the actual SQL
+handling.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-sql&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="paragraph">
+<p>The SQL component uses the following endpoint URI notation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">sql-stored:template[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where template is the stored procedure template, where you declare the
+name of the stored procedure and the IN and OUT arguments.</p>
+</div>
+<div class="paragraph">
+<p>You can also refer to the template in a external file on the file system
+or classpath such as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">sql-stored:classpath:sql/myprocedure.sql[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where sql/myprocedure.sql is a plain text file in the classpath with the
+template, as show:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">SUBNUMBERS(
+  INTEGER ${headers.num1},
+  INTEGER ${headers.num2},
+  OUT INTEGER resultofsub
+)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can append query options to the URI in the following format,
+<code>?option=value&amp;option=value&amp;&#8230;&#8203;</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The SQL Stored Procedure component supports 2 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>dataSource</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the DataSource to use to communicate with the database.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DataSource</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The SQL Stored Procedure endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sql-stored:template</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>template</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Sets the StoredProcedure template to perform</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_7_parameters">Query Parameters (7 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>batch</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables or disables batch mode</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>dataSource</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the DataSource to use to communicate with the database.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DataSource</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>function</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether this call is for a function.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>noop</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set will ignore the results of the template and use the existing IN message as the OUT message for the continuation of processing</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>outputHeader</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Store the template result in a header instead of the message body. By default outputHeader == null and the template result is stored in the message body any existing content in the message body is discarded. If outputHeader is set the value is used as the name of the header to store the template result and the original message body is preserved.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useMessageBodyForTemplate</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to use the message body as the template and then headers for parameters. If this option is enabled then the template in the uri is not used.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_declaring_the_stored_procedure_template">Declaring the stored procedure template</h3>
+<div class="paragraph">
+<p>The template is declared using a syntax that would be similar to a Java
+method signature. The name of the stored procedure, and then the
+arguments enclosed in parenthesis. An example explains this well:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;to uri="sql-stored:SUBNUMBERS(INTEGER ${headers.num1},INTEGER ${headers.num2},OUT INTEGER resultofsub)"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The arguments is declared by a type and then the mapping to the Camel
+message using simple expression. So in this example the first two
+parameters are IN values that are INTEGER type, that maps to the message
+headers. The last parameter is the OUT value, also an INTEGER type.</p>
+</div>
+<div class="paragraph">
+<p>In SQL term the stored procedure could be declared as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CREATE PROCEDURE SUBNUMBERS(VALUE1 INTEGER, VALUE2 INTEGER,OUT RESULT INTEGER)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>IN parameters take four parts separated by a space: parameter name, SQL type(with scale), type name and value source.</p>
+</div>
+<div class="paragraph">
+<p>Parameter name is optional and will be auto generated if not provided. It must be given between quotes(').</p>
+</div>
+<div class="paragraph">
+<p>SQL type is required and can be a integer(positive or negative) or reference to integer field in some class.
+If SQL type contains a dot then component tries resolve that class and read the given field. For example
+SQL type com.Foo.INTEGER is read from the field INTEGER of class com.Foo. If the type doesn&#8217;t
+contain comma then class to resolve the integer value will be java.sql.Types.
+Type can be postfixed by scale for example DECIMAL(10) would mean java.sql.Types.DECIMAL with scale 10.</p>
+</div>
+<div class="paragraph">
+<p>Type name is optional and must be given between quotes(').</p>
+</div>
+<div class="paragraph">
+<p>Value source is required. Value source populates parameter value from the Exchange.
+It can be either a Simple expression or header location i.e. :#&lt;header name&gt;. For example
+Simple expression ${header.val} would mean that parameter value will be read from the header "val".
+Header location expression :#val would have identical effect.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;to uri="sql-stored:MYFUNC('param1' org.example.Types.INTEGER(10) ${header.srcValue})"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>URI means that the stored procedure will be called with parameter name "param1",
+it&#8217;s SQL type is read from field INTEGER of class org.example.Types and scale will be set to 10.
+Input value for the parameter is passed from the header "srcValue".</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;to uri="sql-stored:MYFUNC('param1' 100 'mytypename' ${header.srcValue})"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>URI is identical to previous on except SQL-type is 100 and type name is "mytypename".</p>
+</div>
+<div class="paragraph">
+<p>Actual call will be done using org.springframework.jdbc.core.SqlParameter.</p>
+</div>
+<div class="paragraph">
+<p>OUT parameters work same way as IN parameters and they they contain three parts: SQL type(with scale), type name and output parameter name.</p>
+</div>
+<div class="paragraph">
+<p>SQL type works as in IN parameters.</p>
+</div>
+<div class="paragraph">
+<p>Type name is optional and work as in IN parameters.</p>
+</div>
+<div class="paragraph">
+<p>Output parameter name is used for the e OUT parameter name and header where the result will be stored there also.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;to uri="sql-stored:MYFUNC(OUT org.example.Types.DECIMAL(10) outheader1)"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>URI means that OUT parameter&#8217;s name is "outheader1" and result will be but into header "outheader1".</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;to uri="sql-stored:MYFUNC(OUT org.example.Types.NUMERIC(10) 'mytype' outheader1)"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is identical to previous one but type name will be "mytype".</p>
+</div>
+<div class="paragraph">
+<p>Actual call will be done using org.springframework.jdbc.core.SqlOutParameter.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_camel_sql_starter">Camel Sql Starter</h3>
+<div class="paragraph">
+<p>A starter module is available to spring-boot users. When using the starter,
+the <code>DataSource</code> can be directly configured using spring-boot properties.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code># Example for a mysql datasource
+spring.datasource.url=jdbc:mysql://localhost/test
+spring.datasource.username=dbuser
+spring.datasource.password=dbpass
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To use this feature, add the following dependencies to your spring boot pom.xml file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-sql-starter&lt;/artifactId&gt;
+    &lt;version&gt;${camel.version}&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt;
+    &lt;version&gt;${spring-boot-version}&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should also include the specific database driver, if needed.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+<li>
+<p><a href="sql-component.html">SQL Component</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/ssh-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/sql-language/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

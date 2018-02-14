@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Hazelcast Replicated Map Component Available as of Camel version 2.16
+ The Hazelcast instance component is one of Camel Hazelcast Components which allows you to consume join/leave events of the cache instance in the cluster. A replicated map is a weakly consistent, distributed key-value data structure with no data partition.
+ Options The Hazelcast Replicated Map component supports 3 options which are listed below.
+     Name Description Default Type     hazelcastInstance (advanced)'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Hazelcast Replicated Map Component Available as of Camel version 2.16
+ The Hazelcast instance component is one of Camel Hazelcast Components which allows you to consume join/leave events of the cache instance in the cluster. A replicated map is a weakly consistent, distributed key-value data structure with no data partition.
+ Options The Hazelcast Replicated Map component supports 3 options which are listed below.
+     Name Description Default Type     hazelcastInstance (advanced)'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/hazelcast-replicatedmap-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/hazelcast-replicatedmap-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_hazelcast_replicated_map_component">Hazelcast Replicated Map Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.16</strong></p>
+</div>
+<div class="paragraph">
+<p>The <a href="http://www.hazelcast.com/">Hazelcast</a> instance component is one of <a href="hazelcast.html">Camel Hazelcast Components</a> which allows you to consume join/leave events of the cache instance in the cluster.
+A replicated map is a weakly consistent, distributed key-value data structure with no data partition.</p>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The Hazelcast Replicated Map component supports 3 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>hazelcastInstance</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The hazelcast instance reference which can be used for hazelcast endpoint. If you don&#8217;t specify the instance reference camel use the default hazelcast instance from the camel-hazelcast instance.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HazelcastInstance</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>hazelcastMode</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The hazelcast mode reference which kind of instance should be used. If you don&#8217;t specify the mode then the node mode will be the default.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">node</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Hazelcast Replicated Map endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>hazelcast-replicatedmap:cacheName</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>cacheName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The name of the cache</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_13_parameters">Query Parameters (13 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>defaultOperation</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To specify a default operation to use if no operation header has been provided.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HazelcastOperation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>hazelcastInstance</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The hazelcast instance reference which can be used for hazelcast endpoint.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HazelcastInstance</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>hazelcastInstanceName</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The hazelcast instance reference name which can be used for hazelcast endpoint. If you don&#8217;t specify the instance reference camel use the default hazelcast instance from the camel-hazelcast instance.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>reliable</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Define if the endpoint will use a reliable Topic struct or not.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>concurrentConsumers</strong> (seda)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use concurrent consumers polling from the SEDA queue.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>onErrorDelay</strong> (seda)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Milliseconds before consumer continues polling after an error has occurred.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>pollTimeout</strong> (seda)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timeout used when consuming from the SEDA queue. When a timeout occurs the consumer can check whether it is allowed to continue running. Setting a lower value allows the consumer to react more quickly upon shutdown.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transacted</strong> (seda)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set to true then the consumer runs in transaction mode where the messages in the seda queue will only be removed if the transaction commits which happens when the processing is complete.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transferExchange</strong> (seda)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set to true the whole Exchange will be transfered. If header or body contains not serializable objects they will be skipped.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_replicatedmap_cache_producer">replicatedmap cache producer</h3>
+<div class="paragraph">
+<p>The replicatedmap producer provides 4 operations:
+* put
+* get
+* delete
+* clear</p>
+</div>
+<div class="paragraph">
+<p>Header Variables for the request message:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHazelcastOperationType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">valid values are: put, get, removevalue, delete</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHazelcastObjectId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the object id to store / find your object inside the cache</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_sample_for_strong_put_strong">Sample for <strong>put</strong>:</h4>
+<div class="paragraph">
+<p>Java DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:put")
+.setHeader(HazelcastConstants.OPERATION, constant(HazelcastOperation.PUT))
+.to(String.format("hazelcast-%sbar", HazelcastConstants.REPLICATEDMAP_PREFIX));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Spring DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;route&gt;
+    &lt;from uri="direct:put" /&gt;
+    &lt;log message="put.."/&gt;
+        &lt;!-- If using version 2.8 and above set headerName to "CamelHazelcastOperationType" --&gt;
+    &lt;setHeader headerName="hazelcast.operation.type"&gt;
+        &lt;constant&gt;put&lt;/constant&gt;
+    &lt;/setHeader&gt;
+    &lt;to uri="hazelcast-replicatedmap:foo" /&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sample_for_strong_get_strong">Sample for <strong>get</strong>:</h4>
+<div class="paragraph">
+<p>Java DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:get")
+.setHeader(HazelcastConstants.OPERATION, constant(HazelcastOperation.GET))
+.toF("hazelcast-%sbar", HazelcastConstants.REPLICATEDMAP_PREFIX)
+.to("seda:out");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Spring DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;route&gt;
+    &lt;from uri="direct:get" /&gt;
+    &lt;log message="get.."/&gt;
+        &lt;!-- If using version 2.8 and above set headerName to "CamelHazelcastOperationType" --&gt;
+    &lt;setHeader headerName="hazelcast.operation.type"&gt;
+        &lt;constant&gt;get&lt;/constant&gt;
+    &lt;/setHeader&gt;
+    &lt;to uri="hazelcast-replicatedmap:foo" /&gt;
+    &lt;to uri="seda:out" /&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sample_for_strong_delete_strong">Sample for <strong>delete</strong>:</h4>
+<div class="paragraph">
+<p>Java DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:delete")
+.setHeader(HazelcastConstants.OPERATION, constant(HazelcastOperation.DELETE))
+.toF("hazelcast-%sbar", HazelcastConstants.REPLICATEDMAP_PREFIX);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Spring DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;route&gt;
+    &lt;from uri="direct:delete" /&gt;
+    &lt;log message="delete.."/&gt;
+        &lt;!-- If using version 2.8 and above set headerName to "CamelHazelcastOperationType" --&gt;
+    &lt;setHeader headerName="hazelcast.operation.type"&gt;
+        &lt;constant&gt;delete&lt;/constant&gt;
+    &lt;/setHeader&gt;
+    &lt;to uri="hazelcast-replicatedmap:foo" /&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>you can call them in your test class with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">template.sendBodyAndHeader("direct:[put|get|delete|clear]", "my-foo", HazelcastConstants.OBJECT_ID, "4711");</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_replicatedmap_cache_consumer">replicatedmap cache consumer</h3>
+<div class="paragraph">
+<p>For the multimap cache this component provides the same listeners /
+variables as for the map cache consumer (except the update and enviction
+listener). The only difference is the <strong>multimap</strong> prefix inside the URI.
+Here is a sample:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">fromF("hazelcast-%sbar", HazelcastConstants.MULTIMAP_PREFIX)
+.log("object...")
+.choice()
+    .when(header(HazelcastConstants.LISTENER_ACTION).isEqualTo(HazelcastConstants.ADDED))
+        .log("...added")
+                .to("mock:added")
+        //.when(header(HazelcastConstants.LISTENER_ACTION).isEqualTo(HazelcastConstants.ENVICTED))
+        //        .log("...envicted")
+        //        .to("mock:envicted")
+        .when(header(HazelcastConstants.LISTENER_ACTION).isEqualTo(HazelcastConstants.REMOVED))
+                .log("...removed")
+                .to("mock:removed")
+        .otherwise()
+                .log("fail!");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Header Variables inside the response message:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHazelcastListenerTime</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Long</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">time of the event in millis</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHazelcastListenerType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the map consumer sets here "cachelistener"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHazelcastListenerAction</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">type of event - here <strong>added</strong> and <strong>removed</strong> (and soon <strong>envicted</strong>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHazelcastObjectId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the oid of the object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHazelcastCacheName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the name of the cache - e.g. "foo"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHazelcastCacheType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the type of the cache - here replicatedmap</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/hazelcast-ringbuffer-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/hazelcast-queue-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

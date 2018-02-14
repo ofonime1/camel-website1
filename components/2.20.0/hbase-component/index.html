@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='HBase Component Available as of Camel version 2.10
+ This component provides an idemptotent repository, producers and consumers for Apache HBase.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-hbase&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   Apache HBase Overview HBase is an open-source, distributed, versioned, column-oriented store modeled after Google&#8217;s Bigtable: A Distributed Storage System for Structured Data.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='HBase Component Available as of Camel version 2.10
+ This component provides an idemptotent repository, producers and consumers for Apache HBase.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-hbase&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   Apache HBase Overview HBase is an open-source, distributed, versioned, column-oriented store modeled after Google&#8217;s Bigtable: A Distributed Storage System for Structured Data.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/hbase-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/hbase-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_hbase_component">HBase Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.10</strong></p>
+</div>
+<div class="paragraph">
+<p>This component provides an idemptotent repository, producers and
+consumers for <a href="http://hbase.apache.org/">Apache HBase</a>.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-hbase&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_apache_hbase_overview">Apache HBase Overview</h3>
+<div class="paragraph">
+<p>HBase is an open-source, distributed, versioned, column-oriented store
+modeled after Google&#8217;s Bigtable: A Distributed Storage System for
+Structured Data. You can use HBase when you need random, realtime
+read/write access to your Big Data. More information at
+<a href="http://hbase.apache.org">Apache HBase</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_camel_and_hbase">Camel and HBase</h3>
+<div class="paragraph">
+<p>When using a datasotre inside a camel route, there is always the
+chalenge of specifying how the camel message will stored to the
+datastore. In document based stores things are more easy as the message
+body can be directly mapped to a document. In relational databases an
+ORM solution can be used to map properties to columns etc. In column
+based stores things are more challenging as there is no standard way to
+perform that kind of mapping.</p>
+</div>
+<div class="paragraph">
+<p>HBase adds two additional challenges:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>HBase groups columns into families, so just mapping a property to a
+column using a name convention is just not enough.</p>
+</li>
+<li>
+<p>HBase doesn&#8217;t have the notion of type, which means that it stores
+everything as byte[] and doesn&#8217;t know if the byte[] represents a String,
+a Number, a serialized Java object or just binary data.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To overcome these challenges, camel-hbase makes use of the message
+headers to specify the mapping of the message to HBase columns. It also
+provides the ability to use some camel-hbase provided classes that model
+HBase data and can be easily convert to and from xml/json etc.<br>
+ Finally it provides the ability to the user to implement and use his
+own mapping strategy.</p>
+</div>
+<div class="paragraph">
+<p>Regardless of the mapping strategy camel-hbase will convert a message
+into an org.apache.camel.component.hbase.model.HBaseData object and use
+that object for its internal operations.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configuring_the_component">Configuring the component</h3>
+<div class="paragraph">
+<p>The HBase component can be provided a custom HBaseConfiguration object
+as a property or it can create an HBase configuration object on its own
+based on the HBase related resources that are found on classpath.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;bean id="hbase" class="org.apache.camel.component.hbase.HBaseComponent"&gt;
+        &lt;property name="configuration" ref="config"/&gt;
+    &lt;/bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If no configuration object is provided to the component, the component
+will create one. The created configuration will search the class path
+for an hbase-site.xml file, from which it will draw the configuration.
+You can find more information about how to configure HBase clients at:
+<a href="http://archive.apache.org/dist/hbase/docs/client_dependencies.html">HBase
+client configuration and dependencies</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hbase_producer">HBase Producer</h3>
+<div class="paragraph">
+<p>As mentioned above camel provides produers endpoints for HBase. This
+allows you to store, delete, retrieve or query data from HBase using
+your camel routes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">hbase://table[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <strong>table</strong> is the table name.</p>
+</div>
+<div class="paragraph">
+<p>The supported operations are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Put</p>
+</li>
+<li>
+<p>Get</p>
+</li>
+<li>
+<p>Delete</p>
+</li>
+<li>
+<p>Scan</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_supported_uri_options">Supported URI options</h4>
+<div class="paragraph">
+<p>The HBase component supports 3 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>configuration</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the shared configuration</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configuration</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>poolMaxSize</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum number of references to keep for each table in the HTable pool. The default value is 10.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The HBase endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>hbase:tableName</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>tableName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The name of the table</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_16_parameters">Query Parameters (16 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>cellMappingStrategyFactory</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom CellMappingStrategyFactory that is responsible for mapping cells.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CellMappingStrategy Factory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>filters</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A list of filters to use.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>mappingStrategyClassName</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The class name of a custom mapping strategy implementation.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>mappingStrategyName</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The strategy to use for mapping Camel messages to HBase columns. Supported values: header or body.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>rowMapping</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To map the key/values from the Map to a HBaseRow. The following keys is supported: rowId - The id of the row. This has limited use as the row usually changes per Exchange. rowType - The type to covert row id to. Supported operations: CamelHBaseScan. family - The column family. Supports a number suffix for referring to more than one columns. qualifier - The column qualifier. Supports a number suffix for referring to more than one columns. value - The value. Supports a number suffix for referring to more than one columns valueType - The value type. Supports a number suffix for referring to more than one columns. Supported operations: CamelHBaseGet and CamelHBaseScan.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>rowModel</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An instance of org.apache.camel.component.hbase.model.HBaseRow which describes how each row should be modeled</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HBaseRow</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>userGroupInformation</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines privileges to communicate with HBase such as using kerberos.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UserGroupInformation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxMessagesPerPoll</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gets the maximum number of messages as a limit to poll at each polling. Is default unlimited but use 0 or negative number to disable it as unlimited.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>operation</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The HBase operation to perform</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>remove</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the option is true Camel HBase Consumer will remove the rows which it processes.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>removeHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom HBaseRemoveHandler that is executed when a row is to be removed.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HBaseRemoveHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxResults</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum number of rows to scan.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">100</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_put_operations">Put Operations.</h4>
+<div class="paragraph">
+<p>HBase is a column based store, which allows you to store data into a
+specific column of a specific row. Columns are grouped into families, so
+in order to specify a column you need to specify the column family and
+the qualifier of that column. To store data into a specific column you
+need to specify both the column and the row.</p>
+</div>
+<div class="paragraph">
+<p>The simplest scenario for storing data into HBase from a camel route,
+would be to store part of the message body to specified HBase column.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">        &lt;route&gt;
+            &lt;from uri="direct:in"/&gt;
+            &lt;!-- Set the HBase Row --&gt;
+            &lt;setHeader headerName="CamelHBaseRowId"&gt;
+                &lt;el&gt;${in.body.id}&lt;/el&gt;
+            &lt;/setHeader&gt;
+            &lt;!-- Set the HBase Value --&gt;
+            &lt;setHeader headerName="CamelHBaseValue"&gt;
+                &lt;el&gt;${in.body.value}&lt;/el&gt;
+            &lt;/setHeader&gt;
+            &lt;to uri="hbase:mytable?operation=CamelHBasePut&amp;amp;family=myfamily&amp;amp;qualifier=myqualifier"/&gt;
+        &lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The route above assumes that the message body contains an object that
+has an id and value property and will store the content of value in the
+HBase column myfamily:myqualifier in the row specified by id. If we
+needed to specify more than one column/value pairs we could just specify
+additional column mappings. Notice that you must use numbers from the
+2nd header onwards, eg RowId2, RowId3, RowId4, etc. Only the 1st header
+does not have the number 1.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">        &lt;route&gt;
+            &lt;from uri="direct:in"/&gt;
+            &lt;!-- Set the HBase Row 1st column --&gt;
+            &lt;setHeader headerName="CamelHBaseRowId"&gt;
+                &lt;el&gt;${in.body.id}&lt;/el&gt;
+            &lt;/setHeader&gt;
+            &lt;!-- Set the HBase Row 2nd column --&gt;
+            &lt;setHeader headerName="CamelHBaseRowId2"&gt;
+                &lt;el&gt;${in.body.id}&lt;/el&gt;
+            &lt;/setHeader&gt;
+            &lt;!-- Set the HBase Value for 1st column --&gt;
+            &lt;setHeader headerName="CamelHBaseValue"&gt;
+                &lt;el&gt;${in.body.value}&lt;/el&gt;
+            &lt;/setHeader&gt;
+            &lt;!-- Set the HBase Value for 2nd column --&gt;
+            &lt;setHeader headerName="CamelHBaseValue2"&gt;
+                &lt;el&gt;${in.body.othervalue}&lt;/el&gt;
+            &lt;/setHeader&gt;
+            &lt;to uri="hbase:mytable?operation=CamelHBasePut&amp;amp;family=myfamily&amp;amp;qualifier=myqualifier&amp;amp;family2=myfamily&amp;amp;qualifier2=myqualifier2"/&gt;
+        &lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is important to remember that you can use uri options, message
+headers or a combination of both. It is recommended to specify constants
+as part of the uri and dynamic values as headers. If something is
+defined both as header and as part of the uri, the header will be used.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_get_operations">Get Operations.</h4>
+<div class="paragraph">
+<p>A Get Operation is an operation that is used to retrieve one or more
+values from a specified HBase row. To specify what are the values that
+you want to retrieve you can just specify them as part of the uri or as
+message headers.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">        &lt;route&gt;
+            &lt;from uri="direct:in"/&gt;
+            &lt;!-- Set the HBase Row of the Get --&gt;
+            &lt;setHeader headerName="CamelHBaseRowId"&gt;
+                &lt;el&gt;${in.body.id}&lt;/el&gt;
+            &lt;/setHeader&gt;
+            &lt;to uri="hbase:mytable?operation=CamelHBaseGet&amp;amp;family=myfamily&amp;amp;qualifier=myqualifier&amp;amp;valueType=java.lang.Long"/&gt;
+            &lt;to uri="log:out"/&gt;
+        &lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the example above the result of the get operation will be stored as a
+header with name CamelHBaseValue.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_delete_operations">Delete Operations.</h4>
+<div class="paragraph">
+<p>You can also you camel-hbase to perform HBase delete operation. The
+delete operation will remove an entire row. All that needs to be
+specified is one or more rows as part of the message headers.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">        &lt;route&gt;
+            &lt;from uri="direct:in"/&gt;
+            &lt;!-- Set the HBase Row of the Get --&gt;
+            &lt;setHeader headerName="CamelHBaseRowId"&gt;
+                &lt;el&gt;${in.body.id}&lt;/el&gt;
+            &lt;/setHeader&gt;
+            &lt;to uri="hbase:mytable?operation=CamelHBaseDelete"/&gt;
+        &lt;/route&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_scan_operations">Scan Operations.</h4>
+<div class="paragraph">
+<p>A scan operation is the equivalent of a query in HBase. You can use the
+scan operation to retrieve multiple rows. To specify what columns should
+be part of the result and also specify how the values will be converted
+to objects you can use either uri options or headers.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">        &lt;route&gt;
+            &lt;from uri="direct:in"/&gt;
+            &lt;to uri="hbase:mytable?operation=CamelHBaseScan&amp;amp;family=myfamily&amp;amp;qualifier=myqualifier&amp;amp;valueType=java.lang.Long&amp;amp;rowType=java.lang.String"/&gt;
+            &lt;to uri="log:out"/&gt;
+        &lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case its probable that you also also need to specify a list of
+filters for limiting the results. You can specify a list of filters as
+part of the uri and camel will return only the rows that satisfy <strong>ALL</strong>
+the filters. <br>
+ To have a filter that will be aware of the information that is part of
+the message, camel defines the ModelAwareFilter. This will allow your
+filter to take into consideration the model that is defined by the
+message and the mapping strategy.<br>
+ When using a ModelAwareFilter camel-hbase will apply the selected
+mapping strategy to the in message, will create an object that models
+the mapping and will pass that object to the Filter.</p>
+</div>
+<div class="paragraph">
+<p>For example to perform scan using as criteria the message headers, you
+can make use of the ModelAwareColumnMatchingFilter as shown below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">        &lt;route&gt;
+            &lt;from uri="direct:scan"/&gt;
+            &lt;!-- Set the Criteria --&gt;
+            &lt;setHeader headerName="CamelHBaseFamily"&gt;
+                &lt;constant&gt;name&lt;/constant&gt;
+            &lt;/setHeader&gt;
+            &lt;setHeader headerName="CamelHBaseQualifier"&gt;
+                &lt;constant&gt;first&lt;/constant&gt;
+            &lt;/setHeader&gt;
+            &lt;setHeader headerName="CamelHBaseValue"&gt;
+                &lt;el&gt;in.body.firstName&lt;/el&gt;
+            &lt;/setHeader&gt;
+            &lt;setHeader headerName="CamelHBaseFamily2"&gt;
+                &lt;constant&gt;name&lt;/constant&gt;
+            &lt;/setHeader&gt;
+            &lt;setHeader headerName="CamelHBaseQualifier2"&gt;
+                &lt;constant&gt;last&lt;/constant&gt;
+            &lt;/setHeader&gt;
+            &lt;setHeader headerName="CamelHBaseValue2"&gt;
+                &lt;el&gt;in.body.lastName&lt;/el&gt;
+            &lt;/setHeader&gt;
+            &lt;!-- Set additional fields that you want to be return by skipping value --&gt;
+            &lt;setHeader headerName="CamelHBaseFamily3"&gt;
+                &lt;constant&gt;address&lt;/constant&gt;
+            &lt;/setHeader&gt;
+            &lt;setHeader headerName="CamelHBaseQualifier3"&gt;
+                &lt;constant&gt;country&lt;/constant&gt;
+            &lt;/setHeader&gt;
+            &lt;to uri="hbase:mytable?operation=CamelHBaseScan&amp;amp;filters=#myFilterList"/&gt;
+        &lt;/route&gt;
+
+        &lt;bean id="myFilters" class="java.util.ArrayList"&gt;
+            &lt;constructor-arg&gt;
+                &lt;list&gt;
+                    &lt;bean class="org.apache.camel.component.hbase.filters.ModelAwareColumnMatchingFilter"/&gt;
+                &lt;/list&gt;
+            &lt;/constructor-arg&gt;
+        &lt;/bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The route above assumes that a pojo is with properties firstName and
+lastName is passed as the message body, it takes those properties and
+adds them as part of the message headers. The default mapping strategy
+will create a model object that will map the headers to HBase columns
+and will pass that model the the ModelAwareColumnMatchingFilter. The
+filter will filter out any rows, that do not contain columns that match
+the model. It is like query by example.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hbase_consumer">HBase Consumer</h3>
+<div class="paragraph">
+<p>The Camel HBase Consumer, will perform repeated scan on the specified
+HBase table and will return the scan results as part of the message. You
+can either specify header mapping (default) or body mapping. The later
+will just add the org.apache.camel.component.hbase.model.HBaseData as
+part of the message body.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">hbase://table[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can specify the columns that you want to be return and their types
+as part of the uri options:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">hbase:mutable?family=name&amp;qualifer=first&amp;valueType=java.lang.String&amp;family=address&amp;qualifer=number&amp;valueType2=java.lang.Integer&amp;rowType=java.lang.Long</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The example above will create a model object that is consisted of the
+specified fields and the scan results will populate the model object
+with values. Finally the mapping strategy will be used to map this model
+to the camel message.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hbase_idempotent_repository">HBase Idempotent repository</h3>
+<div class="paragraph">
+<p>The camel-hbase component also provides an idempotent repository which
+can be used when you want to make sure that each message is processed
+only once. The HBase idempotent repository is configured with a table, a
+column family and a column qualifier and will create to that table a row
+per message.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">HBaseConfiguration configuration = HBaseConfiguration.create();
+HBaseIdempotentRepository repository = new HBaseIdempotentRepository(configuration, tableName, family, qualifier);
+
+from("direct:in")
+  .idempotentConsumer(header("messageId"), repository)
+  .to("log:out);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hbase_mapping">HBase Mapping</h3>
+<div class="paragraph">
+<p>It was mentioned above that you the default mapping strategies are
+<strong>header</strong> and <strong>body</strong> mapping.<br>
+ Below you can find some detailed examples of how each mapping strategy
+works.</p>
+</div>
+<div class="sect3">
+<h4 id="_hbase_header_mapping_examples">HBase Header mapping Examples</h4>
+<div class="paragraph">
+<p>The header mapping is the default mapping.
+ To put the value "myvalue" into HBase row "myrow" and column
+"myfamily:mycolum" the message should contain the following headers:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Header</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelHBaseRowId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">myrow</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelHBaseFamily</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">myfamily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelHBaseQualifier</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">myqualifier</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelHBaseValue</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">myvalue</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>To put more values for different columns and / or different rows you can
+specify additional headers suffixed with the index of the headers, e.g:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Header</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelHBaseRowId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">myrow</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelHBaseFamily</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">myfamily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelHBaseQualifier</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">myqualifier</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelHBaseValue</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">myvalue</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelHBaseRowId2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">myrow2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelHBaseFamily2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">myfamily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelHBaseQualifier2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">myqualifier</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelHBaseValue2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">myvalue2</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>In the case of retrieval operations such as get or scan you can also
+specify for each column the type that you want the data to be converted
+to. For exampe:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Header</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelHBaseFamily</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">myfamily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelHBaseQualifier</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">myqualifier</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelHBaseValueType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Please note that in order to avoid boilerplate headers that are
+considered constant for all messages, you can also specify them as part
+of the endpoint uri, as you will see below.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_body_mapping_examples">Body mapping Examples</h4>
+<div class="paragraph">
+<p>In order to use the body mapping strategy you will have to specify the
+option mappingStrategy as part of the uri, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">hbase:mytable?mappingStrategyName=body</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To use the body mapping strategy the body needs to contain an instance
+of org.apache.camel.component.hbase.model.HBaseData. You can construct t</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">HBaseData data = new HBaseData();
+HBaseRow row = new HBaseRow();
+row.setId("myRowId");
+HBaseCell cell = new HBaseCell();
+cell.setFamily("myfamily");
+cell.setQualifier("myqualifier");
+cell.setValue("myValue");
+row.getCells().add(cell);
+data.addRows().add(row);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The object above can be used for example in a put operation and will
+result in creating or updating the row with id myRowId and add the value
+myvalue to the column myfamily:myqualifier.<br>
+ The body mapping strategy might not seem very appealing at first. The
+advantage it has over the header mapping strategy is that the HBaseData
+object can be easily converted to or from xml/json.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="polling-consumer.html">Polling Consumer</a></p>
+</li>
+<li>
+<p><a href="http://hbase.apache.org">Apache HBase</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/hdfs-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/hazelcast/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

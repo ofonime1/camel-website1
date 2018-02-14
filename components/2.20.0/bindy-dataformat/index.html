@@ -1,0 +1,2703 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Bindy DataFormat Available as of Camel version 2.0
+ The goal of this component is to allow the parsing/binding of non-structured data (or to be more precise non-XML data)
+to/from Java Beans that have binding mappings defined with annotations. Using Bindy, you can bind data from sources such as :
+   CSV records,
+  Fixed-length records,
+  FIX messages,
+  or almost any other non-structured data'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Bindy DataFormat Available as of Camel version 2.0
+ The goal of this component is to allow the parsing/binding of non-structured data (or to be more precise non-XML data)
+to/from Java Beans that have binding mappings defined with annotations. Using Bindy, you can bind data from sources such as :
+   CSV records,
+  Fixed-length records,
+  FIX messages,
+  or almost any other non-structured data'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/bindy-dataformat/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/bindy-dataformat/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_bindy_dataformat">Bindy DataFormat</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.0</strong></p>
+</div>
+<div class="paragraph">
+<p>The goal of this component is to allow the parsing/binding of
+non-structured data (or to be more precise non-XML data)<br>
+ to/from Java Beans that have binding mappings defined with annotations.
+Using Bindy, you can bind data from sources such as :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CSV records,</p>
+</li>
+<li>
+<p>Fixed-length records,</p>
+</li>
+<li>
+<p>FIX messages,</p>
+</li>
+<li>
+<p>or almost any other non-structured data</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>to one or many Plain Old Java Object (POJO). Bindy converts the data
+according to the type of the java property. POJOs can be linked together
+with one-to-many relationships available in some cases. Moreover, for
+data type like Date, Double, Float, Integer, Short, Long and BigDecimal,
+you can provide the pattern to apply during the formatting of the
+property.</p>
+</div>
+<div class="paragraph">
+<p>For the BigDecimal numbers, you can also define the precision and the
+decimal or grouping separators.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Format Type</th>
+<th class="tableblock halign-left valign-top">Pattern example</th>
+<th class="tableblock halign-left valign-top">Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DateFormat</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dd-MM-yyyy</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://java.sun.com/j2se/1.5.0/docs/api/java/text/SimpleDateFormat.html">http://java.sun.com/j2se/1.5.0/docs/api/java/text/SimpleDateFormat.html</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decimal*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decimalformat</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><mark>.</mark><mark>.</mark>##</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://java.sun.com/j2se/1.5.0/docs/api/java/text/DecimalFormat.html">http://java.sun.com/j2se/1.5.0/docs/api/java/text/DecimalFormat.html</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Decimal* = Double, Integer, Float, Short, Long</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>*Format supported*</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This first release only support comma separated values fields and key
+value pair fields (e.g. : FIX messages).</p>
+</div>
+<div class="paragraph">
+<p>To work with camel-bindy, you must first define your model in a package
+(e.g. com.acme.model) and for each model class (e.g. Order, Client,
+Instrument, &#8230;&#8203;) add the required annotations (described hereafter) to
+the Class or field.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>*Multiple models*</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you use multiple models, each model has to be placed in it&#8217;s own
+package to prevent unpredictable results.</p>
+</div>
+<div class="paragraph">
+<p>From <strong>Camel 2.16</strong> onwards this is no longer the case, as you can safely
+have multiple models in the same package, as you configure bindy using
+class names instead of package names now.</p>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The Bindy dataformat supports 4 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Java Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>type</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BindyType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to use csv fixed or key value pairs mode. The default value is either Csv or KeyValue depending on chosen dataformat.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>classType</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of model class to use.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>locale</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure a default locale to use such as us for united states. To use the JVM platform default locale then use the name default</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contentTypeHeader</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML or application/json for data formats marshalling to JSon etc.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_annotations">Annotations</h3>
+<div class="paragraph">
+<p>The annotations created allow to map different concept of your model to
+the POJO like :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Type of record (csv, key value pair (e.g. FIX message), fixed length
+&#8230;&#8203;),</p>
+</li>
+<li>
+<p>Link (to link object in another object),</p>
+</li>
+<li>
+<p>DataField and their properties (int, type, &#8230;&#8203;),</p>
+</li>
+<li>
+<p>KeyValuePairField (for key = value format like we have in FIX
+financial messages),</p>
+</li>
+<li>
+<p>Section (to identify header, body and footer section),</p>
+</li>
+<li>
+<p>OneToMany,</p>
+</li>
+<li>
+<p>BindyConverter (since 2.18.0),</p>
+</li>
+<li>
+<p>FormatFactories (since 2.18.0)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This section will describe them :</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_1_csvrecord">1. CsvRecord</h3>
+<div class="paragraph">
+<p>The CsvRecord annotation is used to identified the root class of the
+model. It represents a record = a line of a CSV file and can be linked
+to several children model classes.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Annotation name</th>
+<th class="tableblock halign-left valign-top">Record type</th>
+<th class="tableblock halign-left valign-top">Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>CsvRecord</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">csv</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter name</th>
+<th class="tableblock halign-left valign-top">type</th>
+<th class="tableblock halign-left valign-top">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">separator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mandatory - can be ',' or ';' or 'anything'. This value is interpreted
+as a regular expression. If you want to use a sign which has a special
+meaning in regular expressions, e.g. the '</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">' sign, than you have to mask
+it, like '</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">'</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">skipFirstLine</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - default value = false - allow to skip the first line of the
+CSV file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">crlf</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - possible values = WINDOWS,UNIX,MAC, or custom; default value.
+WINDOWS - allow to define the carriage return character to use. If you
+specify a value other than the three listed before, the value you enter
+(custom) will be used as the CRLF character(s)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">generateHeaderColumns</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - default value = false - uses to generate the header columns
+of the CSV generates</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">autospanLine</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.13/2.12.2:</strong> optional - default value = false - if enabled then
+the last column is auto spanned to end of line, for example if its a
+comment, etc this allows the line to contain all characters, also the
+delimiter char.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">isOrdered</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - default value = false - allow to change the order of the
+fields when CSV is generated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">quote</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.8.3/2.9:</strong> option - allow to specify a quote character of the
+fields when CSV is generated. This annotation is associated to the root class of the model and must be
+declared one time.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">quoting</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>case 1 : separator = ','</strong></p>
+</div>
+<div class="paragraph">
+<p>The separator used to segregate the fields in the CSV record is ',' :</p>
+</div>
+<div class="paragraph">
+<p>10, J, Pauline, M, XD12345678, Fortis Dynamic 15/15, 2500,
+USD,08-01-2009</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord( separator = "," )
+public Class Order {
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>case 2 : separator = ';'</strong></p>
+</div>
+<div class="paragraph">
+<p>Compare to the previous case, the separator here is ';' instead of ',' :</p>
+</div>
+<div class="paragraph">
+<p>10; J; Pauline; M; XD12345678; Fortis Dynamic 15/15; 2500; USD;
+08-01-2009</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord( separator = ";" )
+public Class Order {
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>case 3 : separator = '|'</strong></p>
+</div>
+<div class="paragraph">
+<p>Compare to the previous case, the separator here is '|' instead of ';' :</p>
+</div>
+<div class="paragraph">
+<p>10| J| Pauline| M| XD12345678| Fortis Dynamic 15/15| 2500| USD|
+08-01-2009</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord( separator = "\\|" )
+public Class Order {
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>case 4 : separator = '\",\"'</strong><br>
+ <strong>Applies for Camel 2.8.2 or older</strong></p>
+</div>
+<div class="paragraph">
+<p>When the field to be parsed of the CSV record contains ',' or ';' which
+is also used as separator, we whould find another strategy<br>
+ to tell camel bindy how to handle this case. To define the field
+containing the data with a comma, you will use simple or double quotes<br>
+ as delimiter (e.g : '10', 'Street 10, NY', 'USA' or "10", "Street 10,
+NY", "USA").<br>
+ Remark : In this case, the first and last character of the line which
+are a simple or double quotes will removed by bindy</p>
+</div>
+<div class="paragraph">
+<p>"10","J","Pauline"," M","XD12345678","Fortis Dynamic 15,15"
+2500","USD","08-01-2009"</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord( separator = "\",\"" )
+public Class Order {
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>From <strong>Camel 2.8.3/2.9 or never</strong> bindy will automatic detect if the
+record is enclosed with either single or double quotes and automatic
+remove those quotes when unmarshalling from CSV to Object. Therefore do
+<strong>not</strong> include the quotes in the separator, but simple do as below:</p>
+</div>
+<div class="paragraph">
+<p>"10","J","Pauline"," M","XD12345678","Fortis Dynamic 15,15"
+2500","USD","08-01-2009"</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord( separator = "," )
+public Class Order {
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice that if you want to marshal from Object to CSV and use quotes,
+then you need to specify which quote character to use, using the <code>quote</code>
+attribute on the @CsvRecord as shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord( separator = ",", quote = "\"" )
+public Class Order {
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>case 5 : separator &amp; skipfirstline</strong></p>
+</div>
+<div class="paragraph">
+<p>The feature is interesting when the client wants to have in the first
+line of the file, the name of the data fields :</p>
+</div>
+<div class="paragraph">
+<p>order id, client id, first name, last name, isin code, instrument name,
+quantity, currency, date</p>
+</div>
+<div class="paragraph">
+<p>To inform bindy that this first line must be skipped during the parsing
+process, then we use the attribute :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord(separator = ",", skipFirstLine = true)
+public Class Order {
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>case 6 : generateHeaderColumns</strong></p>
+</div>
+<div class="paragraph">
+<p>To add at the first line of the CSV generated, the attribute
+generateHeaderColumns must be set to true in the annotation like this :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord( generateHeaderColumns = true )
+public Class Order {
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As a result, Bindy during the unmarshaling process will generate CSV
+like this :</p>
+</div>
+<div class="paragraph">
+<p>order id, client id, first name, last name, isin code, instrument name,
+quantity, currency, date<br>
+ 10, J, Pauline, M, XD12345678, Fortis Dynamic 15/15, 2500,
+USD,08-01-2009</p>
+</div>
+<div class="paragraph">
+<p><strong>case 7 : carriage return</strong></p>
+</div>
+<div class="paragraph">
+<p>If the platform where camel-bindy will run is not Windows but Macintosh
+or Unix, than you can change the crlf property like this. Three values
+are available : WINDOWS, UNIX or MAC</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord(separator = ",", crlf="MAC")
+public Class Order {
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Additionally, if for some reason you need to add a different line ending
+character, you can opt to specify it using the crlf parameter. In the
+following example, we can end the line with a comma followed by the
+newline character:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord(separator = ",", crlf=",\n")
+public Class Order {
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>case 8 : isOrdered</strong></p>
+</div>
+<div class="paragraph">
+<p>Sometimes, the order to follow during the creation of the CSV record
+from the model is different from the order used during the parsing.
+Then, in this case, we can use the attribute isOrdered = true to
+indicate this in combination with attribute 'position' of the DataField
+annotation.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord(isOrdered = true)
+public Class Order {
+
+   @DataField(pos = 1, position = 11)
+   private int orderNr;
+
+   @DataField(pos = 2, position = 10)
+   private String clientNr;
+
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Remark : pos is used to parse the file, stream while positions is used
+to generate the CSV</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_link">2. Link</h3>
+<div class="paragraph">
+<p>The link annotation will allow to link objects together.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Annotation name</th>
+<th class="tableblock halign-left valign-top">Record type</th>
+<th class="tableblock halign-left valign-top">Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Link</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">all</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class &amp; Property</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter name</th>
+<th class="tableblock halign-left valign-top">type</th>
+<th class="tableblock halign-left valign-top">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">linkType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LinkType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - by default the value is LinkType.oneToOne - so you are not
+obliged to mention it</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Only one-to-one relation is allowed.</p>
+</div>
+<div class="paragraph">
+<p>e.g : If the model Class Client is linked to the Order class, then use
+annotation Link in the Order class like this :</p>
+</div>
+<div class="paragraph">
+<p><strong>Property Link</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord(separator = ",")
+public class Order {
+
+    @DataField(pos = 1)
+    private int orderNr;
+
+    @Link
+    private Client client;
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>AND for the class Client :</p>
+</div>
+<div class="paragraph">
+<p><strong>Class Link</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Link
+public class Client {
+...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_datafield">3. DataField</h3>
+<div class="paragraph">
+<p>The DataField annotation defines the property of the field. Each
+datafield is identified by its position in the record, a type (string,
+int, date, &#8230;&#8203;) and optionally of a pattern</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Annotation name</th>
+<th class="tableblock halign-left valign-top">Record type</th>
+<th class="tableblock halign-left valign-top">Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>DataField</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">all</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Property</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter name</th>
+<th class="tableblock halign-left valign-top">type</th>
+<th class="tableblock halign-left valign-top">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pos</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mandatory - The <strong>input</strong> position of the field. digit number starting
+from 1 to &#8230;&#8203; - See the position parameter.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pattern</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - default value = "" - will be used to format Decimal, Date,
+&#8230;&#8203;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">length</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - represents the length of the field for fixed length format</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">precision</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - represents the precision to be used when the Decimal number
+will be formatted/parsed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pattern</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - default value = "" - is used by the Java formatter
+(SimpleDateFormat by example) to format/validate data. If using pattern,
+then setting locale on bindy data format is recommended. Either set to a
+known locale such as "us" or use "default" to use platform default
+locale. Notice that "default" requires Camel 2.14/2.13.3/2.12.5.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">position</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - must be used when the position of the field in the CSV
+generated (output message) must be different compare to input position
+(pos). See the pos parameter.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - default value = "false"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">trim</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - default value = "false"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">defaultValue</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.10:</strong> optional - default value = "" - defines the field&#8217;s
+default value when the respective CSV field is empty/not available</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">impliedDecimalSeparator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.11:</strong> optional - default value = "false" - Indicates if there is
+a decimal point implied at a specified location</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lengthPos</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.11</strong>: optional - can be used to identify a data field in a
+fixed-length record that defines the fixed length for this field</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delimiter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.11:</strong> optional - can be used to demarcate the end of a variable-length field within a fixed-length record</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>case 1 : pos</strong></p>
+</div>
+<div class="paragraph">
+<p>This parameter/attribute represents the position of the field in the csv
+record</p>
+</div>
+<div class="paragraph">
+<p><strong>Position</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord(separator = ",")
+public class Order {
+
+    @DataField(pos = 1)
+    private int orderNr;
+
+    @DataField(pos = 5)
+    private String isinCode;
+
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see in this example the position starts at '1' but continues
+at '5' in the class Order. The numbers from '2' to '4' are defined in
+the class Client (see here after).</p>
+</div>
+<div class="paragraph">
+<p><strong>Position continues in another model class</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class Client {
+
+    @DataField(pos = 2)
+    private String clientNr;
+
+    @DataField(pos = 3)
+    private String firstName;
+
+    @DataField(pos = 4)
+    private String lastName;
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>case 2 : pattern</strong></p>
+</div>
+<div class="paragraph">
+<p>The pattern allows to enrich or validates the format of your data</p>
+</div>
+<div class="paragraph">
+<p><strong>Pattern</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord(separator = ",")
+public class Order {
+
+    @DataField(pos = 1)
+    private int orderNr;
+
+    @DataField(pos = 5)
+    private String isinCode;
+
+    @DataField(name = "Name", pos = 6)
+    private String instrumentName;
+
+    @DataField(pos = 7, precision = 2)
+    private BigDecimal amount;
+
+    @DataField(pos = 8)
+    private String currency;
+
+    @DataField(pos = 9, pattern = "dd-MM-yyyy") -- pattern used during parsing or when the date is created
+    private Date orderDate;
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>case 3 : precision</strong></p>
+</div>
+<div class="paragraph">
+<p>The precision is helpful when you want to define the decimal part of
+your number</p>
+</div>
+<div class="paragraph">
+<p><strong>Precision</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord(separator = ",")
+public class Order {
+
+    @DataField(pos = 1)
+    private int orderNr;
+
+    @Link
+    private Client client;
+
+    @DataField(pos = 5)
+    private String isinCode;
+
+    @DataField(name = "Name", pos = 6)
+    private String instrumentName;
+
+    @DataField(pos = 7, precision = 2) -- precision
+    private BigDecimal amount;
+
+    @DataField(pos = 8)
+    private String currency;
+
+    @DataField(pos = 9, pattern = "dd-MM-yyyy")
+    private Date orderDate;
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>case 4 : Position is different in output</strong></p>
+</div>
+<div class="paragraph">
+<p>The position attribute will inform bindy how to place the field in the
+CSV record generated. By default, the position used corresponds to the
+position defined with the attribute 'pos'. If the position is different
+(that means that we have an asymetric processus comparing marshaling
+from unmarshaling) than we can use 'position' to indicate this.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example</p>
+</div>
+<div class="paragraph">
+<p><strong>Position is different in output</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord(separator = ",")
+public class Order {
+@CsvRecord(separator = ",", isOrdered = true)
+public class Order {
+
+    // Positions of the fields start from 1 and not from 0
+
+    @DataField(pos = 1, position = 11)
+    private int orderNr;
+
+    @DataField(pos = 2, position = 10)
+    private String clientNr;
+
+    @DataField(pos = 3, position = 9)
+    private String firstName;
+
+    @DataField(pos = 4, position = 8)
+    private String lastName;
+
+    @DataField(pos = 5, position = 7)
+    private String instrumentCode;
+
+    @DataField(pos = 6, position = 6)
+    private String instrumentNumber;
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This attribute of the annotation @DataField must be used in combination
+with attribute isOrdered = true of the annotation @CsvRecord</p>
+</div>
+<div class="paragraph">
+<p><strong>case 5 : required</strong></p>
+</div>
+<div class="paragraph">
+<p>If a field is mandatory, simply use the attribute 'required' setted to
+true</p>
+</div>
+<div class="paragraph">
+<p><strong>Required</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord(separator = ",")
+public class Order {
+
+    @DataField(pos = 1)
+    private int orderNr;
+
+    @DataField(pos = 2, required = true)
+    private String clientNr;
+
+    @DataField(pos = 3, required = true)
+    private String firstName;
+
+    @DataField(pos = 4, required = true)
+    private String lastName;
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If this field is not present in the record, than an error will be raised
+by the parser with the following information :</p>
+</div>
+<div class="paragraph">
+<p>Some fields are missing (optional or mandatory), line :</p>
+</div>
+<div class="paragraph">
+<p><strong>case 6 : trim</strong></p>
+</div>
+<div class="paragraph">
+<p>If a field has leading and/or trailing spaces which should be removed
+before they are processed, simply use the attribute 'trim' setted to
+true</p>
+</div>
+<div class="paragraph">
+<p><strong>Trim</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord(separator = ",")
+public class Order {
+
+    @DataField(pos = 1, trim = true)
+    private int orderNr;
+
+    @DataField(pos = 2, trim = true)
+    private Integer clientNr;
+
+    @DataField(pos = 3, required = true)
+    private String firstName;
+
+    @DataField(pos = 4)
+    private String lastName;
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>case 7 : defaultValue</strong></p>
+</div>
+<div class="paragraph">
+<p>If a field is not defined then uses the value indicated by the
+defaultValue attribute</p>
+</div>
+<div class="paragraph">
+<p><strong>Default value</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord(separator = ",")
+public class Order {
+
+    @DataField(pos = 1)
+    private int orderNr;
+
+    @DataField(pos = 2)
+    private Integer clientNr;
+
+    @DataField(pos = 3, required = true)
+    private String firstName;
+
+    @DataField(pos = 4, defaultValue = "Barin")
+    private String lastName;
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This attribute is only applicable to optional fields.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_fixedlengthrecord">4. FixedLengthRecord</h3>
+<div class="paragraph">
+<p>The FixedLengthRecord annotation is used to identified the root class of
+the model. It represents a record = a line of a file/message containing
+data fixed length formatted and can be linked to several children model
+classes. This format is a bit particular beause data of a field can be
+aligned to the right or to the left.<br>
+ When the size of the data does not fill completely the length of the
+field, we can then add 'padd' characters.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Annotation name</th>
+<th class="tableblock halign-left valign-top">Record type</th>
+<th class="tableblock halign-left valign-top">Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>FixedLengthRecord</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fixed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter name</th>
+<th class="tableblock halign-left valign-top">type</th>
+<th class="tableblock halign-left valign-top">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">crlf</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - possible values = WINDOWS,UNIX,MAC, or custom; default value.
+WINDOWS - allow to define the carriage return character to use. If you
+specify a value other than the three listed before, the value you enter
+(custom) will be used as the CRLF character(s)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">paddingChar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">char</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mandatory - default value = ' '</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">length</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mandatory = size of the fixed length record</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hasHeader</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.11</strong> - optional - Indicates that the record(s) of this type may
+be preceded by a single header record at the beginning of the file /
+stream</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hasFooter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.11</strong> - optional - Indicates that the record(s) of this type may
+be followed by a single footer record at the end of the file / stream</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">skipHeader</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.11</strong> - optional - Configures the data format to skip marshalling
+/ unmarshalling of the header record. Configure this parameter on the
+primary record (e.g., not the header or footer).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">skipFooter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.11</strong> - optional - Configures the data format to skip marshalling
+/ unmarshalling of the footer record Configure this parameter on the
+primary record (e.g., not the header or footer)..</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">isHeader</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.11</strong> - optional - Identifies this FixedLengthRecord as a header
+record</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">isFooter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.11</strong> - optional - Identifies this FixedLengthRecords as a footer
+record</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ignoreTrailingChars</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.11.1</strong> - optional - Indicates that characters beyond the last
+mapped filed can be ignored when unmarshalling / parsing. This annotation is associated to the root class of the model and must be
+declared one time.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The hasHeader/hasFooter parameters are mutually exclusive with
+isHeader/isFooter. A record may not be both a header/footer and a
+primary fixed-length record.</p>
+</div>
+<div class="paragraph">
+<p><strong>case 1 : Simple fixed length record</strong></p>
+</div>
+<div class="paragraph">
+<p>This simple example shows how to design the model to parse/format a
+fixed message</p>
+</div>
+<div class="paragraph">
+<p>10A9PaulineMISINXD12345678BUYShare2500.45USD01-08-2009</p>
+</div>
+<div class="paragraph">
+<p><strong>Fixed-simple</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">   @FixedLengthRecord(length=54, paddingChar=' ')
+    public static class Order {
+
+        @DataField(pos = 1, length=2)
+        private int orderNr;
+
+        @DataField(pos = 3, length=2)
+        private String clientNr;
+
+        @DataField(pos = 5, length=7)
+        private String firstName;
+
+        @DataField(pos = 12, length=1, align="L")
+        private String lastName;
+
+        @DataField(pos = 13, length=4)
+        private String instrumentCode;
+
+        @DataField(pos = 17, length=10)
+        private String instrumentNumber;
+
+        @DataField(pos = 27, length=3)
+        private String orderType;
+
+        @DataField(pos = 30, length=5)
+        private String instrumentType;
+
+        @DataField(pos = 35, precision = 2, length=7)
+        private BigDecimal amount;
+
+        @DataField(pos = 42, length=3)
+        private String currency;
+
+        @DataField(pos = 45, length=10, pattern = "dd-MM-yyyy")
+        private Date orderDate;
+        ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>case 2 : Fixed length record with alignment and padding</strong></p>
+</div>
+<div class="paragraph">
+<p>This more elaborated example show how to define the alignment for a
+field and how to assign a padding character which is ' ' here''</p>
+</div>
+<div class="paragraph">
+<p>10A9 PaulineM ISINXD12345678BUYShare2500.45USD01-08-2009</p>
+</div>
+<div class="paragraph">
+<p><strong>Fixed-padding-align</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">   @FixedLengthRecord(length=60, paddingChar=' ')
+    public static class Order {
+
+        @DataField(pos = 1, length=2)
+        private int orderNr;
+
+        @DataField(pos = 3, length=2)
+        private String clientNr;
+
+        @DataField(pos = 5, length=9)
+        private String firstName;
+
+        @DataField(pos = 14, length=5, align="L")   // align text to the LEFT zone of the block
+        private String lastName;
+
+        @DataField(pos = 19, length=4)
+        private String instrumentCode;
+
+        @DataField(pos = 23, length=10)
+        private String instrumentNumber;
+
+        @DataField(pos = 33, length=3)
+        private String orderType;
+
+        @DataField(pos = 36, length=5)
+        private String instrumentType;
+
+        @DataField(pos = 41, precision = 2, length=7)
+        private BigDecimal amount;
+
+        @DataField(pos = 48, length=3)
+        private String currency;
+
+        @DataField(pos = 51, length=10, pattern = "dd-MM-yyyy")
+        private Date orderDate;
+        ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>case 3 : Field padding</strong></p>
+</div>
+<div class="paragraph">
+<p>Sometimes, the default padding defined for record cannnot be applied to
+the field as we have a number format where we would like to padd with
+'0' instead of ' '. In this case, you can use in the model the attribute
+paddingField to set this value.</p>
+</div>
+<div class="paragraph">
+<p>10A9 PaulineM ISINXD12345678BUYShare000002500.45USD01-08-2009</p>
+</div>
+<div class="paragraph">
+<p><strong>Fixed-padding-field</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    @FixedLengthRecord(length = 65, paddingChar = ' ')
+    public static class Order {
+
+        @DataField(pos = 1, length = 2)
+        private int orderNr;
+
+        @DataField(pos = 3, length = 2)
+        private String clientNr;
+
+        @DataField(pos = 5, length = 9)
+        private String firstName;
+
+        @DataField(pos = 14, length = 5, align = "L")
+        private String lastName;
+
+        @DataField(pos = 19, length = 4)
+        private String instrumentCode;
+
+        @DataField(pos = 23, length = 10)
+        private String instrumentNumber;
+
+        @DataField(pos = 33, length = 3)
+        private String orderType;
+
+        @DataField(pos = 36, length = 5)
+        private String instrumentType;
+
+        @DataField(pos = 41, precision = 2, length = 12, paddingChar = '0')
+        private BigDecimal amount;
+
+        @DataField(pos = 53, length = 3)
+        private String currency;
+
+        @DataField(pos = 56, length = 10, pattern = "dd-MM-yyyy")
+        private Date orderDate;
+        ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>case 4: Fixed length record with delimiter</strong></p>
+</div>
+<div class="paragraph">
+<p>Fixed-length records sometimes have delimited content within the record.
+The firstName and lastName fields are delimited with the '^' character
+in the following example:</p>
+</div>
+<div class="paragraph">
+<p>10A9Pauline<sup>M</sup>ISINXD12345678BUYShare000002500.45USD01-08-2009</p>
+</div>
+<div class="paragraph">
+<p><strong>Fixed-delimited</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    @FixedLengthRecord()
+    public static class Order {
+
+        @DataField(pos = 1, length = 2)
+        private int orderNr;
+
+        @DataField(pos = 2, length = 2)
+        private String clientNr;
+
+        @DataField(pos = 3, delimiter = "^")
+        private String firstName;
+
+        @DataField(pos = 4, delimiter = "^")
+        private String lastName;
+
+        @DataField(pos = 5, length = 4)
+        private String instrumentCode;
+
+        @DataField(pos = 6, length = 10)
+        private String instrumentNumber;
+
+        @DataField(pos = 7, length = 3)
+        private String orderType;
+
+        @DataField(pos = 8, length = 5)
+        private String instrumentType;
+
+        @DataField(pos = 9, precision = 2, length = 12, paddingChar = '0')
+        private BigDecimal amount;
+
+        @DataField(pos = 10, length = 3)
+        private String currency;
+
+        @DataField(pos = 11, length = 10, pattern = "dd-MM-yyyy")
+        private Date orderDate;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As of <strong>Camel 2.11</strong> the 'pos' value(s) in a fixed-length record may
+optionally be defined using ordinal, sequential values instead of
+precise column numbers.</p>
+</div>
+<div class="paragraph">
+<p><strong>case 5 : Fixed length record with record-defined field length</strong></p>
+</div>
+<div class="paragraph">
+<p>Occasionally a fixed-length record may contain a field that define the
+expected length of another field within the same record. In the
+following example the length of the instrumentNumber field value is
+defined by the value of instrumentNumberLen field in the record.</p>
+</div>
+<div class="paragraph">
+<p>10A9Pauline<sup>M</sup>ISIN10XD12345678BUYShare000002500.45USD01-08-2009</p>
+</div>
+<div class="paragraph">
+<p><strong>Fixed-delimited</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    @FixedLengthRecord()
+    public static class Order {
+
+        @DataField(pos = 1, length = 2)
+        private int orderNr;
+
+        @DataField(pos = 2, length = 2)
+        private String clientNr;
+
+        @DataField(pos = 3, delimiter = "^")
+        private String firstName;
+
+        @DataField(pos = 4, delimiter = "^")
+        private String lastName;
+
+        @DataField(pos = 5, length = 4)
+        private String instrumentCode;
+
+        @DataField(pos = 6, length = 2, align = "R", paddingChar = '0')
+        private int instrumentNumberLen;
+
+        @DataField(pos = 7, lengthPos=6)
+        private String instrumentNumber;
+
+        @DataField(pos = 8, length = 3)
+        private String orderType;
+
+        @DataField(pos = 9, length = 5)
+        private String instrumentType;
+
+        @DataField(pos = 10, precision = 2, length = 12, paddingChar = '0')
+        private BigDecimal amount;
+
+        @DataField(pos = 11, length = 3)
+        private String currency;
+
+        @DataField(pos = 12, length = 10, pattern = "dd-MM-yyyy")
+        private Date orderDate;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>case 6 : Fixed length record with header and footer</strong></p>
+</div>
+<div class="paragraph">
+<p>Bindy will discover fixed-length header and footer records that are
+configured as part of the model – provided that the annotated classes
+exist either in the same package as the primary @FixedLengthRecord
+class, or within one of the configured scan packages. The following text
+illustrates two fixed-length records that are bracketed by a header
+record and footer record.</p>
+</div>
+<div class="paragraph">
+<p>101-08-2009<br>
+ 10A9 PaulineM ISINXD12345678BUYShare000002500.45USD01-08-2009<br>
+ 10A9 RichN ISINXD12345678BUYShare000002700.45USD01-08-2009<br>
+ 9000000002</p>
+</div>
+<div class="paragraph">
+<p><strong>Fixed-header-and-footer-main-class</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@FixedLengthRecord(hasHeader = true, hasFooter = true)
+public class Order {
+
+    @DataField(pos = 1, length = 2)
+    private int orderNr;
+
+    @DataField(pos = 2, length = 2)
+    private String clientNr;
+
+    @DataField(pos = 3, length = 9)
+    private String firstName;
+
+    @DataField(pos = 4, length = 5, align = "L")
+    private String lastName;
+
+    @DataField(pos = 5, length = 4)
+    private String instrumentCode;
+
+    @DataField(pos = 6, length = 10)
+    private String instrumentNumber;
+
+    @DataField(pos = 7, length = 3)
+    private String orderType;
+
+    @DataField(pos = 8, length = 5)
+    private String instrumentType;
+
+    @DataField(pos = 9, precision = 2, length = 12, paddingChar = '0')
+    private BigDecimal amount;
+
+    @DataField(pos = 10, length = 3)
+    private String currency;
+
+    @DataField(pos = 11, length = 10, pattern = "dd-MM-yyyy")
+    private Date orderDate;
+...
+}
+
+
+@FixedLengthRecord(isHeader = true)
+public  class OrderHeader {
+    @DataField(pos = 1, length = 1)
+    private int recordType = 1;
+
+    @DataField(pos = 2, length = 10, pattern = "dd-MM-yyyy")
+    private Date recordDate;
+
+...
+}
+
+
+@FixedLengthRecord(isFooter = true)
+public class OrderFooter {
+
+    @DataField(pos = 1, length = 1)
+    private int recordType = 9;
+
+    @DataField(pos = 2, length = 9, align = "R", paddingChar = '0')
+    private int numberOfRecordsInTheFile;
+
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>case 7 : Skipping content when parsing a fixed length record. (Camel
+2.11.1)</strong></p>
+</div>
+<div class="paragraph">
+<p>It is common to integrate with systems that provide fixed-length records
+containing more information than needed for the target use case. It is
+useful in this situation to skip the declaration and parsing of those
+fields that we do not need. To accomodate this, Bindy will skip forward
+to the next mapped field within a record if the 'pos' value of the next
+declared field is beyond the cursor position of the last parsed field.
+Using absolute 'pos' locations for the fields of interest (instead of
+ordinal values) causes Bindy to skip content between two fields.</p>
+</div>
+<div class="paragraph">
+<p>Similarly, it is possible that none of the content beyond some field is
+of interest. In this case, you can tell Bindy to skip parsing of
+everything beyond the last mapped field by setting the
+<strong>ignoreTrailingChars</strong> property on the @FixedLengthRecord declaration.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@FixedLengthRecord(ignoreTrailingChars = true)
+public static class Order {
+
+        @DataField(pos = 1, length = 2)
+        private int orderNr;
+
+        @DataField(pos = 3, length = 2)
+        private String clientNr;
+
+    ... any characters that appear beyond the last mapped field will be ignored
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_5_message">5. Message</h3>
+<div class="paragraph">
+<p>The Message annotation is used to identified the class of your model who
+will contain key value pairs fields. This kind of format is used mainly
+in Financial Exchange Protocol Messages (FIX). Nevertheless, this
+annotation can be used for any other format where data are identified by
+keys. The key pair values are separated each other by a separator which
+can be a special character like a tab delimitor (unicode representation
+: \u0009) or a start of heading (unicode representation : \u0001)</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>*"FIX information"*</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>More information about FIX can be found on this web site :
+<a href="http://www.fixprotocol.org/">http://www.fixprotocol.org/</a>. To work with
+FIX messages, the model must contain a Header and Trailer classes linked
+to the root message class which could be a Order class. This is not
+mandatory but will be very helpful when you will use camel-bindy in
+combination with camel-fix which is a Fix gateway based on quickFix
+project <a href="http://www.quickfixj.org/">http://www.quickfixj.org/</a>.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Annotation name</th>
+<th class="tableblock halign-left valign-top">Record type</th>
+<th class="tableblock halign-left valign-top">Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Message</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">key value pair</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter name</th>
+<th class="tableblock halign-left valign-top">type</th>
+<th class="tableblock halign-left valign-top">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pairSeparator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mandatory - can be '=' or ';' or 'anything'</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keyValuePairSeparair</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mandatory - can be '\u0001', '\u0009', '#' or 'anything'</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">crlf</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - possible values = WINDOWS,UNIX,MAC, or custom; default value
+= WINDOWS - allow to define the carriage return character to use. If you
+specify a value other than the three listed before, the value you enter
+(custom) will be used as the CRLF character(s)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - define the type of message (e.g. FIX, EMX, &#8230;&#8203;)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - version of the message (e.g. 4.1)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">isOrdered</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - default value = false - allow to change the order of the
+fields when FIX message is generated. This annotation is associated to the message class of the model and must
+be declared one time.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>case 1 : separator = 'u0001'</strong></p>
+</div>
+<div class="paragraph">
+<p>The separator used to segregate the key value pair fields in a FIX
+message is the ASCII '01' character or in unicode format '\u0001'. This
+character must be escaped a second time to avoid a java runtime error.
+Here is an example :</p>
+</div>
+<div class="paragraph">
+<p>8=FIX.4.1 9=20 34=1 35=0 49=INVMGR 56=BRKR 1=BE.CHM.001 11=CHM0001-01
+22=4 &#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>and how to use the annotation</p>
+</div>
+<div class="paragraph">
+<p><strong>FIX - message</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Message(keyValuePairSeparator = "=", pairSeparator = "\u0001", type="FIX", version="4.1")
+public class Order {
+...
+}</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>*Look at test cases*</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The ASCII character like tab, &#8230;&#8203; cannot be displayed in WIKI page. So,
+have a look to the test case of camel-bindy to see exactly how the FIX
+message looks like (src\test\data\fix\fix.txt) and the Order, Trailer,
+Header classes
+(src\test\java\org\apache\camel\dataformat\bindy\model\fix\simple\Order.java)</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_6_keyvaluepairfield">6. KeyValuePairField</h3>
+<div class="paragraph">
+<p>The KeyValuePairField annotation defines the property of a key value
+pair field. Each KeyValuePairField is identified by a tag (= key) and
+its value associated, a type (string, int, date, &#8230;&#8203;), optionaly a
+pattern and if the field is required</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Annotation name</th>
+<th class="tableblock halign-left valign-top">Record type</th>
+<th class="tableblock halign-left valign-top">Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>KeyValuePairField</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key Value Pair - FIX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Property</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter name</th>
+<th class="tableblock halign-left valign-top">type</th>
+<th class="tableblock halign-left valign-top">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mandatory - digit number identifying the field in the message - must be
+unique</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pattern</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - default value = "" - will be used to format Decimal, Date,
+&#8230;&#8203;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">precision</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - digit number - represents the precision to be used when the
+Decimal number will be formatted/parsed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">position</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - must be used when the position of the key/tag in the FIX
+message must be different</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - default value = "false"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">impliedDecimalSeparator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.11:</strong> optional - default value = "false" - Indicates if there is
+a decimal point implied at a specified location</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>case 1 : tag</strong></p>
+</div>
+<div class="paragraph">
+<p>This parameter represents the key of the field in the message</p>
+</div>
+<div class="paragraph">
+<p><strong>FIX message - Tag</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Message(keyValuePairSeparator = "=", pairSeparator = "\u0001", type="FIX", version="4.1")
+public class Order {
+
+    @Link Header header;
+
+    @Link Trailer trailer;
+
+    @KeyValuePairField(tag = 1) // Client reference
+    private String Account;
+
+    @KeyValuePairField(tag = 11) // Order reference
+    private String ClOrdId;
+
+    @KeyValuePairField(tag = 22) // Fund ID type (Sedol, ISIN, ...)
+    private String IDSource;
+
+    @KeyValuePairField(tag = 48) // Fund code
+    private String SecurityId;
+
+    @KeyValuePairField(tag = 54) // Movement type ( 1 = Buy, 2 = sell)
+    private String Side;
+
+    @KeyValuePairField(tag = 58) // Free text
+    private String Text;
+
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>case 2 : Different position in output</strong></p>
+</div>
+<div class="paragraph">
+<p>If the tags/keys that we will put in the FIX message must be sorted
+according to a predefine order, then use the attribute 'position' of the
+annotation @KeyValuePairField</p>
+</div>
+<div class="paragraph">
+<p><strong>FIX message - Tag - sort</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Message(keyValuePairSeparator = "=", pairSeparator = "\\u0001", type = "FIX", version = "4.1", isOrdered = true)
+public class Order {
+
+    @Link Header header;
+
+    @Link Trailer trailer;
+
+    @KeyValuePairField(tag = 1, position = 1) // Client reference
+    private String account;
+
+    @KeyValuePairField(tag = 11, position = 3) // Order reference
+    private String clOrdId;
+
+...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_7_section">7. Section</h3>
+<div class="paragraph">
+<p>In FIX message of fixed length records, it is common to have different
+sections in the representation of the information : header, body and
+section. The purpose of the annotation @Section is to inform bindy about
+which class of the model represents the header (= section 1), body (=
+section 2) and footer (= section 3)</p>
+</div>
+<div class="paragraph">
+<p>Only one attribute/parameter exists for this annotation.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Annotation name</th>
+<th class="tableblock halign-left valign-top">Record type</th>
+<th class="tableblock halign-left valign-top">Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Section</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FIX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter name</th>
+<th class="tableblock halign-left valign-top">type</th>
+<th class="tableblock halign-left valign-top">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">digit number identifying the section position</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>case 1 : Section</strong></p>
+</div>
+<div class="paragraph">
+<p>Definition of the header section</p>
+</div>
+<div class="paragraph">
+<p><strong>FIX message - Section - Header</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Section(number = 1)
+public class Header {
+
+    @KeyValuePairField(tag = 8, position = 1) // Message Header
+    private String beginString;
+
+    @KeyValuePairField(tag = 9, position = 2) // Checksum
+    private int bodyLength;
+...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Definition of the body section</p>
+</div>
+<div class="paragraph">
+<p><strong>FIX message - Section - Body</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Section(number = 2)
+@Message(keyValuePairSeparator = "=", pairSeparator = "\\u0001", type = "FIX", version = "4.1", isOrdered = true)
+public class Order {
+
+    @Link Header header;
+
+    @Link Trailer trailer;
+
+    @KeyValuePairField(tag = 1, position = 1) // Client reference
+    private String account;
+
+    @KeyValuePairField(tag = 11, position = 3) // Order reference
+    private String clOrdId;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Definition of the footer section</p>
+</div>
+<div class="paragraph">
+<p><strong>FIX message - Section - Footer</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Section(number = 3)
+public class Trailer {
+
+    @KeyValuePairField(tag = 10, position = 1)
+    // CheckSum
+    private int checkSum;
+
+    public int getCheckSum() {
+        return checkSum;
+    }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_8_onetomany">8. OneToMany</h3>
+<div class="paragraph">
+<p>The purpose of the annotation @OneToMany is to allow to work with a
+List&lt;?&gt; field defined a POJO class or from a record containing
+repetitive groups.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>*Restrictions OneToMany*</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Be careful, the one to many of bindy does not allow to handle
+repetitions defined on several levels of the hierarchy</p>
+</div>
+<div class="paragraph">
+<p>The relation OneToMany ONLY WORKS in the following cases :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Reading a FIX message containing repetitive groups (= group of
+tags/keys)</p>
+</li>
+<li>
+<p>Generating a CSV with repetitive data</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Annotation name</th>
+<th class="tableblock halign-left valign-top">Record type</th>
+<th class="tableblock halign-left valign-top">Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>OneToMany</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">all</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">property</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter name</th>
+<th class="tableblock halign-left valign-top">type</th>
+<th class="tableblock halign-left valign-top">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mappedTo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">optional - string - class name associated to the type of the List&lt;Type
+of the Class&gt;</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>case 1 : Generating CSV with repetitive data</strong></p>
+</div>
+<div class="paragraph">
+<p>Here is the CSV output that we want :</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Claus,Ibsen,Camel in Action 1,2010,35 +
+Claus,Ibsen,Camel in Action 2,2012,35 +
+Claus,Ibsen,Camel in Action 3,2013,35 +
+Claus,Ibsen,Camel in Action 4,2014,35</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Remark : the repetitive data concern the title of the book and its
+publication date while first, last name and age are common</p>
+</div>
+<div class="paragraph">
+<p>and the classes used to modeling this. The Author class contains a List
+of Book.</p>
+</div>
+<div class="paragraph">
+<p><strong>Generate CSV with repetitive data</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@CsvRecord(separator=",")
+public class Author {
+
+    @DataField(pos = 1)
+    private String firstName;
+
+    @DataField(pos = 2)
+    private String lastName;
+
+    @OneToMany
+    private List&lt;Book&gt; books;
+
+    @DataField(pos = 5)
+    private String Age;
+...
+
+
+public class Book {
+
+    @DataField(pos = 3)
+    private String title;
+
+    @DataField(pos = 4)
+    private String year;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Very simple isn&#8217;t it !!!</p>
+</div>
+<div class="paragraph">
+<p><strong>case 2 : Reading FIX message containing group of tags/keys</strong></p>
+</div>
+<div class="paragraph">
+<p>Here is the message that we would like to process in our model :</p>
+</div>
+<div class="paragraph">
+<p>"8=FIX 4.19=2034=135=049=INVMGR56=BRKR"<br>
+ "1=BE.CHM.00111=CHM0001-0158=this is a camel - bindy test"<br>
+ "22=448=BE000124567854=1"<br>
+ "22=548=BE000987654354=2"<br>
+ "22=648=BE000999999954=3"<br>
+ "10=220"</p>
+</div>
+<div class="paragraph">
+<p>tags 22, 48 and 54 are repeated</p>
+</div>
+<div class="paragraph">
+<p>and the code</p>
+</div>
+<div class="paragraph">
+<p><strong>Reading FIX message containing group of tags/keys</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class Order {
+
+    @Link Header header;
+
+    @Link Trailer trailer;
+
+    @KeyValuePairField(tag = 1) // Client reference
+    private String account;
+
+    @KeyValuePairField(tag = 11) // Order reference
+    private String clOrdId;
+
+    @KeyValuePairField(tag = 58) // Free text
+    private String text;
+
+    @OneToMany(mappedTo = "org.apache.camel.dataformat.bindy.model.fix.complex.onetomany.Security")
+    List&lt;Security&gt; securities;
+...
+
+public class Security {
+
+    @KeyValuePairField(tag = 22) // Fund ID type (Sedol, ISIN, ...)
+    private String idSource;
+
+    @KeyValuePairField(tag = 48) // Fund code
+    private String securityCode;
+
+    @KeyValuePairField(tag = 54) // Movement type ( 1 = Buy, 2 = sell)
+    private String side;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_9_bindyconverter">9. BindyConverter</h3>
+<div class="paragraph">
+<p>The purpose of the annotation @BindyConverter is define a converter
+to be used on field level. The provided class must implement the
+Format interface.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">...
+    @FixedLengthRecord(length = 10, paddingChar = ' ')
+    public static class DataModel {
+        @DataField(pos =  1, length = 10, trim = true)
+        @BindyConverter(CustomConverter.class)
+        public String field1;
+    }
+
+    public static class CustomConverter implements Format&lt;String&gt; {
+        @Override
+        public String format(String object) throws Exception {
+            return (new StringBuilder(object)).reverse().toString();
+        }
+
+        @Override
+        public String parse(String string) throws Exception {
+            return (new StringBuilder(string)).reverse().toString();
+        }
+    }
+...</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_10_formatfactories">10. FormatFactories</h3>
+<div class="paragraph">
+<p>The purpose of the annotation @FormatFactories is to define a set of converters
+at record-level. The provided classes must implement the FormatFactoryInterface interface.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    @CsvRecord(separator = ",")
+    @FormatFactories({OrderNumberFormatFactory.class})
+    public static class Order {
+
+        @DataField(pos = 1)
+        private OrderNumber orderNr;
+
+        @DataField(pos = 2)
+        private String firstName;
+
+...
+    }
+
+    public static class OrderNumber {
+        private int orderNr;
+
+        public static OrderNumber ofString(String orderNumber) {
+            OrderNumber result = new OrderNumber();
+            result.orderNr = Integer.valueOf(orderNumber);
+            return result;
+        }
+    }
+
+    public static class OrderNumberFormatFactory extends AbstractFormatFactory {
+
+        {
+            supportedClasses.add(OrderNumber.class);
+        }
+
+        @Override
+        public Format&lt;?&gt; build(FormattingOptions formattingOptions) {
+            return new Format&lt;OrderNumber&gt;() {
+                @Override
+                public String format(OrderNumber object) throws Exception {
+                    return String.valueOf(object.orderNr);
+                }
+
+                @Override
+                public OrderNumber parse(String string) throws Exception {
+                    return OrderNumber.ofString(string);
+                }
+            };
+        }
+    }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_supported_datatypes">Supported Datatypes</h3>
+<div class="paragraph">
+<p>The DefaultFormatFactory makes formatting of the following datatype available by
+returning an instance of the interface FormatFactoryInterface based on the provided
+FormattingOptions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>BigDecimal</p>
+</li>
+<li>
+<p>BigInteger</p>
+</li>
+<li>
+<p>Boolean</p>
+</li>
+<li>
+<p>Byte</p>
+</li>
+<li>
+<p>Character</p>
+</li>
+<li>
+<p>Date</p>
+</li>
+<li>
+<p>Double</p>
+</li>
+<li>
+<p>Enums</p>
+</li>
+<li>
+<p>Float</p>
+</li>
+<li>
+<p>Integer</p>
+</li>
+<li>
+<p>LocalDate (java 8, since 2.18.0)</p>
+</li>
+<li>
+<p>LocalDateTime (java 8, since 2.18.0)</p>
+</li>
+<li>
+<p>LocalTime (java 8, since 2.18.0)</p>
+</li>
+<li>
+<p>Long</p>
+</li>
+<li>
+<p>Short</p>
+</li>
+<li>
+<p>String</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The DefaultFormatFactory can be overridden by providing an instance of
+FactoryRegistry in the registry in use (e.g. spring or JNDI).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_the_java_dsl">Using the Java DSL</h3>
+<div class="paragraph">
+<p>The next step consists in instantiating the DataFormat <em>bindy</em> class
+associated with this record type and providing Java package name(s) as
+parameter.</p>
+</div>
+<div class="paragraph">
+<p>For example the following uses the class <code>BindyCsvDataFormat</code> (who
+correspond to the class associated with the CSV record type) which is
+configured with "com.acme.model"<br>
+ package name to initialize the model objects configured in this
+package.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// Camel 2.15 or older (configure by package name)
+DataFormat bindy = new BindyCsvDataFormat("com.acme.model");
+
+
+// Camel 2.16 onwards (configure by class name)
+DataFormat bindy = new BindyCsvDataFormat(com.acme.model.MyModel.class);</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_setting_locale">Setting locale</h4>
+<div class="paragraph">
+<p>Bindy supports configuring the locale on the dataformat, such as</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// Camel 2.15 or older (configure by package name)
+BindyCsvDataFormat bindy = new BindyCsvDataFormat("com.acme.model");
+// Camel 2.16 onwards (configure by class name)
+BindyCsvDataFormat bindy = new BindyCsvDataFormat(com.acme.model.MyModel.class);
+
+bindy.setLocale("us");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or to use the platform default locale then use "default" as the locale
+name. Notice this requires Camel 2.14/2.13.3/2.12.5.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// Camel 2.15 or older (configure by package name)
+BindyCsvDataFormat bindy = new BindyCsvDataFormat("com.acme.model");
+// Camel 2.16 onwards (configure by class name)
+BindyCsvDataFormat bindy = new BindyCsvDataFormat(com.acme.model.MyModel.class);
+
+bindy.setLocale("default");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>for older releases you can set it using Java code as shown</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// Camel 2.15 or older (configure by package name)
+BindyCsvDataFormat bindy = new BindyCsvDataFormat("com.acme.model");
+// Camel 2.16 onwards (configure by class name)
+BindyCsvDataFormat bindy = new BindyCsvDataFormat(com.acme.model.MyModel.class);
+
+
+bindy.setLocale(Locale.getDefault().getISO3Country());</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_unmarshaling">Unmarshaling</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("file://inbox")
+  .unmarshal(bindy)
+  .to("direct:handleOrders");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can use a named reference to a data format which can
+then be defined in your <a href="registry.html">Registry</a> e.g. your
+<a href="spring.html">Spring</a> XML file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("file://inbox")
+  .unmarshal("myBindyDataFormat")
+  .to("direct:handleOrders");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The Camel route will pick-up files in the inbox directory, unmarshall
+CSV records into a collection of model objects and send the collection<br>
+ to the route referenced by 'handleOrders'.</p>
+</div>
+<div class="paragraph">
+<p>The collection returned is a <strong>List of Map</strong> objects. Each Map within the
+list contains the model objects that were marshalled out of each line of
+the CSV. The reason behind this is that <em>each line can correspond to
+more than one object</em>. This can be confusing when you simply expect one
+object to be returned per line.</p>
+</div>
+<div class="paragraph">
+<p>Each object can be retrieve using its class name.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    List&lt;Map&lt;String, Object&gt;&gt; unmarshaledModels = (List&lt;Map&lt;String, Object&gt;&gt;) exchange.getIn().getBody();
+
+    int modelCount = 0;
+    for (Map&lt;String, Object&gt; model : unmarshaledModels) {
+      for (String className : model.keySet()) {
+         Object obj = model.get(className);
+         LOG.info("Count : " + modelCount + ", " + obj.toString());
+      }
+     modelCount++;
+    }
+
+    LOG.info("Total CSV records received by the csv bean : " + modelCount);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Assuming that you want to extract a single Order object from this map
+for processing in a route, you could use a combination of a
+<a href="splitter.html">Splitter</a> and a <a href="processor.html">Processor</a> as per
+the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("file://inbox")
+    .unmarshal(bindy)
+    .split(body())
+        .process(new Processor() {
+            public void process(Exchange exchange) throws Exception {
+                Message in = exchange.getIn();
+                Map&lt;String, Object&gt; modelMap = (Map&lt;String, Object&gt;) in.getBody();
+                in.setBody(modelMap.get(Order.class.getCanonicalName()));
+            }
+        })
+        .to("direct:handleSingleOrder")
+    .end();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Take care of the fact that Bindy uses CHARSET_NAME property or the CHARSET_NAME header as define in the
+Exchange interface to do a characterset conversion of the inputstream received for unmarshalling.
+In some producers (e.g. file-endpoint) you can define a characterset. The characterset conversion
+can already been done by this producer. Sometimes you need to remove this property or header from the
+exchange before sending it to the unmarshal. If you don&#8217;t remove it the conversion might be done twice
+which might lead to unwanted results.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("file://inbox?charset=Cp922")
+  .removeProperty(Exchange.CHARSET_NAME)
+  .unmarshal("myBindyDataFormat")
+  .to("direct:handleOrders");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_marshaling">Marshaling</h4>
+<div class="paragraph">
+<p>To generate CSV records from a collection of model objects, you create
+the following route :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:handleOrders")
+   .marshal(bindy)
+   .to("file://outbox")</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_spring_xml">Using Spring XML</h3>
+<div class="paragraph">
+<p>This is really easy to use Spring as your favorite DSL language to
+declare the routes to be used for camel-bindy. The following example
+shows two routes where the first will pick-up records from files,
+unmarshal the content and bind it to their model. The result is then
+send to a pojo (doing nothing special) and place them into a queue.</p>
+</div>
+<div class="paragraph">
+<p>The second route will extract the pojos from the queue and marshal the
+content to generate a file containing the csv record. The example above
+is for using Camel 2.16 onwards.</p>
+</div>
+<div class="paragraph">
+<p><strong>spring dsl</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring
+       http://camel.apache.org/schema/spring/camel-spring.xsd"&gt;
+
+        &lt;!-- Queuing engine - ActiveMq - work locally in mode virtual memory --&gt;
+    &lt;bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent"&gt;
+        &lt;property name="brokerURL" value="vm://localhost:61616"/&gt;
+    &lt;/bean&gt;
+
+
+    &lt;camelContext xmlns="http://camel.apache.org/schema/spring"&gt;
+
+
+        &lt;dataFormats&gt;
+          &lt;bindy id="bindyDataformat" type="Csv" classType="org.apache.camel.bindy.model.Order"/&gt;
+        &lt;/dataFormats&gt;
+
+        &lt;route&gt;
+            &lt;from uri="file://src/data/csv/?noop=true" /&gt;
+            &lt;unmarshal ref="bindyDataformat" /&gt;
+            &lt;to uri="bean:csv" /&gt;
+            &lt;to uri="activemq:queue:in" /&gt;
+        &lt;/route&gt;
+
+        &lt;route&gt;
+            &lt;from uri="activemq:queue:in" /&gt;
+            &lt;marshal ref="bindyDataformat" /&gt;
+            &lt;to uri="file://src/data/csv/out/" /&gt;
+        &lt;/route&gt;
+    &lt;/camelContext&gt;
+&lt;/beans&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Note:</strong> Please verify that your model classes implements serializable otherwise
+the queue manager will raise an error</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dependencies">Dependencies</h3>
+<div class="paragraph">
+<p>To use Bindy in your camel routes you need to add the a dependency on
+<strong>camel-bindy</strong> which implements this data format.</p>
+</div>
+<div class="paragraph">
+<p>If you use maven you could just add the following to your pom.xml,
+substituting the version number for the latest &amp; greatest release (see
+<a href="download.html">the download page for the latest versions</a>).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-bindy&lt;/artifactId&gt;
+  &lt;version&gt;x.x.x&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/blueprint/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/beanstalk-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

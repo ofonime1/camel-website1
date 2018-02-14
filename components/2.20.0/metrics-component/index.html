@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Metrics Component Metrics Component The metrics: component allows to collect various metrics directly from Camel routes. Supported metric types are counter, histogram, meter, timer and gauge. http://metrics.dropwizard.io[Metrics] provides simple way to measure behaviour of application. Configurable reporting backend is enabling different integration options for collecting and visualizing statistics. The component also provides a MetricsRoutePolicyFactory which allows to expose route statistics using Dropwizard Metrics, see bottom of page for details.
+ Maven users will need to add the following dependency to their pom.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Metrics Component Metrics Component The metrics: component allows to collect various metrics directly from Camel routes. Supported metric types are counter, histogram, meter, timer and gauge. http://metrics.dropwizard.io[Metrics] provides simple way to measure behaviour of application. Configurable reporting backend is enabling different integration options for collecting and visualizing statistics. The component also provides a MetricsRoutePolicyFactory which allows to expose route statistics using Dropwizard Metrics, see bottom of page for details.
+ Maven users will need to add the following dependency to their pom.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/metrics-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/metrics-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_metrics_component">Metrics Component</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_metrics_component_2">Metrics Component</h3>
+<div class="paragraph">
+<p>The <strong>metrics:</strong> component allows to collect various metrics directly
+from Camel routes. Supported metric types
+are <a href="#MetricsComponent-counter">counter</a>, <a href="#MetricsComponent-histogram">histogram</a>,
+<a href="#MetricsComponent-meter">meter</a>, <a href="#MetricsComponent-timer">timer</a> and <a href="#MetricsComponent-gauge">gauge</a>. http://metrics.dropwizard.io[Metrics] provides
+simple way to measure behaviour of application. Configurable
+reporting backend is enabling different integration options for
+collecting and visualizing statistics. The component also provides
+a <code>MetricsRoutePolicyFactory</code> which allows to expose route statistics
+using Dropwizard Metrics, see bottom of page for details.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-metrics&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>metrics:[ meter | counter | histogram | timer | gauge ]:metricname[?options]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The Metrics component supports 2 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>metricRegistry</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom configured MetricRegistry.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MetricRegistry</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Metrics endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>metrics:metricsType:metricsName</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_2_parameters">Path Parameters (2 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>metricsType</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Type of metrics</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MetricsType</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>metricsName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Name of metrics</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_7_parameters">Query Parameters (7 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>action</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Action when using timer type</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MetricsTimerAction</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>decrement</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decrement value when using counter type</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>increment</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Increment value when using counter type</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>mark</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mark when using meter type</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>subject</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subject value when using gauge type</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>value</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value value when using histogram type</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_metricscomponent_registry_a_metric_registry"><a id="MetricsComponent-registry"></a>Metric Registry</h3>
+<div class="paragraph">
+<p>Camel Metrics component uses by default a <code>MetricRegistry</code> instance with
+a <code>Slf4jReporter</code> that has a 60 second reporting interval.
+This default registry can be replaced with a custom one by providing
+a <code>MetricRegistry</code> bean. If multiple <code>MetricRegistry</code> beans exist in the
+application, the one with name <code>metricRegistry</code> is used.</p>
+</div>
+<div class="paragraph">
+<p>For example using Spring Java Configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Configuration
+public static class MyConfig extends SingleRouteCamelConfiguration {
+
+    @Bean
+    @Override
+    public RouteBuilder route() {
+        return new RouteBuilder() {
+            @Override
+            public void configure() throws Exception {
+                // define Camel routes here
+            }
+        };
+    }
+
+    @Bean(name = MetricsComponent.METRIC_REGISTRY_NAME)
+    public MetricRegistry getMetricRegistry() {
+        MetricRegistry registry = ...;
+        return registry;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or using CDI:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">class MyBean extends RouteBuilder {
+
+    @Override
+    public void configure() {
+      from("...")
+          // Register the 'my-meter' meter in the MetricRegistry below
+          .to("metrics:meter:my-meter");
+    }
+
+    @Produces
+    // If multiple MetricRegistry beans
+    // @Named(MetricsComponent.METRIC_REGISTRY_NAME)
+    MetricRegistry registry() {
+        MetricRegistry registry = new MetricRegistry();
+        // ...
+        return registry;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<code>MetricRegistry</code> uses internal thread(s) for reporting. There is no
+public API in version DropWizard <code>3.0.1</code> for users to clean up on exit. Thus using
+Camel Metrics Component leads to Java classloader leak and my cause
+<code>OutOfMemoryErrors</code> in some cases.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_usage">Usage</h3>
+<div class="paragraph">
+<p>Each metric has type and name. Supported types are
+<a href="#MetricsComponent-counter">counter</a>,
+<a href="#MetricsComponent-histogram">histogram</a>, <a href="#MetricsComponent-meter">meter</a>,
+<a href="#MetricsComponent-timer">timer</a> and <a href="#MetricsComponent-gauge">gauge</a>.
+Metric name is simple string. If metric type is not provided then type meter is used by default.</p>
+</div>
+<div class="sect3">
+<h4 id="_headers">Headers</h4>
+<div class="paragraph">
+<p>Metric name defined in URI can be overridden by using header with name
+<code>CamelMetricsName</code>.</p>
+</div>
+<div class="paragraph">
+<p>For example</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:in")
+    .setHeader(MetricsConstants.HEADER_METRIC_NAME, constant("new.name"))
+    .to("metrics:counter:name.not.used")
+    .to("direct:out");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>will update counter with name <code>new.name</code> instead of <code>name.not.used</code>.</p>
+</div>
+<div class="paragraph">
+<p>All Metrics specific headers are removed from the message once Metrics
+endpoint finishes processing of exchange. While processing exchange
+Metrics endpoint will catch all exceptions and write log entry using
+level <code>warn</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_metricscomponent_counter_a_metrics_type_counter"><a id="MetricsComponent-counter"></a>Metrics type counter</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>metrics:counter:metricname[?options]</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_options_2">Options</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">increment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long value to add to the counter</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">decrement</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long value to subtract from the counter</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>If neither <code>increment</code> or <code>decrement</code> is defined then counter value will
+be incremented by one. If <code>increment</code> and <code>decrement</code> are both defined
+only increment operation is called.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// update counter simple.counter by 7
+from("direct:in")
+    .to("metric:counter:simple.counter?increment=7")
+    .to("direct:out");</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// increment counter simple.counter by 1
+from("direct:in")
+    .to("metric:counter:simple.counter")
+    .to("direct:out");</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// decrement counter simple.counter by 3
+from("direct:in")
+    .to("metric:counter:simple.counter?decrement=3")
+    .to("direct:out");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_headers_2">Headers</h4>
+<div class="paragraph">
+<p>Message headers can be used to override <code>increment</code> and <code>decrement</code>
+values specified in Metrics component URI.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 80%;">
+<col style="width: 10%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Expected type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMetricsCounterIncrement</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Override increment value in URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMetricsCounterDecrement</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Override decrement value in URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// update counter simple.counter by 417
+from("direct:in")
+    .setHeader(MetricsConstants.HEADER_COUNTER_INCREMENT, constant(417L))
+    .to("metric:counter:simple.counter?increment=7")
+    .to("direct:out");</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// updates counter using simple language to evaluate body.length
+from("direct:in")
+    .setHeader(MetricsConstants.HEADER_COUNTER_INCREMENT, simple("${body.length}"))
+    .to("metrics:counter:body.length")
+    .to("mock:out");</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_metricscomponent_histogram_a_metric_type_histogram"><a id="MetricsComponent-histogram"></a>Metric type histogram</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>metrics:histogram:metricname[?options]</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_options_3">Options</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value to use in histogram</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>If no <code>value</code> is not set nothing is added to histogram and warning is
+logged.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// adds value 9923 to simple.histogram
+from("direct:in")
+    .to("metric:histogram:simple.histogram?value=9923")
+    .to("direct:out");</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// nothing is added to simple.histogram; warning is logged
+from("direct:in")
+    .to("metric:histogram:simple.histogram")
+    .to("direct:out");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_headers_3">Headers</h4>
+<div class="paragraph">
+<p>Message header can be used to override value specified in Metrics
+component URI.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 80%;">
+<col style="width: 10%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Expected type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMetricsHistogramValue</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Override histogram value in URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// adds value 992 to simple.histogram
+from("direct:in")
+    .setHeader(MetricsConstants.HEADER_HISTOGRAM_VALUE, constant(992L))
+    .to("metric:histogram:simple.histogram?value=700")
+    .to("direct:out")</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_metricscomponent_meter_a_metric_type_meter"><a id="MetricsComponent-meter"></a>Metric type meter</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>metrics:meter:metricname[?options]</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_options_4">Options</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mark</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long value to use as mark</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>If <code>mark</code> is not set then <code>meter.mark()</code> is called without argument.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// marks simple.meter without value
+from("direct:in")
+    .to("metric:simple.meter")
+    .to("direct:out");</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// marks simple.meter with value 81
+from("direct:in")
+    .to("metric:meter:simple.meter?mark=81")
+    .to("direct:out");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_headers_4">Headers</h4>
+<div class="paragraph">
+<p>Message header can be used to override <code>mark</code> value specified in Metrics
+component URI.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 80%;">
+<col style="width: 10%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Expected type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMetricsMeterMark</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Override mark value in URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// updates meter simple.meter with value 345
+from("direct:in")
+    .setHeader(MetricsConstants.HEADER_METER_MARK, constant(345L))
+    .to("metric:meter:simple.meter?mark=123")
+    .to("direct:out");</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_metricscomponent_timer_a_metrics_type_timer"><a id="MetricsComponent-timer"></a>Metrics type timer</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>metrics:timer:metricname[?options]</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_options_5">Options</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">action</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">start or stop</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>If no <code>action</code> or invalid value is provided then warning is logged
+without any timer update. If action <code>start</code> is called on already running
+timer or <code>stop</code> is called on not running timer then nothing is updated
+and warning is logged.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// measure time taken by route "calculate"
+from("direct:in")
+    .to("metrics:timer:simple.timer?action=start")
+    .to("direct:calculate")
+    .to("metrics:timer:simple.timer?action=stop");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>TimerContext</code> objects are stored as Exchange properties between
+different Metrics component calls.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_headers_5">Headers</h4>
+<div class="paragraph">
+<p>Message header can be used to override action value specified in Metrics
+component URI.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 80%;">
+<col style="width: 10%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Expected type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMetricsTimerAction</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Override timer action in URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.camel.component.metrics.timer.TimerEndpoint.TimerAction</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// sets timer action using header
+from("direct:in")
+    .setHeader(MetricsConstants.HEADER_TIMER_ACTION, TimerAction.start)
+    .to("metric:timer:simple.timer")
+    .to("direct:out");</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_a_id_metricscomponent_gauge_a_metric_type_gauge"><a id="MetricsComponent-gauge"></a>Metric type gauge</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>metrics:gauge:metricname[?options]</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_options_6">Options</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">subject</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any object to be observed by the gauge</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>If <code>subject</code> is not defined it&#8217;s simply ignored, i.e. the gauge is not registered.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// update gauge "simple.gauge" by a bean "mySubjectBean"
+from("direct:in")
+    .to("metric:gauge:simple.gauge?subject=#mySubjectBean")
+    .to("direct:out");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_headers_6">Headers</h4>
+<div class="paragraph">
+<p>Message headers can be used to override <code>subject</code> values specified in Metrics component URI.
+Note: if <code>CamelMetricsName</code> header is specified, then new gauge is registered in addition to
+default one specified in a URI.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 80%;">
+<col style="width: 10%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Expected type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMetricsGaugeSubject</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Override subject value in URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// update gauge simple.gauge by a String literal "myUpdatedSubject"
+from("direct:in")
+    .setHeader(MetricsConstants.HEADER_GAUGE_SUBJECT, constant("myUpdatedSubject"))
+    .to("metric:counter:simple.gauge?subject=#mySubjectBean")
+    .to("direct:out");</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_metricsroutepolicyfactory">MetricsRoutePolicyFactory</h3>
+<div class="paragraph">
+<p>This factory allows to add a <a href="routepolicy.html">RoutePolicy</a> for each
+route which exposes route utilization statistics using Dropwizard metrics.
+This factory can be used in Java and XML as the examples below
+demonstrates.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Instead of using the MetricsRoutePolicyFactory you can define a
+MetricsRoutePolicy per route you want to instrument, in case you only
+want to instrument a few selected routes.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>From Java you just add the factory to the <code>CamelContext</code> as shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">context.addRoutePolicyFactory(new MetricsRoutePolicyFactory());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And from XML DSL you define a &lt;bean&gt; as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">  &lt;!-- use camel-metrics route policy to gather metrics for all routes --&gt;
+  &lt;bean id="metricsRoutePolicyFactory" class="org.apache.camel.component.metrics.routepolicy.MetricsRoutePolicyFactory"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>MetricsRoutePolicyFactory</code> and <code>MetricsRoutePolicy</code> supports the
+following options:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">useJmx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to report fine grained statistics to JMX by
+using the <code>com.codahale.metrics.JmxReporter</code>.<br>
+Notice that if JMX is enabled on <a href="camelcontext.html">CamelContext</a>
+then a <code>MetricsRegistryService</code> mbean is enlisted under the services
+type in the JMX tree. That mbean has a single operation to output the
+statistics using json. Setting <code>useJmx</code> to true is only needed if you
+want fine grained mbeans per statistics type.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jmxDomain</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.camel.metrics</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The JMX domain name</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prettyPrint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to use pretty print when outputting
+statistics in json format</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">metricsRegistry</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allow to use a shared
+<code>com.codahale.metrics.MetricRegistry</code>. If none is provided then Camel
+will create a shared instance used by the this CamelContext.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rateUnit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TimeUnit.SECONDS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unit to use for rate in the metrics
+reporter or when dumping the statistics as json.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">durationUnit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TimeUnit.MILLISECONDS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unit to use for duration in
+the metrics reporter or when dumping the statistics as json.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">namePattern</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><mark>name</mark>.<mark>routeId</mark>.<mark>type</mark></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.17:</strong> The name
+pattern to use. Uses dot as separators, but you can change that. The
+values <code><mark>name</mark></code>, <code><mark>routeId</mark></code>, and <code><mark>type</mark></code> will be replaced with actual
+value. Where <code><mark><mark>name</mark></mark></code> is the name of the CamelContext. <code><mark><mark>routeId</mark></mark></code>
+is the name of the route. And <code><mark><mark>type</mark></mark></code> is the value of responses.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>From Java code tou can get hold of
+the <code>com.codahale.metrics.MetricRegistry</code> from the
+<code>org.apache.camel.component.metrics.routepolicy.MetricsRegistryService</code>
+as shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">MetricRegistryService registryService = context.hasService(MetricsRegistryService.class);
+if (registryService != null) {
+  MetricsRegistry registry = registryService.getMetricsRegistry();
+  ...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_metricsmessagehistoryfactory">MetricsMessageHistoryFactory</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.17</strong></p>
+</div>
+<div class="paragraph">
+<p>This factory allows to use metrics to
+capture <a href="message-history.html">Message History</a> performance
+statistics while routing messages. It works by using a metrics Timer for
+each node in all the routes. This factory can be used in Java and XML as
+the examples below demonstrates.</p>
+</div>
+<div class="paragraph">
+<p>From Java you just set the factory to the <code>CamelContext</code> as shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">context.setMessageHistoryFactory(new MetricsMessageHistoryFactory());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And from XML DSL you define a &lt;bean&gt; as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">  &lt;!-- use camel-metrics message history to gather metrics for all messages being routed --&gt;
+  &lt;bean id="metricsMessageHistoryFactory" class="org.apache.camel.component.metrics.messagehistory.MetricsMessageHistoryFactory"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following options is supported on the factory:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">useJmx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to report fine grained statistics to JMX by
+using the <code>com.codahale.metrics.JmxReporter</code>.<br>
+Notice that if JMX is enabled on <a href="camelcontext.html">CamelContext</a>
+then a <code>MetricsRegistryService</code> mbean is enlisted under the services
+type in the JMX tree. That mbean has a single operation to output the
+statistics using json. Setting <code>useJmx</code> to true is only needed if you
+want fine grained mbeans per statistics type.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jmxDomain</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.camel.metrics</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The JMX domain name</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prettyPrint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to use pretty print when outputting
+statistics in json format</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">metricsRegistry</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allow to use a shared
+<code>com.codahale.metrics.MetricRegistry</code>. If none is provided then Camel
+will create a shared instance used by the this CamelContext.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rateUnit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TimeUnit.SECONDS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unit to use for rate in the metrics
+reporter or when dumping the statistics as json.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">durationUnit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TimeUnit.MILLISECONDS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unit to use for duration in
+the metrics reporter or when dumping the statistics as json.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">namePattern</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><mark>name</mark>.<mark>routeId</mark>.<mark><mark>id</mark></mark>.<mark>type</mark></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name pattern
+to use. Uses dot as separators, but you can change that. The values
+<code><mark>name</mark></code>, <code><mark>routeId</mark></code>, <code><mark>type</mark></code>, and <code><mark><mark>id</mark></mark></code> will be replaced with
+actual value. Where <code><mark><mark>name</mark></mark></code> is the name of the CamelContext.
+<code><mark><mark>routeId</mark></mark></code> is the name of the route. The <code><mark><mark>id</mark></mark></code> pattern represents
+the node id. And <code><mark><mark>type</mark></mark></code> is the value of history.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>At runtime the metrics can be accessed from Java API or JMX which allows
+to gather the data as json output.</p>
+</div>
+<div class="paragraph">
+<p>From Java code you can do get the service from the CamelContext as
+shown:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">MetricsMessageHistoryService service = context.hasService(MetricsMessageHistoryService.class);
+String json = service.dumpStatisticsAsJson();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And the JMX API the MBean is registered in the <code>type=services</code> tree
+with <code>name=MetricsMessageHistoryService</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_instrumentedthreadpoolfactory">InstrumentedThreadPoolFactory</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.18</strong></p>
+</div>
+<div class="paragraph">
+<p>This factory allows you to gather performance information about Camel Thread Pools by injecting a InstrumentedThreadPoolFactory
+which collects information from inside of Camel.
+See more details at <a href="advanced-configuration-of-camelcontext-using-spring.html">Advanced configuration of CamelContext using Spring</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>camel-example-cdi-metrics</code> example that illustrates the integration
+between Camel, Metrics and CDI.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/milo-client-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/mail-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

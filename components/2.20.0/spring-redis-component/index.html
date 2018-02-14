@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Spring Redis Component Available as of Camel version 2.11
+ This component allows sending and receiving messages from Redis. Redis is advanced key-value store where keys can contain strings, hashes, lists, sets and sorted sets. In addition it provides pub/sub functionality for inter-app communications.
+Camel provides a producer for executing commands, consumer for subscribing to pub/sub messages an idempotent repository for filtering out duplicate messages.
+ INFO:*Prerequisites* In order to use this component, you must have a Redis server running.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Spring Redis Component Available as of Camel version 2.11
+ This component allows sending and receiving messages from Redis. Redis is advanced key-value store where keys can contain strings, hashes, lists, sets and sorted sets. In addition it provides pub/sub functionality for inter-app communications.
+Camel provides a producer for executing commands, consumer for subscribing to pub/sub messages an idempotent repository for filtering out duplicate messages.
+ INFO:*Prerequisites* In order to use this component, you must have a Redis server running.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/spring-redis-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/spring-redis-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_spring_redis_component">Spring Redis Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.11</strong></p>
+</div>
+<div class="paragraph">
+<p>This component allows sending and receiving messages from
+<a href="http://http//redis.io/">Redis</a>. Redis is advanced key-value store where
+keys can contain strings, hashes, lists, sets and sorted sets. In
+addition it provides pub/sub functionality for inter-app
+communications.<br>
+ Camel provides a producer for executing commands, consumer for
+subscribing to pub/sub messages an idempotent repository for filtering
+out duplicate messages.</p>
+</div>
+<div class="paragraph">
+<p>INFO:*Prerequisites*
+In order to use this component, you must have a Redis server running.</p>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI Format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">spring-redis://host:port[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can append query options to the URI in the following format,
+<code>?options=value&amp;option2=value&amp;&#8230;&#8203;</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_options">URI Options</h3>
+<div class="paragraph">
+<p>The Spring Redis component has no options.</p>
+</div>
+<div class="paragraph">
+<p>The Spring Redis endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>spring-redis:host:port</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_2_parameters">Path Parameters (2 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>host</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The host where Redis server is running.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>port</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Redis server port number</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_10_parameters">Query Parameters (10 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>channels</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List of topic names or name patterns to subscribe to. Multiple names can be separated by comma.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>command</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default command which can be overridden by message header. Notice the consumer only supports the following commands: PSUBSCRIBE and SUBSCRIBE</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">SET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Command</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionFactory</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reference to a pre-configured RedisConnectionFactory instance to use.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RedisConnectionFactory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>redisTemplate</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reference to a pre-configured RedisTemplate instance to use.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RedisTemplate</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>serializer</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reference to a pre-configured RedisSerializer instance to use.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RedisSerializer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>listenerContainer</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reference to a pre-configured RedisMessageListenerContainer instance to use.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RedisMessageListener Container</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_usage">Usage</h3>
+<div class="paragraph">
+<p>See also the unit tests available
+at https://github.com/apache/camel/tree/master/components/camel-spring-redis/src/test/java/org/apache/camel/component/redis[<a href="https://github.com/apache/camel/tree/master/components/camel-spring-redis/src/test/java/org/apache/camel/component/redis" class="bare">https://github.com/apache/camel/tree/master/components/camel-spring-redis/src/test/java/org/apache/camel/component/redis</a>].</p>
+</div>
+<div class="sect3">
+<h4 id="_message_headers_evaluated_by_the_redis_producer">Message headers evaluated by the Redis producer</h4>
+<div class="paragraph">
+<p>The producer issues commands to the server and each command has
+different set of parameters with specific types. The result from the
+command execution is returned in the message body.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 50.0002%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Hash Commands</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Parameters</th>
+<th class="tableblock halign-left valign-top">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HSET</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the string value of a hash field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Field (String), CamelRedis.Value
+(Object)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HGET</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get the value of a hash field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Field (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HSETNX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the value of a hash field, only if the field does not exist</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Field (String), CamelRedis.Value
+(Object)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HMSET</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set multiple hash fields to multiple values</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Values(Map&lt;String, Object&gt;)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HMGET</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get the values of all the given hash fields</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Fields (Collection&lt;String&gt;)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Collection&lt;Object&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HINCRBY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Increment the integer value of a hash field by the given number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Field (String), CamelRedis.Value
+(Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HEXISTS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determine if a hash field exists</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Field (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HDEL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete one or more hash fields</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Field (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HLEN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get the number of fields in a hash</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HKEYS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get all the fields in a hash</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set&lt;String&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HVALS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get all the values in a hash</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Collection&lt;Object&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HGETALL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get all the fields and values in a hash</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map&lt;String, Object&gt;</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 50.0002%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">List Commands</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Parameters</th>
+<th class="tableblock halign-left valign-top">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RPUSH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Append one or multiple values to a list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RPUSHX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Append a value to a list, only if the list exists</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LPUSH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Prepend one or multiple values to a list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LLEN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get the length of a list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LRANGE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get a range of elements from a list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Start (Long), CamelRedis.End (Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List&lt;Object&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LTRIM</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trim a list to the specified range</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Start (Long), CamelRedis.End (Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LINDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get an element from a list by its index</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Index (Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LINSERT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Insert an element before or after another element in a list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object), CamelRedis.Pivot
+(String), CamelRedis.Position (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LSET</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the value of an element in a list by its index</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object), CamelRedis.Index
+(Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LREM</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove elements from a list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object), CamelRedis.Count
+(Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LPOP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove and get the first element in a list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RPOP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove and get the last element in a list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RPOPLPUSH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove the last element in a list, append it to another list and return
+it</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Destination (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BRPOPLPUSH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pop a value from a list, push it to another list and return it; or block
+until one is available</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Destination (String),
+CamelRedis.Timeout (Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BLPOP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove and get the first element in a list, or block until one is
+available</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Timeout (Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BRPOP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove and get the last element in a list, or block until one is
+available</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Timeout (Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 50.0002%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Set Commands</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Parameters</th>
+<th class="tableblock halign-left valign-top">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SADD</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add one or more members to a set</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SMEMBERS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get all the members in a set</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set&lt;Object&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SREM</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove one or more members from a set</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SPOP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove and return a random member from a set</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SMOVE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Move a member from one set to another</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object),
+CamelRedis.Destination (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SCARD</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get the number of members in a set</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SISMEMBER</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determine if a given value is a member of a set</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SINTER</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Intersect multiple sets</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Keys (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set&lt;Object&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SINTERSTORE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Intersect multiple sets and store the resulting set in a key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Keys (String),
+CamelRedis.Destination (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SUNION</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add multiple sets</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Keys (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set&lt;Object&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SUNIONSTORE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add multiple sets and store the resulting set in a key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Keys (String),
+CamelRedis.Destination (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SDIFF</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subtract multiple sets</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Keys (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set&lt;Object&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SDIFFSTORE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subtract multiple sets and store the resulting set in a key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Keys (String),
+CamelRedis.Destination (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SRANDMEMBER</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get one or multiple random members from a set</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 50.0002%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Ordered set Commands</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Parameters</th>
+<th class="tableblock halign-left valign-top">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZADD</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add one or more members to a sorted set, or update its score if it
+already exists</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object), CamelRedis.Score
+(Double)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZRANGE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Return a range of members in a sorted set, by index</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Start (Long), CamelRedis.End (Long),
+CamelRedis.WithScore (Boolean)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZREM</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove one or more members from a sorted set</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZINCRBY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Increment the score of a member in a sorted set</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object), CamelRedis.Increment
+(Double)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZRANK</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determine the index of a member in a sorted set</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZREVRANK</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determine the index of a member in a sorted set, with scores ordered
+from high to low</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZREVRANGE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Return a range of members in a sorted set, by index, with scores ordered
+from high to low</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Start (Long), CamelRedis.End (Long),
+CamelRedis.WithScore (Boolean)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZCARD</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get the number of members in a sorted set</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZCOUNT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Count the members in a sorted set with scores within the given values</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Min (Double), CamelRedis.Max
+(Double)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZRANGEBYSCORE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Return a range of members in a sorted set, by score</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Min (Double), CamelRedis.Max
+(Double)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set&lt;Object&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZREVRANGEBYSCORE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Return a range of members in a sorted set, by score, with scores ordered
+from high to low</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Min (Double), CamelRedis.Max
+(Double)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set&lt;Object&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZREMRANGEBYRANK</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove all members in a sorted set within the given indexes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Start (Long), CamelRedis.End (Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZREMRANGEBYSCORE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove all members in a sorted set within the given scores</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Start (Long), CamelRedis.End (Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZUNIONSTORE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add multiple sorted sets and store the resulting sorted set in a new key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Keys (String),
+CamelRedis.Destination (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZINTERSTORE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Intersect multiple sorted sets and store the resulting sorted set in a
+new key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Keys (String),
+CamelRedis.Destination (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 50.0002%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">String Commands</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Parameters</th>
+<th class="tableblock halign-left valign-top">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SET</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the string value of a key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GET</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get the value of a key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STRLEN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get the length of the value stored in a key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>APPEND</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Append a value to a key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SETBIT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets or clears the bit at offset in the string value stored at key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Offset (Long), CamelRedis.Value
+(Boolean)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GETBIT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns the bit value at offset in the string value stored at key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Offset (Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SETRANGE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Overwrite part of a string at key starting at the specified offset</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object), CamelRedis.Offset
+(Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GETRANGE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get a substring of the string stored at a key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Start (Long), CamelRedis.End (Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SETNX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the value of a key, only if the key does not exist</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SETEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the value and expiration of a key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object), CamelRedis.Timeout
+(Long), SECONDS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DECRBY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decrement the integer value of a key by the given number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DECR</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decrement the integer value of a key by one</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String),</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>INCRBY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Increment the integer value of a key by the given amount</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>INCR</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Increment the integer value of a key by one</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MGET</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get the values of all the given keys</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Fields (Collection&lt;String&gt;)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List&lt;Object&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MSET</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set multiple keys to multiple values</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Values(Map&lt;String, Object&gt;)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MSETNX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set multiple keys to multiple values, only if none of the keys exist</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GETSET</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the string value of a key and return its old value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (Object)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 50.0002%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key Commands</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Parameters</th>
+<th class="tableblock halign-left valign-top">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>EXISTS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determine if a key exists</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DEL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete a key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Keys (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TYPE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determine the type stored at key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DataType</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>KEYS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Find all keys matching the given pattern</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Pattern (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Collection&lt;String&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RANDOMKEY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Return a random key from the keyspace</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Pattern (String), CamelRedis.Value (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RENAME</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rename a key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RENAMENX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rename a key, only if the new key does not exist</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Value (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>EXPIRE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set a key&#8217;s time to live in seconds</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Timeout (Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SORT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sort the elements in a list, set or sorted set</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List&lt;Object&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PERSIST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove the expiration from a key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>EXPIREAT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the expiration for a key as a UNIX timestamp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Timestamp (Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PEXPIRE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set a key&#8217;s time to live in milliseconds</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Timeout (Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PEXPIREAT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the expiration for a key as a UNIX timestamp specified in
+milliseconds</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Timestamp (Long)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TTL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get the time to live for a key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MOVE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Move a key to another database</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Key (String), CamelRedis.Db (Integer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 50.0002%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Other Command</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Parameters</th>
+<th class="tableblock halign-left valign-top">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MULTI</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mark the start of a transaction block</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DISCARD</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Discard all commands issued after MULTI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>EXEC</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Execute all commands issued after MULTI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WATCH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Watch the given keys to determine execution of the MULTI/EXEC block</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Keys (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UNWATCH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Forget about all watched keys</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ECHO</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Echo the given string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Value (String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ping the server</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>QUIT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Close the connection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PUBLISH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Post a message to a channel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelRedis.Channel (String), CamelRedis.Message (Object)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">void</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dependencies">Dependencies</h3>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their pom.xml.</p>
+</div>
+<div class="paragraph">
+<p><strong>pom.xml</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-spring-redis&lt;/artifactId&gt;
+    &lt;version&gt;${camel-version}&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>${camel-version</code>} must be replaced by the actual version of Camel
+(2.11 or higher).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/spring-security/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/spring-ldap-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

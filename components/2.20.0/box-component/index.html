@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Box Component Available as of Camel version 2.14
+ The Box component provides access to all of the Box.com APIs accessible using box-java-sdk. It allows producing messages to upload and download files, create, edit, and manage folders, etc. It also supports APIs that allow polling for updates to user accounts and even changes to enterprise accounts, etc.
+ Box.com requires the use of OAuth2.0 for all client application authentication. In order to use camel-box with your account, you&#8217;ll need to create a new application within Box.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Box Component Available as of Camel version 2.14
+ The Box component provides access to all of the Box.com APIs accessible using box-java-sdk. It allows producing messages to upload and download files, create, edit, and manage folders, etc. It also supports APIs that allow polling for updates to user accounts and even changes to enterprise accounts, etc.
+ Box.com requires the use of OAuth2.0 for all client application authentication. In order to use camel-box with your account, you&#8217;ll need to create a new application within Box.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/box-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/box-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_box_component">Box Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.14</strong></p>
+</div>
+<div class="paragraph">
+<p>The Box component provides access to all of the Box.com APIs accessible
+using <a href="https://github.com/box/box-java-sdk/">box-java-sdk</a>. It
+allows producing messages to upload and download files, create, edit,
+and manage folders, etc. It also supports APIs that allow polling for
+updates to user accounts and even changes to enterprise accounts, etc.</p>
+</div>
+<div class="paragraph">
+<p>Box.com requires the use of OAuth2.0 for all client application
+authentication. In order to use camel-box with your account, you&#8217;ll need
+to create a new application within Box.com at
+<a href="https://app.box.com/developers/services/edit/">https://app.box.com/developers/services/edit/</a>.
+The Box application&#8217;s client id and secret will allow access to Box APIs
+which require a current user. A user access token is generated and
+managed by the API for an end user.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their pom.xml
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+        &lt;artifactId&gt;camel-box&lt;/artifactId&gt;
+        &lt;version&gt;${camel-version}&lt;/version&gt;
+    &lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_connection_authentication_types">Connection Authentication Types</h3>
+<div class="paragraph">
+<p>The Box component supports three different types of authenticated connections.</p>
+</div>
+<div class="sect3">
+<h4 id="_standard_authentication">Standard Authentication</h4>
+<div class="paragraph">
+<p><strong>Standard Authentication</strong> uses the <strong>OAuth 2.0 three-legged authentication process</strong> to authenticate its connections with Box.com. This type of authentication enables Box <strong>managed users</strong> and <strong>external users</strong> to access, edit, and save their Box content through the Box component.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_app_enterprise_authentication">App Enterprise Authentication</h4>
+<div class="paragraph">
+<p><strong>App Enterprise Authentication</strong> uses the <strong>OAuth 2.0 with JSON Web Tokens (JWT)</strong> to authenticate its connections as a <strong>Service Account</strong> for a <strong>Box Application</strong>. This type of authentication enables a service account to access, edit, and save the Box content of its <strong>Box Application</strong> through the Box component.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_app_user_authentication">App User Authentication</h4>
+<div class="paragraph">
+<p><strong>App User Authentication</strong> uses the <strong>OAuth 2.0 with JSON Web Tokens (JWT)</strong> to authenticate its connections as an <strong>App User</strong> for a <strong>Box Application</strong>. This type of authentication enables app users to access, edit, and save their Box content in its <strong>Box Application</strong> through the Box component.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_box_options">Box Options</h3>
+<div class="paragraph">
+<p>The Box component supports 2 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>configuration</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the shared configuration</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BoxConfiguration</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Box endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>box:apiName/methodName</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_2_parameters">Path Parameters (2 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>apiName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> What kind of operation to perform</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BoxApiName</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>methodName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> What sub operation to use for the selected operation</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_20_parameters">Query Parameters (20 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>clientId</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Box application client ID</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>enterpriseId</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The enterprise ID to use for an App Enterprise.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>inBody</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the name of a parameter to be passed in the exchange In Body</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>userId</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user ID to use for an App User.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpParams</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Custom HTTP params for settings like proxy host</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>accessTokenCache</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Custom Access Token Cache for storing and retrieving access tokens.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IAccessTokenCache</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>clientSecret</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Box application client secret</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>encryptionAlgorithm</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The type of encryption algorithm for JWT. Supported Algorithms: RSA_SHA_256 RSA_SHA_384 RSA_SHA_512</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">RSA_SHA_256</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EncryptionAlgorithm</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxCacheEntries</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum number of access tokens in cache.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">100</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>authenticationType</strong> (authentication)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The type of authentication for connection. Types of Authentication: STANDARD_AUTHENTICATION - OAuth 2.0 (3-legged) SERVER_AUTHENTICATION - OAuth 2.0 with JSON Web Tokens</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">APP_USER_AUTHENTICATION</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>privateKeyFile</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The private key for generating the JWT signature.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>privateKeyPassword</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The password for the private key.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>publicKeyId</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The ID for public key for validating the JWT signature.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sslContextParameters</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure security using SSLContextParameters.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SSLContextParameters</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>userName</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Box user name MUST be provided</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>userPassword</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Box user password MUST be provided if authSecureStorage is not set or returns null on first call</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    box://endpoint-prefix/endpoint?[options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Endpoint prefix can be one of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>collaborations</p>
+</li>
+<li>
+<p>comments</p>
+</li>
+<li>
+<p>event-logs</p>
+</li>
+<li>
+<p>files</p>
+</li>
+<li>
+<p>folders</p>
+</li>
+<li>
+<p>groups</p>
+</li>
+<li>
+<p>events</p>
+</li>
+<li>
+<p>search</p>
+</li>
+<li>
+<p>tasks</p>
+</li>
+<li>
+<p>users</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_producer_endpoints">Producer Endpoints:</h3>
+<div class="paragraph">
+<p>Producer endpoints can use endpoint prefixes followed by endpoint names
+and associated options described next. A shorthand alias can be used for
+some endpoints. The endpoint URI MUST contain a prefix.</p>
+</div>
+<div class="paragraph">
+<p>Endpoint options that are not mandatory are denoted by <strong>[]</strong>. When there
+are no mandatory options for an endpoint, one of the set of <strong>[]</strong> options
+MUST be provided. Producer endpoints can also use a special
+option <strong><code>inBody</code></strong> that in turn should contain the name of the endpoint
+option whose value will be contained in the Camel Exchange In message.</p>
+</div>
+<div class="paragraph">
+<p>Any of the endpoint options can be provided in either the endpoint URI,
+or dynamically in a message header. The message header name must be of
+the format <strong><code>CamelBox.&lt;option&gt;</code></strong>. Note that the <strong><code>inBody</code></strong> option
+overrides message header, i.e. the endpoint
+option <strong><code>inBody=option</code></strong> would override a <strong><code>CamelBox.option</code></strong> header.</p>
+</div>
+<div class="paragraph">
+<p>If a value is not provided for the option <strong>defaultRequest</strong> either in the
+endpoint URI or in a message header, it will be assumed to be <code>null</code>.
+Note that the <code>null</code> value will only be used if other options do not
+satisfy matching endpoints.</p>
+</div>
+<div class="paragraph">
+<p>In case of Box API errors the endpoint will throw a
+RuntimeCamelException with a
+<strong>com.box.sdk.BoxAPIException</strong> derived exception
+cause.</p>
+</div>
+<div class="sect3">
+<h4 id="_endpoint_prefix_em_collaborations_em">Endpoint Prefix <em>collaborations</em></h4>
+<div class="paragraph">
+<p>For more information on Box collaborations see
+<a href="https://docs.box.com/reference#collaboration-object">https://docs.box.com/reference#collaboration-object</a>. The
+following endpoints can be invoked with the prefix <strong><code>collaborations</code></strong> as
+follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    box://collaborations/endpoint?[options]</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Endpoint</th>
+<th class="tableblock halign-left valign-top">Shorthand Alias</th>
+<th class="tableblock halign-left valign-top">Options</th>
+<th class="tableblock halign-left valign-top">Result Body Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">addFolderCollaboration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">folderId, collaborator, role</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxCollaboration</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">addFolderCollaborationByEmail</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">addByEmail</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">folderId, email, role</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxCollaboration</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteCollaboration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">collaborationId</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getFolderCollaborations</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">collaborations</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">folderId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.util.Collection</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getPendingCollaborations</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pendingCollaborations</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.util.Collection</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getCollaborationInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">info</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">collaborationId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxCollaboration.Info</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">updateCollaborationInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">updateInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">collaborationId, info</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxCollaboration</p></td>
+</tr>
+</tbody>
+</table>
+<div id="Box-URIOptionsforcollaborations" class="paragraph">
+<p>URI Options for <em>collaborations</em></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">collaborationId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">collaborator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxCollaborator</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">role</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxCollaboration.Role</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">folderId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">email</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">info</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxCollaboration.Info</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_endpoint_prefix_em_comments_em">Endpoint Prefix <em>comments</em></h4>
+<div class="paragraph">
+<p>For more information on Box comments see
+<a href="https://docs.box.com/reference#comment-object">https://docs.box.com/reference#comment-object</a>. The
+following endpoints can be invoked with the prefix <strong><code>comments</code></strong> as
+follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    box://comments/endpoint?[options]</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Endpoint</th>
+<th class="tableblock halign-left valign-top">Shorthand Alias</th>
+<th class="tableblock halign-left valign-top">Options</th>
+<th class="tableblock halign-left valign-top">Result Body Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">addFileComment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId, message</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxFile</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">changeCommentMessage</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">updateMessage</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">commentId, message</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxComment</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteComment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">commentId</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getCommentInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">info</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">commentId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxComment.Info</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getFileComments</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">comments</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.util.List</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">replyToComment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reply</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">commentId, message</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxComment</p></td>
+</tr>
+</tbody>
+</table>
+<div id="Box-URIOptionsforcollaborations" class="paragraph">
+<p>URI Options for <em>collaborations</em></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">commentId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">message</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_endpoint_prefix_em_events_logs_em">Endpoint Prefix <em>events-logs</em></h4>
+<div class="paragraph">
+<p>For more information on Box event logs see
+<a href="https://docs.box.com/reference#events">https://docs.box.com/reference#events</a>.
+The following endpoints can be invoked with the prefix <strong><code>events</code></strong> as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">  box://event-logs/endpoint?[options]</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Endpoint</th>
+<th class="tableblock halign-left valign-top">Shorthand Alias</th>
+<th class="tableblock halign-left valign-top">Options</th>
+<th class="tableblock halign-left valign-top">Result Body Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getEnterpriseEvents</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">events</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">position, after, before, [types]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.util.List</p></td>
+</tr>
+</tbody>
+</table>
+<div id="Box-URIOptionsforevent-logs" class="paragraph">
+<p>URI Options for <em>event-logs</em></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">position</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">after</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">before</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">types</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxEvent.Types[]</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_endpoint_prefix_em_files_em">Endpoint Prefix <em>files</em></h4>
+<div class="paragraph">
+<p>For more information on Box files see
+<a href="https://docs.box.com/reference#file-object">https://docs.box.com/reference#file-object</a>.
+The following endpoints can be invoked with the
+prefix <strong><code>files</code></strong> as follows.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">   box://files/endpoint?[options]</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Endpoint</th>
+<th class="tableblock halign-left valign-top">Shorthand Alias</th>
+<th class="tableblock halign-left valign-top">Options</th>
+<th class="tableblock halign-left valign-top">Result Body Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">uploadFile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">upload</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">parentFolderId, content, fileName, [created], [modified], [size], [listener]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxFile</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">downloadFile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">download</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId, output, [rangeStart], [rangeEnd], [listener]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.io.OutputStream</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">copyFile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">copy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId, destinationFolderId, [newName]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxFile</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">moveFile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">move</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId, destinationFolderId,  [newName]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxFile</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">renameFile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rename</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId, newFileName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxFile</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">createFileSharedLink</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">link</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId, access, [unshareDate], [permissions]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxSharedLink</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteFile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">uploadNewFileVersion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">uploadVersion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId, fileContent, [modified], [fileSize], [listener]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.boxsdk.BoxFile</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">promoteFileVersion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">promoteVersion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId, version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxFileVersion</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getFileVersions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">versions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.util.Collection</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">downloadPreviousFileVersions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">downloadVersion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId, version, output, [listener]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.io.OutputStream</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteFileVersion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteVersion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId, version</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getFileInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">info</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId, fields</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxFile.Info</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">updateFileInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">updateInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId, info</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxFile</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">createFileMetadata</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">createMetadata</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId, metadata, [typeName]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.Metadata</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getFileMetadata</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">metadata</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId, [typeName]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.Metadata</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">updateFileMetadata</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">updateMetadata</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId, metadata</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.Metadata</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteFileMetadata</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteMetadata</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getDownloadUrl</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">url</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.net.URL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getPreviewLink</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">preview</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.net.URL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getFileThumbnail</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">thumbnail</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId, fileType, minWidth, minHeight, maxWidth, maxHeight</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte[]</p></td>
+</tr>
+</tbody>
+</table>
+<div id="Box-URIOptionsforfiles" class="paragraph">
+<p>URI Options for <em>files</em></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">parentFolderId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">content</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.io.InputStream</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">created</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">modified</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">listener</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.ProgressListener</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">output</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.io.OutputStream</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rangeStart</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rangeEnd</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">outputStreams</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.io.OutputStream[]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">destinationFolderId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">newName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fields</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String[]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">info</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxFile.Info</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileSize</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">access</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxSharedLink.Access</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">unshareDate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">permissions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxSharedLink.Permissions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxFile.ThumbnailFileType</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">minWidth</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">minHeight</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">maxWidth</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">maxHeight</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">metadata</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.Metadata</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">typeName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_endpoint_prefix_em_folders_em">Endpoint Prefix <em>folders</em></h4>
+<div class="paragraph">
+<p>For more information on Box folders see
+<a href="https://docs.box.com/reference#folder-object">https://docs.box.com/reference#folder-object</a>.
+The following endpoints can be invoked with the prefix
+<strong><code>folders</code></strong> as follows.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    box://folders/endpoint?[options]</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Endpoint</th>
+<th class="tableblock halign-left valign-top">Shorthand Alias</th>
+<th class="tableblock halign-left valign-top">Options</th>
+<th class="tableblock halign-left valign-top">Result Body Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getRootFolder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">root</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxFolder</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">createFolder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">create</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">parentFolderId, folderName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxFolder</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">copyFolder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">copy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">folderId, destinationfolderId, [newName]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxFolder</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">moveFolder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">move</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">folderId, destinationFolderId, newName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxFolder</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">renameFolder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rename</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">folderId, newFolderName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxFolder</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">createFolderSharedLink</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">link</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">folderId, access, [unsharedDate], [permissions]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.util.List</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteFolder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">folderId</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getFolder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">folder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxFolder</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getFolderInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">info</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">folderId, fields</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxFolder.Info</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getFolderItems</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">items</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">folderId, offset, limit, fields</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxFolder</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">updateFolderInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">updateInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">folderId, info</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxFolder</p></td>
+</tr>
+</tbody>
+</table>
+<div id="Box-URIOptionsforfolders" class="paragraph">
+<p>URI Options for <em>folders</em></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String[]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">folderId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">offset</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">limit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fields</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String[]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">parentFolderId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">folderName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">destinationFolderId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">newName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">newFolderName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">info</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">access</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxSharedLink.Access</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">unshareDate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">permissions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxSharedLink.Permissions</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_endpoint_prefix_em_groups_em">Endpoint Prefix <em>groups</em></h4>
+<div class="paragraph">
+<p>For more information on Box groups see
+<a href="https://docs.box.com/reference#group-object">https://docs.box.com/reference#group-object</a>.
+The following endpoints can be invoked with the prefix <strong><code>groups</code></strong> as
+follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    box://groups/endpoint?[options]</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Endpoint</th>
+<th class="tableblock halign-left valign-top">Shorthand Alias</th>
+<th class="tableblock halign-left valign-top">Options</th>
+<th class="tableblock halign-left valign-top">Result Body Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">createGroup</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">create</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxGroup</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">addGroupMembership</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">createMembership</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">groupId, userId, role</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxGroupMembership</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteGroup</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">groupId</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getAllGroups</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">groups</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.util.Collection</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getGroupInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">info</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">groupId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxGroup.Info</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">addGroupMembership</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">addMembership</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">groupId, userId, role</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxGroupMembership</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteGroupMembership</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteMembership</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">groupMembershipId</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getGroupMemberships</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">memberships</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">groupId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.uti.Collection</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getGroupMembershipInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">membershipInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">groupMemebershipId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxGroup.Info</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">updateGroupMembershipInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">updateMembershipInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">groupMemebershipId, info</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxGroupMembership</p></td>
+</tr>
+</tbody>
+</table>
+<div id="Box-URIOptionsforgroups" class="paragraph">
+<p>URI Options for <em>groups</em></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">groupId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">userId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">role</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxGroupMembership.Role</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">groupMembershipId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">info</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxGroupMembership.Info</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_endpoint_prefix_em_search_em">Endpoint Prefix <em>search</em></h4>
+<div class="paragraph">
+<p>For more information on Box search API see
+<a href="https://docs.box.com/reference#searching-for-content">https://docs.box.com/reference#searching-for-content</a>. The
+following endpoints can be invoked with the prefix <strong><code>search</code></strong> as
+follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    box://search/endpoint?[options]</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Endpoint</th>
+<th class="tableblock halign-left valign-top">Shorthand Alias</th>
+<th class="tableblock halign-left valign-top">Options</th>
+<th class="tableblock halign-left valign-top">Result Body Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">searchFolder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">search</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">folderId, query</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.util.Collection</p></td>
+</tr>
+</tbody>
+</table>
+<div id="Box-URIOptionsforsearch" class="paragraph">
+<p>URI Options for <em>search</em></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">folderId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">query</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_endpoint_prefix_em_tasks_em">Endpoint Prefix <em>tasks</em></h4>
+<div class="paragraph">
+<p>For information on Box tasks see
+<a href="https://docs.box.com/reference#task-object-1">https://docs.box.com/reference#task-object-1</a>.
+The following endpoints can be invoked with the prefix <strong><code>tasks</code></strong> as
+follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    box://tasks/endpoint?[options]</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Endpoint</th>
+<th class="tableblock halign-left valign-top">Shorthand Alias</th>
+<th class="tableblock halign-left valign-top">Options</th>
+<th class="tableblock halign-left valign-top">Result Body Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">addFileTask</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId, action, dueAt, [message]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxUser</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteTask</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">taskId</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getFileTasks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tasks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.util.List</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getTaskInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">info</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">taskId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxTask.Info</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">updateTaskInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">updateInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">taskId, info</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxTask</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">addAssignmentToTask</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">addAssignment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">taskId, assignTo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxTask</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteTaskAssignment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteAssignment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">taskAssignmentId</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getTaskAssignments</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">assignments</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">taskId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.util.List</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getTaskAssignmentInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">assignmentInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">taskAssignmentId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxTaskAssignment.Info</p></td>
+</tr>
+</tbody>
+</table>
+<div id="Box-URIOptionsfortasks" class="paragraph">
+<p>URI Options for <em>tasks</em></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fileId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">action</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxTask.Action</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dueAt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">message</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">taskId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">info</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxTask.Info</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">assignTo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxUser</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">taskAssignmentId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_endpoint_prefix_em_users_em">Endpoint Prefix <em>users</em></h4>
+<div class="paragraph">
+<p>For information on Box users see
+<a href="https://docs.box.com/reference#user-object">https://docs.box.com/reference#user-object</a>.
+The following endpoints can be invoked with the prefix <strong><code>users</code></strong> as
+follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    box://users/endpoint?[options]</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Endpoint</th>
+<th class="tableblock halign-left valign-top">Shorthand Alias</th>
+<th class="tableblock halign-left valign-top">Options</th>
+<th class="tableblock halign-left valign-top">Result Body Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getCurrentUser</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">currentUser</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxUser</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getAllEnterpriseOrExternalUsers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">users</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">filterTerm, [fields]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxUser</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">createAppUser</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">create</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name, [params]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxUser</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">createEnterpriseUser</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">create</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">login, name, [params]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxUser</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteUser</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">userId, notifyUser, force</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getUserEmailAlias</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">emailAlias</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">userId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxUser</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteUserEmailAlias</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deleteEmailAlias</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">userId, emailAliasId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.util.List</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">getUserInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">info</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">userId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxUser.Info</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">updateUserInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">updateInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">userId, info</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxUser</p></td>
+</tr>
+</tbody>
+</table>
+<div id="Box-URIOptionsforusers" class="paragraph">
+<p>URI Options for <em>users</em></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">defaultRequest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.restclientv2.requestsbase.BoxDefaultRequestObject</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">emailAliasRequest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.boxjavalibv2.requests.requestobjects.BoxEmailAliasRequestObject</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">emailId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">filterTerm</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">folderId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">simpleUserRequest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.boxjavalibv2.requests.requestobjects.BoxSimpleUserRequestObject</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">userDeleteRequest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.boxjavalibv2.requests.requestobjects.BoxUserDeleteRequestObject</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">userId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">userRequest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.boxjavalibv2.requests.requestobjects.BoxUserRequestObject</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">userUpdateLoginRequest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.boxjavalibv2.requests.requestobjects.BoxUserUpdateLoginRequestObject</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_consumer_endpoints">Consumer Endpoints:</h3>
+<div class="paragraph">
+<p>For more information on Box events see
+<a href="https://docs.box.com/reference#events">https://docs.box.com/reference#events</a>.
+Consumer endpoints can only use the endpoint prefix <strong>events</strong> as
+shown in the example next.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    box://events/endpoint?[options]</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Endpoint</th>
+<th class="tableblock halign-left valign-top">Shorthand Alias</th>
+<th class="tableblock halign-left valign-top">Options</th>
+<th class="tableblock halign-left valign-top">Result Body Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">events</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[startingPosition]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.box.sdk.BoxEvent</p></td>
+</tr>
+</tbody>
+</table>
+<div id="Box-URIOptionsforevents" class="paragraph">
+<p>URI Options for <em>events</em></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">startingPosition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_message_header">Message header</h3>
+<div class="paragraph">
+<p>Any of the options can be provided in a message header for producer
+endpoints with <strong>CamelBox.</strong> prefix.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message_body">Message body</h3>
+<div class="paragraph">
+<p>All result message bodies utilize objects provided by the Box Java SDK.
+Producer endpoints can specify the option name for incoming message body
+in the <strong>inBody</strong> endpoint parameter.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_use_cases">Use cases</h3>
+<div class="paragraph">
+<p>The following route uploads new files to the user&#8217;s root folder:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    from("file:...")
+        .to("box://files/upload/inBody=fileUploadRequest");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following route polls user&#8217;s account for updates:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    from("box://events/listen?startingPosition=-1")
+        .to("bean:blah");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following route uses a producer with dynamic header options. The
+<strong>fileId</strong> property has the Box file id and the <strong>output</strong> property has
+the output stream of the file contents, so they are assigned to the
+<strong>CamelBox.fileId</strong> header and <strong>CamelBox.output</strong> header respectively
+as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    from("direct:foo")
+        .setHeader("CamelBox.fileId", header("fileId"))
+        .setHeader("CamelBox.output", header("output"))
+        .to("box://files/download")
+        .to("file://...");</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/braintree-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/boon-dataformat/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

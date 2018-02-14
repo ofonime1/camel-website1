@@ -1,0 +1,1447 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://camel.apache.org/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ahc-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ahc-ws-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/amqp-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/apns-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/asterisk-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/atmos-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/atmosphere-websocket-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/atom-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/atomix-map-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/atomix-messaging-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/atomix-multimap-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/atomix-queue-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/atomix-set-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/atomix-value-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/avro-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/avro-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/aws-cw-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/aws-ddb-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/aws-ddbstream-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/aws-ec2-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/aws-kinesis-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/aws-kinesis-firehose-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/aws-s3-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/aws-sdb-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/aws-ses-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/aws-sns-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/aws-sqs-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/aws-swf-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/aws/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/azure-blob-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/azure-queue-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/azure/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/bam-example/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/bam/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/barcode-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/base64-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/bean-validator-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/beanio-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/beanstalk-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/bindy-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/blueprint/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/bonita-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/boon-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/box-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/braintree-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/cache-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/caffeine-cache-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/caffeine-loadcache-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/castor-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/cdi/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/chronicle-engine-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/chunk-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/cm-sms-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/cmis-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/coap-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/cometd-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/consul-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/context-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/couchbase-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/couchdb-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/cql-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/crypto-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/crypto-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/csv-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/cxf-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/cxf-transport/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/cxfrs-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/digitalocean-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/disruptor-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/dns-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/docker-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/dozer-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/drill-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/dropbox-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/eclipse/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ehcache-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ejb-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/el-language/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/elasticsearch-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/elasticsearch5-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/elsql-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/etcd-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/eventadmin-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/exec-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/facebook-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/flatpack-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/flatpack-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/flink-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/fop-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/freemarker-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ftp-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ftps-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ganglia-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/geocoder-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/git-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/github-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/google-calendar-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/google-drive-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/google-mail-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/google-pubsub-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/gora-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/grape-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/groovy-dsl/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/groovy-language/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/grpc-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/guava-eventbus-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/guice/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hawtdb/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hazelcast-atomicvalue-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hazelcast-instance-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hazelcast-list-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hazelcast-map-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hazelcast-multimap-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hazelcast-queue-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hazelcast-replicatedmap-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hazelcast-ringbuffer-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hazelcast-seda-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hazelcast-set-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hazelcast-topic-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hazelcast/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hbase-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hdfs-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hdfs2-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/headersmap/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hessian-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hipchat-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hl7-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/http-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/http4-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/hystrix/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ibatis-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ical-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ignite-cache-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ignite-compute-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ignite-events-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ignite-idgen-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ignite-messaging-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ignite-queue-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ignite-set-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ignite/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/infinispan-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/influxdb-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/irc-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ironmq-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jacksonxml-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jasypt/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/javascript-language/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/javaspace-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jaxb-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jbpm-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jcache-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jclouds-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jcr-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jdbc-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jetty-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jgroups-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jibx-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jing-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jira-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jms-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jmx-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jolt-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jpa-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/json-fastjson-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/json-gson-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/json-jackson-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/json-johnzon-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/json-xstream-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jsonpath-language/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jt400-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/jxpath-language/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/kafka-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/kestrel-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/krati-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/kubernetes-build-configs-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/kubernetes-builds-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/kubernetes-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/kubernetes-config-maps-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/kubernetes-namespaces-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/kubernetes-nodes-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/kubernetes-persistent-volumes-claims-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/kubernetes-persistent-volumes-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/kubernetes-pods-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/kubernetes-replication-controllers-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/kubernetes-resources-quota-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/kubernetes-secrets-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/kubernetes-services-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/kubernetes/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/kura/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ldap-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/leveldb/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/linkedin-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/lpr-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/lucene-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/lumberjack-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/lzf-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/mail-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/metrics-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/milo-client-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/milo-server-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/mime-multipart-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/mina-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/mina2-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/mllp-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/mongodb-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/mongodb-gridfs-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/mongodb3-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/mqtt-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/msv-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/mustache-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/mvel-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/mvel-language/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/mybatis-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/nagios-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/nats-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/netty-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/netty-http-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/netty4-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/netty4-http-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ognl-language/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/olingo2-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/olingo4-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/openshift-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/openstack-cinder-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/openstack-glance-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/openstack-keystone-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/openstack-neutron-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/openstack-nova-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/openstack-swift-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/openstack/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/opentracing/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/optaplanner-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/paho-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/paxlogging-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/pdf-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/pgevent-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/pgp-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/php-language/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/protobuf-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/pubnub-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/python-language/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/quartz-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/quartz2-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/quickfix-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/rabbitmq-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/reactive-streams-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/reactor-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/rest-swagger-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/restlet-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ribbon/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/rmi-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/routebox-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/rss-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/rss-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ruby-language/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ruby/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/rx/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/salesforce-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/sap-netweaver-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/scala-eip/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/scala-getting-started/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/scala-supported-languages/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/scala/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/schematron-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/scp-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/scr/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/script/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/securexml-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/servicenow-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/servlet-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/servletlistener/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/sftp-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/shiro/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/sip-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/sjms-batch-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/sjms-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/sjms2-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/slack-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/smpp-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/snmp-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/soapjaxb-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/solr-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/spark-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/spark-rest-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/spel-language/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/splunk-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/spring-batch-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/spring-boot/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/spring-cloud-netflix/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/spring-cloud/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/spring-dm/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/spring-event-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/spring-integration-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/spring-javaconfig/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/spring-ldap-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/spring-redis-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/spring-security/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/spring-ws-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/spring/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/sql-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/sql-language/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/sql-stored-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/ssh-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/stax-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/stomp-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/stream-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/string-template-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/swagger-java/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/swagger/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/syslog-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/tarfile-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/telegram-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/terser-language/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/test-blueprint/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/test-cdi/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/test-karaf/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/test-spring/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/test/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/testng/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/thrift-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/thrift-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/tidymarkup-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/tika-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/twilio-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/twitter-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/twitter-directmessage-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/twitter-search-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/twitter-streaming-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/twitter-timeline-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/twitter/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/undertow-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/univocity-csv-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/univocity-fixed-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/univocity-tsv-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/urlrewrite/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/velocity-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/vertx-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/weather-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/websocket-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/xmlbeans-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/xmljson-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/xmlrpc-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/xmlrpc-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/xmlsecurity-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/xmpp-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/xquery-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/xquery-language/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/xstream-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/yaml-snakeyaml-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/yammer-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/zendesk-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/zipfile-dataformat/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/zipkin/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/zookeeper-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/2.20.0/zookeeper-master-component/</loc>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/components/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/versions/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

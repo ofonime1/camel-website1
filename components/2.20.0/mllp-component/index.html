@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='MLLP Component Available as of Camel version 2.17
+ The MLLP component is specifically designed to handle the nuances of the MLLP protocol and provide the functionality required by Healthcare providers to communicate with other systems using the MLLP protocol. The MLLP component provides a simple configuration URI, automated HL7 acknowledgment generation and automatic acknowledgement interrogation.
+ The MLLP protocol does not typically use a large number of concurrent TCP connections - a single active TCP connection is the normal case.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='MLLP Component Available as of Camel version 2.17
+ The MLLP component is specifically designed to handle the nuances of the MLLP protocol and provide the functionality required by Healthcare providers to communicate with other systems using the MLLP protocol. The MLLP component provides a simple configuration URI, automated HL7 acknowledgment generation and automatic acknowledgement interrogation.
+ The MLLP protocol does not typically use a large number of concurrent TCP connections - a single active TCP connection is the normal case.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/mllp-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/mllp-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_mllp_component">MLLP Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.17</strong></p>
+</div>
+<div class="paragraph">
+<p>The MLLP component is specifically designed to handle the nuances of the
+MLLP protocol and provide the functionality required by Healthcare
+providers to communicate with other systems using the MLLP protocol.
+ The MLLP component  provides a simple configuration URI, automated HL7
+acknowledgment generation and automatic acknowledgement interrogation.</p>
+</div>
+<div class="paragraph">
+<p>The MLLP protocol does not typically use a large number of concurrent
+TCP connections - a single active TCP connection is the normal case.
+ Therefore, the MLLP component uses a simple thread-per-connection model
+based an standard Java Sockets. This keeps the implementation simple
+and eliminates the dependencies other than Camel itself.</p>
+</div>
+<div class="paragraph">
+<p>The component supports the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A Camel consumer using a TCP Server</p>
+</li>
+<li>
+<p>A Camel producer using a TCP Client</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The MLLP component uses byte[] payloads, and relies on Camel Type
+Conversion to convert byte[] to other types.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their pom.xml
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-mllp&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_mllp_options">MLLP Options</h3>
+<div class="paragraph">
+<p>The MLLP component has no options.</p>
+</div>
+<div class="paragraph">
+<p>The MLLP endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>mllp:hostname:port</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_2_parameters">Path Parameters (2 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>hostname</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Hostname or IP for connection for the TCP connection. The default value is null which means any local IP address</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>port</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Port number for the TCP connection</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_22_parameters">Query Parameters (22 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>autoAck</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable/Disable the automatic generation of a MLLP Acknowledgement MLLP Consumers only</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bufferWrites</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable/Disable the validation of HL7 Payloads If enabled MLLP Payloads are buffered and written to the external system in a single write(byte) operation. If disabled the MLLP payload will not be buffered and three write operations will be used. The first operation will write the MLLP start-of-block character 0x0b (ASCII VT) the second operation will write the HL7 payload and the third operation will writh the MLLP end-of-block character and the MLLP end-of-data character 0x1c 0x0d (ASCII FS CR).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>hl7Headers</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable/Disable the automatic generation of message headers from the HL7 Message MLLP Consumers only</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>keepAlive</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable/disable the SO_KEEPALIVE socket option.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>reuseAddress</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable/disable the SO_REUSEADDR socket option.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>tcpNoDelay</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable/disable the TCP_NODELAY socket option.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>validatePayload</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable/Disable the validation of HL7 Payloads If enabled HL7 Payloads received from external systems will be validated (see Hl7Util.generateInvalidPayloadExceptionMessage for details on the validation). If and invalid payload is detected a MllpInvalidMessageException (for consumers) or a MllpInvalidAcknowledgementException will be thrown.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backlog</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum queue length for incoming connection indications (a request to connect) is set to the backlog parameter. If a connection indication arrives when the queue is full the connection is refused.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>receiveBufferSize</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the SO_RCVBUF option to the specified value (in bytes)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sendBufferSize</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the SO_SNDBUF option to the specified value (in bytes)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>charsetName</strong> (codec)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the CamelCharsetName property on the exchange</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>acceptTimeout</strong> (timeout)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout (in milliseconds) while waiting for a TCP connection TCP Server Only</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">60000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bindRetryInterval</strong> (timeout)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TCP Server Only - The number of milliseconds to wait between bind attempts</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bindTimeout</strong> (timeout)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TCP Server Only - The number of milliseconds to retry binding to a server port</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">30000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectTimeout</strong> (timeout)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout (in milliseconds) for establishing for a TCP connection TCP Client only</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">30000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxReceiveTimeouts</strong> (timeout)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum number of timeouts (specified by receiveTimeout) allowed before the TCP Connection will be reset.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">-1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>readTimeout</strong> (timeout)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The SO_TIMEOUT value (in milliseconds) used after the start of an MLLP frame has been received</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">500</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>receiveTimeout</strong> (timeout)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The SO_TIMEOUT value (in milliseconds) used when waiting for the start of an MLLP frame</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">10000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_mllp_consumer">MLLP Consumer</h3>
+<div class="paragraph">
+<p>The MLLP Consumer supports receiving MLLP-framed messages and sending
+HL7 Acknowledgements.  The MLLP Consumer can automatically generate the
+HL7 Acknowledgement (HL7 Application Acknowledgements only - AA, AE and
+AR), or the acknowledgement can be specified using
+the CamelMllpAcknowledgement exchange property.  Additionally, the type
+of acknowledgement that will be generated can be controlled by setting
+the CamelMllpAcknowledgementType exchange property.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_strong_message_headers_strong"><strong>Message Headers</strong></h3>
+<div class="paragraph">
+<p>The MLLP Consumer adds these headers on the Camel message:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 34%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Key</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>MSH field</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Example</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpLocalAddress</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpRemoteAddress</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpSendingApplication</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MSH-3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">APPA</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpSendingFacility</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MSH-4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FACA</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpReceivingApplication</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MSH-5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CAMEL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpReceivingFacility</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MSH-6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FACB</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpTimestamp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MSH-7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">20150106235900</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpSecurity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MSH-8</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpMessageType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MSH-9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADT^A04</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpEventType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MSH-9-1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AD4</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpTriggerEvent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MSH-9-2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A04</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpMessageControlId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MSH-10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">12345</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpProcessingId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MSH-11</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpVersionId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MSH-12</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.3.1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpCharset</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MSH-18</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>All headers are String types. If a header value is missing, its value
+is null.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_strong_exchange_properties_strong"><strong>Exchange Properties</strong></h3>
+<div class="paragraph">
+<p>The type of acknowledgment the MLLP Consumer generates can be controlled
+by these properties on the Camel exchange:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 34%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Key</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Example</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpAcknowledgement</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpAcknowledgementType</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AR</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>All headers are String types. If a header value is missing, its value
+is null.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_consumer_configuration">Consumer Configuration</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_mllp_producer">MLLP Producer</h3>
+<div class="paragraph">
+<p>The MLLP Producer supports sending MLLP-framed messages and receiving
+HL7 Acknowledgements.  The MLLP Producer interrogates the HL7
+Acknowledgments and raises exceptions if a negative acknowledgement is
+received.  The received acknowledgement is interrogated and an exception
+is raised in the event of a negative acknowledgement.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_strong_message_headers_strong_2"><strong>Message Headers</strong></h3>
+<div class="paragraph">
+<p>The MLLP Producer adds these headers on the Camel message:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 34%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Key</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>MSH field</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Example</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpLocalAddress</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpRemoteAddress</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpAcknowledgement</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelMllpAcknowledgementType</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AA</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>All headers are String types. If a header value is missing, its value
+is null.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/mongodb-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/mina2-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

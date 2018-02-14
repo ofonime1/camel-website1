@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='MyBatis Component Available as of Camel version 2.7
+ The mybatis: component allows you to query, poll, insert, update and delete data in a relational database using MyBatis.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-mybatis&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   URI format mybatis:statementName[?options]   Where statementName is the statement name in the MyBatis XML mapping file which maps to the query, insert, update or delete operation you wish to evaluate.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='MyBatis Component Available as of Camel version 2.7
+ The mybatis: component allows you to query, poll, insert, update and delete data in a relational database using MyBatis.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-mybatis&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   URI format mybatis:statementName[?options]   Where statementName is the statement name in the MyBatis XML mapping file which maps to the query, insert, update or delete operation you wish to evaluate.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/mybatis-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/mybatis-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_mybatis_component">MyBatis Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.7</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>mybatis:</strong> component allows you to query, poll, insert, update and
+delete data in a relational database using <a href="http://mybatis.org/">MyBatis</a>.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-mybatis&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">mybatis:statementName[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where <strong>statementName</strong> is the statement name in the MyBatis XML mapping
+file which maps to the query, insert, update or delete operation you
+wish to evaluate.</p>
+</div>
+<div class="paragraph">
+<p>You can append query options to the URI in the following format,
+<code>?option=value&amp;option=value&amp;&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>This component will by default load the MyBatis SqlMapConfig file from
+the root of the classpath with the expected name of
+<code>SqlMapConfig.xml</code>.<br>
+ If the file is located in another location, you will need to configure
+the <code>configurationUri</code> option on the <code>MyBatisComponent</code> component.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The MyBatis component supports 3 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sqlSessionFactory</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the SqlSessionFactory</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SqlSessionFactory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>configurationUri</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Location of MyBatis xml configuration file. The default value is: SqlMapConfig.xml loaded from the classpath</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">SqlMapConfig.xml</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The MyBatis endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>mybatis:statement</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>statement</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The statement name in the MyBatis XML mapping file which maps to the query insert update or delete operation you wish to evaluate.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_29_parameters">Query Parameters (29 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>outputHeader</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Store the query result in a header instead of the message body. By default outputHeader == null and the query result is stored in the message body any existing content in the message body is discarded. If outputHeader is set the value is used as the name of the header to store the query result and the original message body is preserved. Setting outputHeader will also omit populating the default CamelMyBatisResult header since it would be the same as outputHeader all the time.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>inputHeader</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User the header value for input parameters instead of the message body. By default inputHeader == null and the input parameters are taken from the message body. If outputHeader is set the value is used and query parameters will be taken from the header instead of the body.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxMessagesPerPoll</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This option is intended to split results returned by the database pool into the batches and deliver them in multiple exchanges. This integer defines the maximum messages to deliver in single exchange. By default no maximum is set. Can be used to set a limit of e.g. 1000 to avoid when starting up the server that there are thousands of files. Set a value of 0 or negative to disable it.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>onConsume</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Statement to run after data has been processed in the route</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>routeEmptyResultSet</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether allow empty resultset to be routed to the next hop</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sendEmptyMessageWhenIdle</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the polling consumer did not poll any files you can enable this option to send an empty message (no body) instead.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transacted</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables or disables transaction. If enabled then if processing an exchange failed then the consumer break out processing any further exchanges to cause a rollback eager</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useIterator</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Process resultset individually or as a list</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>pollStrategy</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pluggable org.apache.camel.PollingConsumerPollingStrategy allowing you to provide your custom implementation to control error handling usually occurred during the poll operation before an Exchange have been created and being routed in Camel.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PollingConsumerPoll Strategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>processingStrategy</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom MyBatisProcessingStrategy</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MyBatisProcessing Strategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>executorType</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The executor type to be used while executing statements. simple - executor does nothing special. reuse - executor reuses prepared statements. batch - executor reuses statements and batches updates.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">SIMPLE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExecutorType</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>statementType</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mandatory to specify for the producer to control which kind of operation to invoke.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">StatementType</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backoffErrorThreshold</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of subsequent error polls (failed due some error) that should happen before the backoffMultipler should kick-in.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backoffIdleThreshold</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of subsequent idle polls that should happen before the backoffMultipler should kick-in.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backoffMultiplier</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the scheduled polling consumer backoff if there has been a number of subsequent idles/errors in a row. The multiplier is then the number of polls that will be skipped before the next actual attempt is happening again. When this option is in use then backoffIdleThreshold and/or backoffErrorThreshold must also be configured.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>delay</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Milliseconds before the next poll. You can also specify time values using units such as 60s (60 seconds) 5m30s (5 minutes and 30 seconds) and 1h (1 hour).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">500</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>greedy</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If greedy is enabled then the ScheduledPollConsumer will run immediately again if the previous run polled 1 or more messages.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>initialDelay</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Milliseconds before the first poll starts. You can also specify time values using units such as 60s (60 seconds) 5m30s (5 minutes and 30 seconds) and 1h (1 hour).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>runLoggingLevel</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The consumer logs a start/complete log line when it polls. This option allows you to configure the logging level for that.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">TRACE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LoggingLevel</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>scheduledExecutorService</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for configuring a custom/shared thread pool to use for the consumer. By default each consumer has its own single threaded thread pool.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ScheduledExecutor Service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>scheduler</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a cron scheduler from either camel-spring or camel-quartz2 component</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ScheduledPollConsumer Scheduler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>schedulerProperties</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure additional properties when using a custom scheduler or any of the Quartz2 Spring based scheduler.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>startScheduler</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the scheduler should be auto started.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>timeUnit</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time unit for initialDelay and delay options.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">MILLISECONDS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TimeUnit</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useFixedDelay</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Controls if fixed delay or fixed rate is used. See ScheduledExecutorService in JDK for details.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message_headers">Message Headers</h3>
+<div class="paragraph">
+<p>Camel will populate the result message, either IN or OUT with a header
+with the statement used:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Header</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelMyBatisStatementName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>statementName</strong> used (for example: insertAccount).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelMyBatisResult</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>response</strong> returned from MtBatis in any of the operations. For
+instance an <code>INSERT</code> could return the auto-generated key, or number of
+rows etc.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_message_body">Message Body</h3>
+<div class="paragraph">
+<p>The response from MyBatis will only be set as the body if it&#8217;s a
+<code>SELECT</code> statement. That means, for example, for <code>INSERT</code> statements
+Camel will not replace the body. This allows you to continue routing and
+keep the original body. The response from MyBatis is always stored in
+the header with the key <code>CamelMyBatisResult</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_samples">Samples</h3>
+<div class="paragraph">
+<p>For example if you wish to consume beans from a JMS queue and insert
+them into a database you could do the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("activemq:queue:newAccount").
+  to("mybatis:insertAccount?statementType=Insert");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice we have to specify the <code>statementType</code>, as we need to instruct
+Camel which kind of operation to invoke.</p>
+</div>
+<div class="paragraph">
+<p>Where <strong>insertAccount</strong> is the MyBatis ID in the SQL mapping file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">  &lt;!-- Insert example, using the Account parameter class --&gt;
+  &lt;insert id="insertAccount" parameterType="Account"&gt;
+    insert into ACCOUNT (
+      ACC_ID,
+      ACC_FIRST_NAME,
+      ACC_LAST_NAME,
+      ACC_EMAIL
+    )
+    values (
+      #{id}, #{firstName}, #{lastName}, #{emailAddress}
+    )
+  &lt;/insert&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_statementtype_for_better_control_of_mybatis">Using StatementType for better control of MyBatis</h3>
+<div class="paragraph">
+<p>When routing to an MyBatis endpoint you will want more fine grained
+control so you can control whether the SQL statement to be executed is a
+<code>SELECT</code>, <code>UPDATE</code>, <code>DELETE</code> or <code>INSERT</code> etc. So for instance if we want
+to route to an MyBatis endpoint in which the IN body contains parameters
+to a <code>SELECT</code> statement we can do:</p>
+</div>
+<div class="paragraph">
+<p>In the code above we can invoke the MyBatis statement
+<code>selectAccountById</code> and the IN body should contain the account id we
+want to retrieve, such as an <code>Integer</code> type.</p>
+</div>
+<div class="paragraph">
+<p>We can do the same for some of the other operations, such as
+<code>SelectList</code>:</p>
+</div>
+<div class="paragraph">
+<p>And the same for <code>UPDATE</code>, where we can send an <code>Account</code> object as the
+IN body to MyBatis:</p>
+</div>
+<div class="sect3">
+<h4 id="_using_insertlist_statementtype">Using InsertList StatementType</h4>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.10</strong></p>
+</div>
+<div class="paragraph">
+<p>MyBatis allows you to insert multiple rows using its for-each batch
+driver. To use this, you need to use the &lt;foreach&gt; in the mapper XML
+file. For example as shown below:</p>
+</div>
+<div class="paragraph">
+<p>Then you can insert multiple rows, by sending a Camel message to the
+<code>mybatis</code> endpoint which uses the <code>InsertList</code> statement type, as shown
+below:</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_updatelist_statementtype">Using UpdateList StatementType</h4>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.11</strong></p>
+</div>
+<div class="paragraph">
+<p>MyBatis allows you to update multiple rows using its for-each batch
+driver. To use this, you need to use the &lt;foreach&gt; in the mapper XML
+file. For example as shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;update id="batchUpdateAccount" parameterType="java.util.Map"&gt;
+    update ACCOUNT set
+    ACC_EMAIL = #{emailAddress}
+    where
+    ACC_ID in
+    &lt;foreach item="Account" collection="list" open="(" close=")" separator=","&gt;
+        #{Account.id}
+    &lt;/foreach&gt;
+&lt;/update&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then you can update multiple rows, by sending a Camel message to the
+mybatis endpoint which uses the UpdateList statement type, as shown
+below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start")
+    .to("mybatis:batchUpdateAccount?statementType=UpdateList")
+    .to("mock:result");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_deletelist_statementtype">Using DeleteList StatementType</h4>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.11</strong></p>
+</div>
+<div class="paragraph">
+<p>MyBatis allows you to delete multiple rows using its for-each batch
+driver. To use this, you need to use the &lt;foreach&gt; in the mapper XML
+file. For example as shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;delete id="batchDeleteAccountById" parameterType="java.util.List"&gt;
+    delete from ACCOUNT
+    where
+    ACC_ID in
+    &lt;foreach item="AccountID" collection="list" open="(" close=")" separator=","&gt;
+        #{AccountID}
+    &lt;/foreach&gt;
+&lt;/delete&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then you can delete multiple rows, by sending a Camel message to the
+mybatis endpoint which uses the DeleteList statement type, as shown
+below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start")
+    .to("mybatis:batchDeleteAccount?statementType=DeleteList")
+    .to("mock:result");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_notice_on_insertlist_updatelist_and_deletelist_statementtypes">Notice on InsertList, UpdateList and DeleteList StatementTypes</h4>
+<div class="paragraph">
+<p>Parameter of any type (List, Map, etc.) can be passed to mybatis and an
+end user is responsible for handling it as required<br>
+ with the help of <a href="http://www.mybatis.org/core/dynamic-sql.html">mybatis
+dynamic queries</a> capabilities.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_scheduled_polling_example">Scheduled polling example</h4>
+<div class="paragraph">
+<p>This component supports scheduled polling and can therefore be used as
+a <a href="polling-consumer.html">Polling Consumer</a>. For example to poll the
+database every minute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("mybatis:selectAllAccounts?delay=60000").to("activemq:queue:allAccounts");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See "ScheduledPollConsumer Options"
+on <a href="polling-consumer.html">Polling Consumer</a> for more options.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively you can use another mechanism for triggering the scheduled
+polls, such as the <a href="timer.html">Timer</a> or <a href="quartz.html">Quartz</a>
+components. In the sample below we poll the database, every 30 seconds
+using the <a href="timer.html">Timer</a> component and send the data to the JMS
+queue:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("timer://pollTheDatabase?delay=30000").to("mybatis:selectAllAccounts").to("activemq:queue:allAccounts");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And the MyBatis SQL mapping file used:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">  &lt;!-- Select with no parameters using the result map for Account class. --&gt;
+  &lt;select id="selectAllAccounts" resultMap="AccountResult"&gt;
+    select * from ACCOUNT
+  &lt;/select&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_onconsume">Using onConsume</h4>
+<div class="paragraph">
+<p>This component supports executing statements <strong>after</strong> data have been
+consumed and processed by Camel. This allows you to do post updates in
+the database. Notice all statements must be <code>UPDATE</code> statements. Camel
+supports executing multiple statements whose names should be separated
+by commas.</p>
+</div>
+<div class="paragraph">
+<p>The route below illustrates we execute the <strong>consumeAccount</strong> statement
+data is processed. This allows us to change the status of the row in the
+database to processed, so we avoid consuming it twice or more.</p>
+</div>
+<div class="paragraph">
+<p>And the statements in the sqlmap file:</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_participating_in_transactions">Participating in transactions</h4>
+<div class="paragraph">
+<p>Setting up a transaction manager under camel-mybatis can be a little bit
+fiddly, as it involves externalising the database configuration outside
+the standard MyBatis <code>SqlMapConfig.xml</code> file.</p>
+</div>
+<div class="paragraph">
+<p>The first part requires the setup of a <code>DataSource</code>. This is typically a
+pool (either DBCP, or c3p0), which needs to be wrapped in a Spring
+proxy. This proxy enables non-Spring use of the <code>DataSource</code> to
+participate in Spring transactions (the MyBatis <code>SqlSessionFactory</code> does
+just this).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;bean id="dataSource" class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy"&gt;
+        &lt;constructor-arg&gt;
+            &lt;bean class="com.mchange.v2.c3p0.ComboPooledDataSource"&gt;
+                &lt;property name="driverClass" value="org.postgresql.Driver"/&gt;
+                &lt;property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/myDatabase"/&gt;
+                &lt;property name="user" value="myUser"/&gt;
+                &lt;property name="password" value="myPassword"/&gt;
+            &lt;/bean&gt;
+        &lt;/constructor-arg&gt;
+    &lt;/bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This has the additional benefit of enabling the database configuration
+to be externalised using property placeholders.</p>
+</div>
+<div class="paragraph">
+<p>A transaction manager is then configured to manage the outermost
+<code>DataSource</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"&gt;
+        &lt;property name="dataSource" ref="dataSource"/&gt;
+    &lt;/bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A <a href="http://www.mybatis.org/spring/index.html">mybatis-spring</a>
+<a href="http://www.mybatis.org/spring/factorybean.html"><code>SqlSessionFactoryBean</code></a>
+then wraps that same <code>DataSource</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"&gt;
+        &lt;property name="dataSource" ref="dataSource"/&gt;
+        &lt;!-- standard mybatis config file --&gt;
+    &lt;property name="configLocation" value="/META-INF/SqlMapConfig.xml"/&gt;
+        &lt;!-- externalised mappers --&gt;
+    &lt;property name="mapperLocations" value="classpath*:META-INF/mappers/**/*.xml"/&gt;
+    &lt;/bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The camel-mybatis component is then configured with that factory:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;bean id="mybatis" class="org.apache.camel.component.mybatis.MyBatisComponent"&gt;
+        &lt;property name="sqlSessionFactory" ref="sqlSessionFactory"/&gt;
+    &lt;/bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, a <a href="transactional-client.html">transaction policy</a> is defined
+over the top of the transaction manager, which can then be used as
+usual:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;bean id="PROPAGATION_REQUIRED" class="org.apache.camel.spring.spi.SpringTransactionPolicy"&gt;
+        &lt;property name="transactionManager" ref="txManager"/&gt;
+        &lt;property name="propagationBehaviorName" value="PROPAGATION_REQUIRED"/&gt;
+    &lt;/bean&gt;
+
+    &lt;camelContext id="my-model-context" xmlns="http://camel.apache.org/schema/spring"&gt;
+        &lt;route id="insertModel"&gt;
+            &lt;from uri="direct:insert"/&gt;
+            &lt;transacted ref="PROPAGATION_REQUIRED"/&gt;
+            &lt;to uri="mybatis:myModel.insert?statementType=Insert"/&gt;
+        &lt;/route&gt;
+    &lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/nagios-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/mvel-language/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

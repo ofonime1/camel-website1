@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Shiro Security Component Available as of Camel 2.5
+ The shiro-security component in Camel is a security focused component, based on the Apache Shiro security project.
+ Apache Shiro is a powerful and flexible open-source security framework that cleanly handles authentication, authorization, enterprise session management and cryptography. The objective of the Apache Shiro project is to provide the most robust and comprehensive application security framework available while also being very easy to understand and extremely simple to use.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Shiro Security Component Available as of Camel 2.5
+ The shiro-security component in Camel is a security focused component, based on the Apache Shiro security project.
+ Apache Shiro is a powerful and flexible open-source security framework that cleanly handles authentication, authorization, enterprise session management and cryptography. The objective of the Apache Shiro project is to provide the most robust and comprehensive application security framework available while also being very easy to understand and extremely simple to use.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/shiro/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/shiro/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect2">
+<h3 id="ShiroSecurity-ShiroSecurityComponent">Shiro Security Component</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.5</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>shiro-security</strong> component in Camel is a security focused component,
+based on the Apache Shiro security project.</p>
+</div>
+<div class="paragraph">
+<p>Apache Shiro is a powerful and flexible open-source security framework
+that cleanly handles authentication, authorization, enterprise session
+management and cryptography. The objective of the Apache Shiro project
+is to provide the most robust and comprehensive application security
+framework available while also being very easy to understand and
+extremely simple to use.</p>
+</div>
+<div class="paragraph">
+<p>This camel shiro-security component allows authentication and
+authorization support to be applied to different segments of a camel
+route.</p>
+</div>
+<div class="paragraph">
+<p>Shiro security is applied on a route using a Camel Policy. A Policy in
+Camel utilizes a strategy pattern for applying interceptors on Camel
+Processors. It offering the ability to apply cross-cutting concerns (for
+example. security, transactions etc) on sections/segments of a camel
+route.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-shiro&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ShiroSecurity-ShiroSecurityBasics">Shiro Security Basics</h4>
+<div class="paragraph">
+<p>To employ Shiro security on a camel route, a ShiroSecurityPolicy object
+must be instantiated with security configuration details (including
+users, passwords, roles etc). This object must then be applied to a
+camel route. This ShiroSecurityPolicy Object may also be registered in
+the Camel registry (JNDI or ApplicationContextRegistry) and then
+utilized on other routes in the Camel Context.</p>
+</div>
+<div class="paragraph">
+<p>Configuration details are provided to the ShiroSecurityPolicy using an
+Ini file (properties file) or an Ini object. The Ini file is a standard
+Shiro configuration file containing user/role details as shown below</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">[users]
+# user 'ringo' with password 'starr' and the 'sec-level1' role
+ringo = starr, sec-level1
+george = harrison, sec-level2
+john = lennon, sec-level3
+paul = mccartney, sec-level3
+
+[roles]
+# 'sec-level3' role has all permissions, indicated by the
+# wildcard '*'
+sec-level3 = *
+
+# The 'sec-level2' role can do anything with access of permission
+# readonly (*) to help
+sec-level2 = zone1:*
+
+# The 'sec-level1' role can do anything with access of permission
+# readonly
+sec-level1 = zone1:readonly:*</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ShiroSecurity-InstantiatingaShiroSecurityPolicyObject">Instantiating a ShiroSecurityPolicy Object</h4>
+<div class="paragraph">
+<p>A ShiroSecurityPolicy object is instantiated as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">        private final String iniResourcePath = "classpath:shiro.ini";
+        private final byte[] passPhrase = {
+            (byte) 0x08, (byte) 0x09, (byte) 0x0A, (byte) 0x0B,
+            (byte) 0x0C, (byte) 0x0D, (byte) 0x0E, (byte) 0x0F,
+            (byte) 0x10, (byte) 0x11, (byte) 0x12, (byte) 0x13,
+            (byte) 0x14, (byte) 0x15, (byte) 0x16, (byte) 0x17};
+        List&lt;permission&gt; permissionsList = new ArrayList&lt;permission&gt;();
+        Permission permission = new WildcardPermission("zone1:readwrite:*");
+        permissionsList.add(permission);
+
+        final ShiroSecurityPolicy securityPolicy =
+            new ShiroSecurityPolicy(iniResourcePath, passPhrase, true, permissionsList);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ShiroSecurity-ShiroSecurityPolicyOptions">ShiroSecurityPolicy Options</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 8.3333%;">
+<col style="width: 8.3333%;">
+<col style="width: 8.3333%;">
+<col style="width: 75.0001%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default Value</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>iniResourcePath or ini</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resource String or Ini Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A mandatory Resource String for the iniResourcePath or an instance of an
+Ini object must be passed to the security policy. Resources can be
+acquired from the file system, classpath, or URLs when prefixed with
+"file:, classpath:, or url:" respectively. For e.g "classpath:shiro.ini"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>passPhrase</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>An AES 128 based key</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A passPhrase to decrypt ShiroSecurityToken(s) sent along with Message
+Exchanges</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>alwaysReauthenticate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Setting to ensure re-authentication on every individual request. If set
+to false, the user is authenticated and locked such than only requests
+from the same user going forward are authenticated.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>permissionsList</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List&lt;Permission&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A List of permissions required in order for an authenticated user to be
+authorized to perform further action i.e continue further on the route.
+If no Permissions list or Roles List (see below) is provided to the
+ShiroSecurityPolicy object, then authorization is deemed as not
+required. Note that the default is that authorization is granted if any
+of the Permission Objects in the list are applicable.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rolesList</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List&lt;String&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.13:</strong> A List of roles required in order for an authenticated
+user to be authorized to perform further action i.e continue further on
+the route. If no roles list or permissions list (see above) is provided
+to the ShiroSecurityPolicy object, then authorization is deemed as not
+required. Note that the default is that authorization is granted if any
+of the roles in the list are applicable.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cipherService</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AES</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.shiro.crypto.CipherService</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shiro ships with AES &amp; Blowfish based CipherServices. You may use one
+these or pass in your own Cipher implementation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>base64</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.12:</strong> To use base64 encoding for the security token header,
+which allows transferring the header over <a href="jms.html">JMS</a> etc. This
+option must also be set on <code>ShiroSecurityTokenInjector</code> as well.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>allPermissionsRequired</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.13:</strong> The default is that authorization is granted if any of the
+Permission Objects in the permissionsList parameter are applicable. Set
+this to true to require all of the Permissions to be met.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>allRolesRequired</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.13:</strong> The default is that authorization is granted if any of the
+roles in the rolesList parameter are applicable. Set this to true to
+require all of the roles to be met.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="ShiroSecurity-ApplyingShiroAuthenticationonaCamelRoute">Applying Shiro Authentication on a Camel Route</h4>
+<div class="paragraph">
+<p>The ShiroSecurityPolicy, tests and permits incoming message exchanges
+containing a encrypted SecurityToken in the Message Header to proceed
+further following proper authentication. The SecurityToken object
+contains a Username/Password details that are used to determine where
+the user is a valid user.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    protected RouteBuilder createRouteBuilder() throws Exception {
+        final ShiroSecurityPolicy securityPolicy =
+            new ShiroSecurityPolicy("classpath:shiro.ini", passPhrase);
+
+        return new RouteBuilder() {
+            public void configure() {
+                onException(UnknownAccountException.class).
+                    to("mock:authenticationException");
+                onException(IncorrectCredentialsException.class).
+                    to("mock:authenticationException");
+                onException(LockedAccountException.class).
+                    to("mock:authenticationException");
+                onException(AuthenticationException.class).
+                    to("mock:authenticationException");
+
+                from("direct:secureEndpoint").
+                    to("log:incoming payload").
+                    policy(securityPolicy).
+                    to("mock:success");
+            }
+        };
+    }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ShiroSecurity-ApplyingShiroAuthorizationonaCamelRoute">Applying Shiro Authorization on a Camel Route</h4>
+<div class="paragraph">
+<p>Authorization can be applied on a camel route by associating a
+Permissions List with the ShiroSecurityPolicy. The Permissions List
+specifies the permissions necessary for the user to proceed with the
+execution of the route segment. If the user does not have the proper
+permission set, the request is not authorized to continue any further.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    protected RouteBuilder createRouteBuilder() throws Exception {
+        final ShiroSecurityPolicy securityPolicy =
+            new ShiroSecurityPolicy("./src/test/resources/securityconfig.ini", passPhrase);
+
+        return new RouteBuilder() {
+            public void configure() {
+                onException(UnknownAccountException.class).
+                    to("mock:authenticationException");
+                onException(IncorrectCredentialsException.class).
+                    to("mock:authenticationException");
+                onException(LockedAccountException.class).
+                    to("mock:authenticationException");
+                onException(AuthenticationException.class).
+                    to("mock:authenticationException");
+
+                from("direct:secureEndpoint").
+                    to("log:incoming payload").
+                    policy(securityPolicy).
+                    to("mock:success");
+            }
+        };
+    }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ShiroSecurity-CreatingaShiroSecurityTokenandinjectingitintoaMessageExchange">Creating a ShiroSecurityToken and injecting it into a Message Exchange</h4>
+<div class="paragraph">
+<p>A ShiroSecurityToken object may be created and injected into a Message
+Exchange using a Shiro Processor called ShiroSecurityTokenInjector. An
+example of injecting a ShiroSecurityToken using a
+ShiroSecurityTokenInjector in the client is shown below</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    ShiroSecurityToken shiroSecurityToken = new ShiroSecurityToken("ringo", "starr");
+    ShiroSecurityTokenInjector shiroSecurityTokenInjector =
+        new ShiroSecurityTokenInjector(shiroSecurityToken, passPhrase);
+
+    from("direct:client").
+        process(shiroSecurityTokenInjector).
+        to("direct:secureEndpoint");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ShiroSecurity-SendingMessagestoroutessecuredbyaShiroSecurityPolicy">Sending Messages to routes secured by a ShiroSecurityPolicy</h4>
+<div class="paragraph">
+<p>Messages and Message Exchanges sent along the camel route where the
+security policy is applied need to be accompanied by a SecurityToken in
+the Exchange Header. The SecurityToken is an encrypted object that holds
+a Username and Password. The SecurityToken is encrypted using AES 128
+bit security by default and can be changed to any cipher of your choice.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example of how a request may be sent using a
+ProducerTemplate in Camel along with a SecurityToken</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    @Test
+    public void testSuccessfulShiroAuthenticationWithNoAuthorization() throws Exception {
+        //Incorrect password
+        ShiroSecurityToken shiroSecurityToken = new ShiroSecurityToken("ringo", "stirr");
+
+        // TestShiroSecurityTokenInjector extends ShiroSecurityTokenInjector
+        TestShiroSecurityTokenInjector shiroSecurityTokenInjector =
+            new TestShiroSecurityTokenInjector(shiroSecurityToken, passPhrase);
+
+        successEndpoint.expectedMessageCount(1);
+        failureEndpoint.expectedMessageCount(0);
+
+        template.send("direct:secureEndpoint", shiroSecurityTokenInjector);
+
+        successEndpoint.assertIsSatisfied();
+        failureEndpoint.assertIsSatisfied();
+    }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ShiroSecurity-SendingMessagestoroutessecuredbyaShiroSecurityPolicymucheasierfromCamel2.12onwards">Sending Messages to routes secured by a ShiroSecurityPolicy (much easier from Camel 2.12 onwards)</h4>
+<div class="paragraph">
+<p>From <strong>Camel 2.12</strong> onwards its even easier as you can provide the subject
+in two different ways.</p>
+</div>
+<div class="sect4">
+<h5 id="ShiroSecurity-UsingShiroSecurityToken">Using ShiroSecurityToken</h5>
+<div class="paragraph">
+<p>You can send a message to a Camel route with a header of key
+<code>ShiroSecurityConstants.SHIRO_SECURITY_TOKEN</code> of the type
+<code>org.apache.camel.component.shiro.security.ShiroSecurityToken</code> that
+contains the username and password. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">        ShiroSecurityToken shiroSecurityToken = new ShiroSecurityToken("ringo", "starr");
+
+        template.sendBodyAndHeader("direct:secureEndpoint", "Beatle Mania", ShiroSecurityConstants.SHIRO_SECURITY_TOKEN, shiroSecurityToken);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also provide the username and password in two different headers
+as shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">        Map&lt;String, Object&gt; headers = new HashMap&lt;String, Object&gt;();
+        headers.put(ShiroSecurityConstants.SHIRO_SECURITY_USERNAME, "ringo");
+        headers.put(ShiroSecurityConstants.SHIRO_SECURITY_PASSWORD, "starr");
+        template.sendBodyAndHeaders("direct:secureEndpoint", "Beatle Mania", headers);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When you use the username and password headers, then the
+ShiroSecurityPolicy in the Camel route will automatic transform those
+into a single header with key
+ShiroSecurityConstants.SHIRO_SECURITY_TOKEN with the token. Then token
+is either a <code>ShiroSecurityToken</code> instance, or a base64 representation as
+a String (the latter is when you have set base64=true).</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/sip-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/sftp-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Zipkin Component Available as of Camel 2.18
+ The camel-zipkin component is used for tracing and timing incoming and outgoing Camel messages using zipkin.
+ Events (span) are captured for incoming and outgoing messages being sent to/from Camel.
+ This means you need to configure which Camel endpoints map to zipkin service names.
+ The mapping can be configured using:
+   route id - A Camel route id'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Zipkin Component Available as of Camel 2.18
+ The camel-zipkin component is used for tracing and timing incoming and outgoing Camel messages using zipkin.
+ Events (span) are captured for incoming and outgoing messages being sent to/from Camel.
+ This means you need to configure which Camel endpoints map to zipkin service names.
+ The mapping can be configured using:
+   route id - A Camel route id'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/zipkin/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/zipkin/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect2">
+<h3 id="Zipkin-ZipkinComponent">Zipkin Component</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.18</strong></p>
+</div>
+<div class="paragraph">
+<p>The camel-zipkin component is used for tracing and timing incoming and
+outgoing Camel messages using <a href="http://zipkin.io/">zipkin</a>.</p>
+</div>
+<div class="paragraph">
+<p>Events (span) are captured for incoming and outgoing messages being sent
+to/from Camel.</p>
+</div>
+<div class="paragraph">
+<p>This means you need to configure which Camel endpoints map
+to zipkin service names.</p>
+</div>
+<div class="paragraph">
+<p>The mapping can be configured using:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>route id - A Camel route id</p>
+</li>
+<li>
+<p>endpoint url - A Camel endpoint url</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For both kinds you can match using wildcards and regular expressions,
+using the rules from <a href="intercept.html">Intercept</a>.</p>
+</div>
+<div class="paragraph">
+<p>To match all Camel messages you can use * in the pattern and configure
+that to the same service name.</p>
+</div>
+<div class="paragraph">
+<p>If no mapping has been configured, Camel will fallback and use
+endpoint uri&#8217;s as service names. <br>
+However, it&#8217;s recommended to configure service mappings so you can use
+human-readable names instead of Camel endpoint uris in the names.</p>
+</div>
+<div class="paragraph">
+<p>Camel will auto-configure a ScribeSpanCollector if no spanCollector has been
+explicitly configured, or if the following SpanCollector hostname and port environment variables
+have been configured:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>ZIPKIN_COLLECTOR_THRIFT_SERVICE_HOST - The hostname</p>
+</li>
+<li>
+<p>ZIPKIN_COLLECTOR_THRIFT_SERVICE_PORT - The port number</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This makes it easy to use camel-zipkin in container platforms where the
+platform can run your application in a linux container where service
+configurations are provided as environment variables.</p>
+</div>
+<div class="sect3">
+<h4 id="camel-zipkin-Options">Options</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.0f</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configures a rate that decides how many events should be traced by
+zipkin. The rate is expressed as a percentage (1.0f = 100%, 0.5f is 50%, 0.1f is
+10%).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">spanCollector</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Mandatory:</strong> The collector to use for sending zipkin span events to the
+zipkin server.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">serviceName</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a global service name that matches all Camel events</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clientServiceMappings</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the <strong>client</strong> service mappings that matches Camel events to the
+given zipkin service name. The content is a Map&lt;String, String&gt; where the key is a pattern and the
+value is the service name. The pattern uses the rules from <a href="intercept.html">Intercept</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">serverServiceMappings</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the <strong>server</strong> service mappings that matches Camel events to the
+given zipkin service name. The content is a Map&lt;String, String&gt; where the key is a pattern and the
+value is the service name. The pattern uses the rules from <a href="intercept.html">Intercept</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">excludePatterns</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets exclude pattern(s) that will disable tracing with zipkin for Camel
+messages that matches the pattern. The content is a Set&lt;String&gt; where the key is a pattern. The pattern
+uses the rules from <a href="intercept.html">Intercept</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">includeMessageBody</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to include the Camel message body in the zipkin traces.
+This is not recommended for production usage, or when having big
+payloads. You can limit the size by configuring the
+<a href="how-do-i-set-the-max-chars-when-debug-logging-messages-in-camel.html">max
+debug log size</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">includeMessageBodyStreams</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to include message bodies that are stream based in the zipkin
+traces. This requires enabling stream<a href="stream-caching.html">caching</a> on the
+routes or globally on the CamelContext. This is not recommended for production usage, or when having big
+payloads. You can limit the size by configuring the
+<a href="how-do-i-set-the-max-chars-when-debug-logging-messages-in-camel.html">max
+debug log size</a>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="camel-zipkin-Example">Example</h4>
+<div class="paragraph">
+<p>To enable camel-zipkin you need to configure first</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">ZipkinTracer zipkin = new ZipkinTracer();
+// configure the scribe span collector with the hostname and port for the Zipkin Collector Server
+zipkin.setSpanCollector(new ScribeSpanCollector("192.168.90.100", 9410);
+// and then add zipkin to the CamelContext
+zipkin.init(camelContext);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The configuration above will trace all incoming and outgoing
+messages in Camel routes.</p>
+</div>
+<div class="paragraph">
+<p>To use ZipkinTracer in XML, all you need to do is to define scribe and
+zipkin tracer beans. Camel will automatically discover and use them.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">  &lt;!-- configure the scribe span collector with the hostname and port for the Zipkin Collector Server --&gt;
+  &lt;bean id="scribe" class="com.github.kristofa.brave.scribe.ScribeSpanCollector"&gt;
+    &lt;constructor-arg index="0" value="192.168.90.100"/&gt;
+    &lt;constructor-arg index="1" value="9410"/&gt;
+  &lt;/bean&gt;
+
+  &lt;!-- setup zipkin tracer --&gt;
+  &lt;bean id="zipkinTracer" class="org.apache.camel.zipkin.ZipkinTracer"&gt;
+    &lt;property name="serviceName" value="dude"/&gt;
+    &lt;property name="spanCollector" ref="scribe"/&gt;
+  &lt;/bean&gt;</code></pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="camel-zipkin-ServiceName">ServiceName</h5>
+<div class="paragraph">
+<p>However, if you want to map Camel endpoints to human friendly logical
+names, you can add mappings</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>ServiceName *</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can configure a global service name that all events will fallback
+and use, such as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">zipkin.setServiceName("invoices");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will use the same service name for all incoming and outgoing zipkin
+traces. If your application uses different services, you should map
+them to more finely grained client / server service mappings</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="camel-zipkin-ClientandServerServiceMappings">Client and Server Service Mappings</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>ClientServiceMappings</p>
+</li>
+<li>
+<p>ServerServiceMappings</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If your application hosts a service that others can call, you can map
+the Camel route endpoint to a server service mapping. For example,
+suppose your Camel application has the following route:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("activemq:queue:inbox")
+  ...
+  .to("http:someserver/somepath");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And you want to make that as a server service, you can add the following
+mapping:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">zipkin.addServerServiceMapping("activemq:queue:inbox", "orders");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then when a message is consumed from that inbox queue, it becomes a
+zipkin server event with the service name 'orders'.</p>
+</div>
+<div class="paragraph">
+<p>Now suppose that the call to http:someserver/somepath is also a service,
+which you want to map to a client service name, which can be done as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">zipkin.addClientServiceMapping("http:someserver/somepath", "audit");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then in the same Camel application you have mapped incoming and outgoing
+endpoints to different zipkin service names.</p>
+</div>
+<div class="paragraph">
+<p>You can use wildcards in the service mapping. To match all outgoing
+calls to the same HTTP server you can do:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>zipkin.addClientServiceMapping("http:someserver*", "audit");</pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="camel-zipkin-Mappingrules">Mapping rules</h5>
+<div class="paragraph">
+<p>The service name mapping for server occurs using the following rules</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Is there an exclude pattern that matches the endpoint uri of the
+from endpoint? If yes then skip.</p>
+</li>
+<li>
+<p>Is there a match in the serviceServiceMapping that matches the
+endpoint uri of the from endpoint? If yes, then use the found service name</p>
+</li>
+<li>
+<p>Is there a match in the serviceServiceMapping that matches the route
+id of the current route? If yes, then use the found service name</p>
+</li>
+<li>
+<p>Is there a match in the serviceServiceMapping that matches the
+original route id where the exchange started? If yes, then use the found
+service name</p>
+</li>
+<li>
+<p>No service name was found, the exchange is not traced by zipkin</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The service name mapping for client occurs using the following rules</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Is there an exclude pattern that matches the endpoint uri of the
+from endpoint? If yes then skip.</p>
+</li>
+<li>
+<p>Is there a match in the clientServiceMapping that matches the
+endpoint uri of endpoint where the message is being sent to? If yes, then
+use the found service name</p>
+</li>
+<li>
+<p>Is there a match in the clientServiceMapping that matches the route
+id of the current route? If yes, then use the found service name</p>
+</li>
+<li>
+<p>Is there a match in the clientServiceMapping that matches the
+original route id where the exchange started? If yes, then use the found
+service name</p>
+</li>
+<li>
+<p>No service name was found, the exchange is not traced by zipkin</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4">
+<h5 id="camel-zipkin-Noclientorservermappings">No client or server mappings</h5>
+<div class="paragraph">
+<p>If there has been no configuration of client or server service mappings,
+CamelZipkin runs in a fallback mode, and uses endpoint
+uris as the service name.</p>
+</div>
+<div class="paragraph">
+<p>In the example above, this would mean the service names would be defined as
+if you add the following code yourself:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">zipkin.addServerServiceMapping("activemq:queue:inbox", "activemq:queue:inbox");
+zipkin.addClientServiceMapping("http:someserver/somepath", "http:someserver/somepath");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is not a recommended approach, but gets you up and running quickly
+without doing any service name mappings. However, when you have multiple
+systems across your infrastructure, then you should consider using human-readable service names, that you map to instead of using the camel endpoint
+uris.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="camel-zipkin-camel-zipin-starter">camel-zipin-starter</h4>
+<div class="paragraph">
+<p>If you are using <a href="spring-boot.html">Spring Boot</a> then you can add
+the <code>camel-zipkin-starter</code> dependency, and turn on zipkin by annotating
+the main class with <code>@CamelZipkin</code>. You can then configure camel-zipkin
+in the <code>application.properties</code> file where you can configure the
+hostname and port number for the Zipkin Server, and all the other
+options as listed in the options table above.</p>
+</div>
+<div class="paragraph">
+<p>You can find an example of this in
+the https://github.com/apache/camel/tree/master/examples/camel-example-zipkin[camel-example-zipkin]</p>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/zookeeper-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/zipfile-dataformat/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

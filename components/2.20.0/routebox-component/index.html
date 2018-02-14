@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='RouteBox Component (deprecated) Available as of Camel version 2.6
+ Routebox subject for change
+ The Routebox component will be revisited in upcoming releases to see if it can be further simplified, be more intuitive and user friendly. The related Context component may be regardes as the simpler component. This component may be @deprecated in favor of Context.
+ The routebox component enables the creation of specialized endpoints that offer encapsulation and a strategy based indirection service to a collection of camel routes hosted in an automatically created or user injected camel context.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='RouteBox Component (deprecated) Available as of Camel version 2.6
+ Routebox subject for change
+ The Routebox component will be revisited in upcoming releases to see if it can be further simplified, be more intuitive and user friendly. The related Context component may be regardes as the simpler component. This component may be @deprecated in favor of Context.
+ The routebox component enables the creation of specialized endpoints that offer encapsulation and a strategy based indirection service to a collection of camel routes hosted in an automatically created or user injected camel context.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/routebox-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/routebox-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_routebox_component_deprecated">RouteBox Component (deprecated)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.6</strong></p>
+</div>
+<div class="paragraph">
+<p><strong>Routebox subject for change</strong></p>
+</div>
+<div class="paragraph">
+<p>The Routebox component will be revisited in upcoming releases to see if
+it can be further simplified, be more intuitive and user friendly. The
+related <a href="context.html">Context</a> component may be regardes as the
+simpler component. This component may be @deprecated in favor of
+<a href="context.html">Context</a>.</p>
+</div>
+<div class="paragraph">
+<p>The <strong>routebox</strong> component enables the creation of specialized endpoints
+that offer encapsulation and a strategy based indirection service to a
+collection of camel routes hosted in an automatically created or user
+injected camel context.</p>
+</div>
+<div class="paragraph">
+<p>Routebox endpoints are camel endpoints that may be invoked directly on
+camel routes. The routebox endpoint performs the following key functions</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>encapsulation - acts as a blackbox, hosting a collection of camel
+routes stored in an inner camel context. The inner context is fully
+under the control of the routebox component and is <strong>JVM bound</strong>.</p>
+</li>
+<li>
+<p>strategy based indirection - direct payloads sent to the routebox
+endpoint along a camel route to specific inner routes based on a user
+defined internal routing strategy or a dispatch map.</p>
+</li>
+<li>
+<p>exchange propagation - forward exchanges modified by the routebox
+endpoint to the next segment of the camel route.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The routebox component supports both consumer and producer endpoints.</p>
+</div>
+<div class="paragraph">
+<p>Producer endpoints are of two flavors</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Producers that send or dispatch incoming requests to a external
+routebox consumer endpoint</p>
+</li>
+<li>
+<p>Producers that directly invoke routes in an internal embedded camel
+context thereby not sending requests to an external consumer.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-routebox&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_need_for_a_camel_routebox_endpoint">The need for a Camel Routebox endpoint</h3>
+<div class="paragraph">
+<p>The routebox component is designed to ease integration in complex
+environments needing</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a large collection of routes and</p>
+</li>
+<li>
+<p>involving a wide set of endpoint technologies needing integration in
+different ways</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In such environments, it is often necessary to craft an integration
+solution by creating a sense of layering among camel routes effectively
+organizing them into</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Coarse grained or higher level routes - aggregated collection of inner
+or lower level routes exposed as Routebox endpoints that represent an
+integration focus area. For example</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Focus Area</th>
+<th class="tableblock halign-left valign-top">Coarse grained Route Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Department Focus</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HR routes, Sales routes etc</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Supply chain &amp; B2B Focus</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shipping routes, Fulfillment routes, 3rd party services etc</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Technology Focus</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database routes, JMS routes, Scheduled batch routes etc</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Fine grained routes - routes that execute a singular and specific
+business and/or integration pattern.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Requests sent to Routebox endpoints on coarse grained routes can then
+delegate requests to inner fine grained routes to achieve a specific
+integration objective, collect the final inner result, and continue to
+progress to the next step along the coarse-grained route.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">routebox:routeboxname[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can append query options to the URI in the following format,
+<code>?option=value&amp;option=value&amp;&#8230;&#8203;</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The RouteBox component has no options.</p>
+</div>
+<div class="paragraph">
+<p>The RouteBox endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>routebox:routeboxName</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>routeboxName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Logical name for the routebox (eg like a queue name)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_17_parameters">Query Parameters (17 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>dispatchMap</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A string representing a key in the Camel Registry matching an object value of the type HashMap. The HashMap key should contain strings that can be matched against the value set for the exchange header ROUTE_DISPATCH_KEY. The HashMap value should contain inner route consumer URI&#8217;s to which requests should be directed.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>dispatchStrategy</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom RouteboxDispatchStrategy which allows to use custom dispatching instead of the default.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RouteboxDispatch Strategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>forkContext</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to fork and create a new inner CamelContext instead of reusing the same CamelContext.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>innerProtocol</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Protocol used internally by the Routebox component. Can be Direct or SEDA. The Routebox component currently offers protocols that are JVM bound.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">direct</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>queueSize</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create a fixed size queue to receive requests.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>pollInterval</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timeout used when polling from seda. When a timeout occurs the consumer can check whether it is allowed to continue running. Setting a lower value allows the consumer to react more quickly upon shutdown.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>threads</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of threads to be used by the routebox to receive requests.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">20</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionTimeout</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout in millis used by the producer when sending a message.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">20000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sendToConsumer</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dictates whether a Producer endpoint sends a request to an external routebox consumer. If the setting is false the Producer creates an embedded inner context and processes requests internally.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>innerContext</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A string representing a key in the Camel Registry matching an object value of the type org.apache.camel.CamelContext. If a CamelContext is not provided by the user a CamelContext is automatically created for deployment of inner routes.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelContext</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>innerProducerTemplate</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The ProducerTemplate to use by the internal embeded CamelContext</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ProducerTemplate</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>innerRegistry</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom registry for the internal embedded CamelContext.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Registry</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>routeBuilders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A string representing a key in the Camel Registry matching an object value of the type List. If the user does not supply an innerContext pre-primed with inner routes the routeBuilders option must be provided as a non-empty list of RouteBuilders containing inner routes</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sending_receiving_messages_to_from_the_routebox">Sending/Receiving Messages to/from the routebox</h3>
+<div class="paragraph">
+<p>Before sending requests it is necessary to properly configure the
+routebox by loading the required URI parameters into the Registry as
+shown below. In the case of Spring, if the necessary beans are declared
+correctly, the registry is automatically populated by Camel.</p>
+</div>
+<div class="sect3">
+<h4 id="_step_1_loading_inner_route_details_into_the_registry">Step 1: Loading inner route details into the Registry</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Override
+protected JndiRegistry createRegistry() throws Exception {
+    JndiRegistry registry = new JndiRegistry(createJndiContext());
+
+    // Wire the routeDefinitions &amp; dispatchStrategy to the outer camelContext where the routebox is declared
+    List&lt;RouteBuilder&gt; routes = new ArrayList&lt;RouteBuilder&gt;();
+    routes.add(new SimpleRouteBuilder());
+    registry.bind("registry", createInnerRegistry());
+    registry.bind("routes", routes);
+
+    // Wire a dispatch map to registry
+    HashMap&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
+    map.put("addToCatalog", "seda:addToCatalog");
+    map.put("findBook", "seda:findBook");
+    registry.bind("map", map);
+
+    // Alternatively wiring a dispatch strategy to the registry
+    registry.bind("strategy", new SimpleRouteDispatchStrategy());
+
+    return registry;
+}
+
+private JndiRegistry createInnerRegistry() throws Exception {
+    JndiRegistry innerRegistry = new JndiRegistry(createJndiContext());
+    BookCatalog catalogBean = new BookCatalog();
+    innerRegistry.bind("library", catalogBean);
+
+    return innerRegistry;
+}
+...
+CamelContext context = new DefaultCamelContext(createRegistry());</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_step_2_optionaly_using_a_dispatch_strategy_instead_of_a_dispatch_map">Step 2: Optionaly using a Dispatch Strategy instead of a Dispatch Map</h4>
+<div class="paragraph">
+<p>Using a dispatch Strategy involves implementing the interface
+<em>org.apache.camel.component.routebox.strategy.RouteboxDispatchStrategy</em>
+as shown in the example below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class SimpleRouteDispatchStrategy implements RouteboxDispatchStrategy {
+
+    /* (non-Javadoc)
+     * @see org.apache.camel.component.routebox.strategy.RouteboxDispatchStrategy#selectDestinationUri(java.util.List, org.apache.camel.Exchange)
+     */
+    public URI selectDestinationUri(List&lt;URI&gt; activeDestinations,
+            Exchange exchange) {
+        URI dispatchDestination = null;
+
+        String operation = exchange.getIn().getHeader("ROUTE_DISPATCH_KEY", String.class);
+        for (URI destination : activeDestinations) {
+            if (destination.toASCIIString().equalsIgnoreCase("seda:" + operation)) {
+                dispatchDestination = destination;
+                break;
+            }
+        }
+
+        return dispatchDestination;
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_step_2_launching_a_routebox_consumer">Step 2: Launching a routebox consumer</h4>
+<div class="paragraph">
+<p>When creating a route consumer, note that the # entries in the
+routeboxUri are matched to the created inner registry, routebuilder list
+and dispatchStrategy/dispatchMap in the CamelContext Registry. Note that
+all routebuilders and associated routes are launched in the routebox
+created inner context</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">private String routeboxUri = "routebox:multipleRoutes?innerRegistry=#registry&amp;routeBuilders=#routes&amp;dispatchMap=#map";
+
+public void testRouteboxRequests() throws Exception {
+    CamelContext context = createCamelContext();
+    template = new DefaultProducerTemplate(context);
+    template.start();
+
+    context.addRoutes(new RouteBuilder() {
+        public void configure() {
+            from(routeboxUri)
+                .to("log:Routes operation performed?showAll=true");
+        }
+    });
+    context.start();
+
+    // Now use the ProducerTemplate to send the request to the routebox
+    template.requestBodyAndHeader(routeboxUri, book, "ROUTE_DISPATCH_KEY", "addToCatalog");
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_step_3_using_a_routebox_producer">Step 3: Using a routebox producer</h4>
+<div class="paragraph">
+<p>When sending requests to the routebox, it is not necessary for producers
+do not need to know the inner route endpoint URI and they can simply
+invoke the Routebox URI endpoint with a dispatch strategy or dispatchMap
+as shown below</p>
+</div>
+<div class="paragraph">
+<p>It is necessary to set a special exchange Header called
+<strong>ROUTE_DISPATCH_KEY</strong> (optional for Dispatch Strategy) with a key that
+matches a key in the dispatch map so that the request can be sent to the
+correct inner route</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:sendToStrategyBasedRoutebox")
+    .to("routebox:multipleRoutes?innerRegistry=#registry&amp;routeBuilders=#routes&amp;dispatchStrategy=#strategy")
+    .to("log:Routes operation performed?showAll=true");
+
+from ("direct:sendToMapBasedRoutebox")
+    .setHeader("ROUTE_DISPATCH_KEY", constant("addToCatalog"))
+    .to("routebox:multipleRoutes?innerRegistry=#registry&amp;routeBuilders=#routes&amp;dispatchMap=#map")
+    .to("log:Routes operation performed?showAll=true");</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/rss-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/rmi-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='HL7 DataFormat Available as of Camel version 2.0
+ The HL7 component is used for working with the HL7 MLLP protocol and HL7 v2 messages using the HAPI library.
+ This component supports the following:
+   HL7 MLLP codec for Mina
+  HL7 MLLP codec for Netty4 from Camel 2.15 onwards
+  Type Converter from/to HAPI and String
+  HL7 DataFormat using the HAPI library'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='HL7 DataFormat Available as of Camel version 2.0
+ The HL7 component is used for working with the HL7 MLLP protocol and HL7 v2 messages using the HAPI library.
+ This component supports the following:
+   HL7 MLLP codec for Mina
+  HL7 MLLP codec for Netty4 from Camel 2.15 onwards
+  Type Converter from/to HAPI and String
+  HL7 DataFormat using the HAPI library'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/hl7-dataformat/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/hl7-dataformat/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_hl7_dataformat">HL7 DataFormat</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.0</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>HL7</strong> component is used for working with the HL7 MLLP protocol and
+<a href="http://www.hl7.org/implement/standards/product_brief.cfm?product_id=185">HL7
+v2 messages</a> using the <a href="http://hl7api.sourceforge.net">HAPI library</a>.</p>
+</div>
+<div class="paragraph">
+<p>This component supports the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>HL7 MLLP codec for <a href="mina2.html">Mina</a></p>
+</li>
+<li>
+<p>HL7 MLLP codec for <a href="netty4.html">Netty4</a> from <strong>Camel 2.15</strong> onwards</p>
+</li>
+<li>
+<p><a href="type-converter.html">Type Converter</a> from/to HAPI and String</p>
+</li>
+<li>
+<p>HL7 DataFormat using the HAPI library</p>
+</li>
+<li>
+<p>Even more ease-of-use as it&#8217;s integrated well with the
+<a href="mina2.html">camel-mina2</a> component.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-hl7&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hl7_mllp_protocol">HL7 MLLP protocol</h3>
+<div class="paragraph">
+<p>HL7 is often used with the HL7 MLLP protocol, which is a text based TCP
+socket based protocol. This component ships with a Mina and Netty4 Codec
+that conforms to the MLLP protocol so you can easily expose an HL7
+listener accepting HL7 requests over the TCP transport layer. To expose
+a HL7 listener service, the <a href="mina2.html">camel-mina2</a> or
+<a href="netty4.html">camel-netty4</a> component is used with the
+<code>HL7MLLPCodec</code> (mina2) or <code>HL7MLLPNettyDecoder/HL7MLLPNettyEncoder</code>
+(Netty4).</p>
+</div>
+<div class="paragraph">
+<p>HL7 MLLP codec can be configured as follows:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>startByte</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x0b</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The start byte spanning the HL7 payload.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>endByte1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x1c</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The first end byte spanning the HL7 payload.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>endByte2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x0d</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The 2nd end byte spanning the HL7 payload.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>charset</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JVM Default</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The encoding (a
+<a href="http://docs.oracle.com/javase/6/docs/api/java/nio/charset/Charset.html">charset
+name</a>) to use for the codec. If not provided, Camel will use the
+<a href="http://docs.oracle.com/javase/6/docs/api/java/nio/charset/Charset.html#defaultCharset()">JVM
+default Charset</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>produceString</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>(as of Camel 2.14.1)</strong> If true, the codec creates a string using the
+defined charset. If false, the codec sends a plain byte array into the
+route, so that the HL7 Data Format can determine the actual charset from
+the HL7 message content.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>convertLFtoCR</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Will convert <code>\n</code> to <code>\r</code> (<code>0x0d</code>, 13 decimal) as HL7 stipulates <code>\r</code> as
+segment terminators. The HAPI library requires the use of <code>\r</code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_exposing_an_hl7_listener_using_mina">Exposing an HL7 listener using Mina</h4>
+<div class="paragraph">
+<p>In the Spring XML file, we configure a mina2 endpoint to listen for HL7
+requests using TCP on port <code>8888</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;endpoint id="hl7MinaListener" uri="mina2:tcp://localhost:8888?sync=true&amp;amp;codec=#hl7codec"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>sync=true</strong> indicates that this listener is synchronous and therefore
+will return a HL7 response to the caller. The HL7 codec is setup with
+<strong>codec=#hl7codec</strong>. Note that <code>hl7codec</code> is just a Spring bean ID, so it
+could be named <code>mygreatcodecforhl7</code> or whatever. The codec is also set
+up in the Spring XML file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;bean id="hl7codec" class="org.apache.camel.component.hl7.HL7MLLPCodec"&gt;
+        &lt;property name="charset" value="iso-8859-1"/&gt;
+    &lt;/bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The endpoint <strong>hl7MinaLlistener</strong> can then be used in a route as a
+consumer, as this Java DSL example illustrates:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    from("hl7MinaListener").beanRef("patientLookupService");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is a very simple route that will listen for HL7 and route it to a
+service named <strong>patientLookupService</strong>. This is also Spring bean ID,
+configured in the Spring XML as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;bean id="patientLookupService" class="com.mycompany.healthcare.service.PatientLookupService"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The business logic can be implemented in POJO classes that do not depend
+on Camel, as shown here:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import ca.uhn.hl7v2.HL7Exception;
+import ca.uhn.hl7v2.model.Message;
+import ca.uhn.hl7v2.model.v24.segment.QRD;
+
+public class PatientLookupService {
+    public Message lookupPatient(Message input) throws HL7Exception {
+        QRD qrd = (QRD)input.get("QRD");
+        String patientId = qrd.getWhoSubjectFilter(0).getIDNumber().getValue();
+
+        // find patient data based on the patient id and create a HL7 model object with the response
+        Message response = ... create and set response data
+        return response
+    }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_exposing_an_hl7_listener_using_netty_available_from_camel_2_15_onwards">Exposing an HL7 listener using Netty (available from Camel 2.15 onwards)</h4>
+<div class="paragraph">
+<p>In the Spring XML file, we configure a netty4 endpoint to listen for HL7
+requests using TCP on port <code>8888</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;endpoint id="hl7NettyListener" uri="netty4:tcp://localhost:8888?sync=true&amp;amp;encoder=#hl7encoder&amp;amp;decoder=#hl7decoder"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>sync=true</strong> indicates that this listener is synchronous and therefore
+will return a HL7 response to the caller. The HL7 codec is setup with
+<strong>encoder=#hl7encoder*and*decoder=#hl7decoder</strong>. Note that <code>hl7encoder</code>
+and <code>hl7decoder</code> are just bean IDs, so they could be named differently.
+The beans can be set in the Spring XML file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;bean id="hl7decoder" class="org.apache.camel.component.hl7.HL7MLLPNettyDecoderFactory"/&gt;
+    &lt;bean id="hl7encoder" class="org.apache.camel.component.hl7.HL7MLLPNettyEncoderFactory"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The endpoint <strong>hl7NettyListener</strong> can then be used in a route as a
+consumer, as this Java DSL example illustrates:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    from("hl7NettyListener").beanRef("patientLookupService");</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hl7_model_using_java_lang_string_or_byte">HL7 Model using java.lang.String or byte[]</h3>
+<div class="paragraph">
+<p>The HL7 MLLP codec uses plain String as its data format. Camel uses its
+<a href="type-converter.html">Type Converter</a> to convert to/from strings to
+the HAPI HL7 model objects, but you can use the plain String objects if
+you prefer, for instance if you wish to parse the data yourself.</p>
+</div>
+<div class="paragraph">
+<p>As of Camel 2.14.1 you can also let both the Mina and Netty codecs use a
+plain <code>byte[]</code> as its data format by setting the <code>produceString</code>
+property to false. The Type Converter is also capable of converting
+the <code>byte[]</code> to/from HAPI HL7 model objects.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hl7v2_model_using_hapi">HL7v2 Model using HAPI</h3>
+<div class="paragraph">
+<p>The HL7v2 model uses Java objects from the HAPI library. Using this
+library, you can encode and decode from the EDI format (ER7) that is
+mostly used with HL7v2.</p>
+</div>
+<div class="paragraph">
+<p>The sample below is a request to lookup a patient with the patient ID
+<code>0101701234</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">MSH|^~\\&amp;|MYSENDER|MYRECEIVER|MYAPPLICATION||200612211200||QRY^A19|1234|P|2.4
+QRD|200612211200|R|I|GetPatient|||1^RD|0101701234|DEM||</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Using the HL7 model you can work with a <code>ca.uhn.hl7v2.model.Message</code>
+object, e.g. to retrieve a patient ID:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Message msg = exchange.getIn().getBody(Message.class);
+QRD qrd = (QRD)msg.get("QRD");
+String patientId = qrd.getWhoSubjectFilter(0).getIDNumber().getValue();  // 0101701234</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is powerful when combined with the HL7 listener, because you don&#8217;t
+have to work with <code>byte[]</code>, <code>String</code> or any other simple object formats.
+You can just use the HAPI HL7v2 model objects. If you know the message
+type in advance, you can be more type-safe:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">QRY_A19 msg = exchange.getIn().getBody(QRY_A19.class);
+String patientId = msg.getQRD().getWhoSubjectFilter(0).getIDNumber().getValue();</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hl7_dataformat_2">HL7 DataFormat</h3>
+<div class="paragraph">
+<p>The <a href="hl7.html">HL7</a> component ships with a HL7 data format that can
+be used to marshal or unmarshal HL7 model objects.</p>
+</div>
+<div class="paragraph">
+<p>The HL7 dataformat supports 2 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Java Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>validate</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to validate the HL7 message Is by default true.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contentTypeHeader</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML or application/json for data formats marshalling to JSon etc.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p><code>marshal</code> = from Message to byte stream (can be used when responding
+using the HL7 MLLP codec)</p>
+</li>
+<li>
+<p><code>unmarshal</code> = from byte stream to Message (can be used when receiving
+streamed data from the HL7 MLLP</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To use the data format, simply instantiate an instance and invoke the
+marshal or unmarshal operation in the route builder:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">  DataFormat hl7 = new HL7DataFormat();
+  ...
+  from("direct:hl7in").marshal(hl7).to("jms:queue:hl7out");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the sample above, the HL7 is marshalled from a HAPI Message object to
+a byte stream and put on a JMS queue.<br>
+ The next example is the opposite:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">  DataFormat hl7 = new HL7DataFormat();
+  ...
+  from("jms:queue:hl7out").unmarshal(hl7).to("patientLookupService");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here we unmarshal the byte stream into a HAPI Message object that is
+passed to our patient lookup service.</p>
+</div>
+<div class="paragraph">
+<p><strong>Serializable messages</strong></p>
+</div>
+<div class="paragraph">
+<p>As of HAPI 2.0 (used by <strong>Camel 2.11</strong>), the HL7v2 model classes are fully
+serializable. So you can put HL7v2 messages directly into a JMS queue
+(i.e. without calling <code>marshal()</code> and read them again directly from the
+queue (i.e. without calling <code>unmarshal()</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Segment separators</strong></p>
+</div>
+<div class="paragraph">
+<p>As of <strong>Camel 2.11</strong>, <code>unmarshal</code> does not automatically fix segment
+separators anymore by converting <code>\n</code> to <code>\r</code>. If you <br>
+ need this conversion,
+<code>org.apache.camel.component.hl7.HL7#convertLFToCR</code> provides a handy
+<code>Expression</code> for this purpose.</p>
+</div>
+<div class="paragraph">
+<p><strong>Charset</strong></p>
+</div>
+<div class="paragraph">
+<p>As of <strong>Camel 2.14.1</strong>, both <code>marshal and unmarshal</code> evaluate the charset
+provided in the field <code>MSH-18</code>. If this field is empty, by default the
+charset contained in the corresponding Camel charset property/header is
+assumed. You can even change this default behavior by overriding the
+<code>guessCharsetName</code> method when inheriting from the <code>HL7DataFormat</code>
+class.</p>
+</div>
+<div class="paragraph">
+<p>There is a shorthand syntax in Camel for well-known data formats that
+are commonly used. Then you don&#8217;t need to create an instance of the <code>HL7DataFormat</code>
+object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">  from("direct:hl7in").marshal().hl7().to("jms:queue:hl7out");
+  from("jms:queue:hl7out").unmarshal().hl7().to("patientLookupService");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message_headers">Message Headers</h3>
+<div class="paragraph">
+<p>The unmarshal operation adds these fields from the MSH segment as
+headers on the Camel message:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">MSH field</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHL7SendingApplication</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MSH-3</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MYSERVER</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHL7SendingFacility</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MSH-4</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MYSERVERAPP</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHL7ReceivingApplication</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MSH-5</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MYCLIENT</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHL7ReceivingFacility</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MSH-6</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MYCLIENTAPP</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHL7Timestamp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MSH-7</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>20071231235900</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHL7Security</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MSH-8</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHL7MessageType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MSH-9-1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ADT</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHL7TriggerEvent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MSH-9-2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>A01</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHL7MessageControl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MSH-10</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1234</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHL7ProcessingId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MSH-11</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>P</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHL7VersionId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MSH-12</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>2.4</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">`CamelHL7Context</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">``</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">` <strong>(Camel 2.14)</strong> contains the
+<a href="http://hl7api.sourceforge.net/base/apidocs/ca/uhn/hl7v2/HapiContext.html">HapiContext</a>
+that was used to parse the message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHL7Charset</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MSH-18</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>(Camel 2.14.1)</strong> <code>UNICODE UTF-8</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>All headers except <code>CamelHL7Context `are `String</code> types. If a header
+value is missing, its value is <code>null</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The HL7 Data Format supports the following options:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>validate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the HAPI Parser should validate the message using the default
+validation rules. It is recommended to use the <code>parser</code> or <code>hapiContext</code>
+option and initialize it with the desired HAPI
+<a href="http://hl7api.sourceforge.net/base/apidocs/ca/uhn/hl7v2/validation/ValidationContext.html"><code>ValidationContext</code></a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>parser</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ca.uhn.hl7v2.parser.GenericParser</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Custom parser to be used. Must be of type
+<a href="http://hl7api.sourceforge.net/base/apidocs/ca/uhn/hl7v2/parser/Parser.html"><code>ca.uhn.hl7v2.parser.Parser</code></a>.
+Note that
+<a href="http://hl7api.sourceforge.net/base/apidocs/ca/uhn/hl7v2/parser/GenericParser.html"><code>GenericParser</code></a>
+also allows to parse XML-encoded HL7v2 messages</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hapiContext</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ca.uhn.hl7v2.DefaultHapiContext</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.14:</strong> Custom HAPI context that can define a custom parser,
+custom ValidationContext etc. This gives you full control over the HL7
+parsing and rendering process.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_dependencies">Dependencies</h3>
+<div class="paragraph">
+<p>To use HL7 in your Camel routes you&#8217;ll need to add a dependency on
+<strong>camel-hl7</strong> listed above, which implements this data format.</p>
+</div>
+<div class="paragraph">
+<p>The HAPI library is split into a
+<a href="http://repo1.maven.org/maven2/ca/uhn/hapi/hapi-base">base library</a> and
+several structure libraries, one for each HL7v2 message version:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://repo1.maven.org/maven2/ca/uhn/hapi/hapi-structures-v21">v2.1
+structures library</a></p>
+</li>
+<li>
+<p><a href="http://repo1.maven.org/maven2/ca/uhn/hapi/hapi-structures-v22">v2.2
+structures library</a></p>
+</li>
+<li>
+<p><a href="http://repo1.maven.org/maven2/ca/uhn/hapi/hapi-structures-v23">v2.3
+structures library</a></p>
+</li>
+<li>
+<p><a href="http://repo1.maven.org/maven2/ca/uhn/hapi/hapi-structures-v231">v2.3.1
+structures library</a></p>
+</li>
+<li>
+<p><a href="http://repo1.maven.org/maven2/ca/uhn/hapi/hapi-structures-v24">v2.4
+structures library</a></p>
+</li>
+<li>
+<p><a href="http://repo1.maven.org/maven2/ca/uhn/hapi/hapi-structures-v25">v2.5
+structures library</a></p>
+</li>
+<li>
+<p><a href="http://repo1.maven.org/maven2/ca/uhn/hapi/hapi-structures-v251">v2.5.1
+structures library</a></p>
+</li>
+<li>
+<p><a href="http://repo1.maven.org/maven2/ca/uhn/hapi/hapi-structures-v26">v2.6
+structures library</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>By default <code>camel-hl7</code> only references the HAPI
+<a href="http://repo1.maven.org/maven2/ca/uhn/hapi/hapi-base">base library</a>.
+Applications are responsible for including structure libraries
+themselves. For example, if an application works with HL7v2 message
+versions 2.4 and 2.5 then the following dependencies must be added:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;ca.uhn.hapi&lt;/groupId&gt;
+    &lt;artifactId&gt;hapi-structures-v24&lt;/artifactId&gt;
+    &lt;version&gt;2.2&lt;/version&gt;
+    &lt;!-- use the same version as your hapi-base version --&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;ca.uhn.hapi&lt;/groupId&gt;
+    &lt;artifactId&gt;hapi-structures-v25&lt;/artifactId&gt;
+    &lt;version&gt;2.2&lt;/version&gt;
+    &lt;!-- use the same version as your hapi-base version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, an OSGi bundle containing the base library, all
+structures libraries and required dependencies (on the bundle classpath)
+can be downloaded from the
+<a href="http://repo1.maven.org/maven2/ca/uhn/hapi/hapi-osgi-base">central Maven
+repository</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;ca.uhn.hapi&lt;/groupId&gt;
+    &lt;artifactId&gt;hapi-osgi-base&lt;/artifactId&gt;
+    &lt;version&gt;2.2&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_terser_language">Terser language</h3>
+<div class="paragraph">
+<p><a href="http://hl7api.sourceforge.net">HAPI</a> provides a
+<a href="http://hl7api.sourceforge.net/base/apidocs/ca/uhn/hl7v2/util/Terser.html">Terser</a>
+class that provides access to fields using a commonly used terse
+location specification syntax. The Terser language allows to use this
+syntax to extract values from messages and to use them as expressions
+and predicates for filtering, content-based routing etc.</p>
+</div>
+<div class="paragraph">
+<p>Sample:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import static org.apache.camel.component.hl7.HL7.terser;
+...
+
+   // extract patient ID from field QRD-8 in the QRY_A19 message above and put into message header
+   from("direct:test1")
+      .setHeader("PATIENT_ID",terser("QRD-8(0)-1"))
+      .to("mock:test1");
+
+   // continue processing if extracted field equals a message header
+   from("direct:test2")
+      .filter(terser("QRD-8(0)-1").isEqualTo(header("PATIENT_ID"))
+      .to("mock:test2");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hl7_validation_predicate">HL7 Validation predicate</h3>
+<div class="paragraph">
+<p>Often it is preferable to first parse a HL7v2 message and in a separate
+step validate it against a HAPI
+<a href="http://hl7api.sourceforge.net/base/apidocs/ca/uhn/hl7v2/validation/ValidationContext.html">ValidationContext</a>.</p>
+</div>
+<div class="paragraph">
+<p>Sample:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import static org.apache.camel.component.hl7.HL7.messageConformsTo;
+import ca.uhn.hl7v2.validation.impl.DefaultValidation;
+...
+
+   // Use standard or define your own validation rules
+   ValidationContext defaultContext = new DefaultValidation();
+
+   // Throws PredicateValidationException if message does not validate
+   from("direct:test1")
+      .validate(messageConformsTo(defaultContext))
+      .to("mock:test1");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hl7_validation_predicate_using_the_hapicontext_camel_2_14">HL7 Validation predicate using the HapiContext (Camel 2.14)</h3>
+<div class="paragraph">
+<p>The HAPI Context is always configured with a
+<a href="http://hl7api.sourceforge.net/base/apidocs/ca/uhn/hl7v2/validation/ValidationContext.html">ValidationContext</a>
+(or a
+<a href="http://hl7api.sourceforge.net/base/apidocs/ca/uhn/hl7v2/validation/builder/ValidationRuleBuilder.html">ValidationRuleBuilder</a>),
+so you can access the validation rules indirectly. Furthermore, when
+unmarshalling the HL7DataFormat forwards the configured HAPI context in
+the <code>CamelHL7Context</code> header, and the validation rules of this context
+can be easily reused:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import static org.apache.camel.component.hl7.HL7.messageConformsTo;
+import static org.apache.camel.component.hl7.HL7.messageConforms
+...
+
+  HapiContext hapiContext = new DefaultHapiContext();
+  hapiContext.getParserConfiguration().setValidating(false); // don't validate during parsing
+
+  // customize HapiContext some more ... e.g. enforce that PID-8 in ADT_A01 messages of version 2.4 is not empty
+  ValidationRuleBuilder builder = new ValidationRuleBuilder() {
+      @Override
+      protected void configure() {
+         forVersion(Version.V24)
+              .message("ADT", "A01")
+              .terser("PID-8", not(empty()));
+         }
+      };
+  hapiContext.setValidationRuleBuilder(builder);
+
+  HL7DataFormat hl7 = new HL7DataFormat();
+  hl7.setHapiContext(hapiContext);
+
+  from("direct:test1")
+     .unmarshal(hl7)                // uses the GenericParser returned from the HapiContext
+     .validate(messageConforms())   // uses the validation rules returned from the HapiContext
+                                    // equivalent with .validate(messageConformsTo(hapiContext))
+     // route continues from here</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hl7_acknowledgement_expression">HL7 Acknowledgement expression</h3>
+<div class="paragraph">
+<p>A common task in HL7v2 processing is to generate an acknowledgement
+message as response to an incoming HL7v2 message, e.g. based on a
+validation result. The <code>ack</code> expression lets us accomplish this very
+elegantly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import static org.apache.camel.component.hl7.HL7.messageConformsTo;
+import static org.apache.camel.component.hl7.HL7.ack;
+import ca.uhn.hl7v2.validation.impl.DefaultValidation;
+...
+
+  // Use standard or define your own validation rules
+   ValidationContext defaultContext = new DefaultValidation();
+
+   from("direct:test1")
+      .onException(Exception.class)
+         .handled(true)
+         .transform(ack()) // auto-generates negative ack because of exception in Exchange
+         .end()
+      .validate(messageConformsTo(defaultContext))
+      // do something meaningful here
+      ...
+      // acknowledgement
+      .transform(ack())</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_more_samples">More Samples</h3>
+<div class="paragraph">
+<p>In the following example, a plain <code>String</code> HL7 request is sent to an HL7
+listener that sends back a response:</p>
+</div>
+<div class="paragraph">
+<p>In the next sample, HL7 requests from the HL7 listener are routed to the
+business logic, which is implemented as plain POJO registered in the
+registry as <code>hl7service</code>.</p>
+</div>
+<div class="paragraph">
+<p>Then the Camel routes using the <code>RouteBuilder</code> may look as follows:</p>
+</div>
+<div class="paragraph">
+<p>Note that by using the HL7 DataFormat the Camel message headers are
+populated with the fields from the MSH segment. The headers are
+particularly useful for filtering or content-based routing as shown in
+the example above.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/http-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/hipchat-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

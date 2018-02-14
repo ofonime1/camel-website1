@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Camel Guice We have support for Google Guice as a dependency injection framework.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-guice&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   Dependency Injecting Camel with Guice The GuiceCamelContext is designed to work nicely inside Guice. You then need to bind it using some Guice Module.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Camel Guice We have support for Google Guice as a dependency injection framework.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-guice&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   Dependency Injecting Camel with Guice The GuiceCamelContext is designed to work nicely inside Guice. You then need to bind it using some Guice Module.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/guice/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/guice/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect2">
+<h3 id="Guice-CamelGuice">Camel Guice</h3>
+<div class="paragraph">
+<p>We have support for <a href="http://code.google.com/p/google-guice/">Google Guice</a>
+as a dependency injection framework.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-guice&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Guice-DependencyInjectingCamelwithGuice">Dependency Injecting Camel with Guice</h4>
+<div class="paragraph">
+<p>The <a href="http://camel.apache.org/maven/current/camel-guice/apidocs/org/apache/camel/guice/GuiceCamelContext.html">GuiceCamelContext</a>
+is designed to work nicely inside Guice. You then need to bind it using
+some Guice Module.</p>
+</div>
+<div class="paragraph">
+<p>The camel-guice library comes with a number of reusable Guice Modules
+you can use if you wish - or you can bind the GuiceCamelContext yourself
+in your own module.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://camel.apache.org/maven/current/camel-guice/apidocs/org/apache/camel/guice/CamelModule.html">CamelModule</a>
+is the base module which binds the GuiceCamelContext but leaves it up
+you to bind the RouteBuilder instances</p>
+</li>
+<li>
+<p><a href="http://camel.apache.org/maven/current/camel-guice/apidocs/org/apache/camel/guice/CamelModuleWithRouteTypes.html">CamelModuleWithRouteTypes</a>
+extends CamelModule so that in the constructor of the module you specify
+the RouteBuilder classes or instances to use</p>
+</li>
+<li>
+<p><a href="http://camel.apache.org/maven/current/camel-guice/apidocs/org/apache/camel/guice/CamelModuleWithMatchingRoutes.html">CamelModuleWithMatchingRoutes</a>
+extends CamelModule so that all bound RouteBuilder instances will be
+injected into the CamelContext or you can supply an optional Matcher to
+find RouteBuilder instances matching some kind of predicate.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>So you can specify the exact <a href="routebuilder.html">RouteBuilder</a>
+instances you want</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Injector injector = Guice.createInjector(new CamelModuleWithRouteTypes(MyRouteBuilder.class, AnotherRouteBuilder.class));
+// if required you can lookup the CamelContext
+CamelContext camelContext = injector.getInstance(CamelContext.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or inject them all</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Injector injector = Guice.createInjector(new CamelModuleWithRouteTypes());
+// if required you can lookup the CamelContext
+CamelContext camelContext = injector.getInstance(CamelContext.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can then use Guice in the usual way to inject the route instances or
+any other dependent objects.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Guice-BootstrappingwithJNDI">Bootstrapping with JNDI</h4>
+<div class="paragraph">
+<p>A common pattern used in J2EE is to bootstrap your application or root
+objects by looking them up in JNDI. This has long been the approach when
+working with JMS for example - looking up the JMS ConnectionFactory in
+JNDI for example.</p>
+</div>
+<div class="paragraph">
+<p>You can follow a similar pattern with Guice using the
+<a href="http://code.google.com/p/guiceyfruit/wiki/GuiceyJndi">GuiceyFruit JNDI
+Provider</a> which lets you bootstrap Guice from a <strong>jndi.properties</strong> file
+which can include the Guice Modules to create along with environment
+specific properties you can inject into your modules and objects.</p>
+</div>
+<div class="paragraph">
+<p>If the <strong>jndi.properties</strong> is conflict with other component, you can
+specify the jndi properties file name in the Guice Main with option -j
+or -jndiProperties with the properties file location to let Guice Main
+to load right jndi properties file.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Guice-ConfiguringComponent">Configuring Component, Endpoint or RouteBuilder instances</h4>
+<div class="paragraph">
+<p>You can use <a href="guice.html">Guice</a> to dependency inject whatever objects
+you need to create, be it an <a href="endpoint.html">Endpoint</a>,
+<a href="component.html">Component</a>, <a href="routebuilder.html">RouteBuilder</a> or
+arbitrary <a href="bean-integration.html">bean used within a route</a>.</p>
+</div>
+<div class="paragraph">
+<p>The easiest way to do this is to create your own Guice Module class
+which extends one of the above module classes and add a provider method
+for each object you wish to create. A provider method is annotated with
+<strong>@Provides</strong> as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class MyModule extends CamelModuleWithMatchingRoutes {
+
+    @Provides
+    @JndiBind("jms")
+    JmsComponent jms(@Named("activemq.brokerURL") String brokerUrl) {
+        return JmsComponent.jmsComponent(new ActiveMQConnectionFactory(brokerUrl));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can optionally annotate the method with <strong>@JndiBind</strong> to bind the
+object to JNDI at some name if the object is a component, endpoint or
+bean you wish to refer to by name in your routes.</p>
+</div>
+<div class="paragraph">
+<p>You can inject any environment specific properties (such as URLs,
+machine names, usernames/passwords and so forth) from the
+jndi.properties file easily using the <strong>@Named</strong> annotation as shown
+above. This allows most of your configuration to be in Java code which
+is typesafe and easily refactorable - then leaving some properties to be
+environment specific (the jndi.properties file) which you can then
+change based on development, testing, production etc.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Guice-CreatingmultipleRouteBuilderinstancespertype">Creating multiple RouteBuilder instances per type</h4>
+<div class="paragraph">
+<p>It is sometimes useful to create multiple instances of a particular
+<a href="routebuilder.html">RouteBuilder</a> with different configurations.</p>
+</div>
+<div class="paragraph">
+<p>To do this just create multiple provider methods for each configuration;
+or create a single provider method that returns a collection of
+RouteBuilder instances.</p>
+</div>
+<div class="paragraph">
+<p>For example</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import org.apache.camel.guice.CamelModuleWithMatchingRoutes;
+import com.google.common.collect.Lists;
+
+public class MyModule extends CamelModuleWithMatchingRoutes {
+
+    @Provides
+    @JndiBind("foo")
+    Collection&lt;RouteBuilder&gt; foo(@Named("fooUrl") String fooUrl) {
+        return Lists.newArrayList(new MyRouteBuilder(fooUrl), new MyRouteBuilder("activemq:CheeseQueue"));
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Guice-SeeAlso">See Also</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>there are a number of <a href="examples.html">Examples</a> you can look at to
+see Guice and Camel being used such as <a href="guice-jms-example.html">Guice
+JMS Example</a></p>
+</li>
+<li>
+<p><a href="guice-maven-plugin.html">Guice Maven Plugin</a> for running your
+Guice based routes via Maven</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/hawtdb/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/guava-eventbus-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

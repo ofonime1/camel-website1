@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Apache Spark Component Available as of Camel version 2.17
+ This documentation page covers the Apache Spark component for the Apache Camel. The main purpose of the Spark integration with Camel is to provide a bridge between Camel connectors and Spark tasks. In particular Camel connector provides a way to route message from various transports, dynamically choose a task to execute, use incoming message as input data for that task and finally deliver the results of the execution back to the Camel pipeline.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Apache Spark Component Available as of Camel version 2.17
+ This documentation page covers the Apache Spark component for the Apache Camel. The main purpose of the Spark integration with Camel is to provide a bridge between Camel connectors and Spark tasks. In particular Camel connector provides a way to route message from various transports, dynamically choose a task to execute, use incoming message as input data for that task and finally deliver the results of the execution back to the Camel pipeline.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/spark-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/spark-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_apache_spark_component">Apache Spark Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.17</strong></p>
+</div>
+<div class="paragraph">
+<p>This documentation page covers the <a href="http://spark.apache.org/">Apache
+Spark</a> component for the Apache Camel. The main purpose of the Spark
+integration with Camel is to provide a bridge between Camel connectors
+and Spark tasks. In particular Camel connector provides a way to route
+message from various transports, dynamically choose a task to execute,
+use incoming message as input data for that task and finally deliver the
+results of the execution back to the Camel pipeline.</p>
+</div>
+<div class="sect2">
+<h3 id="_supported_architectural_styles">Supported architectural styles</h3>
+<div class="paragraph">
+<p>Spark component can be used as a driver application deployed into an
+application server (or executed as a fat jar).</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="apache-spark.data/camel_spark_driver.png" alt="image"></span><br></p>
+</div>
+<div class="paragraph">
+<p>Spark component can also be submitted as a job directly into the Spark
+cluster.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="apache-spark.data/camel_spark_cluster.png" alt="image"></span><br></p>
+</div>
+<div class="paragraph">
+<p>While Spark component is primary designed to work as a <em>long running
+job</em> serving as an bridge between Spark cluster and the other endpoints,
+you can also use it as a <em>fire-once</em> short job.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_running_spark_in_osgi_servers">Running Spark in OSGi servers</h3>
+<div class="paragraph">
+<p>Currently the Spark component doesn&#8217;t support execution in the OSGi
+container. Spark has been designed to be executed as a fat jar, usually
+submitted as a job to a cluster. For those reasons running Spark in an
+OSGi server is at least challenging and is not support by Camel as well.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="paragraph">
+<p>Currently the Spark component supports only producers - it it intended
+to invoke a Spark job and return results. You can call RDD, data frame
+or Hive SQL job.</p>
+</div>
+<div class="paragraph">
+<p><strong>Spark URI format</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">spark:{rdd|dataframe|hive}</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_spark_options">Spark options</h4>
+<div class="paragraph">
+<p>The Apache Spark component supports 3 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>rdd</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RDD to compute against.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JavaRDDLike</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>rddCallback</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Function performing action against an RDD.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RddCallback</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Apache Spark endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>spark:endpointType</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>endpointType</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Type of the endpoint (rdd dataframe hive).</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EndpointType</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_6_parameters">Query Parameters (6 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>collect</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates if results should be collected or counted.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>dataFrame</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DataFrame to compute against.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DataFrame</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>dataFrameCallback</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Function performing action against an DataFrame.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DataFrameCallback</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>rdd</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RDD to compute against.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JavaRDDLike</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>rddCallback</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Function performing action against an RDD.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RddCallback</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rdd_jobs">RDD jobs</h3>
+<div class="paragraph">
+<p>To invoke an RDD job, use the following URI:</p>
+</div>
+<div class="paragraph">
+<p><strong>Spark RDD producer</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">spark:rdd?rdd=#testFileRdd&amp;rddCallback=#transformation</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p> Where <code>rdd</code> option refers to the name of an RDD instance (subclass of
+<code>org.apache.spark.api.java.JavaRDDLike</code>) from a Camel registry, while
+<code>rddCallback</code> refers to the implementation
+of <code>org.apache.camel.component.spark.RddCallback</code> interface (also from a
+registry). RDD callback provides a single method used to apply incoming
+messages against the given RDD. Results of callback computations are
+saved as a body to an exchange.</p>
+</div>
+<div class="paragraph">
+<p><strong>Spark RDD callback</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public interface RddCallback&lt;T&gt; {
+    T onRdd(JavaRDDLike rdd, Object... payloads);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following snippet demonstrates how to send message as an input to
+the job and return results:</p>
+</div>
+<div class="paragraph">
+<p><strong>Calling spark job</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">String pattern = "job input";
+long linesCount = producerTemplate.requestBody("spark:rdd?rdd=#myRdd&amp;rddCallback=#countLinesContaining", pattern, long.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The RDD callback for the snippet above registered as Spring bean could
+look as follows:</p>
+</div>
+<div class="paragraph">
+<p><strong>Spark RDD callback</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Bean
+RddCallback&lt;Long&gt; countLinesContaining() {
+    return new RddCallback&lt;Long&gt;() {
+        Long onRdd(JavaRDDLike rdd, Object... payloads) {
+            String pattern = (String) payloads[0];
+            return rdd.filter({line -&gt; line.contains(pattern)}).count();
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The RDD definition in Spring could looks as follows:</p>
+</div>
+<div class="paragraph">
+<p><strong>Spark RDD definition</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Bean
+JavaRDDLike myRdd(JavaSparkContext sparkContext) {
+  return sparkContext.textFile("testrdd.txt");
+}</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_void_rdd_callbacks">Void RDD callbacks</h4>
+<div class="paragraph">
+<p>If your RDD callback doesn&#8217;t return any value back to a Camel pipeline,
+you can either return <code>null</code> value or use <code>VoidRddCallback</code> base class:</p>
+</div>
+<div class="paragraph">
+<p><strong>Spark RDD definition</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Bean
+RddCallback&lt;Void&gt; rddCallback() {
+  return new VoidRddCallback() {
+        @Override
+        public void doOnRdd(JavaRDDLike rdd, Object... payloads) {
+            rdd.saveAsTextFile(output.getAbsolutePath());
+        }
+    };
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_converting_rdd_callbacks">Converting RDD callbacks</h4>
+<div class="paragraph">
+<p>If you know what type of the input data will be sent to the RDD
+callback, you can use <code>ConvertingRddCallback</code> and let Camel to
+automatically convert incoming messages before inserting those into the
+callback:</p>
+</div>
+<div class="paragraph">
+<p><strong>Spark RDD definition</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Bean
+RddCallback&lt;Long&gt; rddCallback(CamelContext context) {
+  return new ConvertingRddCallback&lt;Long&gt;(context, int.class, int.class) {
+            @Override
+            public Long doOnRdd(JavaRDDLike rdd, Object... payloads) {
+                return rdd.count() * (int) payloads[0] * (int) payloads[1];
+            }
+        };
+    };
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_annotated_rdd_callbacks">Annotated RDD callbacks</h4>
+<div class="paragraph">
+<p>Probably the easiest way to work with the RDD callbacks is to provide
+class with method marked with <code>@RddCallback</code> annotation:</p>
+</div>
+<div class="paragraph">
+<p><strong>Annotated RDD callback definition</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import static org.apache.camel.component.spark.annotations.AnnotatedRddCallback.annotatedRddCallback;
+
+@Bean
+RddCallback&lt;Long&gt; rddCallback() {
+    return annotatedRddCallback(new MyTransformation());
+}
+
+...
+
+import org.apache.camel.component.spark.annotation.RddCallback;
+
+public class MyTransformation {
+
+    @RddCallback
+    long countLines(JavaRDD&lt;String&gt; textFile, int first, int second) {
+        return textFile.count() * first * second;
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you will pass CamelContext to the annotated RDD callback factory
+method, the created callback will be able to convert incoming payloads
+to match the parameters of the annotated method:</p>
+</div>
+<div class="paragraph">
+<p><strong>Body conversions for annotated RDD callbacks</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import static org.apache.camel.component.spark.annotations.AnnotatedRddCallback.annotatedRddCallback;
+
+@Bean
+RddCallback&lt;Long&gt; rddCallback(CamelContext camelContext) {
+    return annotatedRddCallback(new MyTransformation(), camelContext);
+}
+
+...
+
+
+import org.apache.camel.component.spark.annotation.RddCallback;
+
+public class MyTransformation {
+
+    @RddCallback
+    long countLines(JavaRDD&lt;String&gt; textFile, int first, int second) {
+        return textFile.count() * first * second;
+    }
+
+}
+
+...
+
+// Convert String "10" to integer
+long result = producerTemplate.requestBody("spark:rdd?rdd=#rdd&amp;rddCallback=#rddCallback" Arrays.asList(10, "10"), long.class);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dataframe_jobs">DataFrame jobs</h3>
+<div class="paragraph">
+<p>Instead of working with RDDs Spark component can work with DataFrames as
+well.</p>
+</div>
+<div class="paragraph">
+<p>To invoke an DataFrame job, use the following URI:</p>
+</div>
+<div class="paragraph">
+<p><strong>Spark RDD producer</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">spark:dataframe?dataFrame=#testDataFrame&amp;dataFrameCallback=#transformation</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p> Where <code>dataFrame</code> option refers to the name of an DataFrame instance
+(<code>instance of of org.apache.spark.sql.DataFrame</code>) from a Camel registry,
+while <code>dataFrameCallback</code> refers to the implementation
+of <code>org.apache.camel.component.spark.DataFrameCallback</code> interface (also
+from a registry). DataFrame callback provides a single method used to
+apply incoming messages against the given DataFrame. Results of callback
+computations are saved as a body to an exchange.</p>
+</div>
+<div class="paragraph">
+<p><strong>Spark RDD callback</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public interface DataFrameCallback&lt;T&gt; {
+    T onDataFrame(DataFrame dataFrame, Object... payloads);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following snippet demonstrates how to send message as an input to a
+job and return results:</p>
+</div>
+<div class="paragraph">
+<p><strong>Calling spark job</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">String model = "Micra";
+long linesCount = producerTemplate.requestBody("spark:dataFrame?dataFrame=#cars&amp;dataFrameCallback=#findCarWithModel", model, long.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The DataFrame callback for the snippet above registered as Spring bean
+could look as follows:</p>
+</div>
+<div class="paragraph">
+<p><strong>Spark RDD callback</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Bean
+RddCallback&lt;Long&gt; findCarWithModel() {
+    return new DataFrameCallback&lt;Long&gt;() {
+        @Override
+        public Long onDataFrame(DataFrame dataFrame, Object... payloads) {
+            String model = (String) payloads[0];
+            return dataFrame.where(dataFrame.col("model").eqNullSafe(model)).count();
+        }
+    };
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The DataFrame definition in Spring could looks as follows:</p>
+</div>
+<div class="paragraph">
+<p><strong>Spark RDD definition</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Bean
+DataFrame cars(HiveContext hiveContext) {
+    DataFrame jsonCars = hiveContext.read().json("/var/data/cars.json");
+    jsonCars.registerTempTable("cars");
+    return jsonCars;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hive_jobs">Hive jobs</h3>
+<div class="paragraph">
+<p> Instead of working with RDDs or DataFrame Spark component can also
+receive Hive SQL queries as payloads. To send Hive query to Spark
+component, use the following URI:</p>
+</div>
+<div class="paragraph">
+<p><strong>Spark RDD producer</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">spark:hive</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following snippet demonstrates how to send message as an input to a
+job and return results:</p>
+</div>
+<div class="paragraph">
+<p><strong>Calling spark job</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">long carsCount = template.requestBody("spark:hive?collect=false", "SELECT * FROM cars", Long.class);
+List&lt;Row&gt; cars = template.requestBody("spark:hive", "SELECT * FROM cars", List.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The table we want to execute query against should be registered in a
+HiveContext before we query it. For example in Spring such registration
+could look as follows:</p>
+</div>
+<div class="paragraph">
+<p><strong>Spark RDD definition</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Bean
+DataFrame cars(HiveContext hiveContext) {
+    DataFrame jsonCars = hiveContext.read().json("/var/data/cars.json");
+    jsonCars.registerTempTable("cars");
+    return jsonCars;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/spark-rest-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/solr-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

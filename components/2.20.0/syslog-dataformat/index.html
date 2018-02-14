@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Syslog DataFormat Available as of Camel version 2.6
+ The syslog dataformat is used for working with RFC3164 and RFC5424 messages.
+ This component supports the following:
+   UDP consumption of syslog messages
+  Agnostic data format using either plain String objects or SyslogMessage model objects.
+  Type Converter from/to SyslogMessage and String
+  Integration with the camel-mina component.
+  Integration with the camel-netty component.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Syslog DataFormat Available as of Camel version 2.6
+ The syslog dataformat is used for working with RFC3164 and RFC5424 messages.
+ This component supports the following:
+   UDP consumption of syslog messages
+  Agnostic data format using either plain String objects or SyslogMessage model objects.
+  Type Converter from/to SyslogMessage and String
+  Integration with the camel-mina component.
+  Integration with the camel-netty component.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/syslog-dataformat/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/syslog-dataformat/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_syslog_dataformat">Syslog DataFormat</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.6</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>syslog</strong> dataformat is used for working with
+<a href="http://www.ietf.org/rfc/rfc3164.txt">RFC3164</a> and RFC5424 messages.</p>
+</div>
+<div class="paragraph">
+<p>This component supports the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>UDP consumption of syslog messages</p>
+</li>
+<li>
+<p>Agnostic data format using either plain String objects or
+SyslogMessage model objects.</p>
+</li>
+<li>
+<p><a href="type-converter.html">Type Converter</a> from/to SyslogMessage and
+String</p>
+</li>
+<li>
+<p>Integration with the <a href="mina.html">camel-mina</a> component.</p>
+</li>
+<li>
+<p>Integration with the <a href="netty.html">camel-netty</a> component.</p>
+</li>
+<li>
+<p><strong>Camel 2.14:</strong> Encoder and decoder for
+the <a href="netty.html">camel-netty</a> component.</p>
+</li>
+<li>
+<p><strong>Camel 2.14:</strong> Support for RFC5424 also.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-syslog&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rfc3164_syslog_protocol">RFC3164 Syslog protocol</h3>
+<div class="paragraph">
+<p>Syslog uses the user datagram protocol (UDP)
+<a href="https://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=CAMEL&amp;title=1&amp;linkCreation=true&amp;fromPageId=24185759">1</a>
+as its underlying transport layer mechanism.
+The UDP port that has been assigned to syslog is 514.</p>
+</div>
+<div class="paragraph">
+<p>To expose a Syslog listener service we reuse the existing
+<a href="mina.html">camel-mina</a> component or <a href="netty.html">camel-netty</a>
+where we just use the <code>Rfc3164SyslogDataFormat</code> to marshal and unmarshal
+messages. Notice that from <strong>Camel 2.14</strong> onwards the syslog dataformat is
+renamed to <code>SyslogDataFormat</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The Syslog dataformat supports 1 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Java Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contentTypeHeader</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML or application/json for data formats marshalling to JSon etc.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_rfc5424_syslog_protocol">RFC5424 Syslog protocol</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.14</strong></p>
+</div>
+<div class="paragraph">
+<p>To expose a Syslog listener service we reuse the
+existing <a href="mina.html">camel-mina</a> component
+or <a href="netty.html">camel-netty</a> where we just use
+the <code>SyslogDataFormat</code> to marshal and unmarshal messages</p>
+</div>
+<div class="sect3">
+<h4 id="_exposing_a_syslog_listener">Exposing a Syslog listener</h4>
+<div class="paragraph">
+<p>In our Spring XML file, we configure an endpoint to listen for udp
+messages on port 10514, note that in netty we disable the defaultCodec,
+this <br>
+ will allow a fallback to a NettyTypeConverter and delivers the message
+as an InputStream:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext id="myCamel" xmlns="http://camel.apache.org/schema/spring"&gt;
+
+    &lt;dataFormats&gt;
+          &lt;syslog id="mySyslog"/&gt;
+    &lt;/dataFormats&gt;
+
+    &lt;route&gt;
+          &lt;from uri="netty:udp://localhost:10514?sync=false&amp;amp;allowDefaultCodec=false"/&gt;
+          &lt;unmarshal ref="mySyslog"/&gt;
+          &lt;to uri="mock:stop1"/&gt;
+    &lt;/route&gt;
+
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The same route using <a href="mina.html">camel-mina</a></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext id="myCamel" xmlns="http://camel.apache.org/schema/spring"&gt;
+
+    &lt;dataFormats&gt;
+          &lt;syslog id="mySyslog"/&gt;
+    &lt;/dataFormats&gt;
+
+    &lt;route&gt;
+          &lt;from uri="mina:udp://localhost:10514"/&gt;
+          &lt;unmarshal ref="mySyslog"/&gt;
+          &lt;to uri="mock:stop1"/&gt;
+    &lt;/route&gt;
+
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sending_syslog_messages_to_a_remote_destination">Sending syslog messages to a remote destination</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext id="myCamel" xmlns="http://camel.apache.org/schema/spring"&gt;
+
+    &lt;dataFormats&gt;
+        &lt;syslog id="mySyslog"/&gt;
+    &lt;/dataFormats&gt;
+
+    &lt;route&gt;
+        &lt;from uri="direct:syslogMessages"/&gt;
+        &lt;marshal ref="mySyslog"/&gt;
+        &lt;to uri="mina:udp://remotehost:10514"/&gt;
+    &lt;/route&gt;
+
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/tarfile-dataformat/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/swagger/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

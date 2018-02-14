@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Simple JMS2 Component Available as of Camel version 2.19
+ The Simple JMS 2.0 Component, or SJMS2, is a JMS client for use with Camel that uses well known best practices when it comes to JMS client creation and configuration. SJMS2 contains a brand new JMS 2.0 client API written explicitly for Camel eliminating third party messaging implementations keeping it light and resilient. The following features is included:
+   Standard Queue and Topic Support (Durable &amp; Non-Durable)'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Simple JMS2 Component Available as of Camel version 2.19
+ The Simple JMS 2.0 Component, or SJMS2, is a JMS client for use with Camel that uses well known best practices when it comes to JMS client creation and configuration. SJMS2 contains a brand new JMS 2.0 client API written explicitly for Camel eliminating third party messaging implementations keeping it light and resilient. The following features is included:
+   Standard Queue and Topic Support (Durable &amp; Non-Durable)'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/sjms2-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/sjms2-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_simple_jms2_component">Simple JMS2 Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.19</strong></p>
+</div>
+<div class="paragraph">
+<p>The Simple JMS 2.0 Component, or SJMS2, is a JMS client for use with Camel
+that uses well known best practices when it comes to JMS client creation
+and configuration. SJMS2 contains a brand new JMS 2.0 client API written
+explicitly for Camel eliminating third party messaging implementations
+keeping it light and resilient. The following features is included:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Standard Queue and Topic Support (Durable &amp; Non-Durable)</p>
+</li>
+<li>
+<p>InOnly &amp; InOut MEP Support</p>
+</li>
+<li>
+<p>Asynchronous Producer and Consumer Processing</p>
+</li>
+<li>
+<p>Internal JMS Transaction Support</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Additional key features include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Plugable Connection Resource Management</p>
+</li>
+<li>
+<p>Session, Consumer, &amp; Producer Pooling &amp; Caching Management</p>
+</li>
+<li>
+<p>Batch Consumers and Producers</p>
+</li>
+<li>
+<p>Transacted Batch Consumers &amp; Producers</p>
+</li>
+<li>
+<p>Support for Customizable Transaction Commit Strategies (Local JMS
+Transactions only)</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Why the S in SJMS</strong></p>
+</div>
+<div class="paragraph">
+<p>S stands for Simple and Standard and Springless. Also camel-jms was
+already taken. {icon-smile}</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-sjms2&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>sjms2:[queue:|topic:]destinationName[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where <code>destinationName</code> is a JMS queue or topic name. By default, the
+<code>destinationName</code> is interpreted as a queue name. For example, to
+connect to the queue, <code>FOO.BAR</code> use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>sjms2:FOO.BAR</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can include the optional <code>queue:</code> prefix, if you prefer:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>sjms2:queue:FOO.BAR</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To connect to a topic, you <em>must</em> include the <code>topic:</code> prefix. For
+example, to connect to the topic, <code>Stocks.Prices</code>, use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>sjms2:topic:Stocks.Prices</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You append query options to the URI using the following format,
+<code>?option=value&amp;option=value&amp;&#8230;&#8203;</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_component_options_and_configurations">Component Options and Configurations</h3>
+<div class="paragraph">
+<p>The Simple JMS2 component supports 15 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionFactory</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A ConnectionFactory is required to enable the SjmsComponent. It can be set directly or set set as part of a ConnectionResource.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ConnectionFactory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionResource</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A ConnectionResource is an interface that allows for customization and container control of the ConnectionFactory. See Plugable Connection Resource Management for further details.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ConnectionResource</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionCount</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum number of connections available to endpoints started under this component</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>jmsKeyFormatStrategy</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pluggable strategy for encoding and decoding JMS keys so they can be compliant with the JMS specification. Camel provides one implementation out of the box: default. The default strategy will safely marshal dots and hyphens (. and -). Can be used for JMS brokers which do not care whether JMS header keys contain illegal characters. You can provide your own implementation of the org.apache.camel.component.jms.JmsKeyFormatStrategy and refer to it using the notation.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JmsKeyFormatStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transactionCommit Strategy</strong> (transaction)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure which kind of commit strategy to use. Camel provides two implementations out of the box default and batch.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TransactionCommit Strategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>destinationCreation Strategy</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom DestinationCreationStrategy.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DestinationCreation Strategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>timedTaskManager</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom TimedTaskManager</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TimedTaskManager</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>messageCreatedStrategy</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the given MessageCreatedStrategy which are invoked when Camel creates new instances of javax.jms.Message objects when Camel is sending a JMS message.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MessageCreatedStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionTestOnBorrow</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When using the default org.apache.camel.component.sjms.jms.ConnectionFactoryResource then should each javax.jms.Connection be tested (calling start) before returned from the pool.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionUsername</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The username to use when creating javax.jms.Connection when using the default org.apache.camel.component.sjms.jms.ConnectionFactoryResource.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionPassword</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The password to use when creating javax.jms.Connection when using the default org.apache.camel.component.sjms.jms.ConnectionFactoryResource.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionClientId</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The client ID to use when creating javax.jms.Connection when using the default org.apache.camel.component.sjms.jms.ConnectionFactoryResource.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionMaxWait</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The max wait time in millis to block and wait on free connection when the pool is exhausted when using the default org.apache.camel.component.sjms.jms.ConnectionFactoryResource.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>headerFilterStrategy</strong> (filter)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HeaderFilterStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Simple JMS2 endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sjms2:destinationType:destinationName</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_2_parameters">Path Parameters (2 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>destinationType</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The kind of destination to use</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">queue</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>destinationName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> DestinationName is a JMS queue or topic name. By default the destinationName is interpreted as a queue name.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_37_parameters">Query Parameters (37 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>acknowledgementMode</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The JMS acknowledgement name which is one of: SESSION_TRANSACTED CLIENT_ACKNOWLEDGE AUTO_ACKNOWLEDGE DUPS_OK_ACKNOWLEDGE</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">AUTO_ ACKNOWLEDGE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SessionAcknowledgement Type</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>consumerCount</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the number of consumer listeners used for this endpoint.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>durable</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets topic consumer to durable.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>durableSubscriptionId</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the durable subscription Id required for durable topics.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>shared</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the consumer to shared.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>subscriptionId</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the subscription Id required for durable or shared topics.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>messageSelector</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the JMS Message selector syntax.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>namedReplyTo</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the reply to destination name used for InOut producer endpoints.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>persistent</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Flag used to enable/disable message persistence.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>producerCount</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the number of producers used for this endpoint.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>ttl</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Flag used to adjust the Time To Live value of produced messages.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">-1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>allowNullBody</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to allow sending messages with no body. If this option is false and the message body is null then an JMSException is thrown.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>prefillPool</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to prefill the producer connection pool on startup or create connections lazy when needed.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>responseTimeOut</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the amount of time we should wait before timing out a InOut response.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>asyncStartListener</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to startup the consumer message listener asynchronously when starting a route. For example if a JmsConsumer cannot get a connection to a remote JMS broker then it may block while retrying and/or failover. This will cause Camel to block while starting routes. By setting this option to true you will let routes startup while the JmsConsumer connects to the JMS broker using a dedicated thread in asynchronous mode. If this option is used then beware that if the connection could not be established then an exception is logged at WARN level and the consumer will not be able to receive messages; You can then restart the route to retry.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>asyncStopListener</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to stop the consumer message listener asynchronously when stopping a route.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionCount</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum number of connections available to this endpoint</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionFactory</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Initializes the connectionFactory for the endpoint which takes precedence over the component&#8217;s connectionFactory if any</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ConnectionFactory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionResource</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Initializes the connectionResource for the endpoint which takes precedence over the component&#8217;s connectionResource if any</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ConnectionResource</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>destinationCreationStrategy</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom DestinationCreationStrategy.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DestinationCreation Strategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionListener</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the JMS Exception Listener that is to be notified of any underlying JMS exceptions.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionListener</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>headerFilterStrategy</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom HeaderFilterStrategy to filter header to and from Camel message.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HeaderFilterStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>includeAllJMSXProperties</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to include all JMSXxxx properties when mapping from JMS to Camel Message. Setting this to true will include properties such as JMSXAppID and JMSXUserID etc. Note: If you are using a custom headerFilterStrategy then this option does not apply.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>jmsKeyFormatStrategy</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pluggable strategy for encoding and decoding JMS keys so they can be compliant with the JMS specification.Camel provides two implementations out of the box: default and passthrough. The default strategy will safely marshal dots and hyphens (. and -). The passthrough strategy leaves the key as is. Can be used for JMS brokers which do not care whether JMS header keys contain illegal characters. You can provide your own implementation of the org.apache.camel.component.jms.JmsKeyFormatStrategy and refer to it using the notation.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JmsKeyFormatStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>mapJmsMessage</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether Camel should auto map the received JMS message to a suited payload type such as javax.jms.TextMessage to a String etc. See section about how mapping works below for more details.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>messageCreatedStrategy</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the given MessageCreatedStrategy which are invoked when Camel creates new instances of javax.jms.Message objects when Camel is sending a JMS message.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MessageCreatedStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>errorHandlerLoggingLevel</strong> (logging)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows to configure the default errorHandler logging level for logging uncaught exceptions.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">WARN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LoggingLevel</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>errorHandlerLogStackTrace</strong> (logging)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows to control whether stacktraces should be logged or not by the default errorHandler.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transacted</strong> (transaction)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether to use transacted mode</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transactionBatchCount</strong> (transaction)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If transacted sets the number of messages to process before committing a transaction.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">-1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transactionBatchTimeout</strong> (transaction)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets timeout (in millis) for batch transactions the value should be 1000 or higher.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transactionCommitStrategy</strong> (transaction)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the commit strategy.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TransactionCommit Strategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sharedJMSSession</strong> (transaction)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether to share JMS session with other SJMS endpoints. Turn this off if your route is accessing to multiple JMS providers. If you need transaction against multiple JMS providers use jms component to leverage XA transaction.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Below is an example of how to configure the <code>Sjms2Component</code> with its
+required <code>ConnectionFactory</code> provider. It will create a single connection
+by default and store it using the component&#8217;s internal pooling APIs to
+ensure that it is able to service Session creation requests in a thread
+safe manner.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Sjms2Component component = new Sjms2Component();
+component.setConnectionFactory(new ActiveMQConnectionFactory("tcp://localhost:61616"));
+getContext().addComponent("sjms2", component);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For a SJMS2 component that is required to support a durable subscription,
+you can override the default <code>ConnectionFactoryResource</code> instance and set
+the <code>clientId</code> property.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">ConnectionFactoryResource connectionResource = new ConnectionFactoryResource();
+connectionResource.setConnectionFactory(new ActiveMQConnectionFactory("tcp://localhost:61616"));
+connectionResource.setClientId("myclient-id");
+
+Sjms2Component component = new Sjms2Component();
+component.setConnectionResource(connectionResource);
+component.setMaxConnections(1);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_producer_usage">Producer Usage</h3>
+<div class="sect3">
+<h4 id="_inonly_producer_default">InOnly Producer - (Default)</h4>
+<div class="paragraph">
+<p>The <em>InOnly</em> producer is the default behavior of the SJMS2 Producer
+Endpoint.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start")
+    .to("sjms2:queue:bar");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_inout_producer">InOut Producer</h4>
+<div class="paragraph">
+<p>To enable <em>InOut</em> behavior append the <code>exchangePattern</code> attribute to the
+URI. By default it will use a dedicated TemporaryQueue for each
+consumer.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start")
+    .to("sjms2:queue:bar?exchangePattern=InOut");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can specify a <code>namedReplyTo</code> though which can provide a better
+monitor point.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start")
+    .to("sjms2:queue:bar?exchangePattern=InOut&amp;namedReplyTo=my.reply.to.queue");</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_consumer_usage">Consumer Usage</h3>
+<div class="sect3">
+<h4 id="_durable_shared_subscription">Durable Shared Subscription</h4>
+<div class="paragraph">
+<p>To create a durable subscription that can be shared between one or more consumers.
+Use a JMS 2.0 compliant connection factory and specify a common subscriptionId. Then set the subscription properties durable and shared to true.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("sjms2:topic:foo?consumerCount=3&amp;subscriptionId=bar&amp;durable=true&amp;shared=true")
+    .to("mock:result");
+
+from("sjms2:topic:foo?consumerCount=2&amp;subscriptionId=bar&amp;durable=true&amp;shared=true")
+    .to("mock:result");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_inonly_consumer_default">InOnly Consumer - (Default)</h4>
+<div class="paragraph">
+<p>The <em>InOnly</em> xonsumer is the default Exchange behavior of the SJMS2
+Consumer Endpoint.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("sjms2:queue:bar")
+    .to("mock:result");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_inout_consumer">InOut Consumer</h4>
+<div class="paragraph">
+<p>To enable <em>InOut</em> behavior append the <code>exchangePattern</code> attribute to the
+URI.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("sjms2:queue:in.out.test?exchangePattern=InOut")
+    .transform(constant("Bye Camel"));</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_advanced_usage_notes">Advanced Usage Notes</h3>
+<div class="sect3">
+<h4 id="SJMS2-connectionresource">Plugable Connection Resource Management</h4>
+<div class="paragraph">
+<p>SJMS2 provides JMS
+<a href="http://docs.oracle.com/javaee/5/api/javax/jms/Connection.html"><code>Connection</code></a>
+resource management through built-in connection pooling. This eliminates
+the need to depend on third party API pooling logic. However there may
+be times that you are required to use an external Connection resource
+manager such as those provided by J2EE or OSGi containers. For this SJMS2
+provides an interface that can be used to override the internal SJMS2
+Connection pooling capabilities. This is accomplished through the
+<a href="https://svn.apache.org/repos/asf/camel/trunk/components/camel-sjms/src/main/java/org/apache/camel/component/sjms/jms/ConnectionResource.java"><code>ConnectionResource</code></a>
+interface.</p>
+</div>
+<div class="paragraph">
+<p>The
+<a href="https://svn.apache.org/repos/asf/camel/trunk/components/camel-sjms/src/main/java/org/apache/camel/component/sjms/jms/ConnectionResource.java"><code>ConnectionResource</code></a>
+provides methods for borrowing and returning Connections as needed is
+the contract used to provide
+<a href="http://docs.oracle.com/javaee/5/api/javax/jms/Connection.html"><code>Connection</code></a>
+pools to the SJMS2 component. A user should use when it is necessary to
+integrate SJMS2 with an external connection pooling manager.</p>
+</div>
+<div class="paragraph">
+<p>It is recommended though that for standard
+<a href="http://docs.oracle.com/javaee/5/api/javax/jms/ConnectionFactory.html"><code>ConnectionFactory</code></a>
+providers you use the
+<a href="https://svn.apache.org/repos/asf/camel/trunk/components/camel-sjms/src/test/java/org/apache/camel/component/sjms/it/ConnectionResourceIT.java"><code>ConnectionFactoryResource</code></a>
+implementation that is provided with SJMS2 as-is or extend as it is
+optimized for this component.</p>
+</div>
+<div class="paragraph">
+<p>Below is an example of using the plugable ConnectionResource with the
+ActiveMQ <code>PooledConnectionFactory</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class AMQConnectionResource implements ConnectionResource {
+    private PooledConnectionFactory pcf;
+
+    public AMQConnectionResource(String connectString, int maxConnections) {
+        super();
+        pcf = new PooledConnectionFactory(connectString);
+        pcf.setMaxConnections(maxConnections);
+        pcf.start();
+    }
+
+    public void stop() {
+        pcf.stop();
+    }
+
+    @Override
+    public Connection borrowConnection() throws Exception {
+        Connection answer = pcf.createConnection();
+        answer.start();
+        return answer;
+    }
+
+    @Override
+    public Connection borrowConnection(long timeout) throws Exception {
+        // SNIPPED...
+    }
+
+    @Override
+    public void returnConnection(Connection connection) throws Exception {
+        // Do nothing since there isn't a way to return a Connection
+        // to the instance of PooledConnectionFactory
+        log.info("Connection returned");
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then pass in the <code>ConnectionResource</code> to the <code>Sjms2Component</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CamelContext camelContext = new DefaultCamelContext();
+AMQConnectionResource pool = new AMQConnectionResource("tcp://localhost:33333", 1);
+Sjms2Component component = new Sjms2Component();
+component.setConnectionResource(pool);
+camelContext.addComponent("sjms2", component);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To see the full example of its usage please refer to the
+<a href="https://svn.apache.org/repos/asf/camel/trunk/components/camel-sjms/src/test/java/org/apache/camel/component/sjms/it/ConnectionResourceIT.java"><code>ConnectionResourceIT</code></a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_session_consumer_producer_pooling_caching_management">Session, Consumer, &amp; Producer Pooling &amp; Caching Management</h4>
+<div class="paragraph">
+<p>Coming soon &#8230;&#8203;</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_batch_message_support">Batch Message Support</h4>
+<div class="paragraph">
+<p>The Sjms2Producer supports publishing a collection of messages by
+creating an Exchange that encapsulates a <code>List</code>. This Sjms2Producer will
+take then iterate through the contents of the List and publish each
+message individually.</p>
+</div>
+<div class="paragraph">
+<p>If when producing a batch of messages there is the need to set headers
+that are unique to each message you can use the SJMS2
+<a href="https://svn.apache.org/repos/asf/camel/trunk/components/camel-sjms/src/main/java/org/apache/camel/component/sjms/BatchMessage.java"><code>BatchMessage</code></a>
+class. When the Sjms2Producer encounters a <code>BatchMessage</code> list it will
+iterate each <code>BatchMessage</code> and publish the included payload and headers.</p>
+</div>
+<div class="paragraph">
+<p>Below is an example of using the BatchMessage class. First we create a
+list of <code>BatchMessage</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">List&lt;BatchMessage&lt;String&gt;&gt; messages = new ArrayList&lt;BatchMessage&lt;String&gt;&gt;();
+for (int i = 1; i &lt;= messageCount; i++) {
+    String body = "Hello World " + i;
+    BatchMessage&lt;String&gt; message = new BatchMessage&lt;String&gt;(body, null);
+    messages.add(message);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then publish the list:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">template.sendBody("sjms2:queue:batch.queue", messages);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_customizable_transaction_commit_strategies_local_jms_transactions_only">Customizable Transaction Commit Strategies (Local JMS Transactions only)</h4>
+<div class="paragraph">
+<p>SJMS2 provides a developer the means to create a custom and plugable
+transaction strategy through the use of the
+<a href="https://svn.apache.org/repos/asf/camel/trunk/components/camel-sjms/src/main/java/org/apache/camel/component/sjms/TransactionCommitStrategy.java"><code>TransactionCommitStrategy</code></a>
+interface. This allows a user to define a unique set of circumstances
+that the
+<a href="https://svn.apache.org/repos/asf/camel/trunk/components/camel-sjms/src/main/java/org/apache/camel/component/sjms/tx/SessionTransactionSynchronization.java"><code>SessionTransactionSynchronization</code></a>
+will use to determine when to commit the Session. An example of its use
+is the
+<a href="https://svn.apache.org/repos/asf/camel/trunk/components/camel-sjms/src/main/java/org/apache/camel/component/sjms/tx/BatchTransactionCommitStrategy.java"><code>BatchTransactionCommitStrategy</code></a>
+which is detailed further in the next section.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_transacted_batch_consumers_producers">Transacted Batch Consumers &amp; Producers</h4>
+<div class="paragraph">
+<p>The SJMS2 component has been designed to support the batching of local JMS
+transactions on both the Producer and Consumer endpoints. How they are
+handled on each is very different though.</p>
+</div>
+<div class="paragraph">
+<p>The SJMS2 consumer endpoint is a straightforward implementation that will
+process X messages before committing them with the associated Session.
+To enable batched transaction on the consumer first enable transactions
+by setting the <code>transacted</code> parameter to true and then adding the
+<code>transactionBatchCount</code> and setting it to any value that is greater than
+0. For example the following configuration will commit the Session every
+10 messages:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>sjms2:queue:transacted.batch.consumer?transacted=true&amp;transactionBatchCount=10</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If an exception occurs during the processing of a batch on the consumer
+endpoint, the Session rollback is invoked causing the messages to be
+redelivered to the next available consumer. The counter is also reset to
+0 for the <code>BatchTransactionCommitStrategy</code> for the associated Session as
+well. It is the responsibility of the user to ensure they put hooks in
+their processors of batch messages to watch for messages with the
+JMSRedelivered header set to true. This is the indicator that messages
+were rolled back at some point and that a verification of a successful
+processing should occur.</p>
+</div>
+<div class="paragraph">
+<p>A transacted batch consumer also carries with it an instance of an
+internal timer that waits a default amount of time (5000ms) between
+messages before committing the open transactions on the Session. The
+default value of 5000ms (minimum of 1000ms) should be adequate for most
+use-cases but if further tuning is necessary simply set the
+<code>transactionBatchTimeout</code> parameter.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>sjms2:queue:transacted.batch.consumer?transacted=true&amp;transactionBatchCount=10&amp;transactionBatchTimeout=2000</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The minimal value that will be accepted is 1000ms as the amount of
+context switching may cause unnecessary performance impacts without
+gaining benefit.</p>
+</div>
+<div class="paragraph">
+<p>The producer endpoint is handled much differently though. With the
+producer after each message is delivered to its destination the Exchange
+is closed and there is no longer a reference to that message. To make a
+available all the messages available for redelivery you simply enable
+transactions on a Producer Endpoint that is publishing BatchMessages.
+The transaction will commit at the conclusion of the exchange which
+includes all messages in the batch list. Nothing additional need be
+configured. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">List&lt;BatchMessage&lt;String&gt;&gt; messages = new ArrayList&lt;BatchMessage&lt;String&gt;&gt;();
+for (int i = 1; i &lt;= messageCount; i++) {
+    String body = "Hello World " + i;
+    BatchMessage&lt;String&gt; message = new BatchMessage&lt;String&gt;(body, null);
+    messages.add(message);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now publish the List with transactions enabled:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">template.sendBody("sjms2:queue:batch.queue?transacted=true", messages);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_additional_notes">Additional Notes</h3>
+<div class="sect3">
+<h4 id="_message_header_format">Message Header Format</h4>
+<div class="paragraph">
+<p>The SJMS2 Component uses the same header format strategy that is used in
+the Camel JMS Component. This plugable strategy ensures that messages
+sent over the wire conform to the JMS Message spec.</p>
+</div>
+<div class="paragraph">
+<p>For the <code>exchange.in.header</code> the following rules apply for the header
+keys:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Keys starting with <code>JMS</code> or <code>JMSX</code> are reserved.</p>
+</li>
+<li>
+<p><code>exchange.in.headers</code> keys must be literals and all be valid Java
+identifiers (do not use dots in the key name).</p>
+</li>
+<li>
+<p>Camel replaces dots &amp; hyphens and the reverse when when consuming JMS
+messages:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>is replaced by <em>DOT</em> and the reverse replacement when Camel consumes
+the message.</p>
+</li>
+<li>
+<p>is replaced by <em>HYPHEN</em> and the reverse replacement when Camel
+consumes the message.<br>
+See also the option <code>jmsKeyFormatStrategy</code>, which allows use of your own
+custom strategy for formatting keys.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For the <code>exchange.in.header</code>, the following rules apply for the header
+values:</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_message_content">Message Content</h4>
+<div class="paragraph">
+<p>To deliver content over the wire we must ensure that the body of the
+message that is being delivered adheres to the JMS Message
+Specification. Therefore, all that are produced must either be
+primitives or their counter objects (such as <code>Integer</code>, <code>Long</code>, <code>Character</code>).
+The types, <code>String</code>, <code>CharSequence</code>, <code>Date</code>, <code>BigDecimal</code> and <code>BigInteger</code> are all
+converted to their <code>toString()</code> representation. All other types are
+dropped.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_clustering">Clustering</h4>
+<div class="paragraph">
+<p>When using <em>InOut</em> with SJMS2 in a clustered environment you must either
+use TemporaryQueue destinations or use a unique named reply to
+destination per InOut producer endpoint. Message correlation is handled
+by the endpoint, not with message selectors at the broker. The InOut
+Producer Endpoint uses Java Concurrency Exchangers cached by the Message
+<code>JMSCorrelationID</code>. This provides a nice performance increase while
+reducing the overhead on the broker since all the messages are consumed
+from the destination in the order they are produced by the interested
+consumer.</p>
+</div>
+<div class="paragraph">
+<p>Currently the only correlation strategy is to use the <code>JMSCorrelationId</code>.
+The <em>InOut</em> Consumer uses this strategy as well ensuring that all
+responses messages to the included <code>JMSReplyTo</code> destination also have the
+<code>JMSCorrelationId</code> copied from the request as well.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="SJMS2-transactions">Transaction Support</h3>
+<div class="paragraph">
+<p>SJMS2 currently only supports the use of internal JMS Transactions. There
+is no support for the Camel Transaction Processor or the Java
+Transaction API (JTA).</p>
+</div>
+<div class="sect3">
+<h4 id="_does_springless_mean_i_can_t_use_spring">Does Springless Mean I Can&#8217;t Use Spring?</h4>
+<div class="paragraph">
+<p>Not at all. Below is an example of the SJMS2 component using the Spring
+DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;route
+    id="inout.named.reply.to.producer.route"&gt;
+    &lt;from
+        uri="direct:invoke.named.reply.to.queue" /&gt;
+    &lt;to
+        uri="sjms2:queue:named.reply.to.queue?namedReplyTo=my.response.queue&amp;amp;exchangePattern=InOut" /&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Springless refers to moving away from the dependency on the Spring JMS
+API. A new JMS client API is being developed from the ground up to power
+SJMS2.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/slack-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/sjms-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

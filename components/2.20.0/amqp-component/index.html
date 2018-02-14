@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='AMQP Component Available as of Camel version 1.2
+ The amqp: component supports the AMQP 1.0 protocol using the JMS Client API of the Qpid project. In case you want to use AMQP 0.9 (in particular RabbitMQ) you might also be interested in the Camel RabbitMQ component. Please keep in mind that prior to the Camel 2.17.0 AMQP component supported AMQP 0.9 and above, however since Camel 2.17.0 it supports only AMQP 1.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='AMQP Component Available as of Camel version 1.2
+ The amqp: component supports the AMQP 1.0 protocol using the JMS Client API of the Qpid project. In case you want to use AMQP 0.9 (in particular RabbitMQ) you might also be interested in the Camel RabbitMQ component. Please keep in mind that prior to the Camel 2.17.0 AMQP component supported AMQP 0.9 and above, however since Camel 2.17.0 it supports only AMQP 1.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/amqp-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/amqp-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_amqp_component">AMQP Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 1.2</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>amqp:</strong> component supports the <a href="http://www.amqp.org/">AMQP 1.0
+protocol</a> using the JMS Client API of the <a href="http://qpid.apache.org/">Qpid</a>
+project. In case you want to use AMQP 0.9 (in particular RabbitMQ) you
+might also be interested in the <a href="rabbitmq.html">Camel RabbitMQ</a>
+component. Please keep in mind that prior to the Camel 2.17.0 AMQP
+component supported AMQP 0.9 and above, however since Camel 2.17.0 it
+supports only AMQP 1.0.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-amqp&lt;/artifactId&gt;
+    &lt;version&gt;${camel.version}&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">amqp:[queue:|topic:]destinationName[?options]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_amqp_options">AMQP Options</h3>
+<div class="paragraph">
+<p>You can specify all of the various configuration options of the
+<a href="../../../../camel-jms/src/main/docs/readme.html">JMS</a> component after the destination name.</p>
+</div>
+<div class="paragraph">
+<p>The AMQP component supports 75 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>configuration</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a shared JMS configuration</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JmsConfiguration</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>acceptMessagesWhile Stopping</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether the consumer accept messages while it is stopping. You may consider enabling this option if you start and stop JMS routes at runtime while there are still messages enqueued on the queue. If this option is false and you stop the JMS route then messages may be rejected and the JMS broker would have to attempt redeliveries which yet again may be rejected and eventually the message may be moved at a dead letter queue on the JMS broker. To avoid this its recommended to enable this option.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>allowReplyManagerQuick Stop</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the DefaultMessageListenerContainer used in the reply managers for request-reply messaging allow the DefaultMessageListenerContainer.runningAllowed flag to quick stop in case JmsConfigurationisAcceptMessagesWhileStopping is enabled and org.apache.camel.CamelContext is currently being stopped. This quick stop ability is enabled by default in the regular JMS consumers but to enable for reply managers you must enable this flag.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>acknowledgementMode</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The JMS acknowledgement mode defined as an Integer. Allows you to set vendor-specific extensions to the acknowledgment mode.For the regular modes it is preferable to use the acknowledgementModeName instead.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>eagerLoadingOf Properties</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables eager loading of JMS properties as soon as a message is loaded which generally is inefficient as the JMS properties may not be required but sometimes can catch early any issues with the underlying JMS provider and the use of JMS properties</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>acknowledgementModeName</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The JMS acknowledgement name which is one of: SESSION_TRANSACTED CLIENT_ACKNOWLEDGE AUTO_ACKNOWLEDGE DUPS_OK_ACKNOWLEDGE</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">AUTO_ ACKNOWLEDGE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>autoStartup</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether the consumer container should auto-startup.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>cacheLevel</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the cache level by ID for the underlying JMS resources. See cacheLevelName option for more details.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>cacheLevelName</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the cache level by name for the underlying JMS resources. Possible values are: CACHE_AUTO CACHE_CONNECTION CACHE_CONSUMER CACHE_NONE and CACHE_SESSION. The default setting is CACHE_AUTO. See the Spring documentation and Transactions Cache Levels for more information.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">CACHE_AUTO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>replyToCacheLevelName</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the cache level by name for the reply consumer when doing request/reply over JMS. This option only applies when using fixed reply queues (not temporary). Camel will by default use: CACHE_CONSUMER for exclusive or shared w/ replyToSelectorName. And CACHE_SESSION for shared without replyToSelectorName. Some JMS brokers such as IBM WebSphere may require to set the replyToCacheLevelName=CACHE_NONE to work. Note: If using temporary queues then CACHE_NONE is not allowed and you must use a higher value such as CACHE_CONSUMER or CACHE_SESSION.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>clientId</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the JMS client ID to use. Note that this value if specified must be unique and can only be used by a single JMS connection instance. It is typically only required for durable topic subscriptions. If using Apache ActiveMQ you may prefer to use Virtual Topics instead.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>concurrentConsumers</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the default number of concurrent consumers when consuming from JMS (not for request/reply over JMS). See also the maxMessagesPerTask option to control dynamic scaling up/down of threads. When doing request/reply over JMS then the option replyToConcurrentConsumers is used to control number of concurrent consumers on the reply message listener.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>replyToConcurrent Consumers</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the default number of concurrent consumers when doing request/reply over JMS. See also the maxMessagesPerTask option to control dynamic scaling up/down of threads.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionFactory</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The connection factory to be use. A connection factory must be configured either on the component or endpoint.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ConnectionFactory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>username</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Username to use with the ConnectionFactory. You can also configure username/password directly on the ConnectionFactory.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>password</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Password to use with the ConnectionFactory. You can also configure username/password directly on the ConnectionFactory.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>deliveryPersistent</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether persistent delivery is used by default.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>deliveryMode</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the delivery mode to be used. Possibles values are those defined by javax.jms.DeliveryMode. NON_PERSISTENT = 1 and PERSISTENT = 2.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>durableSubscriptionName</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The durable subscriber name for specifying durable topic subscriptions. The clientId option must be configured as well.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionListener</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the JMS Exception Listener that is to be notified of any underlying JMS exceptions.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionListener</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>errorHandler</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies a org.springframework.util.ErrorHandler to be invoked in case of any uncaught exceptions thrown while processing a Message. By default these exceptions will be logged at the WARN level if no errorHandler has been configured. You can configure logging level and whether stack traces should be logged using errorHandlerLoggingLevel and errorHandlerLogStackTrace options. This makes it much easier to configure than having to code a custom errorHandler.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ErrorHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>errorHandlerLogging Level</strong> (logging)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows to configure the default errorHandler logging level for logging uncaught exceptions.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">WARN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LoggingLevel</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>errorHandlerLogStack Trace</strong> (logging)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows to control whether stacktraces should be logged or not by the default errorHandler.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>explicitQosEnabled</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set if the deliveryMode priority or timeToLive qualities of service should be used when sending messages. This option is based on Spring&#8217;s JmsTemplate. The deliveryMode priority and timeToLive options are applied to the current endpoint. This contrasts with the preserveMessageQos option which operates at message granularity reading QoS properties exclusively from the Camel In message headers.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exposeListenerSession</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether the listener session should be exposed when consuming messages.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>idleTaskExecutionLimit</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the limit for idle executions of a receive task not having received any message within its execution. If this limit is reached the task will shut down and leave receiving to other executing tasks (in the case of dynamic scheduling; see the maxConcurrentConsumers setting). There is additional doc available from Spring.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>idleConsumerLimit</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specify the limit for the number of consumers that are allowed to be idle at any given time.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxConcurrentConsumers</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the maximum number of concurrent consumers when consuming from JMS (not for request/reply over JMS). See also the maxMessagesPerTask option to control dynamic scaling up/down of threads. When doing request/reply over JMS then the option replyToMaxConcurrentConsumers is used to control number of concurrent consumers on the reply message listener.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>replyToMaxConcurrent Consumers</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the maximum number of concurrent consumers when using request/reply over JMS. See also the maxMessagesPerTask option to control dynamic scaling up/down of threads.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>replyOnTimeoutToMax ConcurrentConsumers</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the maximum number of concurrent consumers for continue routing when timeout occurred when using request/reply over JMS.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxMessagesPerTask</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of messages per task. -1 is unlimited. If you use a range for concurrent consumers (eg min max) then this option can be used to set a value to eg 100 to control how fast the consumers will shrink when less work is required.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">-1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>messageConverter</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom Spring org.springframework.jms.support.converter.MessageConverter so you can be in control how to map to/from a javax.jms.Message.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MessageConverter</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>mapJmsMessage</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether Camel should auto map the received JMS message to a suited payload type such as javax.jms.TextMessage to a String etc.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>messageIdEnabled</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When sending specifies whether message IDs should be added. This is just an hint to the JMS broker.If the JMS provider accepts this hint these messages must have the message ID set to null; if the provider ignores the hint the message ID must be set to its normal unique value</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>messageTimestampEnabled</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether timestamps should be enabled by default on sending messages. This is just an hint to the JMS broker.If the JMS provider accepts this hint these messages must have the timestamp set to zero; if the provider ignores the hint the timestamp must be set to its normal value</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>alwaysCopyMessage</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If true Camel will always make a JMS message copy of the message when it is passed to the producer for sending. Copying the message is needed in some situations such as when a replyToDestinationSelectorName is set (incidentally Camel will set the alwaysCopyMessage option to true if a replyToDestinationSelectorName is set)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useMessageIDAs CorrelationID</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether JMSMessageID should always be used as JMSCorrelationID for InOut messages.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>priority</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Values greater than 1 specify the message priority when sending (where 0 is the lowest priority and 9 is the highest). The explicitQosEnabled option must also be enabled in order for this option to have any effect.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>pubSubNoLocal</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether to inhibit the delivery of messages published by its own connection.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>receiveTimeout</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timeout for receiving messages (in milliseconds).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>recoveryInterval</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the interval between recovery attempts i.e. when a connection is being refreshed in milliseconds. The default is 5000 ms that is 5 seconds.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>subscriptionDurable</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deprecated: Enabled by default if you specify a durableSubscriptionName and a clientId.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>taskExecutor</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows you to specify a custom task executor for consuming messages.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TaskExecutor</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>timeToLive</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When sending messages specifies the time-to-live of the message (in milliseconds).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">-1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transacted</strong> (transaction)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether to use transacted mode</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>lazyCreateTransaction Manager</strong> (transaction)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If true Camel will create a JmsTransactionManager if there is no transactionManager injected when option transacted=true.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transactionManager</strong> (transaction)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Spring transaction manager to use.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PlatformTransaction Manager</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transactionName</strong> (transaction)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the transaction to use.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transactionTimeout</strong> (transaction)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timeout value of the transaction (in seconds) if using transacted mode.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">-1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>testConnectionOn Startup</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether to test the connection on startup. This ensures that when Camel starts that all the JMS consumers have a valid connection to the JMS broker. If a connection cannot be granted then Camel throws an exception on startup. This ensures that Camel is not started with failed connections. The JMS producers is tested as well.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>asyncStartListener</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to startup the JmsConsumer message listener asynchronously when starting a route. For example if a JmsConsumer cannot get a connection to a remote JMS broker then it may block while retrying and/or failover. This will cause Camel to block while starting routes. By setting this option to true you will let routes startup while the JmsConsumer connects to the JMS broker using a dedicated thread in asynchronous mode. If this option is used then beware that if the connection could not be established then an exception is logged at WARN level and the consumer will not be able to receive messages; You can then restart the route to retry.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>asyncStopListener</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to stop the JmsConsumer message listener asynchronously when stopping a route.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>forceSendOriginal Message</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When using mapJmsMessage=false Camel will create a new JMS message to send to a new JMS destination if you touch the headers (get or set) during the route. Set this option to true to force Camel to send the original JMS message that was received.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>requestTimeout</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timeout for waiting for a reply when using the InOut Exchange Pattern (in milliseconds). The default is 20 seconds. You can include the header CamelJmsRequestTimeout to override this endpoint configured timeout value and thus have per message individual timeout values. See also the requestTimeoutCheckerInterval option.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">20000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>requestTimeoutChecker Interval</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configures how often Camel should check for timed out Exchanges when doing request/reply over JMS. By default Camel checks once per second. But if you must react faster when a timeout occurs then you can lower this interval to check more frequently. The timeout is determined by the option requestTimeout.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transferExchange</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">You can transfer the exchange over the wire instead of just the body and headers. The following fields are transferred: In body Out body Fault body In headers Out headers Fault headers exchange properties exchange exception. This requires that the objects are serializable. Camel will exclude any non-serializable objects and log it at WARN level. You must enable this option on both the producer and consumer side so Camel knows the payloads is an Exchange and not a regular payload.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transferException</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If enabled and you are using Request Reply messaging (InOut) and an Exchange failed on the consumer side then the caused Exception will be send back in response as a javax.jms.ObjectMessage. If the client is Camel the returned Exception is rethrown. This allows you to use Camel JMS as a bridge in your routing - for example using persistent queues to enable robust routing. Notice that if you also have transferExchange enabled this option takes precedence. The caught exception is required to be serializable. The original Exception on the consumer side can be wrapped in an outer exception such as org.apache.camel.RuntimeCamelException when returned to the producer.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transferFault</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If enabled and you are using Request Reply messaging (InOut) and an Exchange failed with a SOAP fault (not exception) on the consumer side then the fault flag on MessageisFault() will be send back in the response as a JMS header with the key org.apache.camel.component.jms.JmsConstantsJMS_TRANSFER_FAULTJMS_TRANSFER_FAULT. If the client is Camel the returned fault flag will be set on the link org.apache.camel.MessagesetFault(boolean). You may want to enable this when using Camel components that support faults such as SOAP based such as cxf or spring-ws.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>jmsOperations</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows you to use your own implementation of the org.springframework.jms.core.JmsOperations interface. Camel uses JmsTemplate as default. Can be used for testing purpose but not used much as stated in the spring API docs.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JmsOperations</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>destinationResolver</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pluggable org.springframework.jms.support.destination.DestinationResolver that allows you to use your own resolver (for example to lookup the real destination in a JNDI registry).</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DestinationResolver</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>replyToType</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for explicitly specifying which kind of strategy to use for replyTo queues when doing request/reply over JMS. Possible values are: Temporary Shared or Exclusive. By default Camel will use temporary queues. However if replyTo has been configured then Shared is used by default. This option allows you to use exclusive queues instead of shared ones. See Camel JMS documentation for more details and especially the notes about the implications if running in a clustered environment and the fact that Shared reply queues has lower performance than its alternatives Temporary and Exclusive.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ReplyToType</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>preserveMessageQos</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set to true if you want to send message using the QoS settings specified on the message instead of the QoS settings on the JMS endpoint. The following three headers are considered JMSPriority JMSDeliveryMode and JMSExpiration. You can provide all or only some of them. If not provided Camel will fall back to use the values from the endpoint instead. So when using this option the headers override the values from the endpoint. The explicitQosEnabled option by contrast will only use options set on the endpoint and not values from the message header.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>asyncConsumer</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the JmsConsumer processes the Exchange asynchronously. If enabled then the JmsConsumer may pickup the next message from the JMS queue while the previous message is being processed asynchronously (by the Asynchronous Routing Engine). This means that messages may be processed not 100 strictly in order. If disabled (as default) then the Exchange is fully processed before the JmsConsumer will pickup the next message from the JMS queue. Note if transacted has been enabled then asyncConsumer=true does not run asynchronously as transaction must be executed synchronously (Camel 3.0 may support async transactions).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>allowNullBody</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to allow sending messages with no body. If this option is false and the message body is null then an JMSException is thrown.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>includeSentJMS MessageID</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only applicable when sending to JMS destination using InOnly (eg fire and forget). Enabling this option will enrich the Camel Exchange with the actual JMSMessageID that was used by the JMS client when the message was sent to the JMS destination.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>includeAllJMSX Properties</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to include all JMSXxxx properties when mapping from JMS to Camel Message. Setting this to true will include properties such as JMSXAppID and JMSXUserID etc. Note: If you are using a custom headerFilterStrategy then this option does not apply.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>defaultTaskExecutor Type</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies what default TaskExecutor type to use in the DefaultMessageListenerContainer for both consumer endpoints and the ReplyTo consumer of producer endpoints. Possible values: SimpleAsync (uses Spring&#8217;s SimpleAsyncTaskExecutor) or ThreadPool (uses Spring&#8217;s ThreadPoolTaskExecutor with optimal values - cached threadpool-like). If not set it defaults to the previous behaviour which uses a cached thread pool for consumer endpoints and SimpleAsync for reply consumers. The use of ThreadPool is recommended to reduce thread trash in elastic configurations with dynamically increasing and decreasing concurrent consumers.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DefaultTaskExecutor Type</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>jmsKeyFormatStrategy</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pluggable strategy for encoding and decoding JMS keys so they can be compliant with the JMS specification. Camel provides two implementations out of the box: default and passthrough. The default strategy will safely marshal dots and hyphens (. and -). The passthrough strategy leaves the key as is. Can be used for JMS brokers which do not care whether JMS header keys contain illegal characters. You can provide your own implementation of the org.apache.camel.component.jms.JmsKeyFormatStrategy and refer to it using the notation.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JmsKeyFormatStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>queueBrowseStrategy</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom QueueBrowseStrategy when browsing queues</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">QueueBrowseStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>messageCreatedStrategy</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the given MessageCreatedStrategy which are invoked when Camel creates new instances of javax.jms.Message objects when Camel is sending a JMS message.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MessageCreatedStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>waitForProvision CorrelationToBeUpdated Counter</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of times to wait for provisional correlation id to be updated to the actual correlation id when doing request/reply over JMS and when the option useMessageIDAsCorrelationID is enabled.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">50</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>waitForProvision CorrelationToBeUpdated ThreadSleepingTime</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interval in millis to sleep each time while waiting for provisional correlation id to be updated.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">100</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>correlationProperty</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use this JMS property to correlate messages in InOut exchange pattern (request-reply) instead of JMSCorrelationID property. This allows you to exchange messages with systems that do not correlate messages using JMSCorrelationID JMS property. If used JMSCorrelationID will not be used or set by Camel. The value of here named property will be generated if not supplied in the header of the message under the same name.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>headerFilterStrategy</strong> (filter)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HeaderFilterStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The AMQP endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>amqp:destinationType:destinationName</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_2_parameters">Path Parameters (2 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>destinationType</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The kind of destination to use</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">queue</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>destinationName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Name of the queue or topic to use as destination</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_85_parameters">Query Parameters (85 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>clientId</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the JMS client ID to use. Note that this value if specified must be unique and can only be used by a single JMS connection instance. It is typically only required for durable topic subscriptions. If using Apache ActiveMQ you may prefer to use Virtual Topics instead.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionFactory</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The connection factory to be use. A connection factory must be configured either on the component or endpoint.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ConnectionFactory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>disableReplyTo</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If true a producer will behave like a InOnly exchange with the exception that JMSReplyTo header is sent out and not be suppressed like in the case of InOnly. Like InOnly the producer will not wait for a reply. A consumer with this flag will behave like InOnly. This feature can be used to bridge InOut requests to another queue so that a route on the other queue will send its response directly back to the original JMSReplyTo.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>durableSubscriptionName</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The durable subscriber name for specifying durable topic subscriptions. The clientId option must be configured as well.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>jmsMessageType</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows you to force the use of a specific javax.jms.Message implementation for sending JMS messages. Possible values are: Bytes Map Object Stream Text. By default Camel would determine which JMS message type to use from the In body type. This option allows you to specify it.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JmsMessageType</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>testConnectionOnStartup</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether to test the connection on startup. This ensures that when Camel starts that all the JMS consumers have a valid connection to the JMS broker. If a connection cannot be granted then Camel throws an exception on startup. This ensures that Camel is not started with failed connections. The JMS producers is tested as well.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>acknowledgementModeName</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The JMS acknowledgement name which is one of: SESSION_TRANSACTED CLIENT_ACKNOWLEDGE AUTO_ACKNOWLEDGE DUPS_OK_ACKNOWLEDGE</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">AUTO_ ACKNOWLEDGE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>asyncConsumer</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the JmsConsumer processes the Exchange asynchronously. If enabled then the JmsConsumer may pickup the next message from the JMS queue while the previous message is being processed asynchronously (by the Asynchronous Routing Engine). This means that messages may be processed not 100 strictly in order. If disabled (as default) then the Exchange is fully processed before the JmsConsumer will pickup the next message from the JMS queue. Note if transacted has been enabled then asyncConsumer=true does not run asynchronously as transaction must be executed synchronously (Camel 3.0 may support async transactions).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>autoStartup</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether the consumer container should auto-startup.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>cacheLevel</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the cache level by ID for the underlying JMS resources. See cacheLevelName option for more details.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>cacheLevelName</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the cache level by name for the underlying JMS resources. Possible values are: CACHE_AUTO CACHE_CONNECTION CACHE_CONSUMER CACHE_NONE and CACHE_SESSION. The default setting is CACHE_AUTO. See the Spring documentation and Transactions Cache Levels for more information.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">CACHE_AUTO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>concurrentConsumers</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the default number of concurrent consumers when consuming from JMS (not for request/reply over JMS). See also the maxMessagesPerTask option to control dynamic scaling up/down of threads. When doing request/reply over JMS then the option replyToConcurrentConsumers is used to control number of concurrent consumers on the reply message listener.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxConcurrentConsumers</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the maximum number of concurrent consumers when consuming from JMS (not for request/reply over JMS). See also the maxMessagesPerTask option to control dynamic scaling up/down of threads. When doing request/reply over JMS then the option replyToMaxConcurrentConsumers is used to control number of concurrent consumers on the reply message listener.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>replyTo</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provides an explicit ReplyTo destination which overrides any incoming value of Message.getJMSReplyTo().</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>replyToDeliveryPersistent</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether to use persistent delivery by default for replies.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>selector</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the JMS selector to use</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>acceptMessagesWhileStopping</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether the consumer accept messages while it is stopping. You may consider enabling this option if you start and stop JMS routes at runtime while there are still messages enqueued on the queue. If this option is false and you stop the JMS route then messages may be rejected and the JMS broker would have to attempt redeliveries which yet again may be rejected and eventually the message may be moved at a dead letter queue on the JMS broker. To avoid this its recommended to enable this option.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>allowReplyManagerQuickStop</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the DefaultMessageListenerContainer used in the reply managers for request-reply messaging allow the DefaultMessageListenerContainer.runningAllowed flag to quick stop in case JmsConfigurationisAcceptMessagesWhileStopping is enabled and org.apache.camel.CamelContext is currently being stopped. This quick stop ability is enabled by default in the regular JMS consumers but to enable for reply managers you must enable this flag.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>consumerType</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The consumer type to use which can be one of: Simple Default or Custom. The consumer type determines which Spring JMS listener to use. Default will use org.springframework.jms.listener.DefaultMessageListenerContainer Simple will use org.springframework.jms.listener.SimpleMessageListenerContainer. When Custom is specified the MessageListenerContainerFactory defined by the messageListenerContainerFactory option will determine what org.springframework.jms.listener.AbstractMessageListenerContainer to use.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Default</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ConsumerType</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>defaultTaskExecutorType</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies what default TaskExecutor type to use in the DefaultMessageListenerContainer for both consumer endpoints and the ReplyTo consumer of producer endpoints. Possible values: SimpleAsync (uses Spring&#8217;s SimpleAsyncTaskExecutor) or ThreadPool (uses Spring&#8217;s ThreadPoolTaskExecutor with optimal values - cached threadpool-like). If not set it defaults to the previous behaviour which uses a cached thread pool for consumer endpoints and SimpleAsync for reply consumers. The use of ThreadPool is recommended to reduce thread trash in elastic configurations with dynamically increasing and decreasing concurrent consumers.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DefaultTaskExecutor Type</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>eagerLoadingOfProperties</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables eager loading of JMS properties as soon as a message is loaded which generally is inefficient as the JMS properties may not be required but sometimes can catch early any issues with the underlying JMS provider and the use of JMS properties</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exposeListenerSession</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether the listener session should be exposed when consuming messages.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>replyToSameDestination Allowed</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether a JMS consumer is allowed to send a reply message to the same destination that the consumer is using to consume from. This prevents an endless loop by consuming and sending back the same message to itself.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>taskExecutor</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows you to specify a custom task executor for consuming messages.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TaskExecutor</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>deliveryMode</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the delivery mode to be used. Possibles values are those defined by javax.jms.DeliveryMode. NON_PERSISTENT = 1 and PERSISTENT = 2.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>deliveryPersistent</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether persistent delivery is used by default.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>explicitQosEnabled</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set if the deliveryMode priority or timeToLive qualities of service should be used when sending messages. This option is based on Spring&#8217;s JmsTemplate. The deliveryMode priority and timeToLive options are applied to the current endpoint. This contrasts with the preserveMessageQos option which operates at message granularity reading QoS properties exclusively from the Camel In message headers.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>preserveMessageQos</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set to true if you want to send message using the QoS settings specified on the message instead of the QoS settings on the JMS endpoint. The following three headers are considered JMSPriority JMSDeliveryMode and JMSExpiration. You can provide all or only some of them. If not provided Camel will fall back to use the values from the endpoint instead. So when using this option the headers override the values from the endpoint. The explicitQosEnabled option by contrast will only use options set on the endpoint and not values from the message header.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>priority</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Values greater than 1 specify the message priority when sending (where 0 is the lowest priority and 9 is the highest). The explicitQosEnabled option must also be enabled in order for this option to have any effect.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>replyToConcurrentConsumers</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the default number of concurrent consumers when doing request/reply over JMS. See also the maxMessagesPerTask option to control dynamic scaling up/down of threads.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>replyToMaxConcurrent Consumers</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the maximum number of concurrent consumers when using request/reply over JMS. See also the maxMessagesPerTask option to control dynamic scaling up/down of threads.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>replyToOnTimeoutMax ConcurrentConsumers</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the maximum number of concurrent consumers for continue routing when timeout occurred when using request/reply over JMS.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>replyToOverride</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provides an explicit ReplyTo destination in the JMS message which overrides the setting of replyTo. It is useful if you want to forward the message to a remote Queue and receive the reply message from the ReplyTo destination.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>replyToType</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for explicitly specifying which kind of strategy to use for replyTo queues when doing request/reply over JMS. Possible values are: Temporary Shared or Exclusive. By default Camel will use temporary queues. However if replyTo has been configured then Shared is used by default. This option allows you to use exclusive queues instead of shared ones. See Camel JMS documentation for more details and especially the notes about the implications if running in a clustered environment and the fact that Shared reply queues has lower performance than its alternatives Temporary and Exclusive.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ReplyToType</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>requestTimeout</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timeout for waiting for a reply when using the InOut Exchange Pattern (in milliseconds). The default is 20 seconds. You can include the header CamelJmsRequestTimeout to override this endpoint configured timeout value and thus have per message individual timeout values. See also the requestTimeoutCheckerInterval option.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">20000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>timeToLive</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When sending messages specifies the time-to-live of the message (in milliseconds).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">-1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>allowNullBody</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to allow sending messages with no body. If this option is false and the message body is null then an JMSException is thrown.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>alwaysCopyMessage</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If true Camel will always make a JMS message copy of the message when it is passed to the producer for sending. Copying the message is needed in some situations such as when a replyToDestinationSelectorName is set (incidentally Camel will set the alwaysCopyMessage option to true if a replyToDestinationSelectorName is set)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>correlationProperty</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When using InOut exchange pattern use this JMS property instead of JMSCorrelationID JMS property to correlate messages. If set messages will be correlated solely on the value of this property JMSCorrelationID property will be ignored and not set by Camel.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>disableTimeToLive</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use this option to force disabling time to live. For example when you do request/reply over JMS then Camel will by default use the requestTimeout value as time to live on the message being sent. The problem is that the sender and receiver systems have to have their clocks synchronized so they are in sync. This is not always so easy to archive. So you can use disableTimeToLive=true to not set a time to live value on the sent message. Then the message will not expire on the receiver system. See below in section About time to live for more details.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>forceSendOriginalMessage</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When using mapJmsMessage=false Camel will create a new JMS message to send to a new JMS destination if you touch the headers (get or set) during the route. Set this option to true to force Camel to send the original JMS message that was received.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>includeSentJMSMessageID</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only applicable when sending to JMS destination using InOnly (eg fire and forget). Enabling this option will enrich the Camel Exchange with the actual JMSMessageID that was used by the JMS client when the message was sent to the JMS destination.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>replyToCacheLevelName</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the cache level by name for the reply consumer when doing request/reply over JMS. This option only applies when using fixed reply queues (not temporary). Camel will by default use: CACHE_CONSUMER for exclusive or shared w/ replyToSelectorName. And CACHE_SESSION for shared without replyToSelectorName. Some JMS brokers such as IBM WebSphere may require to set the replyToCacheLevelName=CACHE_NONE to work. Note: If using temporary queues then CACHE_NONE is not allowed and you must use a higher value such as CACHE_CONSUMER or CACHE_SESSION.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>replyToDestinationSelector Name</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the JMS Selector using the fixed name to be used so you can filter out your own replies from the others when using a shared queue (that is if you are not using a temporary reply queue).</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>allowSerializedHeaders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Controls whether or not to include serialized headers. Applies only when transferExchange is true. This requires that the objects are serializable. Camel will exclude any non-serializable objects and log it at WARN level.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>asyncStartListener</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to startup the JmsConsumer message listener asynchronously when starting a route. For example if a JmsConsumer cannot get a connection to a remote JMS broker then it may block while retrying and/or failover. This will cause Camel to block while starting routes. By setting this option to true you will let routes startup while the JmsConsumer connects to the JMS broker using a dedicated thread in asynchronous mode. If this option is used then beware that if the connection could not be established then an exception is logged at WARN level and the consumer will not be able to receive messages; You can then restart the route to retry.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>asyncStopListener</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to stop the JmsConsumer message listener asynchronously when stopping a route.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>destinationResolver</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pluggable org.springframework.jms.support.destination.DestinationResolver that allows you to use your own resolver (for example to lookup the real destination in a JNDI registry).</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DestinationResolver</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>errorHandler</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies a org.springframework.util.ErrorHandler to be invoked in case of any uncaught exceptions thrown while processing a Message. By default these exceptions will be logged at the WARN level if no errorHandler has been configured. You can configure logging level and whether stack traces should be logged using errorHandlerLoggingLevel and errorHandlerLogStackTrace options. This makes it much easier to configure than having to code a custom errorHandler.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ErrorHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionListener</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the JMS Exception Listener that is to be notified of any underlying JMS exceptions.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionListener</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>headerFilterStrategy</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom HeaderFilterStrategy to filter header to and from Camel message.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HeaderFilterStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>idleConsumerLimit</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specify the limit for the number of consumers that are allowed to be idle at any given time.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>idleTaskExecutionLimit</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the limit for idle executions of a receive task not having received any message within its execution. If this limit is reached the task will shut down and leave receiving to other executing tasks (in the case of dynamic scheduling; see the maxConcurrentConsumers setting). There is additional doc available from Spring.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>includeAllJMSXProperties</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to include all JMSXxxx properties when mapping from JMS to Camel Message. Setting this to true will include properties such as JMSXAppID and JMSXUserID etc. Note: If you are using a custom headerFilterStrategy then this option does not apply.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>jmsKeyFormatStrategy</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pluggable strategy for encoding and decoding JMS keys so they can be compliant with the JMS specification. Camel provides two implementations out of the box: default and passthrough. The default strategy will safely marshal dots and hyphens (. and -). The passthrough strategy leaves the key as is. Can be used for JMS brokers which do not care whether JMS header keys contain illegal characters. You can provide your own implementation of the org.apache.camel.component.jms.JmsKeyFormatStrategy and refer to it using the notation.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>mapJmsMessage</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether Camel should auto map the received JMS message to a suited payload type such as javax.jms.TextMessage to a String etc.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxMessagesPerTask</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of messages per task. -1 is unlimited. If you use a range for concurrent consumers (eg min max) then this option can be used to set a value to eg 100 to control how fast the consumers will shrink when less work is required.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">-1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>messageConverter</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom Spring org.springframework.jms.support.converter.MessageConverter so you can be in control how to map to/from a javax.jms.Message.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MessageConverter</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>messageCreatedStrategy</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the given MessageCreatedStrategy which are invoked when Camel creates new instances of javax.jms.Message objects when Camel is sending a JMS message.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MessageCreatedStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>messageIdEnabled</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When sending specifies whether message IDs should be added. This is just an hint to the JMS broker.If the JMS provider accepts this hint these messages must have the message ID set to null; if the provider ignores the hint the message ID must be set to its normal unique value</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>messageListenerContainer Factory</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Registry ID of the MessageListenerContainerFactory used to determine what org.springframework.jms.listener.AbstractMessageListenerContainer to use to consume messages. Setting this will automatically set consumerType to Custom.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MessageListener ContainerFactory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>messageTimestampEnabled</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether timestamps should be enabled by default on sending messages. This is just an hint to the JMS broker.If the JMS provider accepts this hint these messages must have the timestamp set to zero; if the provider ignores the hint the timestamp must be set to its normal value</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>pubSubNoLocal</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether to inhibit the delivery of messages published by its own connection.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>receiveTimeout</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timeout for receiving messages (in milliseconds).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>recoveryInterval</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the interval between recovery attempts i.e. when a connection is being refreshed in milliseconds. The default is 5000 ms that is 5 seconds.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>requestTimeoutChecker Interval</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configures how often Camel should check for timed out Exchanges when doing request/reply over JMS. By default Camel checks once per second. But if you must react faster when a timeout occurs then you can lower this interval to check more frequently. The timeout is determined by the option requestTimeout.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transferException</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If enabled and you are using Request Reply messaging (InOut) and an Exchange failed on the consumer side then the caused Exception will be send back in response as a javax.jms.ObjectMessage. If the client is Camel the returned Exception is rethrown. This allows you to use Camel JMS as a bridge in your routing - for example using persistent queues to enable robust routing. Notice that if you also have transferExchange enabled this option takes precedence. The caught exception is required to be serializable. The original Exception on the consumer side can be wrapped in an outer exception such as org.apache.camel.RuntimeCamelException when returned to the producer.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transferExchange</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">You can transfer the exchange over the wire instead of just the body and headers. The following fields are transferred: In body Out body Fault body In headers Out headers Fault headers exchange properties exchange exception. This requires that the objects are serializable. Camel will exclude any non-serializable objects and log it at WARN level. You must enable this option on both the producer and consumer side so Camel knows the payloads is an Exchange and not a regular payload.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transferFault</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If enabled and you are using Request Reply messaging (InOut) and an Exchange failed with a SOAP fault (not exception) on the consumer side then the fault flag on MessageisFault() will be send back in the response as a JMS header with the key org.apache.camel.component.jms.JmsConstantsJMS_TRANSFER_FAULTJMS_TRANSFER_FAULT. If the client is Camel the returned fault flag will be set on the link org.apache.camel.MessagesetFault(boolean). You may want to enable this when using Camel components that support faults such as SOAP based such as cxf or spring-ws.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useMessageIDAsCorrelation ID</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether JMSMessageID should always be used as JMSCorrelationID for InOut messages.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>waitForProvisionCorrelation ToBeUpdatedCounter</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of times to wait for provisional correlation id to be updated to the actual correlation id when doing request/reply over JMS and when the option useMessageIDAsCorrelationID is enabled.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">50</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>waitForProvisionCorrelation ToBeUpdatedThreadSleeping Time</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interval in millis to sleep each time while waiting for provisional correlation id to be updated.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">100</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>errorHandlerLoggingLevel</strong> (logging)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows to configure the default errorHandler logging level for logging uncaught exceptions.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">WARN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LoggingLevel</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>errorHandlerLogStackTrace</strong> (logging)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows to control whether stacktraces should be logged or not by the default errorHandler.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>password</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Password to use with the ConnectionFactory. You can also configure username/password directly on the ConnectionFactory.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>username</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Username to use with the ConnectionFactory. You can also configure username/password directly on the ConnectionFactory.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transacted</strong> (transaction)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether to use transacted mode</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>lazyCreateTransaction Manager</strong> (transaction)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If true Camel will create a JmsTransactionManager if there is no transactionManager injected when option transacted=true.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transactionManager</strong> (transaction)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Spring transaction manager to use.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PlatformTransaction Manager</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transactionName</strong> (transaction)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the transaction to use.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transactionTimeout</strong> (transaction)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timeout value of the transaction (in seconds) if using transacted mode.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">-1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_usage">Usage</h3>
+<div class="paragraph">
+<p>As AMQP component is inherited from JMS component, the usage of the
+former is almost identical to the latter:</p>
+</div>
+<div class="paragraph">
+<p><strong>Using AMQP component</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// Consuming from AMQP queue
+from("amqp:queue:incoming").
+  to(...);
+
+// Sending message to the AMQP topic
+from(...).
+  to("amqp:topic:notify");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configuring_amqp_component">Configuring AMQP component</h3>
+<div class="paragraph">
+<p>Starting from the Camel 2.16.1 you can also use the
+<code>AMQPComponent#amqp10Component(String connectionURI)</code> factory method to
+return the AMQP 1.0 component with the pre-configured topic prefix:</p>
+</div>
+<div class="paragraph">
+<p><strong>Creating AMQP 1.0 component</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java"> AMQPComponent amqp = AMQPComponent.amqp10Component("amqp://guest:guest@localhost:5672");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Keep in mind that starting from the
+Camel 2.17 the <code>AMQPComponent#amqp10Component(String connectionURI)</code> factory
+method has been deprecated on the behalf of the
+<code>AMQPComponent#amqpComponent(String connectionURI)</code>:</p>
+</div>
+<div class="paragraph">
+<p><strong>Creating AMQP 1.0 component</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">AMQPComponent amqp = AMQPComponent.amqpComponent("amqp://localhost:5672");
+
+AMQPComponent authorizedAmqp = AMQPComponent.amqpComponent("amqp://localhost:5672", "user", "password");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Starting from Camel 2.17, in order to automatically configure the AMQP
+component, you can also add an instance
+of <code>org.apache.camel.component.amqp.AMQPConnectionDetails</code> to the
+registry. For example for Spring Boot you just have to define bean:</p>
+</div>
+<div class="paragraph">
+<p><strong>AMQP connection details auto-configuration</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Bean
+AMQPConnectionDetails amqpConnection() {
+  return new AMQPConnectionDetails("amqp://localhost:5672");
+}
+
+@Bean
+AMQPConnectionDetails securedAmqpConnection() {
+  return new AMQPConnectionDetails("amqp://lcoalhost:5672", "username", "password");
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Likewise, you can also use CDI producer methods when using Camel-CDI</p>
+</div>
+<div class="paragraph">
+<p><strong>AMQP connection details auto-configuration for CDI</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Produces
+AMQPConnectionDetails amqpConnection() {
+  return new AMQPConnectionDetails("amqp://localhost:5672");
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also rely on the <a href="properties.html">Camel properties</a> to read
+the AMQP connection details. Factory
+method <code>AMQPConnectionDetails.discoverAMQP()</code> attempts to read Camel
+properties in a Kubernetes-like convention, just as demonstrated on the
+snippet below:</p>
+</div>
+<div class="paragraph">
+<p><strong>AMQP connection details auto-configuration</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">export AMQP_SERVICE_HOST = "mybroker.com"
+export AMQP_SERVICE_PORT = "6666"
+export AMQP_SERVICE_USERNAME = "username"
+export AMQP_SERVICE_PASSWORD = "password"
+
+...
+
+@Bean
+AMQPConnectionDetails amqpConnection() {
+  return AMQPConnectionDetails.discoverAMQP();
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_topics">Using topics</h3>
+<div class="paragraph">
+<p>To have using topics working with <code>camel-amqp</code> you need to configure the
+component to use <code>topic://</code> as topic prefix, as shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java"> &lt;bean id="amqp" class="org.apache.camel.component.amqp.AmqpComponent"&gt;
+   &lt;property name="connectionFactory"&gt;
+     &lt;bean class="org.apache.qpid.jms.JmsConnectionFactory" factory-method="createFromURL"&gt;
+       &lt;property name="remoteURI" value="amqp://localhost:5672" /&gt;
+       &lt;property name="topicPrefix" value="topic://" /&gt;  &lt;!-- only necessary when connecting to ActiveMQ over AMQP 1.0 --&gt;
+     &lt;/bean&gt;
+   &lt;/property&gt;
+ &lt;/bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Keep in mind that both  <code>AMQPComponent#amqpComponent()</code> methods and
+<code>AMQPConnectionDetails</code> pre-configure the component with the topic
+prefix, so you don&#8217;t have to configure it explicitly.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/apns-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/ahc-ws-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

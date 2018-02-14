@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='DigitalOcean Component Available as of Camel version 2.19
+ The DigitalOcean component allows you to manage Droplets and resources within the DigitalOcean cloud with Camel by encapsulating [digitalocean-api-java](https://www.digitalocean.com/community/projects/api-client-in-java). All of the functionality that you are familiar with in the DigitalOcean control panel is also available through this Camel component.
+ Prerequisites You must have a valid DigitalOcean account and a valid OAuth token. You can generate an OAuth token by visiting the [Apps &amp; API](https://cloud.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='DigitalOcean Component Available as of Camel version 2.19
+ The DigitalOcean component allows you to manage Droplets and resources within the DigitalOcean cloud with Camel by encapsulating [digitalocean-api-java](https://www.digitalocean.com/community/projects/api-client-in-java). All of the functionality that you are familiar with in the DigitalOcean control panel is also available through this Camel component.
+ Prerequisites You must have a valid DigitalOcean account and a valid OAuth token. You can generate an OAuth token by visiting the [Apps &amp; API](https://cloud.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/digitalocean-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/digitalocean-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_digitalocean_component">DigitalOcean Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.19</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>DigitalOcean</strong> component allows you to manage Droplets and resources within the DigitalOcean cloud with <strong>Camel</strong> by encapsulating [digitalocean-api-java](<a href="https://www.digitalocean.com/community/projects/api-client-in-java" class="bare">https://www.digitalocean.com/community/projects/api-client-in-java</a>). All of the functionality that you are familiar with in the DigitalOcean control panel is also available through this Camel component.</p>
+</div>
+<div class="sect2">
+<h3 id="_prerequisites">Prerequisites</h3>
+<div class="paragraph">
+<p>You must have a valid DigitalOcean account and a valid OAuth token. You can generate an OAuth token by visiting the [Apps &amp; API](<a href="https://cloud.digitalocean.com/settings/applications" class="bare">https://cloud.digitalocean.com/settings/applications</a>) section of the DigitalOcean control panel for your account.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="paragraph">
+<p>The <strong>DigitalOcean Component</strong> uses the following URI format:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>digitalocean://endpoint?[options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>endpoint</code> is a DigitalOcean resource type.</p>
+</div>
+<div class="paragraph">
+<p>Example : to list your droplets:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>digitalocean://droplets?operation=list&amp;oAuthToken=XXXXXX&amp;page=1&amp;perPage=10</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The DigitalOcean component only supports producer endpoints so you cannot use this component at the beginning of a route to listen to messages in a channel.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The DigitalOcean component has no options.</p>
+</div>
+<div class="paragraph">
+<p>The DigitalOcean endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>digitalocean:operation</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>operation</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The operation to perform to the given resource.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DigitalOceanOperations</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_10_parameters">Query Parameters (10 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>page</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use for pagination. Force the page number.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>perPage</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use for pagination. Set the number of item per request. The maximum number of results per page is 200.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">25</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resource</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The DigitalOcean resource type on which perform the operation.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DigitalOceanResources</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>digitalOceanClient</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a existing configured DigitalOceanClient as client</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DigitalOceanClient</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpProxyHost</strong> (proxy)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set a proxy host if needed</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpProxyPassword</strong> (proxy)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set a proxy password if needed</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpProxyPort</strong> (proxy)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set a proxy port if needed</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpProxyUser</strong> (proxy)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set a proxy host if needed</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>oAuthToken</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DigitalOcean OAuth Token</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>You have to provide an <strong>operation</strong> value for each endpoint, with the <code>operation</code> URI option or the <code>CamelDigitalOceanOperation</code> message header.</p>
+</div>
+<div class="paragraph">
+<p>All <strong>operation</strong> values are defined in <code>DigitalOceanOperations</code> enumeration.</p>
+</div>
+<div class="paragraph">
+<p>All <strong>header</strong> names used by the component are defined in <code>DigitalOceanHeaders</code> enumeration.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message_body_result">Message body result</h3>
+<div class="paragraph">
+<p>All message bodies returned are using objects provided by the <strong>digitalocean-api-java</strong> library.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_api_rate_limits">API Rate Limits</h3>
+<div class="paragraph">
+<p>DigitalOcean REST API encapsulated by camel-digitalocean component is subjected to API Rate Limiting. You can find the per method limits in the [API Rate Limits documentation](<a href="https://developers.digitalocean.com/documentation/v2/#rate-limit" class="bare">https://developers.digitalocean.com/documentation/v2/#rate-limit</a>).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_account_endpoint">Account endpoint</h3>
+<div class="paragraph">
+<p>| operation | Description | Headers | Result |
+| ------ | ---- | ------- | ----------- |
+| <code>get</code> | get account info |  | <code>com.myjeeva.digitalocean.pojo.Account</code>  |</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_blockstorages_endpoint">BlockStorages endpoint</h3>
+<div class="paragraph">
+<p>| operation | Description | Headers | Result |
+| ------ | ---- | ------- | ----------- |
+| <code>list</code> | list all of the Block Storage volumes available on your account |  | <code>List&lt;com.myjeeva.digitalocean.pojo.Volume&gt;</code>  |
+| <code>get</code> | show information about a Block Storage volume| <code>CamelDigitalOceanId</code> <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Volume</code>  |
+| <code>get</code> | show information about a Block Storage volume by name| <code>CamelDigitalOceanName</code> <em>String</em> &lt;br&gt;`CamelDigitalOceanRegion` <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Volume</code>  |
+| <code>listSnapshots</code> | retrieve the snapshots that have been created from a volume | <code>CamelDigitalOceanId</code> <em>Integer</em>| <code>List&lt;com.myjeeva.digitalocean.pojo.Snapshot&gt;</code>  |
+| <code>create</code> | create a new volume | <code>CamelDigitalOceanVolumeSizeGigabytes</code>  <em>Integer</em>&lt;br&gt;`CamelDigitalOceanName` <em>String</em>&lt;br&gt;`CamelDigitalOceanDescription`* <em>String</em>&lt;br&gt;`CamelDigitalOceanRegion`* <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Volume</code>  |
+| <code>delete</code> | delete a Block Storage volume, destroying all data and removing it from your account| <code>CamelDigitalOceanId</code>  <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Delete</code>|
+| <code>delete</code> | delete a Block Storage volume by name| <code>CamelDigitalOceanName</code> <em>String</em>&lt;br&gt;`CamelDigitalOceanRegion` <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Delete</code>
+| <code>attach</code> | attach a Block Storage volume to a Droplet| <code>CamelDigitalOceanId</code>  <em>Integer</em> &lt;br&gt;`CamelDigitalOceanDropletId`  <em>Integer</em>&lt;br&gt;`CamelDigitalOceanDropletRegion` <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>
+| <code>attach</code> | attach a Block Storage volume to a Droplet by name| <code>CamelDigitalOceanName</code> <em>String</em>&lt;br&gt;`CamelDigitalOceanDropletId`  <em>Integer</em>&lt;br&gt;`CamelDigitalOceanDropletRegion` <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>
+| <code>detach</code> | detach a Block Storage volume from a Droplet| <code>CamelDigitalOceanId</code>  <em>Integer</em> &lt;br&gt;`CamelDigitalOceanDropletId`  <em>Integer</em>&lt;br&gt;`CamelDigitalOceanDropletRegion` <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>
+| <code>attach</code> | detach a Block Storage volume from a Droplet by name| <code>CamelDigitalOceanName</code> <em>String</em>&lt;br&gt;`CamelDigitalOceanDropletId`  <em>Integer</em>&lt;br&gt;`CamelDigitalOceanDropletRegion` <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>
+| <code>resize</code> | resize a Block Storage volume | <code>CamelDigitalOceanVolumeSizeGigabytes</code>  <em>Integer</em>&lt;br&gt;`CamelDigitalOceanRegion` <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>listActions</code> | retrieve all actions that have been executed on a volume | <code>CamelDigitalOceanId</code>  <em>Integer</em>| <code>List&lt;com.myjeeva.digitalocean.pojo.Action&gt;</code>  |</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_droplets_endpoint">Droplets endpoint</h3>
+<div class="paragraph">
+<p>| operation | Description | Headers | Result |
+| ------ | ---- | ------- | ----------- |
+| <code>list</code> | list all Droplets in your account |  | <code>List&lt;com.myjeeva.digitalocean.pojo.Droplet&gt;</code>  |
+| <code>get</code> | show an individual droplet | <code>CamelDigitalOceanId</code> <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Droplet</code>  |
+| <code>create</code> | create a new Droplet | <code>CamelDigitalOceanName</code> <em>String</em> &lt;br&gt;`CamelDigitalOceanDropletImage` <em>String</em> &lt;br&gt;`CamelDigitalOceanRegion` <em>String</em> &lt;br&gt;`CamelDigitalOceanDropletSize` <em>String</em> &lt;br&gt;`CamelDigitalOceanDropletSSHKeys`* <em>List\&lt;String\&gt;</em> &lt;br&gt;`CamelDigitalOceanDropletEnableBackups`* <em>Boolean</em> &lt;br&gt;`CamelDigitalOceanDropletEnableIpv6`* <em>Boolean</em> &lt;br&gt;`CamelDigitalOceanDropletEnablePrivateNetworking`* <em>Boolean</em> &lt;br&gt;`CamelDigitalOceanDropletUserData`* <em>String</em> &lt;br&gt;`CamelDigitalOceanDropletVolumes`* <em>List\&lt;String\&gt;</em> &lt;br&gt;`CamelDigitalOceanDropletTags` <em>List\&lt;String\&gt;</em>| <code>com.myjeeva.digitalocean.pojo.Droplet</code>  |
+| <code>create</code> | create multiple Droplets | <code>CamelDigitalOceanNames</code> <em>List\&lt;String\&gt;</em> &lt;br&gt;`CamelDigitalOceanDropletImage` <em>String</em> &lt;br&gt;`CamelDigitalOceanRegion` <em>String</em> &lt;br&gt;`CamelDigitalOceanDropletSize` <em>String</em> &lt;br&gt;`CamelDigitalOceanDropletSSHKeys`* <em>List\&lt;String\&gt;</em> &lt;br&gt;`CamelDigitalOceanDropletEnableBackups`* <em>Boolean</em> &lt;br&gt;`CamelDigitalOceanDropletEnableIpv6`* <em>Boolean</em> &lt;br&gt;`CamelDigitalOceanDropletEnablePrivateNetworking`* <em>Boolean</em> &lt;br&gt;`CamelDigitalOceanDropletUserData`* <em>String</em> &lt;br&gt;`CamelDigitalOceanDropletVolumes`* <em>List\&lt;String\&gt;</em> &lt;br&gt;`CamelDigitalOceanDropletTags` <em>List\&lt;String\&gt;</em>| <code>com.myjeeva.digitalocean.pojo.Droplet</code>  |
+| <code>delete</code> | delete a Droplet, | <code>CamelDigitalOceanId</code> <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Delete</code>  |
+| <code>enableBackups</code> | enable backups on an existing Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>disableBackups</code> | disable backups on an existing Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>enableIpv6</code> | enable IPv6 networking on an existing Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>enablePrivateNetworking</code> | enable private networking on an existing Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>reboot</code> | reboot a Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>powerCycle</code> | power cycle a Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>shutdown</code> | shutdown a Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>powerOff</code> | power off a Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>powerOn</code> | power on a Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>restore</code> | shutdown a Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em> &lt;br&gt;`CamelDigitalOceanImageId` <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>passwordReset</code> | reset the password for a Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>resize</code> | resize a Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em> &lt;br&gt;`CamelDigitalOceanDropletSize` <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>rebuild</code> | rebuild a Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em> &lt;br&gt;`CamelDigitalOceanImageId` <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>rename</code> | rename a Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em> &lt;br&gt;`CamelDigitalOceanName` <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>changeKernel</code> | change the kernel of a Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em> &lt;br&gt;`CamelDigitalOceanKernelId` <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>takeSnapshot</code> | snapshot a Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em> &lt;br&gt;`CamelDigitalOceanName`* <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>tag</code> | tag a Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em> &lt;br&gt;`CamelDigitalOceanName` <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Response</code>  |
+| <code>untag</code> | untag a Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em> &lt;br&gt;`CamelDigitalOceanName` <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Response</code>  |
+| <code>listKernels</code> | retrieve a list of all kernels available to a Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em> | <code>List&lt;com.myjeeva.digitalocean.pojo.Kernel&gt;</code>  |
+| <code>listSnapshots</code> | retrieve the snapshots that have been created from a Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em> | <code>List&lt;com.myjeeva.digitalocean.pojo.Snapshot&gt;</code>  |
+| <code>listBackups</code> |  retrieve any backups associated with a Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em> | <code>List&lt;com.myjeeva.digitalocean.pojo.Backup&gt;</code>  |
+| <code>listActions</code> |  retrieve all actions that have been executed on a Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em> | <code>List&lt;com.myjeeva.digitalocean.pojo.Action&gt;</code>  |
+| <code>listNeighbors</code> |  retrieve a list of droplets that are running on the same physical server | <code>CamelDigitalOceanId</code> <em>Integer</em> | <code>List&lt;com.myjeeva.digitalocean.pojo.Droplet&gt;</code>  |
+| <code>listAllNeighbors</code> |  retrieve a list of any droplets that are running on the same physical hardware | | <code>List&lt;com.myjeeva.digitalocean.pojo.Droplet&gt;</code>  |</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_images_endpoint">Images endpoint</h3>
+<div class="paragraph">
+<p>| operation | Description | Headers | Result |
+| ------ | ---- | ------- | ----------- |
+| <code>list</code> | list images available on your account | <code>CamelDigitalOceanType</code>* <em>DigitalOceanImageTypes</em> | <code>List&lt;com.myjeeva.digitalocean.pojo.Image&gt;</code>  |
+| <code>ownList</code> | retrieve only the private images of a user | | <code>List&lt;com.myjeeva.digitalocean.pojo.Image&gt;</code>  |
+| <code>listActions</code> |  retrieve all actions that have been executed on a Image | <code>CamelDigitalOceanId</code> <em>Integer</em> | <code>List&lt;com.myjeeva.digitalocean.pojo.Action&gt;</code>  |
+| <code>get</code> | retrieve information about an image (public or private) by id| <code>CamelDigitalOceanId</code> <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Image</code>  |
+| <code>get</code> | retrieve information about an public image by slug| <code>CamelDigitalOceanDropletImage</code> <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Image</code>  |
+| <code>update</code> | update an image| <code>CamelDigitalOceanId</code> <em>Integer</em> &lt;br&gt;`CamelDigitalOceanName` <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Image</code>  |
+| <code>delete</code> | delete an image| <code>CamelDigitalOceanId</code> <em>Integer</em> | <code>com.myjeeva.digitalocean.pojo.Delete</code>  |
+| <code>transfer</code> | transfer an image to another region| <code>CamelDigitalOceanId</code> <em>Integer</em> &lt;br&gt;`CamelDigitalOceanRegion` <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>convert</code> | convert an image, for example, a backup to a snapshot| <code>CamelDigitalOceanId</code> <em>Integer</em> | <code>com.myjeeva.digitalocean.pojo.Action</code>  |</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_snapshots_endpoint">Snapshots endpoint</h3>
+<div class="paragraph">
+<p>| operation | Description | Headers | Result |
+| ------ | ---- | ------- | ----------- |
+| <code>list</code> | list all of the snapshots available on your account | <code>CamelDigitalOceanType</code>* <em>DigitalOceanSnapshotTypes</em> | <code>List&lt;com.myjeeva.digitalocean.pojo.Snapshot&gt;</code>  |
+| <code>get</code> | retrieve information about a snapshot| <code>CamelDigitalOceanId</code> <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Snapshot</code>  |
+| <code>delete</code> | delete an snapshot| <code>CamelDigitalOceanId</code> <em>Integer</em> | <code>com.myjeeva.digitalocean.pojo.Delete</code>  |</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_keys_endpoint">Keys endpoint</h3>
+<div class="paragraph">
+<p>| operation | Description | Headers | Result |
+| ------ | ---- | ------- | ----------- |
+| <code>list</code> |  list all of the keys in your account | | <code>List&lt;com.myjeeva.digitalocean.pojo.Key&gt;</code>  |
+| <code>get</code> | retrieve information about a key by id| <code>CamelDigitalOceanId</code> <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Key</code>  |
+| <code>get</code> | retrieve information about a key by fingerprint| <code>CamelDigitalOceanKeyFingerprint</code> <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Key</code>  |
+| <code>update</code> | update a key by id| <code>CamelDigitalOceanId</code> <em>Integer</em> &lt;br&gt;`CamelDigitalOceanName` <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Key</code>  |
+| <code>update</code> | update a key by fingerprint| <code>CamelDigitalOceanKeyFingerprint</code> <em>String</em> &lt;br&gt;`CamelDigitalOceanName` <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Key</code>  |
+| <code>delete</code> | delete a key by id| <code>CamelDigitalOceanId</code> <em>Integer</em> | <code>com.myjeeva.digitalocean.pojo.Delete</code>  |
+| <code>delete</code> | delete a key by fingerprint| <code>CamelDigitalOceanKeyFingerprint</code> <em>String</em> | <code>com.myjeeva.digitalocean.pojo.Delete</code>  |</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_regions_endpoint">Regions endpoint</h3>
+<div class="paragraph">
+<p>| operation | Description | Headers | Result |
+| ------ | ---- | ------- | ----------- |
+| <code>list</code> |  list all of the regions that are available | | <code>List&lt;com.myjeeva.digitalocean.pojo.Region&gt;</code>  |</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sizes_endpoint">Sizes endpoint</h3>
+<div class="paragraph">
+<p>| operation | Description | Headers | Result |
+| ------ | ---- | ------- | ----------- |
+| <code>list</code> |  list all of the sizes that are available | | <code>List&lt;com.myjeeva.digitalocean.pojo.Size&gt;</code>  |</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_floating_ips_endpoint">Floating IPs endpoint</h3>
+<div class="paragraph">
+<p>| operation | Description | Headers | Result |
+| ------ | ---- | ------- | ----------- |
+| <code>list</code> |  list all of the Floating IPs available on your account | | <code>List&lt;com.myjeeva.digitalocean.pojo.FloatingIP&gt;</code>  |
+| <code>create</code> |  create a new Floating IP assigned to a Droplet | <code>CamelDigitalOceanId</code> <em>Integer</em> | <code>List&lt;com.myjeeva.digitalocean.pojo.FloatingIP&gt;</code>  |
+| <code>create</code> |  create a new Floating IP assigned to a Region | <code>CamelDigitalOceanRegion</code> <em>String</em> | <code>List&lt;com.myjeeva.digitalocean.pojo.FloatingIP&gt;</code>  |
+| <code>get</code> | retrieve information about a Floating IP| <code>CamelDigitalOceanFloatingIPAddress</code> <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Key</code>  |
+| <code>delete</code> | delete a Floating IP and remove it from your account| <code>CamelDigitalOceanFloatingIPAddress</code> <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Delete</code>  |
+| <code>assign</code> | assign a Floating IP to a Droplet| <code>CamelDigitalOceanFloatingIPAddress</code> <em>String</em> &lt;br&gt;`CamelDigitalOceanDropletId` <em>Integer</em>| <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>unassign</code> | unassign a Floating IP | <code>CamelDigitalOceanFloatingIPAddress</code> <em>String</em> | <code>com.myjeeva.digitalocean.pojo.Action</code>  |
+| <code>listActions</code> |  retrieve all actions that have been executed on a Floating IP | <code>CamelDigitalOceanFloatingIPAddress</code> <em>String</em> | <code>List&lt;com.myjeeva.digitalocean.pojo.Action&gt;</code>  |</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tags_endpoint">Tags endpoint</h3>
+<div class="paragraph">
+<p>| operation | Description | Headers | Result |
+| ------ | ---- | ------- | ----------- |
+| <code>list</code> |  list all of your tags | | <code>List&lt;com.myjeeva.digitalocean.pojo.Tag&gt;</code>  |
+| <code>create</code> |  create a Tag | <code>CamelDigitalOceanName</code> <em>String</em> | <code>com.myjeeva.digitalocean.pojo.Tag</code>  |
+| <code>get</code> |  retrieve an individual tag | <code>CamelDigitalOceanName</code> <em>String</em> | <code>com.myjeeva.digitalocean.pojo.Tag</code>  |
+| <code>delete</code> |  delete a tag | <code>CamelDigitalOceanName</code> <em>String</em> | <code>com.myjeeva.digitalocean.pojo.Delete</code>  |
+| <code>update</code> |  update a tag | <code>CamelDigitalOceanName</code> <em>String</em> &lt;br&gt;`CamelDigitalOceanNewName` <em>String</em>| <code>com.myjeeva.digitalocean.pojo.Tag</code>  |</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examples">Examples</h3>
+<div class="paragraph">
+<p>Get your account info</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>from("direct:getAccountInfo")
+    .setHeader(DigitalOceanConstants.OPERATION, constant(DigitalOceanOperations.get))
+    .to("digitalocean:account?oAuthToken=XXXXXX")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create a droplet</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>from("direct:createDroplet")
+    .setHeader(DigitalOceanConstants.OPERATION, constant("create"))
+    .setHeader(DigitalOceanHeaders.NAME, constant("myDroplet"))
+    .setHeader(DigitalOceanHeaders.REGION, constant("fra1"))
+    .setHeader(DigitalOceanHeaders.DROPLET_IMAGE, constant("ubuntu-14-04-x64"))
+    .setHeader(DigitalOceanHeaders.DROPLET_SIZE, constant("512mb"))
+    .to("digitalocean:droplet?oAuthToken=XXXXXX")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>List all your droplets</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>from("direct:getDroplets")
+    .setHeader(DigitalOceanConstants.OPERATION, constant("list"))
+    .to("digitalocean:droplets?oAuthToken=XXXXXX")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Retrieve information for the Droplet (dropletId = 34772987)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>from("direct:getDroplet")
+    .setHeader(DigitalOceanConstants.OPERATION, constant("get"))
+    .setHeader(DigitalOceanConstants.ID, 34772987)
+    .to("digitalocean:droplet?oAuthToken=XXXXXX")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Shutdown  information for the Droplet (dropletId = 34772987)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>from("direct:shutdown")
+    .setHeader(DigitalOceanConstants.ID, 34772987)
+    .to("digitalocean:droplet?operation=shutdown&amp;oAuthToken=XXXXXX")</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/disruptor-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/cxfrs-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='gRPC Component Available as of Camel version 2.19
+ The gRPC component allows you to call or expose Remote Procedure Call (RPC) services using Protocol Buffers (protobuf) exchange format over HTTP/2 transport.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-grpc&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   URI format grpc://service[?options]    Endpoint Options The gRPC component has no options.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='gRPC Component Available as of Camel version 2.19
+ The gRPC component allows you to call or expose Remote Procedure Call (RPC) services using Protocol Buffers (protobuf) exchange format over HTTP/2 transport.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-grpc&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   URI format grpc://service[?options]    Endpoint Options The gRPC component has no options.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/grpc-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/grpc-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_grpc_component">gRPC Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.19</strong></p>
+</div>
+<div class="paragraph">
+<p>The gRPC component allows you to call or expose Remote Procedure Call (RPC) services
+using <a href="https://developers.google.com/protocol-buffers/docs/overview">Protocol Buffers (protobuf)</a>
+exchange format over HTTP/2 transport.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-grpc&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">grpc://service[?options]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_endpoint_options">Endpoint Options</h3>
+<div class="paragraph">
+<p>The gRPC component has no options.</p>
+</div>
+<div class="paragraph">
+<p>The gRPC endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>grpc:host:port/service</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_3_parameters">Path Parameters (3 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>host</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The gRPC server host name. This is localhost or 0.0.0.0 when being a consumer or remote server hostname when using producer.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>port</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The gRPC server port</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>service</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Fully qualified service name from the protocol buffer descriptor file (package dot service definition name)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_11_parameters">Query Parameters (11 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>forwardOnCompleted</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines if onCompleted events should be pushed to the Camel route.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>forwardOnError</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines if onError events should be pushed to the Camel route. Exceptions will be set as message body.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>consumerStrategy</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This option specifies the top-level strategy for processing service requests and responses in streaming mode. If an aggregation strategy is selected all requests will be accumulated in the list then transferred to the flow and the accumulated responses will be sent to the sender. If a propagation strategy is selected request is sent to the stream and the response will be immediately sent back to the sender.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">PROPAGATION</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GrpcConsumerStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>method</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gRPC method name</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>producerStrategy</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The mode used to communicate with a remote gRPC server. In SIMPLE mode a single exchange is translated into a remote procedure call. In STREAMING mode all exchanges will be sent within the same request (input and output of the recipient gRPC service must be of type 'stream').</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">SIMPLE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GrpcProducerStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>streamRepliesTo</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When using STREAMING client mode it indicates the endpoint where responses should be forwarded.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>usePlainText</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The plain text connection to the server flag</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_grpc_producer_resource_type_mapping">gRPC producer resource type mapping</h3>
+<div class="paragraph">
+<p>The table below shows the types of objects in the message body, depending on the types (simple or stream) of incoming and outgoing parameters, as well as the invocation style (synchronous or asynchronous). Please note, that invocation of the procedures with incoming stream parameter in asynchronous style are not allowed.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 15.7894%;">
+<col style="width: 15.7894%;">
+<col style="width: 15.7894%;">
+<col style="width: 26.3157%;">
+<col style="width: 26.3161%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Invocation style</th>
+<th class="tableblock halign-left valign-top">Request type</th>
+<th class="tableblock halign-left valign-top">Response type</th>
+<th class="tableblock halign-left valign-top">Request Body Type</th>
+<th class="tableblock halign-left valign-top">Result Body Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">simple</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">simple</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">simple</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stream</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List&lt;Object&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">synchronous</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stream</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">simple</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">not allowed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">not allowed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">synchronous</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stream</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stream</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">not allowed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">not allowed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>asynchronous</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">simple</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">simple</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List&lt;Object&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>asynchronous</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">simple</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stream</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List&lt;Object&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>asynchronous</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stream</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">simple</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object or List&lt;Object&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List&lt;Object&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>asynchronous</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stream</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stream</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object or List&lt;Object&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List&lt;Object&gt;</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_grpc_consumer_headers_will_be_installed_after_the_consumer_invocation">gRPC consumer headers (will be installed after the consumer invocation)</h3>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Header name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Possible values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>CamelGrpcMethodName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Method name handled by the consumer service</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>CamelGrpcEventType</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Received event type from the sent request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">onNext, onCompleted or onError</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>CamelGrpcUserAgent</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If provided, the given agent will prepend the gRPC library&#8217;s user agent information</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_examples">Examples</h3>
+<div class="paragraph">
+<p>Below is a simple synchronous method invoke with host and port parameters</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:grpc-sync")
+.to("grpc://remotehost:1101/org.apache.camel.component.grpc.PingPong?method=sendPing&amp;synchronous=true");</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;route&gt;
+    &lt;from uri="direct:grpc-sync" /&gt;
+    &lt;to uri="grpc://remotehost:1101/org.apache.camel.component.grpc.PingPong?method=sendPing&amp;synchronous=true"/&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An asynchronous method invoke</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:grpc-async")
+.to("grpc://remotehost:1101/org.apache.camel.component.grpc.PingPong?method=pingAsyncResponse");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>gRPC service consumer with propagation consumer strategy</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("grpc://localhost:1101/org.apache.camel.component.grpc.PingPong?consumerStrategy=PROPAGATION")
+.to("direct:grpc-service");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>gRPC service producer with streaming producer strategy (requires a service that uses "stream" mode as input and output)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:grpc-request-stream")
+.to("grpc://remotehost:1101/org.apache.camel.component.grpc.PingPong?method=PingAsyncAsync&amp;producerStrategy=STREAMING&amp;streamRepliesTo=direct:grpc-response-stream");
+
+from("direct:grpc-response-stream")
+.log("Response received: ${body}");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configuration">Configuration</h3>
+<div class="paragraph">
+<p>It&#8217;s it is recommended to use Maven Protocol Buffers Plugin which calls Protocol Buffer Compiler (protoc) tool to generate Java source files from .proto (protocol buffer definition) files for the custom project. This plugin will generate procedures request and response classes, their builders and gRPC procedures stubs classes as well.</p>
+</div>
+<div class="paragraph">
+<p>Following steps are required:</p>
+</div>
+<div class="paragraph">
+<p>Insert operating system and CPU architecture detection extension inside <strong>&lt;build&gt;</strong> tag of the project pom.xml or set ${os.detected.classifier} parameter manually</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;extensions&gt;
+  &lt;extension&gt;
+    &lt;groupId&gt;kr.motd.maven&lt;/groupId&gt;
+    &lt;artifactId&gt;os-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;1.4.1.Final&lt;/version&gt;
+  &lt;/extension&gt;
+&lt;/extensions&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Insert gRPC and protobuf Java code generator plugin <strong>&lt;plugins&gt;</strong> tag of the project pom.xml</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.xolstice.maven.plugins&lt;/groupId&gt;
+  &lt;artifactId&gt;protobuf-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;0.5.0&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;protocArtifact&gt;com.google.protobuf:protoc:${protobuf-version}:exe:${os.detected.classifier}&lt;/protocArtifact&gt;
+    &lt;pluginId&gt;grpc-java&lt;/pluginId&gt;
+    &lt;pluginArtifact&gt;io.grpc:protoc-gen-grpc-java:${grpc-version}:exe:${os.detected.classifier}&lt;/pluginArtifact&gt;
+  &lt;/configuration&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;compile&lt;/goal&gt;
+        &lt;goal&gt;compile-custom&lt;/goal&gt;
+        &lt;goal&gt;test-compile&lt;/goal&gt;
+        &lt;goal&gt;test-compile-custom&lt;/goal&gt;
+      &lt;/goals&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+&lt;/plugin&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_for_more_information_see_these_resources">For more information, see these resources</h3>
+<div class="paragraph">
+<p><a href="http://www.grpc.io/">gRPC project site</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://www.xolstice.org/protobuf-maven-plugin">Maven Protocol Buffers Plugin</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="protobuf.html">Protocol Buffers Data Format</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/guava-eventbus-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/groovy-language/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

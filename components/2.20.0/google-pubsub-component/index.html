@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Google Pubsub Component Available as of Camel version 2.19
+ Component Description The Google Pubsub component provides access to Cloud Pub/Sub Infrastructure via the Google Client Services API.
+ The current implementation does not use gRPC.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-google-pubsub&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   Authentication Configuration'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Google Pubsub Component Available as of Camel version 2.19
+ Component Description The Google Pubsub component provides access to Cloud Pub/Sub Infrastructure via the Google Client Services API.
+ The current implementation does not use gRPC.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-google-pubsub&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   Authentication Configuration'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/google-pubsub-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/google-pubsub-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_google_pubsub_component">Google Pubsub Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.19</strong></p>
+</div>
+<div class="sect2">
+<h3 id="_component_description">Component Description</h3>
+<div class="paragraph">
+<p>The Google Pubsub component provides access
+to <a href="https://cloud.google.com/pubsub/">Cloud Pub/Sub Infrastructure</a> via
+the <a href="https://cloud.google.com/apis/docs/client-libraries-explained">Google Client Services API</a>.</p>
+</div>
+<div class="paragraph">
+<p>The current implementation does not use gRPC.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their pom.xml
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-google-pubsub&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</pre>
+</div>
+</div>
+<div id="GooglePubsub-AuthenticationConfiguration" class="paragraph">
+<p>Authentication Configuration</p>
+</div>
+<div class="paragraph">
+<p>Google Pubsub component authentication is targeted for use with the GCP Service Accounts.
+For more information please refer to <a href="https://cloud.google.com/docs/authentication">Google Cloud Platform Auth Guide</a></p>
+</div>
+<div class="paragraph">
+<p>Google security credentials can be set explicitly via one of the two options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Service Account Email and Service Account Key (PEM format)</p>
+</li>
+<li>
+<p>GCP credentials file location</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If both are set, the Service Account Email/Key will take precedence.</p>
+</div>
+<div class="paragraph">
+<p>Or implicitly, where the connection factory falls back on
+<a href="https://developers.google.com/identity/protocols/application-default-credentials#howtheywork">Application Default Credentials</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>OBS!</strong> The location of the default credentials file is configurable - via GOOGLE_APPLICATION_CREDENTIALS environment variable.</p>
+</div>
+<div class="paragraph">
+<p>Service Account Email and Service Account Key can be found in the GCP JSON credentials file as client_email and private_key respectively.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI Format</h3>
+<div class="paragraph">
+<p>The GoogleMail Component uses the following URI format:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>        google-pubsub://project-id:destinationName?[options]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Destination Name can be either a topic or a subscription name.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_googlepubsubcomponent">GooglePubsubComponent</h3>
+<div class="paragraph">
+<p>The Google Pubsub component supports 2 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionFactory</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the connection factory to use: provides the ability to explicitly manage connection credentials: - the path to the key file - the Service Account Key / Email pair</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GooglePubsubConnection Factory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Google Pubsub endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>google-pubsub:projectId:destinationName</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_2_parameters">Path Parameters (2 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>projectId</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Project Id</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>destinationName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Destination Name</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_9_parameters">Query Parameters (9 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>ackMode</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AUTO = exchange gets ack&#8217;ed/nack&#8217;ed on completion. NONE = downstream process has to ack/nack explicitly</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">AUTO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AckMode</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>concurrentConsumers</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of parallel streams consuming from the subscription</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionFactory</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ConnectionFactory to obtain connection to PubSub Service. If non provided the default will be used.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GooglePubsubConnection Factory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>loggerId</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Logger ID to use when a match to the parent route required</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxMessagesPerPoll</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The max number of messages to receive from the server in a single API call</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_producer_endpoints">Producer Endpoints</h3>
+<div class="paragraph">
+<p>Producer endpoints can accept and deliver to PubSub individual and grouped
+exchanges alike. Grouped exchanges have <code>Exchange.GROUPED_EXCHANGE</code> property set.</p>
+</div>
+<div class="paragraph">
+<p>Google PubSub expects the payload to be byte[] array, Producer endpoints will send:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>String body as byte[] encoded as UTF-8</p>
+</li>
+<li>
+<p>byte[] body as is</p>
+</li>
+<li>
+<p>Everything else will be serialised into byte[] array</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A Map set as message header <code>GooglePubsubConstants.ATTRIBUTES</code> will be sent as PubSub attributes.
+Once exchange has been delivered to PubSub the PubSub Message ID will be assigned to
+the header <code>GooglePubsubConstants.MESSAGE_ID</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_consumer_endpoints">Consumer Endpoints</h3>
+<div class="paragraph">
+<p>Google PubSub will redeliver the message if it has not been acknowledged within the time period set
+as a configuration option on the subscription.</p>
+</div>
+<div class="paragraph">
+<p>The component will acknowledge the message once exchange processing has been completed.</p>
+</div>
+<div class="paragraph">
+<p>If the route throws an exception, the exchange is marked as failed and the component will NACK the message -
+it will be redelivered immediately.</p>
+</div>
+<div class="paragraph">
+<p>To ack/nack the message the component uses Acknowledgement ID stored as header <code>GooglePubsubConstants.ACK_ID</code>.
+If the header is removed or tampered with, the ack will fail and the message will be redelivered
+again after the ack deadline.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message_headers">Message Headers</h3>
+<div class="paragraph">
+<p>Headers set by the consumer endpoints:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>GooglePubsubConstants.MESSAGE_ID</p>
+</li>
+<li>
+<p>GooglePubsubConstants.ATTRIBUTES</p>
+</li>
+<li>
+<p>GooglePubsubConstants.PUBLISH_TIME</p>
+</li>
+<li>
+<p>GooglePubsubConstants.ACK_ID</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message_body">Message Body</h3>
+<div class="paragraph">
+<p>The consumer endpoint returns the content of the message as byte[] - exactly as the underlying system sends it.
+It is up for the route to convert/unmarshall the contents.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rollback_and_redelivery">Rollback and Redelivery</h3>
+<div class="paragraph">
+<p>The rollback for Google PubSub relies on the idea of the Acknowledgement Deadline - the time period where Google PubSub expects to receive the acknowledgement.
+If the acknowledgement has not been received, the message is redelivered.</p>
+</div>
+<div class="paragraph">
+<p>Google provides an API to extend the deadline for a message.</p>
+</div>
+<div class="paragraph">
+<p>More information in <a href="https://cloud.google.com/pubsub/docs/subscriber#ack_deadline">Google PubSub Documentation</a></p>
+</div>
+<div class="paragraph">
+<p>So, rollback is effectively a deadline extension API call with zero value - i.e. deadline is reached now and message can
+be redelivered to the next consumer.</p>
+</div>
+<div class="paragraph">
+<p>It is possible to delay the message redelivery by setting the acknowledgement deadline explicitly for the rollback by
+setting the message header</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>GooglePubsubConstants.ACK_DEADLINE</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>to the value in seconds.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/gora-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/google-mail-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

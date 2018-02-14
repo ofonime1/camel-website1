@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Camel RX (deprecated) Available as of Camel 2.11
+ This component is deprecated. We suggest to use the newer camel-reactive-streams component.
+ The camel-rx library provides Camel support for the Reactive Extensions (RX) using the RxJava library so that:
+   Camel users can use the RxJava API for processing messages on endpoints using a typesafe composable API
+  RxJava users get to use all of the Camel transports and protocols from within the RxJava API'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Camel RX (deprecated) Available as of Camel 2.11
+ This component is deprecated. We suggest to use the newer camel-reactive-streams component.
+ The camel-rx library provides Camel support for the Reactive Extensions (RX) using the RxJava library so that:
+   Camel users can use the RxJava API for processing messages on endpoints using a typesafe composable API
+  RxJava users get to use all of the Camel transports and protocols from within the RxJava API'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/rx/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/rx/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="RX-CamelRX">Camel RX (deprecated)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel 2.11</strong></p>
+</div>
+<div class="paragraph">
+<p>This component is deprecated.
+We suggest to use the newer <code>camel-reactive-streams</code> component.</p>
+</div>
+<div class="paragraph">
+<p>The camel-rx library provides Camel support for the
+<a href="https://rx.codeplex.com/">Reactive Extensions</a> (RX) using the
+<a href="https://github.com/Netflix/RxJava/wiki">RxJava</a> library so that:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Camel users can use the
+<a href="http://netflix.github.com/RxJava/javadoc/">RxJava API</a> for processing
+messages on endpoints using a typesafe composable API</p>
+</li>
+<li>
+<p><a href="https://github.com/Netflix/RxJava/wiki">RxJava</a> users get to use all of
+the <a href="components.html">Camel transports and protocols</a> from within the
+<a href="http://netflix.github.com/RxJava/javadoc/">RxJava API</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="RX-BackgroundonRX">Background on RX</h3>
+<div class="paragraph">
+<p>For a more in depth background on RX check out
+<a href="http://reactivex.io/documentation/observable.html">the RxJava wiki on
+Observable and the Reactive pattern</a> or the
+<a href="https://rx.codeplex.com/">Microsoft RX documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>You can think of RX as providing an API similar to Java 8 / Groovy /
+Scala collections (methods like filter, forEach, map, reduce, zip etc) -
+but which operates on an asynchronous stream of events rather than a
+collection. So you could think of RX as like working with asynchronous
+push based collections (rather than the traditional synchronous pull
+based collections).</p>
+</div>
+<div class="paragraph">
+<p>In RX you work with an
+<a href="http://netflix.github.com/RxJava/javadoc/rx/Observable.html">Observable&lt;T&gt;</a>
+which behaves quite like a Collection&lt;T&gt; in Java 8 so you can
+filter/map/concat and so forth. The Observable&lt;T&gt; then acts as a
+typesafe composable API for working with asynchronous events in a
+collection-like way.</p>
+</div>
+<div class="paragraph">
+<p>Once you have an
+<a href="http://netflix.github.com/RxJava/javadoc/rx/Observable.html">Observable&lt;T&gt;</a>
+you can then</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/Netflix/RxJava/wiki/Filtering-Operators">filter
+events</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Netflix/RxJava/wiki/Transformative-Operators">transform
+events</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Netflix/RxJava/wiki/Combinatorial-Operators">combine
+event streams</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Netflix/RxJava/wiki/Utility-Operators">other utility
+methods</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="RX-ObservingeventsonCamelendpoints">Observing events on Camel endpoints</h3>
+<div class="paragraph">
+<p>You can create an Observable&lt;Message&gt; from any endpoint using the
+ReactiveCamel helper class and the <strong>toObservable()</strong> method.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import org.apache.camel.rx.*;
+
+ReactiveCamel rx = new ReactiveCamel(camelContext);
+Observable&lt;Message&gt; observable = rx.toObservable("activemq:MyMessages");
+
+// we can now call filter/map/concat etc
+filtered = observable.filter(m -&gt; m.getHeader("foo") != null).map(m -&gt; "Hello " + m.getBody());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you know the type of the message payload (its body), you can use an
+overloaded version of toObservable() to pass in the class and get a
+typesafe Observable&lt;T&gt; back:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import org.apache.camel.rx.*;
+
+ReactiveCamel rx = new ReactiveCamel(camelContext);
+Observable&lt;Order&gt; observable = rx.toObservable("seda:orders", Order.class);
+
+// now lets filter and map using Java 7
+Observable&lt;String&gt; largeOrderIds = observable.filter(new Func1&lt;Order, Boolean&gt;() {
+    public Boolean call(Order order) {
+        return order.getAmount() &gt; 100.0;
+    }
+}).map(new Func1&lt;Order, String&gt;() {
+    public String call(Order order) {
+        return order.getId();
+    }
+});</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="RX-SendingObservableEventstoCamelendpoints">Sending Observable&lt;T&gt; events to Camel endpoints</h3>
+<div class="paragraph">
+<p>If you have an
+<a href="http://netflix.github.com/RxJava/javadoc/rx/Observable.html">Observable&lt;T&gt;</a>
+from some other library; or have created one from a
+<a href="http://netflix.github.com/RxJava/javadoc/rx/Observable.html#toObservable(java.util.concurrent.Future)">Future&lt;T&gt;
+using RxJava</a> and you wish to send the events on the observable to a
+Camel endpoint you can use the <strong>sendTo()</strong> method on ReactiveCamel:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import org.apache.camel.rx.*;
+
+// take some observable from somewhere
+Observable&lt;T&gt; observable = ...;
+ReactiveCamel rx = new ReactiveCamel(camelContext);
+
+// lets send the events to a message queue
+rx.sendTo(observable, "activemq:MyQueue");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="RX-EmbeddingsomeRxJavaprocessinginsideaCamelroute">Embedding some RxJava processing inside a Camel route</h3>
+<div class="paragraph">
+<p>Sometimes you may wish to use a Camel route to consume messages, perform
+content based routing, transformation, deal with data format marshalling
+and so forth and then within the route invoke some typesafe RxJava event
+processing.</p>
+</div>
+<div class="paragraph">
+<p>One approach is to just send messages from inside the Camel route to an
+endpoint; then use the <strong>toObservable()</strong> method to bind the endpoint to
+an Observable&lt;T&gt;.</p>
+</div>
+<div class="paragraph">
+<p>However if you prefer to embed the RxJava processing of messages inside
+your route there are 2 helper classes which can be used to wrap up the
+RxJava processing as a Camel Processor that can be easily embed into a
+Camel route.</p>
+</div>
+<div class="paragraph">
+<p>You can use the <strong>ObservableMessage</strong> or <strong>ObservableBody</strong> classes which
+both have an abstract <strong>configure()</strong> method like RouteBuilder. In the
+configure method you can then process the Observable&lt;T&gt; for the Camel
+Message or the message body.</p>
+</div>
+<div class="paragraph">
+<p>e.g.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    public class MyObservableBody extends ObservableBody&lt;String&gt; {
+        public MyObservableBody() {
+            super(String.class);
+        }
+
+        protected void configure(Observable&lt;String&gt; observable) {
+            // lets process the messages using the RX API
+            observable.map(new Func1&lt;String, String&gt;() {
+                public String call(String body) {
+                    return "Hello " + body;
+                }
+            }).subscribe(new Action1&lt;String&gt;() {
+                public void call(String body) {
+                    template.sendBody(resultEndpoint, body);
+                }
+            });
+        }
+    }
+    ...
+    // now lets use this inside a route...
+    from("seda:foo").process(new MyObservableBody());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Another approach, if you are consuming directly from Camel using the
+<a href="bean-integration.html">Bean Integration</a> is to just use the RxJava
+Subject directly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import rx.subjects.Subject;
+
+public class MyThing {
+    private final Subject&lt;String&gt; observable = Subject.create();
+
+    public MyThing() {
+         // now process the observable somehow....
+    }
+
+    @Consume(uri="activemq:myqueue")
+    public void onMessageBody(String body) {
+      subject.onNext(body);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Though using the <strong>toObservable</strong> on <strong>ReactiveCamel</strong> is maybe a little
+simpler.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/salesforce-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/ruby/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

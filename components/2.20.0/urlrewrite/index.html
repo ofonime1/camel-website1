@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='UrlRewrite Component Available as of Camel 2.11
+ The camel-urlrewrite component allows to plugin url rewrite functionality to HTTP, HTTP4, Jetty, or AHC components. This component integrates the UrlRewriteFilter project with Apache Camel. This allows you to use the capabilities from the url rewrite project with your Camel routes.
+ This component requires that your Camel routes starts from a servlet based endpoint such as Jetty or SERVLET.
+ Options The camel-urlrewrite component offers the following options'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='UrlRewrite Component Available as of Camel 2.11
+ The camel-urlrewrite component allows to plugin url rewrite functionality to HTTP, HTTP4, Jetty, or AHC components. This component integrates the UrlRewriteFilter project with Apache Camel. This allows you to use the capabilities from the url rewrite project with your Camel routes.
+ This component requires that your Camel routes starts from a servlet based endpoint such as Jetty or SERVLET.
+ Options The camel-urlrewrite component offers the following options'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/urlrewrite/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/urlrewrite/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect2">
+<h3 id="UrlRewrite-UrlRewriteComponent">UrlRewrite Component</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.11</strong></p>
+</div>
+<div class="paragraph">
+<p>The <code>camel-urlrewrite</code> component allows to plugin url rewrite
+functionality to <a href="http.html">HTTP</a>, <a href="http4.html">HTTP4</a>,
+<a href="jetty.html">Jetty</a>, or <a href="ahc.html">AHC</a> components. This component
+integrates the
+<a href="http://code.google.com/p/urlrewritefilter/">UrlRewriteFilter</a> project
+with Apache Camel. This allows you to use the capabilities from the url
+rewrite project with your Camel routes.</p>
+</div>
+<div class="paragraph">
+<p>This component <strong>requires</strong> that your Camel routes starts from a servlet
+based endpoint such as <a href="jetty.html">Jetty</a> or
+<a href="servlet.html">SERVLET</a>.</p>
+</div>
+<div class="sect3">
+<h4 id="UrlRewrite-Options">Options</h4>
+<div class="paragraph">
+<p>The <code>camel-urlrewrite</code> component offers the following options</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>conf</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom <code>org.tuckey.web.filters.urlrewrite.Conf</code> as the
+configuration for the url rewrite filter.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>configFile</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Refers to a file name to load as the configuration file. The file should
+be XML file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>modRewriteConfFile</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Refers to a file name to load as the Apache mod_rewrite style based
+configuration file. This file should be a plain text file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>modRewriteConfText</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is used to quickly configure a Apache mod_rewrite style based
+configuration without using a file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>useQueryString</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to use query strings in the url rewrite rules.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>useContext</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to include context-path or not in the matching. Will be default
+remove the context-path.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>defaultMatchType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>"regex"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which match type to use. Can be either "wildcard" or "regex".</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>decodeUsing</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a specific encoding such as "utf-8" or "iso-8859-1".</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="UrlRewrite-Usage">Usage</h4>
+<div class="paragraph">
+<p>The following component producers supports using together with the
+<code>camel-urlrewrite</code> component: <a href="http.html">HTTP</a>,
+<a href="http4.html">HTTP4</a> and <a href="jetty.html">Jetty</a>.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Component</th>
+<th class="tableblock halign-left valign-top">Class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>camel-http</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.15 or
+older:</strong>` org.apache.camel.component.urlrewrite.http.HttpUrlRewrite`</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>camel-jetty</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*Camel 2.15 or
+older:*org.apache.camel.component.urlrewrite.http.HttpUrlRewrite</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>camel-http4</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*Camel 2.15 or
+older:*org.apache.camel.component.urlrewrite.http4.HttpUrlRewrite</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>From <strong>Camel 2.16</strong> onwards this is no longer necessary and there is only
+one class, which
+is <code>org.apache.camel.component.urlrewrite.HttpUrlRewrite</code> that works
+with any of the components.</p>
+</div>
+<div class="paragraph">
+<p>You setup the url rewrite as a bean of the type
+<code>org.apache.camel.component.urlrewrite.http.HttpUrlRewrite</code> (when using
+<a href="http.html">HTTP</a> component) as shown below:</p>
+</div>
+<div class="paragraph">
+<p>And in XML DSL you can do:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;bean id="myRewrite" class="org.apache.camel.component.urlrewrite.HttpUrlRewrite"&gt;
+  &lt;property name="configFile" value="example/urlrewrite2.xml"/&gt;
+&lt;/bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the bean above we configure it with the <code>configFile</code> option which is
+a XML <a href="http://code.google.com/p/urlrewritefilter/">UrlRewriteFilter</a>
+configuration file.</p>
+</div>
+<div class="paragraph">
+<p>TIP:See more details at
+<a href="http://code.google.com/p/urlrewritefilter/">UrlRewriteFilter</a> for how to
+configure the XML rules file.</p>
+</div>
+<div class="paragraph">
+<p>In the Camel routes, you bridge the endpoints, and refer to the url
+rewrite on the producer endpoint as shown below. Notice how we refer to
+our url rewrite filter using the <code>urlRewrite</code> option in the endpoint
+uri.</p>
+</div>
+<div class="sect4">
+<h5 id="UrlRewrite-Usingloadbalancingeip">Using load balancing eip</h5>
+<div class="paragraph">
+<p>You can also use Camel&#8217;s <a href="load-balancer.html">Load Balancer</a> together
+with <a href="urlrewrite.html">UrlRewrite</a>, as shown below. In this code we
+use the failover load balancer, to failover to the 2nd endpoint (which
+goes to myapp3) in case of any exception thrown.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="UrlRewrite-UsingApachemod_rewritestyleconfiguration">Using Apache mod_rewrite style configuration</h5>
+<div class="paragraph">
+<p>The <a href="http://code.google.com/p/urlrewritefilter/">UrlRewriteFilter</a> project
+also supports Apache mod_rewrite style configuration.</p>
+</div>
+<div class="paragraph">
+<p>For example to configure the bean using the modRewriteConfFile property
+to refer to a mod configuration file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;bean id="myRewrite" class="org.apache.camel.component.urlrewrite.HttpUrlRewrite"&gt;
+  &lt;property name="modRewriteConfFile" value="example/modrewrite.cxf"/&gt;
+&lt;/bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Which then can contain mod rewrite rules and the likes:</p>
+</div>
+<div class="paragraph">
+<p>You can have multiple RewriteRule rules and other configurations. See
+more details at
+<a href="http://code.google.com/p/urlrewritefilter/">UrlRewriteFilter</a> project.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="UrlRewrite-Writingcustomurlrewriters">Writing custom url rewriters</h4>
+<div class="paragraph">
+<p>You can implement your custom url rewriters by implementing either of
+the following interfaces from the component of choice:</p>
+</div>
+<div class="paragraph">
+<p>Component(s): camel-http / camel-jetty</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>org.apache.camel.component.http.UrlRewrite</code></p>
+</li>
+<li>
+<p><code>org.apache.camel.component.http.HttpServletUrlRewrite</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Component(s): camel-http4</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>org.apache.camel.component.http4.UrlRewrite</code></p>
+</li>
+<li>
+<p><code>org.apache.camel.component.http4.HttpServletUrlRewrite</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The former is a simple and generic interface, which is not dependent on
+the Servlet API. The later is servlet based which requires the Camel route to start from
+a servlet based component such as <a href="jetty.html">Jetty</a> or
+<a href="servlet.html">SERVLET</a>. The servlet based is more feature rich and
+that&#8217;s the API we use to integrate with the
+<a href="http://code.google.com/p/urlrewritefilter/">UrlRewriteFilter</a> project in
+this <code>camel-urlrewrite</code> component.</p>
+</div>
+<div class="sect4">
+<h5 id="UrlRewrite-Asimpleurlrewritefilter">A simple url rewrite filter</h5>
+<div class="paragraph">
+<p>In this example we implement a custom
+<code>org.apache.camel.component.http.UrlRewrite</code> that just replaces yahoo
+with google. Mind this example is based on a unit test, and only for
+demonstration purposes. As its java code you have full power to
+implement more complex logic.</p>
+</div>
+<div class="paragraph">
+<p>The url parameter contains the full url including
+scheme://hostname:port/path?query. The relativeUrl parameter is the url
+without the endpoint configured path. Notice this option may be null if
+the url doesn&#8217;t start with the endpoint configured path.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="UrlRewrite-SeeAlso">See Also</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+<li>
+<p><a href="jetty.html">Jetty</a></p>
+</li>
+<li>
+<p><a href="http4.html">HTTP4</a></p>
+</li>
+<li>
+<p><a href="http.html">HTTP</a></p>
+</li>
+<li>
+<p><a href="ahc.html">AHC</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/velocity-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/univocity-tsv-dataformat/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

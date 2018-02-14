@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Grape Component Available as of Camel version 2.16
+ Grape component allows you to fetch, load and manage additional jars when CamelContext is running. In practice with Camel Grape component you can add new components, data formats and beans to your CamelContext without the restart of the router.
+ Grape options The Grape component has no options.
+ The Grape endpoint is configured using URI syntax:
+ grape:defaultCoordinates   with the following path and query parameters:'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Grape Component Available as of Camel version 2.16
+ Grape component allows you to fetch, load and manage additional jars when CamelContext is running. In practice with Camel Grape component you can add new components, data formats and beans to your CamelContext without the restart of the router.
+ Grape options The Grape component has no options.
+ The Grape endpoint is configured using URI syntax:
+ grape:defaultCoordinates   with the following path and query parameters:'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/grape-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/grape-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_grape_component">Grape Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.16</strong></p>
+</div>
+<div class="paragraph">
+<p><a href="http://docs.groovy-lang.org/latest/html/documentation/grape.html">Grape</a>
+component allows you to fetch, load and manage additional jars when
+<code>CamelContext</code> is running. In practice with Camel Grape component you
+can add new components, data formats and beans to your <code>CamelContext</code>
+without the restart of the router.</p>
+</div>
+<div class="sect2">
+<h3 id="_grape_options">Grape options</h3>
+<div class="paragraph">
+<p>The Grape component has no options.</p>
+</div>
+<div class="paragraph">
+<p>The Grape endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>grape:defaultCoordinates</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>defaultCoordinates</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Maven coordinates to use as default to grab if the message body is empty.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_2_parameters">Query Parameters (2 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> ()</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the default exchange pattern when creating an exchange.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">InOnly</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> ()</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_setting_up_class_loader">Setting up class loader</h3>
+<div class="paragraph">
+<p>Grape requires using Groovy class loader with the <code>CamelContext</code>. You
+can enable Groovy class loading on the existing Camel Context using the
+<code>GrapeComponent#grapeCamelContext()</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import static org.apache.camel.component.grape.GrapeComponent.grapeCamelContext;
+...
+CamelContext camelContext = grapeCamelContext(new DefaultCamelContext());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also set up the Groovy class loader used be Camel context by
+yourself:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">camelContext.setApplicationContextClassLoader(new GroovyClassLoader(myClassLoader));</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="paragraph">
+<p>Grape component supports only producer endpoints.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">grape:defaultMavenCoordinates</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example the following snippet loads Camel FTP component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:loadCamelFTP").
+  to("grape:org.apache.camel/camel-ftp/2.15.2");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also specify the Maven coordinates by sending them to the
+endpoint as the exchange body:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:loadCamelFTP").
+  setBody().constant("org.apache.camel/camel-ftp/2.15.2").
+  to("grape:defaultMavenCoordinates");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_adding_the_grape_component_to_the_project">Adding the Grape component to the project</h3>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-grape&lt;/artifactId&gt;
+    &lt;version&gt;x.y.z&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_default_payload_type">Default payload type</h3>
+<div class="paragraph">
+<p>By default Camel Grape component operates on the String payloads:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">producerTemplate.sendBody("grape:defaultMavenCoordinates", "org.apache.camel/camel-ftp/2.15.2");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>But of course Camel build-in <a href="type-converter.html">type conversion
+API</a> can perform the automatic data type transformations for you. In the
+example below Camel automatically converts binary payload into the
+String:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">producerTemplate.sendBody("grape:defaultMavenCoordinates", "org.apache.camel/camel-ftp/2.15.2".getBytes());</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_headers">Headers</h3>
+<div class="paragraph">
+<p>The following headers are recognized by the Grape component:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Header</th>
+<th class="tableblock halign-left valign-top">Java constant</th>
+<th class="tableblock halign-left valign-top">Endpoint type</th>
+<th class="tableblock halign-left valign-top">Value type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelGrapeCommand</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GrapeConstants.GRAPE_COMMAND</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Producer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.camel.component.grape.GrapeCommand</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The command to be performed by the Grape endpoint. Default to <code>grab</code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_loading_components_at_runtime">Loading components at runtime</h3>
+<div class="paragraph">
+<p>In order to load the new component at the router runtime, just grab the
+jar containing the given component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">ProducerTemplate template = camelContext.createProducerTemplate();
+template.sendBody("grape:grape", "org.apache.camel/camel-stream/2.15.2");
+template.sendBody("stream:out", "msg");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_loading_processors_bean_at_runtime">Loading processors bean at runtime</h3>
+<div class="paragraph">
+<p>In order to load the new processor bean  with your custom business login
+at the router runtime, just grab the jar containing the required bean:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">ProducerTemplate template = camelContext.createProducerTemplate();
+template.sendBody("grape:grape", "com.example/my-business-processors/1.0");
+int productId = 1;
+int price = template.requestBody("bean:com.example.PricingBean?method=currentProductPrice", productId, int.class)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_loading_deployed_jars_after_camel_context_restart">Loading deployed jars after Camel context restart</h3>
+<div class="paragraph">
+<p>After you download new jar, you usually would like to have it loaded by
+the Camel again after the restart of the <code>CamelContext</code>. It is certainly
+possible, as Grape component keeps track of the jar files you have
+installed. In order to load again the installed jars on the context
+startup, use the <code>GrapeEndpoint.loadPatches()</code> method in your route:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import static org.apache.camel.component.grape.GrapeEndpoint.loadPatches;
+
+...
+camelContext.addRoutes(
+  new RouteBuilder() {
+    @Override
+    public void configure() throws Exception {
+      loadPatches(camelContext);
+
+      from("direct:loadCamelFTP").
+        to("grape:org.apache.camel/camel-ftp/2.15.2");
+    }
+  });</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_managing_the_installed_jars">Managing the installed jars</h3>
+<div class="paragraph">
+<p>If you would like to check what jars have been installed into the given
+<code>CamelContext</code>, send message to the grape endpoint with
+the <code>CamelGrapeCommand</code> header set to <code>GrapeCommand.listPatches</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">      from("netty-http4:http://0.0.0.0:80/patches").
+        setHeader(GrapeConstats.GRAPE_COMMAND, constant(CamelGrapeCommand.listPatches)).
+        to("grape:list");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Connecting the to the route defined above using the HTTP client returns
+the list of the jars installed by Grape component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">$ curl http://my-router.com/patches
+grape:org.apache.camel/camel-ftp/2.15.2
+grape:org.apache.camel/camel-jms/2.15.2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you would like to remove the installed jars, so these won&#8217;t be loaded
+again after the context restart, use the <code>GrapeCommand.``clearPatches</code>
+command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">      from("netty-http4:http://0.0.0.0:80/patches").
+        setHeader(GrapeConstats.GRAPE_COMMAND, constant(CamelGrapeCommand.clearPatches)).
+        setBody().constant("Installed patches have been deleted.");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/groovy-dsl/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/gora-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

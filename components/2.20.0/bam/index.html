@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Business Activity Monitoring The Camel BAM module provides a Business Activity Monitoring (BAM) framework for testing business processes across multiple message exchanges on different Endpoint instances.
+ Consider, for example, a simple system in which you submit Purchase Orders into system A and then receive Invoices from system B. You might want to test that, for a given Purchase Order, you receive a matching Invoice from system B within a specific time period.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Business Activity Monitoring The Camel BAM module provides a Business Activity Monitoring (BAM) framework for testing business processes across multiple message exchanges on different Endpoint instances.
+ Consider, for example, a simple system in which you submit Purchase Orders into system A and then receive Invoices from system B. You might want to test that, for a given Purchase Order, you receive a matching Invoice from system B within a specific time period.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/bam/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/bam/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect2">
+<h3 id="BAM-BusinessActivityMonitoring">Business Activity Monitoring</h3>
+<div class="paragraph">
+<p>The <strong>Camel BAM</strong> module provides a Business Activity Monitoring (BAM)
+framework for testing business processes across multiple message
+exchanges on different <a href="endpoint.html">Endpoint</a> instances.</p>
+</div>
+<div class="paragraph">
+<p>Consider, for example, a simple system in which you submit Purchase
+Orders into system A and then receive Invoices from system B. You might
+want to test that, for a given Purchase Order, you receive a matching
+Invoice from system B within a specific time period.</p>
+</div>
+<div class="sect3">
+<h4 id="BAM-HowCamelBAMWorks">How Camel BAM Works</h4>
+<div class="paragraph">
+<p>Camel BAM uses a <a href="correlation-identifier.html">Correlation
+Identifier</a> on an input message to determine the <em>Process Instance</em> to
+which it belongs. The process instance is an entity bean which can
+maintain state for each <em>Activity</em> (where an activity typically maps to
+a single endpoint - such as the submission of Purchase Orders or the
+receipt of Invoices).</p>
+</div>
+<div class="paragraph">
+<p>You can then add rules to be triggered when a message is received on any
+activity - such as to set time expectations or perform real time
+reconciliation of values across activities.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="BAM-SimpleExample">Simple Example</h4>
+<div class="paragraph">
+<p>The following example shows how to perform some time based rules on a
+simple business process of 2 activities - A and B - which correspond
+with Purchase Orders and Invoices in the example above. If you would
+like to experiment with this scenario, you may edit this
+<a href="http://svn.apache.org/repos/asf/camel/trunk/components/camel-bam/src/test/java/org/apache/camel/bam/BamRouteTest.java">Test
+Case</a>, which defines the activities and rules, and then tests that they
+work.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">return new ProcessBuilder(entityManagerFactory, transactionTemplate) {
+    public void configure() throws Exception {
+
+        // let's define some activities, correlating on an XPath on the message bodies
+        ActivityBuilder a = activity("seda:a").name("a")
+                .correlate(xpath("/hello/@id"));
+
+        ActivityBuilder b = activity("seda:b").name("b")
+                .correlate(xpath("/hello/@id"));
+
+        // now let's add some rules
+        b.starts().after(a.completes())
+                .expectWithin(seconds(1))
+                .errorIfOver(seconds(errorTimeout)).to("mock:overdue");
+    }
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see in the above example, we first define two activities, and
+then rules to specify when we expect them to complete for a process
+instance and when an error condition should be raised.p. The
+ProcessBuilder is a <a href="routebuilder.html">RouteBuilder</a> and can be
+added to any <a href="camelcontext.html">CamelContext</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="BAM-CompleteExample">Complete Example</h4>
+<div class="paragraph">
+<p>For a complete example please see the <a href="examples/bam-example.html">BAM
+Example</a>, which is part of the standard Camel
+<a href="examples.html">Examples</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="BAM-UseCases">Use Cases</h4>
+<div class="paragraph">
+<p>In the world of finance, a common requirement is tracking trades. Often
+a trader will submit a Front Office Trade which then flows through the
+Middle Office and Back Office through various systems to settle the
+trade so that money is exchanged. You may wish to test that the front
+and back office trades match up within a certain time period; if they
+don&#8217;t match or a back office trade does not arrive within a required
+amount of time, you might signal an alarm.</p>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/barcode-dataformat/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/bam-example/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

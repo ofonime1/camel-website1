@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='XML JSon DataFormat Available as of Camel version 2.10
+ Camel already supports a number of data formats to perform XML and JSON-related conversions, but all of them require a POJO either as an input (for marshalling) or produce a POJO as output (for unmarshalling). This data format provides the capability to convert from XML to JSON and vice-versa directly, without stepping through intermediate POJOs.
+ This data format leverages the Json-lib library to achieve direct conversion.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='XML JSon DataFormat Available as of Camel version 2.10
+ Camel already supports a number of data formats to perform XML and JSON-related conversions, but all of them require a POJO either as an input (for marshalling) or produce a POJO as output (for unmarshalling). This data format provides the capability to convert from XML to JSON and vice-versa directly, without stepping through intermediate POJOs.
+ This data format leverages the Json-lib library to achieve direct conversion.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/xmljson-dataformat/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/xmljson-dataformat/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_xml_json_dataformat">XML JSon DataFormat</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.10</strong></p>
+</div>
+<div class="paragraph">
+<p>Camel already supports a number of data formats to perform XML and
+JSON-related conversions, but all of them require a POJO either as an
+input (for marshalling) or produce a POJO as output (for unmarshalling).
+This data format provides the capability to convert from XML to JSON and
+vice-versa directly, without stepping through intermediate POJOs.</p>
+</div>
+<div class="paragraph">
+<p>This data format leverages the
+<a href="http://json-lib.sourceforge.net/">Json-lib</a> library to achieve direct
+conversion. In this context, XML is considered the high-level format,
+while JSON is the low-level format. Hence, the marshal/unmarshal
+semantics are assigned as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>marshalling &#8658; converting from XML to JSON</p>
+</li>
+<li>
+<p>unmarshalling &#8658; converting from JSON to XML.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The XML JSon dataformat supports 13 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Java Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>encoding</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the encoding. Used for unmarshalling (JSON to XML conversion).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>elementName</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the name of the XML elements representing each array element. Used for unmarshalling (JSON to XML conversion).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>arrayName</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the name of the top-level XML element. Used for unmarshalling (JSON to XML conversion). For example when converting 1 2 3 it will be output by default as 123. By setting this option or rootName you can alter the name of element 'a'.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>forceTopLevelObject</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines whether the resulting JSON will start off with a top-most element whose name matches the XML root element. Used for marshalling (XML to JSon conversion). If disabled XML string 12 turns into 'x: '1' 'y': '2' . Otherwise it turns into 'a': 'x: '1' 'y': '2' .</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>namespaceLenient</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Flag to be tolerant to incomplete namespace prefixes. Used for unmarshalling (JSON to XML conversion). In most cases json-lib automatically changes this flag at runtime to match the processing.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>rootName</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the name of the top-level element. Used for unmarshalling (JSON to XML conversion). If not set json-lib will use arrayName or objectName (default value: 'o' at the current time it is not configurable in this data format). If set to 'root' the JSON string 'x': 'value1' 'y' : 'value2' would turn into value1value2 otherwise the 'root' element would be named 'o'.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>skipWhitespace</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines whether white spaces between XML elements will be regarded as text values or disregarded. Used for marshalling (XML to JSon conversion).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>trimSpaces</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines whether leading and trailing white spaces will be omitted from String values. Used for marshalling (XML to JSon conversion).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>skipNamespaces</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Signals whether namespaces should be ignored. By default they will be added to the JSON output using xmlns elements. Used for marshalling (XML to JSon conversion).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>removeNamespacePrefixes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Removes the namespace prefixes from XML qualified elements so that the resulting JSON string does not contain them. Used for marshalling (XML to JSon conversion).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>expandableProperties</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With expandable properties JSON array elements are converted to XML as a sequence of repetitive XML elements with the local name equal to the JSON key for example: number: 123 normally converted to: 123 (where e can be modified by setting elementName) would instead translate to 123 if number is set as an expandable property Used for unmarshalling (JSON to XML conversion).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>typeHints</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds type hints to the resulting XML to aid conversion back to JSON. Used for unmarshalling (JSON to XML conversion).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contentTypeHeader</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML or application/json for data formats marshalling to JSon etc.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_basic_usage_with_java_dsl">Basic Usage with Java DSL</h3>
+<div class="sect3">
+<h4 id="_explicitly_instantiating_the_data_format">Explicitly instantiating the data format</h4>
+<div class="paragraph">
+<p>Just instantiate the <code>XmlJsonDataFormat</code> from package
+<code>org.apache.camel.dataformat.xmljson</code>. Make sure you have installed the
+<code>camel-xmljson</code> feature (if running on OSGi) or that you&#8217;ve included
+<code>camel-xmljson-{version}.jar</code> and its transitive dependencies in your
+classpath. Example initialization with a default configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">XmlJsonDataFormat xmlJsonFormat = new XmlJsonDataFormat();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To tune the behaviour of the data format as per the options above, use
+the appropriate setters:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">XmlJsonDataFormat xmlJsonFormat = new XmlJsonDataFormat();
+xmlJsonFormat.setEncoding("UTF-8");
+xmlJsonFormat.setForceTopLevelObject(true);
+xmlJsonFormat.setTrimSpaces(true);
+xmlJsonFormat.setRootName("newRoot");
+xmlJsonFormat.setSkipNamespaces(true);
+xmlJsonFormat.setRemoveNamespacePrefixes(true);
+xmlJsonFormat.setExpandableProperties(Arrays.asList("d", "e"));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once you&#8217;ve instantiated the data format, the next step is to actually
+use the it from within the <code>marshal()</code> and <code>unmarshal()</code> DSL elements:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// from XML to JSON
+from("direct:marshal").marshal(xmlJsonFormat).to("mock:json");
+// from JSON to XML
+from("direct:unmarshal").unmarshal(xmlJsonFormat).to("mock:xml");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_defining_the_data_format_in_line">Defining the data format in-line</h4>
+<div class="paragraph">
+<p>Alternatively, you can define the data format inline by using the
+<code>xmljson()</code> DSL element:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// from XML to JSON - inline dataformat
+from("direct:marshalInline").marshal().xmljson().to("mock:jsonInline");
+// from JSON to XML - inline dataformat
+from("direct:unmarshalInline").unmarshal().xmljson().to("mock:xmlInline");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you wish, you can even pass in a <code>Map&lt;String, String&gt;</code> to the inline
+methods to provide custom options:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Map&lt;String, String&gt; xmlJsonOptions = new HashMap&lt;String, String&gt;();
+xmlJsonOptions.put(org.apache.camel.model.dataformat.XmlJsonDataFormat.ENCODING, "UTF-8");
+xmlJsonOptions.put(org.apache.camel.model.dataformat.XmlJsonDataFormat.ROOT_NAME, "newRoot");
+xmlJsonOptions.put(org.apache.camel.model.dataformat.XmlJsonDataFormat.SKIP_NAMESPACES, "true");
+xmlJsonOptions.put(org.apache.camel.model.dataformat.XmlJsonDataFormat.REMOVE_NAMESPACE_PREFIXES, "true");
+xmlJsonOptions.put(org.apache.camel.model.dataformat.XmlJsonDataFormat.EXPANDABLE_PROPERTIES, "d e");
+
+// from XML to JSON - inline dataformat w/ options
+from("direct:marshalInlineOptions").marshal().xmljson(xmlJsonOptions).to("mock:jsonInlineOptions");
+// form JSON to XML - inline dataformat w/ options
+from("direct:unmarshalInlineOptions").unmarshal().xmljson(xmlJsonOptions).to("mock:xmlInlineOptions");</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_basic_usage_with_spring_or_blueprint_dsl">Basic usage with Spring or Blueprint DSL</h3>
+<div class="paragraph">
+<p>Within the <code>&lt;dataFormats&gt;</code> block, simply configure an <code>xmljson</code> element
+with unique IDs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dataFormats&gt;
+    &lt;xmljson id="xmljson"/&gt;
+    &lt;xmljson id="xmljsonWithOptions" forceTopLevelObject="true" trimSpaces="true" rootName="newRoot" skipNamespaces="true"
+             removeNamespacePrefixes="true" expandableProperties="d e"/&gt;
+&lt;/dataFormats&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then you simply refer to the data format object within your
+<code>&lt;marshal /&gt;</code> and <code>&lt;unmarshal /&gt;</code> DSLs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+    &lt;from uri="direct:marshal"/&gt;
+    &lt;marshal ref="xmljson"/&gt;
+    &lt;to uri="mock:json" /&gt;
+&lt;/route&gt;
+
+&lt;route&gt;
+    &lt;from uri="direct:unmarshalWithOptions"/&gt;
+    &lt;unmarshal ref="xmljsonWithOptions"/&gt;
+    &lt;to uri="mock:xmlWithOptions"/&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Enabling XML DSL autocompletion for this component is easy: just refer
+to the appropriate <a href="http://camel.apache.org/xml-reference.html">Schema
+locations</a>, depending on whether you&#8217;re using
+<a href="http://camel.apache.org/schema/spring/">Spring</a> or
+<a href="http://camel.apache.org/schema/blueprint/">Blueprint</a> DSL. Remember that
+this data format is available from Camel 2.10 onwards, so only schemas
+from that version onwards will include these new XML elements and
+attributes.</p>
+</div>
+<div class="paragraph">
+<p>The syntax with <a href="using-osgi-blueprint-with-camel.html">Blueprint</a> is
+identical to that of the Spring DSL. Just ensure the correct namespaces
+and schemaLocations are in use.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_namespace_mappings">Namespace mappings</h3>
+<div class="paragraph">
+<p>XML has namespaces to fully qualify elements and attributes; JSON
+doesn&#8217;t. You need to take this into account when performing XML-JSON
+conversions.</p>
+</div>
+<div class="paragraph">
+<p>To bridge the gap, <a href="http://json-lib.sourceforge.net/">Json-lib</a> has an
+option to bind namespace declarations in the form of prefixes and
+namespace URIs to XML output elements while unmarshalling (i.e.
+converting from JSON to XML). For example, provided the following JSON
+string:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{ "pref1:a": "value1", "pref2:b": "value2" }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>you can ask Json-lib to output namespace declarations on elements
+<code>pref1:a</code> and <code>pref2:b</code> to bind the prefixes <code>pref1</code> and <code>pref2</code> to
+specific namespace URIs.</p>
+</div>
+<div class="paragraph">
+<p>To use this feature, simply create
+<code>XmlJsonDataFormat.NamespacesPerElementMapping</code> objects and add them to
+the <code>namespaceMappings</code> option (which is a <code>List</code>).</p>
+</div>
+<div class="paragraph">
+<p>The <code>XmlJsonDataFormat.NamespacesPerElementMapping</code> holds an element
+name and a Map of [prefix &#8658; namespace URI]. To facilitate mapping
+multiple prefixes and namespace URIs, the
+<code>NamespacesPerElementMapping(String element, String pipeSeparatedMappings)</code>
+constructor takes a String-based pipe-separated sequence of [prefix,
+namespaceURI] pairs in the following way:
+<code>|ns2|http://camel.apache.org/personalData|ns3|http://camel.apache.org/personalData2|</code>.</p>
+</div>
+<div class="paragraph">
+<p>In order to define a default namespace, just leave the corresponding key
+field empty:
+<code>|ns1|http://camel.apache.org/test1||http://camel.apache.org/default|</code>.</p>
+</div>
+<div class="paragraph">
+<p>Binding namespace declarations to an element name = empty string will
+attach those namespaces to the root element.</p>
+</div>
+<div class="paragraph">
+<p>The full code would look like that:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">XmlJsonDataFormat namespacesFormat = new XmlJsonDataFormat();
+List&lt;XmlJsonDataFormat.NamespacesPerElementMapping&gt; namespaces = new ArrayList&lt;XmlJsonDataFormat.NamespacesPerElementMapping&gt;();
+namespaces.add(new XmlJsonDataFormat.
+                       NamespacesPerElementMapping("", "|ns1|http://camel.apache.org/test1||http://camel.apache.org/default|"));
+namespaces.add(new XmlJsonDataFormat.
+                       NamespacesPerElementMapping("surname", "|ns2|http://camel.apache.org/personalData|" +
+                           "ns3|http://camel.apache.org/personalData2|"));
+namespacesFormat.setNamespaceMappings(namespaces);
+namespacesFormat.setRootElement("person");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And you can achieve the same in Spring DSL.</p>
+</div>
+<div class="sect3">
+<h4 id="_example">Example</h4>
+<div class="paragraph">
+<p>Using the namespace bindings in the Java snippet above on the following
+JSON string:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{ "name": "Raul", "surname": "Kripalani", "f": true, "g": null}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Would yield the following XML:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;person xmlns="http://camel.apache.org/default" xmlns:ns1="http://camel.apache.org/test1"&gt;
+    &lt;f&gt;true&lt;/f&gt;
+    &lt;g null="true"/&gt;
+    &lt;name&gt;Raul&lt;/name&gt;
+    &lt;surname xmlns:ns2="http://camel.apache.org/personalData" xmlns:ns3="http://camel.apache.org/personalData2"&gt;Kripalani&lt;/surname&gt;
+&lt;/person&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Remember that the JSON spec defines a JSON object as follows:</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>An object is an unordered set of name/value pairs. [&#8230;&#8203;].</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>That&#8217;s why the elements are in a different order in the output XML.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dependencies">Dependencies</h3>
+<div class="paragraph">
+<p>To use the <a href="xmljson.html">XmlJson</a> dataformat in your camel routes
+you need to add the following dependency to your pom:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-xmljson&lt;/artifactId&gt;
+  &lt;version&gt;x.x.x&lt;/version&gt;
+  &lt;!-- Use the same version as camel-core, but remember that this component is only available from 2.10 onwards --&gt;
+&lt;/dependency&gt;
+
+&lt;!-- And also XOM must be included. XOM cannot be included by default due to an incompatible
+license with ASF; so add this manually --&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;xom&lt;/groupId&gt;
+  &lt;artifactId&gt;xom&lt;/artifactId&gt;
+  &lt;version&gt;1.2.5&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="data-format.html">Data Format</a></p>
+</li>
+<li>
+<p><a href="http://json-lib.sourceforge.net/">json-lib</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/xmlrpc-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/xmlbeans-dataformat/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

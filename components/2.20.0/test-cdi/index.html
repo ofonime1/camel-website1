@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='CDI Testing Testing is a crucial part of any development or integration work. In case you&#8217;re using the Camel CDI integration for your applications, you have a number of options to ease testing.
+ You can use CDI for IoC and the Camel testing endpoints like DataSet, Mock, Test and testing API like AdviceWith and NotifyBuilder to create sophisticated integration/unit tests that are easy to run and debug inside your IDE.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='CDI Testing Testing is a crucial part of any development or integration work. In case you&#8217;re using the Camel CDI integration for your applications, you have a number of options to ease testing.
+ You can use CDI for IoC and the Camel testing endpoints like DataSet, Mock, Test and testing API like AdviceWith and NotifyBuilder to create sophisticated integration/unit tests that are easy to run and debug inside your IDE.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/test-cdi/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/test-cdi/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect2">
+<h3 id="CDITesting-CDITesting">CDI Testing</h3>
+<div class="paragraph">
+<p><a href="http://camel.apache.org/testing.html">Testing</a> is a crucial part of any
+development or integration work. In case you&#8217;re using the Camel CDI
+integration for your applications, you have a number of options to ease
+testing.</p>
+</div>
+<div class="paragraph">
+<p>You can use CDI for IoC and the Camel testing endpoints like
+<code>DataSet</code>, <code>Mock</code>, <code>Test</code> and testing API like <code>AdviceWith</code>
+and <code>NotifyBuilder</code> to create sophisticated integration/unit tests that
+are easy to run and debug inside your IDE.</p>
+</div>
+<div class="paragraph">
+<p>There are a number of supported approaches for testing with CDI in
+Camel:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 66.6668%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Testing Frameworks Supported</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#CDITesting-CamelCDITest">Camel CDI Test</a></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="ulist">
+<ul>
+<li>
+<p>JUnit 4</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><strong>Available as of Camel 2.17</strong></p>
+</div>
+<div class="paragraph">
+<p>The Camel CDI test module (<code>camel-test-cdi</code>) provides a JUnit runner
+that bootstraps a test environment using CDI so that you don&#8217;t have to
+be familiar with any CDI testing frameworks and can concentrate on the
+testing logic of your Camel CDI applications.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#CDITesting-Arquillian">Arquillian</a></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="ulist">
+<ul>
+<li>
+<p>JUnit 4</p>
+</li>
+<li>
+<p>TestNG 5</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://arquillian.org/">Arquillian</a> is a testing platform that handles
+all the plumbing of in-container testing with support for a wide range
+of <a href="http://arquillian.org/modules/">target containers</a>. Arquillian can be
+configured to run your test classes in <em>embedded</em> (in JVM CDI),
+<em>managed</em> (a real Web server or Java EE application server instance
+started in a separate process) or <em>remote</em> (the lifecycle of the
+container isn&#8217;t managed by Arquillian) modes. You have to create the
+System Under Test (SUT) in your test classes using
+<a href="http://arquillian.org/guides/shrinkwrap_introduction/">ShrinkWrap
+descriptors</a>. The benefit is that you have a very fine-grained control
+over the application configuration that you want to test. The downside
+is more code and more complex <em>classpath</em> / class loading structure.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#CDITesting-PAXExam">PAX Exam</a></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="ulist">
+<ul>
+<li>
+<p>JUnit 4</p>
+</li>
+<li>
+<p>TestNG 6</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ops4j1.jira.com/wiki/display/PAXEXAM4">PAX Exam</a> lets you test
+your Camel applications in OSGi, Java EE or standalone CDI containers
+with the ability to finely configure your System Under Test (SUT),
+similarly to Arquillian. You can use it to test your Camel CDI
+applications that target OSGi environments like Karaf with
+<a href="https://ops4j1.jira.com/wiki/display/PAXCDI/Pax+CDI">PAX CDI</a>, but you
+can use it as well to test your Camel CDI applications in standalone
+<a href="https://ops4j1.jira.com/wiki/display/PAXEXAM4/CDI+Containers">CDI
+containers</a>,
+<a href="https://ops4j1.jira.com/wiki/display/PAXEXAM4/Web+Containers">Web
+containers</a> and
+<a href="https://ops4j1.jira.com/wiki/display/PAXEXAM4/Java+EE+Containers">Java EE
+containers</a>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="CDITesting-CamelCDITest">Camel CDI Test</h4>
+<div class="paragraph">
+<p>With this approach, your test classes use the JUnit runner provided in
+Camel CDI test. This runner manages the lifecycle of a standalone CDI
+container and automatically assemble and deploy the System Under Test
+(SUT) based on the <em>classpath</em> into the container.</p>
+</div>
+<div class="paragraph">
+<p>It deploys the test class as a CDI bean so that dependency injection and
+any CDI features is available within the test class.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to
+their <code>pom.xml</code> for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-test-cdi&lt;/artifactId&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is a simple unit test using the <code>CamelCdiRunner</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@RunWith(CamelCdiRunner.class)
+public class CamelCdiTest {
+
+    @Inject
+    CamelContext context;
+
+    @Test
+    public void test() {
+        assertThat("Camel context status is incorrect!",
+            context.getStatus(),
+            is(equalTo(ServiceStatus.Started)));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>CDI injection is also available for test method parameters, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@RunWith(CamelCdiRunner.class)
+public class CamelCdiTest {
+
+    @Test
+    public void test(@Uri("direct:foo") ProducerTemplate producer) {
+        producer.sendBody("bar");
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Camel CDI test provides the <code>@Order</code> annotation that you can use to
+execute the test methods in a particular sequence, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@RunWith(CamelCdiRunner.class)
+public class CamelCdiTest {
+
+    @Test
+    @Order(1)
+    public void firstTestMethod() {
+    }
+
+    @Test
+    @Order(2)
+    public void secondTestMethod() {
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>One CDI container is bootstrapped for the entire execution of the test
+class.</p>
+</div>
+<div class="paragraph">
+<p>Besides, the test class is deployed as a CDI bean, so that you can
+control how the runner instantiate the test class, either one test class
+instance for each test method (the default, depending on the <em>built-in</em>
+default <code>@Dependent</code> CDI scope), or one test class instance for the
+entire test class execution using the <code>@ApplicationScoped</code> scope, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ApplicationScoped
+@RunWith(CamelCdiRunner.class)
+public class CamelCdiTest {
+
+    int counter;
+
+    @Test
+    @Order(1)
+    public void firstTestMethod() {
+        counter++;
+    }
+
+    @Test
+    @Order(2)
+    public void secondTestMethod() {
+        assertEquals(counter, 1);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In case you need to add additional test beans, you can use the <code>@Beans</code>
+annotation provided by Camel CDI test. For example, if you need to add
+a route to your Camel context, instead of declaring a <code>RouteBuilder</code> bean
+with a nested class, you can declare a managed bean, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">class TestRoute extends RouteBuilder {
+
+    @Override
+    public void configure() {
+        from("direct:foo").to("mock:bar");
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And add it with the <code>@Beans</code> annotation, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@RunWith(CamelCdiRunner.class)
+@Beans(classes = TestRoute.class)
+public class CamelCdiTest {
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="CDITesting-Arquillian">Arquillian</h4>
+<div class="paragraph">
+<p>With this approach, you use the JUnit runner or TestNG support provided
+by Arquillian to delegate the bootstrap of the CDI container. You need
+to declare a <code>@Deployment</code> method to create your application
+configuration to be deployed in the container using
+<a href="http://arquillian.org/guides/shrinkwrap_introduction/">ShrinkWrap
+descriptors</a>, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@RunWith(Arquillian.class)
+public class CamelCdiJavaSeTest {
+
+    @Deployment
+    public static Archive deployment() {
+        return ShrinkWrap.create(JavaArchive.class)
+            // Camel CDI
+            .addPackage(CdiCamelExtension.class.getPackage())
+            // Test classes
+            .addPackage(Application.class.getPackage())
+            // Bean archive deployment descriptor
+            .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+    }
+
+    @Inject
+    CamelContext context;
+
+    @Test
+    public void test() {
+        assertThat("Camel context status is incorrect!",
+            context.getStatus(),
+            is(equalTo(ServiceStatus.Started)));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In that example, you can use any Java SE Arquillian embedded container
+adapter, like the
+<a href="http://arquillian.org/modules/arquillian-weld-se-embedded-1.1-container-adapter/">Weld
+embedded container adapter</a> e.g. with Maven you need that complete set
+of dependencies:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependencies&gt;
+
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.jboss.arquillian.junit&lt;/groupId&gt;
+      &lt;artifactId&gt;arquillian-junit-container&lt;/artifactId&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.jboss.shrinkwrap.descriptors&lt;/groupId&gt;
+      &lt;artifactId&gt;shrinkwrap-descriptors-depchain&lt;/artifactId&gt;
+      &lt;type&gt;pom&lt;/type&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.jboss.arquillian.container&lt;/groupId&gt;
+      &lt;artifactId&gt;arquillian-weld-se-embedded-1.1&lt;/artifactId&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.jboss.weld&lt;/groupId&gt;
+      &lt;artifactId&gt;weld-core&lt;/artifactId&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+
+&lt;/dependencies&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Using ShrinkWarp Descriptors, you have a complete control over the
+configuration and kind of Camel CDI applications you want to test. For
+example, to test a Camel CDI application that uses the Camel
+<a href="rest-dsl.html">REST DSL</a> configured with the
+<a href="servlet.html">Servlet component</a>, you need to create a Web archive,
+e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@RunWith(Arquillian.class)
+public class CamelCdiWebTest {
+
+    @Deployment
+    public static Archive&lt;?&gt; createTestArchive() {
+        return ShrinkWrap.create(WebArchive.class)
+            .addClass(Application.class)
+            .addAsWebInfResource(EmptyAsset.INSTANCE, ArchivePaths.create("beans.xml"))
+            .setWebXML(Paths.get("src/main/webapp/WEB-INF/web.xml").toFile());
+    }
+
+    @Test
+    @RunAsClient
+    public void test(@ArquillianResource URL url) throws Exception {
+        assertThat(IOHelper.loadText(new URL(url, "camel/rest/hello").openStream()),
+            is(equalTo("Hello World!\n")));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the example above, you can use any Arquillian Web container adapter,
+like
+the <a href="http://arquillian.org/modules/arquillian-jetty-embedded-9-container-adapter/">Jetty
+embedded container adapter</a> e.g. with Maven you need the
+complete following set of dependencies:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;/dependencies&gt;
+
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.jboss.arquillian.junit&lt;/groupId&gt;
+    &lt;artifactId&gt;arquillian-junit-container&lt;/artifactId&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+  &lt;/dependency&gt;
+
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.jboss.arquillian.testenricher&lt;/groupId&gt;
+    &lt;artifactId&gt;arquillian-testenricher-resource&lt;/artifactId&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+  &lt;/dependency&gt;
+
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.jboss.shrinkwrap.descriptors&lt;/groupId&gt;
+    &lt;artifactId&gt;shrinkwrap-descriptors-depchain&lt;/artifactId&gt;
+    &lt;type&gt;pom&lt;/type&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+  &lt;/dependency&gt;
+
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.jboss.weld.servlet&lt;/groupId&gt;
+    &lt;artifactId&gt;weld-servlet&lt;/artifactId&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+  &lt;/dependency&gt;
+
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
+    &lt;artifactId&gt;jetty-webapp&lt;/artifactId&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+  &lt;/dependency&gt;
+
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
+    &lt;artifactId&gt;jetty-annotations&lt;/artifactId&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+  &lt;/dependency&gt;
+
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.jboss.arquillian.container&lt;/groupId&gt;
+    &lt;artifactId&gt;arquillian-jetty-embedded-9&lt;/artifactId&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+  &lt;/dependency&gt;
+
+&lt;/dependencies&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can see the tests in the <code>camel-example-cdi-rest-servlet</code> example
+for a complete working example of testing a Camel CDI application using
+the REST DSL and deployed as a WAR in Jetty.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="CDITesting-PAXExam">PAX Exam</h4>
+<div class="paragraph">
+<p>If you target OSGi as runtime environment for your Camel CDI
+applications, you can use PAX Exam to automate the deployment of your
+tests into an OSGi container, for example into Karaf, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@RunWith(PaxExam.class)
+@ExamReactorStrategy(PerClass.class)
+public class PaxCdiOsgiTest {
+
+    @Configuration
+    public Option[] config() throws IOException {
+        return options(
+            // Karaf configuration
+            karafDistributionConfiguration()
+                .frameworkUrl(
+                    maven()
+                       .groupId("org.apache.karaf")
+                       .artifactId("apache-karaf")
+                       .versionAsInProject()
+                       .type("zip"))
+                .name("Apache Karaf")
+                .unpackDirectory(new File("target/paxexam/unpack/")),
+            // PAX CDI Weld
+            features(
+                maven()
+                    .groupId("org.ops4j.pax.cdi")
+                    .artifactId("pax-cdi-features")
+                    .type("xml")
+                    .classifier("features")
+                    .versionAsInProject(),
+                "pax-cdi-weld"),
+            // Karaf Camel commands
+            mavenBundle()
+                .groupId("your.application.groupId")
+                .artifactId("your.application.artifactId")
+                .versionAsInProject()
+        );
+    }
+
+    @Inject
+    private CamelContext context;
+
+    @Test
+    public void testContextStatus() {
+        assertThat("Camel context status is incorrect!",
+            context.getStatus(), equalTo(ServiceStatus.Started));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can see the tests in the <code>camel-example-cdi-osgi</code> example for a
+complete working example of testing a Camel CDI application deployed in
+an OSGi container using PAX Exam.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="CDITesting-TestingPatterns">Testing Patterns</h4>
+<div class="paragraph">
+<p>You can see the tests in the <code>camel-example-cdi-test</code> example for a
+thorough overview of the following testing patterns for Camel CDI
+applications.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+While the patterns above are illustrated using the Camel CDI test
+module, they should equally work with Arquillian and PAX Exam unless
+otherwise stated or illustrated with a specific example.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect4">
+<h5 id="CDITesting-Testroutes">Test routes</h5>
+<div class="paragraph">
+<p>You may want to add some Camel routes to your Camel CDI applications for
+testing purpose. For example to route some exchanges to a <code>MockEndpoint</code>
+instance. You can do that by declaring a <code>RouteBuilder</code> bean within the
+test class as you would normally do in your application code, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@RunWith(CamelCdiRunner.class)
+public class CamelCdiTest {
+
+    // Declare a RouteBuilder bean for testing purpose
+    // that is automatically added to the Camel context
+    static class TestRoute extends RouteBuilder {
+
+    @Override
+    public void configure() {
+        from("direct:out").routeId("test").to("mock:out");
+    }
+
+    // And retrieve the MockEndpoint for further assertions
+    @Inject
+    @Uri("mock:out")
+    MockEndpoint mock;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can find more information in <a href="cdi.html#CDI-Auto-detectingCamelroutes">auto-detecting Camel
+routes</a>.</p>
+</div>
+<div class="paragraph">
+<p>In case you prefer declaring the <code>RouteBuilder</code> bean in a separate class,
+for example to share it more easily across multiple test classes, you can use
+the <code>@Beans</code> annotation to instruct Camel CDI test to deploy that class as a
+CDI bean, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@RunWith(CamelCdiRunner.class)
+@Beans(classes = TestRoute.class)
+public class CamelCdiTest {
+
+    // ...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="CDITesting-Beanalternatives">Bean alternatives</h5>
+<div class="paragraph">
+<p>You may want to replace a bean that is used in your Camel routes by
+another bean for testing purpose, for example to mock it or change the
+behavior of the application bean.</p>
+</div>
+<div class="paragraph">
+<p>Imagine you have the following route in your application:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class Application {
+
+    @ContextName("camel-test-cdi")
+    static class Hello extends RouteBuilder {
+
+        @Override
+        public void configure() {
+            from("direct:in").bean("bean").to("direct:out");
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And the corresponding bean:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Named("bean")
+public class Bean {
+
+    public String process(@Body String body) {
+        return body;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then you can replace the bean above in your tests by declaring an
+<em>alternative</em> bean, annotated with <code>@Alternative</code>, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Alternative
+@Named("bean")
+public class AlternativeBean {
+
+    public String process(@Body String body) {
+        return body + " with alternative bean!";
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And you need to activate (a.k.a. <em>select</em> in CDI terminology) this
+alternative bean in your tests. If your using the <code>CamelCdiRunner</code> JUnit
+runner, you can do that with the <code>@Beans</code> annotation provided by the
+Camel CDI test module, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@RunWith(CamelCdiRunner.class)
+@Beans(alternatives = AlternativeBean.class)
+public class CamelCdiTest {
+
+    @Test
+    public void testAlternativeBean(@Uri("direct:in") ProducerTemplate producer
+                                    @Uri("mock:out") MockEndpoint mock) throws InterruptedException {
+        mock.expectedMessageCount(1);
+        mock.expectedBodiesReceived("test with alternative bean!");
+
+        producer.sendBody("test");
+
+        MockEndpoint.assertIsSatisfied(1L, TimeUnit.SECONDS, mock);
+    }
+
+    static class TestRoute extends RouteBuilder {
+
+        @Override
+        public void configure() {
+            from("direct:out").routeId("test").to("mock:out");
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re using Arquillian as testing framework, you need to activate the
+alternative in your deployment method, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@RunWith(Arquillian.class)
+public class CamelCdiTest {
+
+    @Deployment
+    public static Archive deployment() {
+        return ShrinkWrap.create(JavaArchive.class)
+            // Camel CDI
+            .addPackage(CdiCamelExtension.class.getPackage())
+            // Test classes
+            .addPackage(Application.class.getPackage())
+            // Bean archive deployment descriptor
+            .addAsManifestResource(
+                new StringAsset(
+                    Descriptors.create(BeansDescriptor.class)
+                        .getOrCreateAlternatives()
+                            .stereotype(MockAlternative.class.getName()).up()
+                        .exportAsString()),
+                "beans.xml");
+    }
+
+    //...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="CDITesting-Camelcontextcustomization">Camel context customization</h5>
+<div class="paragraph">
+<p>You may need to customize your Camel contexts for testing purpose, for
+example disabling JMX management to avoid TCP port allocation conflict.
+You can do that by declaring a custom Camel context bean in your test
+class, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@RunWith(CamelCdiRunner.class)
+public class CamelCdiTest {
+
+    @Default
+    @ContextName("camel-test-cdi")
+    @ApplicationScoped
+    static class CustomCamelContext extends DefaultCamelContext {
+
+        @PostConstruct
+        void customize() {
+            disableJMX();
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In that example, the custom Camel context bean declared in the test
+class will be used during the test execution instead of the default
+Camel context bean provided by the <a href="cdi.html">Camel CDI component</a>.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="CDITesting-RoutesadvisingwithadviceWith">Routes advising with <code>adviceWith</code></h5>
+<div class="paragraph">
+<p><code>AdviceWith</code> is used for testing Camel routes where you
+can <em>advice</em> an existing route before its being tested. It allows to
+add <a href="http://camel.apache.org/intercept.html">Intercept</a> or <em>weave</em> routes
+for testing purpose, for example using
+the <a href="mock.html">Mock</a> component.</p>
+</div>
+<div class="paragraph">
+<p>It is recommended to only advice routes which are not started already.
+To meet that requirement, you can use the <code>CamelContextStartingEvent</code>
+event by declaring an observer method in which you use <code>adviceWith</code> to
+add a <code>mock</code> endpoint at the end of your Camel route, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@RunWith(CamelCdiRunner.class)
+public class CamelCdiTest {
+
+    void advice(@Observes CamelContextStartingEvent event,
+                @Uri("mock:test") MockEndpoint messages,
+                ModelCamelContext context) throws Exception {
+
+        context.getRouteDefinition("route")
+            .adviceWith(context, new AdviceWithRouteBuilder() {
+                @Override
+                public void configure() {
+                    weaveAddLast().to("mock:test");
+                }
+            });
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="CDITesting-JUnitrules">JUnit rules</h5>
+<div class="paragraph">
+<p>Camel CDI test starts the CDI container after all the JUnit class rules
+have executed.</p>
+</div>
+<div class="paragraph">
+<p>That way, you can use JUnit class rules to initialize (resp. clean-up)
+resources that your test classes would require during their execution
+before the container initializes (resp. after the container has
+shutdown). For example, you could use an embedded JMS broker
+like <a href="https://activemq.apache.org/artemis/">ActiveMQ Artemis</a> to test your
+Camel JMS application, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import org.apache.activemq.artemis.jms.server.embedded.EmbeddedJMS;
+
+@RunWith(CamelCdiRunner.class)
+public class CamelCdiTest {
+
+    @ClassRule
+    public static final ExternalResource resources = new ExternalResource() {
+
+        private final EmbeddedJMS jms = new EmbeddedJMS();
+
+        @Override
+        protected void before() throws Exception {
+            jms.start();
+        }
+
+        @Override
+        protected void after() throws Exception {
+            jms.stop();
+        }
+    };
+
+    @Inject
+    @Uri("jms:destination")
+    private ProducerTemplate producer;
+
+    @Test
+    public void sendMessage() {
+        producer.sendBody("message");
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Another use case is to assert the behavior of your application after it
+has shutdown. In that case, you can use the <code>Verifier</code> rule, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import org.junit.rules.Verifier;
+
+@RunWith(CamelCdiRunner.class)
+public class CamelCdiTest {
+
+    @ClassRule
+    public static Verifier verifier = new Verifier() {
+
+        @Override
+        protected void verify() {
+            // Executes after the CDI container has shutdown
+        }
+    };
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="CDITesting-SeeAlso">See Also</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="cdi.html">CDI component</a></p>
+</li>
+<li>
+<p><a href="http://arquillian.org">Arquillian Web site</a></p>
+</li>
+<li>
+<p><a href="http://arquillian.org/modules/descriptors-shrinkwrap/">ShrinkWrap
+Descriptors</a></p>
+</li>
+<li>
+<p><a href="http://arquillian.org/guides/shrinkwrap_introduction/">Creating
+Deployable Archives with ShrinkWrap</a></p>
+</li>
+<li>
+<p><a href="https://ops4j1.jira.com/wiki/display/PAXEXAM4">PAX Exam</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/test-karaf/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/test-blueprint/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

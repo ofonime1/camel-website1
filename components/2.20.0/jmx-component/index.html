@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='JMX Component Camel JMX Apache Camel has extensive support for JMX to allow you to monitor and control the Camel managed objects with a JMX client.
+ Camel also provides a JMX component that allows you to subscribe to MBean notifications. This page is about how to manage and monitor Camel using JMX.
+  Options The JMX component has no options.
+ The JMX endpoint is configured using URI syntax:'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='JMX Component Camel JMX Apache Camel has extensive support for JMX to allow you to monitor and control the Camel managed objects with a JMX client.
+ Camel also provides a JMX component that allows you to subscribe to MBean notifications. This page is about how to manage and monitor Camel using JMX.
+  Options The JMX component has no options.
+ The JMX endpoint is configured using URI syntax:'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/jmx-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/jmx-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_jmx_component">JMX Component</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_camel_jmx">Camel JMX</h3>
+<div class="paragraph">
+<p>Apache Camel has extensive support for JMX to allow you to monitor and
+control the Camel managed objects with a JMX client.</p>
+</div>
+<div class="paragraph">
+<p>Camel also provides a <a href="jmx.html">JMX</a> component that allows you to
+subscribe to MBean notifications. This page is about how to manage and
+monitor Camel using JMX.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The JMX component has no options.</p>
+</div>
+<div class="paragraph">
+<p>The JMX endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>jmx:serverURL</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>serverURL</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">server url comes from the remaining endpoint</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_29_parameters">Query Parameters (29 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>format</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: Format for the message body. Either xml or raw. If xml the notification is serialized to xml. If raw then the raw java object is set as the body.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">xml</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>granularityPeriod</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: monitor types only The frequency to poll the bean to check the monitor.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">10000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>monitorType</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: monitor types only The type of monitor to create. One of string gauge counter.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>objectDomain</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> URI Property: The domain for the mbean you&#8217;re connecting to</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>objectName</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: The name key for the mbean you&#8217;re connecting to. This value is mutually exclusive with the object properties that get passed.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>observedAttribute</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: monitor types only The attribute to observe for the monitor bean.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>handback</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: Value to handback to the listener when a notification is received. This value will be put in the message header with the key jmx.handback</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>notificationFilter</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: Reference to a bean that implements the NotificationFilter.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NotificationFilter</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>objectProperties</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: properties for the object name. These values will be used if the objectName param is not set</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>reconnectDelay</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: The number of seconds to wait before attempting to retry establishment of the initial connection or attempt to reconnect a lost connection</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>reconnectOnConnection Failure</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: If true the consumer will attempt to reconnect to the JMX server when any connection failure occurs. The consumer will attempt to re-establish the JMX connection every 'x' seconds until the connection is made-- where 'x' is the configured reconnectionDelay</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>testConnectionOnStartup</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: If true the consumer will throw an exception if unable to establish the JMX connection upon startup. If false the consumer will attempt to establish the JMX connection every 'x' seconds until the connection is made&#8201;&#8212;&#8201;where 'x' is the configured reconnectionDelay</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>initThreshold</strong> (counter)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: counter monitor only Initial threshold for the monitor. The value must exceed this before notifications are fired.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>modulus</strong> (counter)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: counter monitor only The value at which the counter is reset to zero</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>offset</strong> (counter)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: counter monitor only The amount to increment the threshold after it&#8217;s been exceeded.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>differenceMode</strong> (gauge)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: counter gauge monitor only If true then the value reported in the notification is the difference from the threshold as opposed to the value itself.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>notifyHigh</strong> (gauge)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: gauge monitor only If true the gauge will fire a notification when the high threshold is exceeded</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>notifyLow</strong> (gauge)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: gauge monitor only If true the gauge will fire a notification when the low threshold is exceeded</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>thresholdHigh</strong> (gauge)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: gauge monitor only Value for the gauge&#8217;s high threshold</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>thresholdLow</strong> (gauge)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: gauge monitor only Value for the gauge&#8217;s low threshold</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>password</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: credentials for making a remote connection</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>user</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: credentials for making a remote connection</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>notifyDiffer</strong> (string)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: string monitor only If true the string monitor will fire a notification when the string attribute differs from the string to compare.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>notifyMatch</strong> (string)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: string monitor only If true the string monitor will fire a notification when the string attribute matches the string to compare.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>stringToCompare</strong> (string)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI Property: string monitor only Value for the string monitor&#8217;s string to compare.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_activating_jmx_in_camel">Activating JMX in Camel</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Spring JAR dependency, required for Camel 2.8 or older</strong></p>
+</div>
+<div class="paragraph">
+<p><code>spring-context.jar</code>, <code>spring-aop.jar</code>, <code>spring-beans.jar</code>, and
+<code>spring-core.jar</code> are needed on the classpath by Camel to be able to use
+JMX instrumentation. If these .jars are not on the classpath, Camel will
+fallback to non JMX mode. This situation is logged at <code>WARN</code> level using
+logger name <code>org.apache.camel.impl.DefaultCamelContext</code>.</p>
+</div>
+<div class="paragraph">
+<p>From <strong>Camel 2.9</strong> onwards, the Spring JARs are <strong>no</strong> longer required to
+run Camel in JMX mode.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_using_jmx_to_manage_apache_camel">Using JMX to manage Apache Camel</h4>
+<div class="paragraph">
+<p>By default, JMX instrumentation agent is enabled in Camel, which means
+that Camel runtime creates and registers MBean management objects with a
+<code>MBeanServer</code> instance in the VM. This allows Camel users to instantly
+obtain insights into how Camel routes perform down to the individual
+processor level.</p>
+</div>
+<div class="paragraph">
+<p>The supported types of management objects are
+<a href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/management/mbean/ManagedEndpoint.html">endpoint</a>,
+<a href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/management/mbean/ManagedRoute.html">route</a>,
+<a href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/management/mbean/ManagedService.html">service</a>,
+and
+<a href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/management/mbean/ManagedProcessor.html">processor</a>.
+Some of these management objects also expose lifecycle operations in
+addition to performance counter attributes.</p>
+</div>
+<div class="paragraph">
+<p>The
+<a href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/management/DefaultManagementNamingStrategy.html"><code>DefaultManagementNamingStrategy</code></a>
+is the default naming strategy which builds object names used for MBean
+registration. By default, <code>org.apache.camel</code> is the domain name for all
+object names created by <code>CamelNamingStrategy</code>. The domain name of the
+MBean object can be configured by Java VM system property:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>-Dorg.apache.camel.jmx.mbeanObjectDomainName=your.domain.name</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or, by adding a <code>jmxAgent</code> element inside the camelContext element in
+Spring configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
+  &lt;jmxAgent id="agent" mbeanObjectDomainName="your.domain.name"/&gt;
+    ...
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Spring configuration always takes precedence over system properties when
+they both present. It is true for all JMX related configurations.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_disabling_jmx_instrumentation_agent_in_camel">Disabling JMX instrumentation agent in Camel</h4>
+<div class="paragraph">
+<p>You can disable JMX instrumentation agent by setting the Java VM system
+property as follow:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>-Dorg.apache.camel.jmx.disabled=true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The property value is treated as <code>boolean</code>.</p>
+</div>
+<div class="paragraph">
+<p>Or, by adding a <code>jmxAgent</code> element inside the <code>camelContext</code> element in
+Spring configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
+  &lt;jmxAgent id="agent" disabled="true"/&gt;
+    ...
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or in <strong>Camel 2.1</strong> its a bit easier (not having to use JVM system
+property) if using pure Java as you can disable it as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CamelContext camel = new DefaultCamelContext();
+camel.disableJMX();</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_locating_a_mbeanserver_in_the_java_vm">Locating a MBeanServer in the Java VM</h4>
+<div class="paragraph">
+<p>Each CamelContext can have an instance of
+<a href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/spi/InstrumentationAgent.html"><code>InstrumentationAgent</code></a>
+wrapped inside the
+<a href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/management/InstrumentationLifecycleStrategy.html"><code>InstrumentationLifecycleStrategy</code></a>.
+The InstrumentationAgent is the object that interfaces with a
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/management/MBeanServer.html"><code>MBeanServer</code></a>
+to register / unregister Camel MBeans. Multiple
+CamelContexts / InstrumentationAgents can / should share a <code>MBeanServer</code>. By
+default, Camel runtime picks the first <code>MBeanServer</code> returned by
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/management/MBeanServerFactory.html#findMBeanServer(java.lang.String)">MBeanServerFactory.findMBeanServer
+method</a> that matches the default domain name of <code>org.apache.camel</code>.</p>
+</div>
+<div class="paragraph">
+<p>You may want to change the default domain name to match the
+<code>MBeanServer</code> instance that you are already using in your application.
+Especially, if your <code>MBeanServer</code> is attached to a JMX connector server,
+you will not need to create a connector server in Camel.</p>
+</div>
+<div class="paragraph">
+<p>You can configure the matching default domain name via system property.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>-Dorg.apache.camel.jmx.mbeanServerDefaultDomain=&lt;your.domain.name&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or, by adding a <code>jmxAgent</code> element inside the camelContext element in
+Spring configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
+  &lt;jmxAgent id="agent" mbeanServerDefaultDomain="your.domain.name"/&gt;
+    ...
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If no matching <code>MBeanServer</code> can be found, a new one is created and the
+new `MBeanServer&#8217;s default domain name is set according to the default
+and configuration as mentioned above.</p>
+</div>
+<div class="paragraph">
+<p>It is also possible to use the
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/management/ManagementFactory.html#getPlatformMBeanServer()"><code>PlatformMBeanServer</code></a>
+when it is desirable to manage JVM MBeans by setting the system
+property. The <code>MBeanServer</code> default domain name configuration is ignored
+as it is not applicable.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+Starting in next release (1.5), the default
+value of <code>usePlatformMBeanServer</code> will be changed to <code>true</code>. You can set
+the property to <code>false</code> to disable using platform <code>MBeanServer</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>-Dorg.apache.camel.jmx.usePlatformMBeanServer=True</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or, by adding a <code>jmxAgent</code> element inside the <code>camelContext</code> element in
+Spring configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
+  &lt;jmxAgent id="agent" usePlatformMBeanServer="true"/&gt;
+    ...
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_creating_jmx_rmi_connector_server">Creating JMX RMI Connector Server</h4>
+<div class="paragraph">
+<p>JMX connector server enables MBeans to be remotely managed by a JMX
+client such as JConsole; Camel JMX RMI connector server can be
+optionally turned on by setting system property and the <code>MBeanServer</code>
+used by Camel is attached to that connector server.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>-Dorg.apache.camel.jmx.createRmiConnector=True</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or, by adding a <code>jmxAgent</code> element inside the <code>camelContext</code> element in
+Spring configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
+  &lt;jmxAgent id="agent" createConnector="true"/&gt;
+    ...
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_jmx_service_url">JMX Service URL</h4>
+<div class="paragraph">
+<p>The default JMX Service URL has the format:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>service:jmx:rmi:///jndi/rmi://localhost:&lt;registryPort&gt;/&lt;serviceUrlPath&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>registryPort</code> is the RMI registry port and the default value is
+<code>1099</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can set the RMI registry port by system property.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>-Dorg.apache.camel.jmx.rmiConnector.registryPort=&lt;port number&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or, by adding a <code>jmxAgent</code> element inside the <code>camelContext</code> element in
+Spring configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
+  &lt;jmxAgent id="agent" createConnector="true" registryPort="port number"/&gt;
+    ...
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>serviceUrlPath</code> is the path name in the URL and the default value is
+<code>/jmxrmi/camel</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can set the service URL path by system property.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>-Dorg.apache.camel.jmx.serviceUrlPath=&lt;path&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Setting ManagementAgent settings in Java</strong></p>
+</div>
+<div class="paragraph">
+<p>In <strong>Camel 2.4</strong> onwards you can also set the various options on the
+<code>ManagementAgent</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">context.getManagementStrategy().getManagementAgent().setServiceUrlPath("/foo/bar");
+context.getManagementStrategy().getManagementAgent().setRegistryPort(2113);
+context.getManagementStrategy().getManagementAgent().setCreateConnector(true);</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Or, by adding a <code>jmxAgent</code> element inside the camelContext element in
+Spring configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
+  &lt;jmxAgent id="agent" createConnector="true" serviceUrlPath="path"/&gt;
+    ...
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default, RMI server object listens on a dynamically generated port,
+which can be a problem for connections established through a firewall.
+In such situations, RMI connection port can be explicitly set by the
+system property.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>-Dorg.apache.camel.jmx.rmiConnector.connectorPort=&lt;port number&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or, by adding a <code>jmxAgent</code> element inside the <code>camelContext</code> element in
+Spring configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext id="camel" xmlns="http://activemq.apache.org/camel/schema/spring"&gt;
+  &lt;jmxAgent id="agent" createConnector="true" connectorPort="port number"/&gt;
+    ...
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the connector port option is set, the JMX service URL will become:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>service:jmx:rmi://localhost:&lt;connectorPort&gt;/jndi/rmi://localhost:&lt;registryPort&gt;/&lt;serviceUrlPath&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_the_system_properties_for_camel_jmx_support">The System Properties for Camel JMX support</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property Name</th>
+<th class="tableblock halign-left valign-top">value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.camel.jmx</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code> or <code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">if is <code>true</code>, it will enable jmx
+feature in Camel</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>See more system properties in this section below: <em>jmxAgent Properties
+Reference</em>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_how_to_use_authentication_with_jmx">How to use authentication with JMX</h4>
+<div class="paragraph">
+<p>JMX in the JDK have features for authentication and also for using
+secure connections over SSL. You have to refer to the SUN documentation
+how to use this:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://java.sun.com/j2se/1.5.0/docs/guide/management/agent.html" class="bare">http://java.sun.com/j2se/1.5.0/docs/guide/management/agent.html</a></p>
+</li>
+<li>
+<p><a href="http://java.sun.com/javase/6/docs/technotes/guides/management/agent.html" class="bare">http://java.sun.com/javase/6/docs/technotes/guides/management/agent.html</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_jmx_inside_an_application_server">JMX inside an Application Server</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_tomcat_6">Tomcat 6</h4>
+<div class="paragraph">
+<p>See <a href="http://tomcat.apache.org/tomcat-6.0-doc/monitoring.html">this page</a>
+for details about enabling JMX in Tomcat.</p>
+</div>
+<div class="paragraph">
+<p>In short, modify your catalina.sh (or catalina.bat in Windows) file to
+set the following options&#8230;&#8203;</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code> set CATALINA_OPTS=-Dcom.sun.management.jmxremote \
+    -Dcom.sun.management.jmxremote.port=1099 \
+    -Dcom.sun.management.jmxremote.ssl=false \
+    -Dcom.sun.management.jmxremote.authenticate=false</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_jboss_as_4">JBoss AS 4</h4>
+<div class="paragraph">
+<p>By default JBoss creates its own <code>MBeanServer</code>. To allow Camel to expose
+to the same server follow these steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Tell Camel to use the Platform <code>MBeanServer</code> (This defaults to true
+in Camel 1.5)</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camel:camelContext id="camelContext"&gt;
+  &lt;camel:jmxAgent id="jmxAgent" mbeanObjectDomainName="org.yourname" usePlatformMBeanServer="true"  /&gt;
+&lt;/camel:camelContext&gt;</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Alter your JBoss instance to use the Platform <code>MBeanServer</code>.<br>
+Add the following property to your <code>JAVA_OPTS</code> by editing <code>run.sh</code> or
+<code>run.conf</code> <code>-Djboss.platform.mbeanserver</code>. See
+<a href="http://wiki.jboss.org/wiki/JBossMBeansInJConsole" class="bare">http://wiki.jboss.org/wiki/JBossMBeansInJConsole</a></p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_websphere">WebSphere</h4>
+<div class="paragraph">
+<p>Alter the <code>mbeanServerDefaultDomain</code> to be <code>WebSphere</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camel:jmxAgent id="agent" createConnector="true" mbeanObjectDomainName="org.yourname" usePlatformMBeanServer="false" mbeanServerDefaultDomain="WebSphere"/&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_oracle_oc4j">Oracle OC4j</h4>
+<div class="paragraph">
+<p>The Oracle OC4J J2EE application server will not allow Camel to access
+the platform <code>MBeanServer</code>. You can identify this in the log as Camel
+will log a <code>WARNING</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>xxx xx, xxxx xx:xx:xx xx org.apache.camel.management.InstrumentationLifecycleStrategy onContextStart
+WARNING: Could not register CamelContext MBean
+java.lang.SecurityException: Unauthorized access from application: xx to MBean: java.lang:type=ClassLoading
+        at oracle.oc4j.admin.jmx.shared.UserMBeanServer.checkRegisterAccess(UserMBeanServer.java:873)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To resolve this you should disable the JMX agent in Camel, see section
+<em>Disabling JMX instrumentation agent in Camel</em>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_advanced_jmx_configuration">Advanced JMX Configuration</h4>
+<div class="paragraph">
+<p>The Spring configuration file allows you to configure how Camel is
+exposed to JMX for management. In some cases, you could specify more
+information here, like the connector&#8217;s port or the path name.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example">Example:</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
+  &lt;jmxAgent id="agent" createConnector="true" registryPort="2000" mbeanServerDefaultDomain="org.apache.camel.test"/&gt;
+    &lt;route&gt;
+      &lt;from uri="seda:start"/&gt;
+      &lt;to uri="mock:result"/&gt;
+    &lt;/route&gt;
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you wish to change the Java 5 JMX settings you can use various
+<a href="http://java.sun.com/j2se/1.5.0/docs/guide/management/agent.html#properties">JMX
+system properties</a></p>
+</div>
+<div class="paragraph">
+<p>For example you can enable remote JMX connections to the Sun JMX
+connector, via setting the following environment variable (using <strong>set</strong>
+or <strong>export</strong> depending on your platform). These settings only configure
+the Sun JMX connector within Java 1.5+, not the JMX connector that Camel
+creates by default.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>SUNJMX=-Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port=1616 \
+-Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>(The SUNJMX environment variable is simple used by the startup script
+for Camel, as additional startup parameters for the JVM. If you start
+Camel directly, you&#8217;ll have to pass these parameters yourself.)</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_code_jmxagent_code_properties_reference"><code>jmxAgent</code> Properties Reference</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Spring property</th>
+<th class="tableblock halign-left valign-top">System property</th>
+<th class="tableblock halign-left valign-top">Default Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The JMX agent name, and it is not optional</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>usePlatformMBeanServer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.camel.jmx.usePlatformMBeanServer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code>, <code>true</code> - Release 1.5 or later</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <code>true</code>, it will use the
+<code>MBeanServer</code> from the JVM</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mbeanServerDefaultDomain</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.camel.jmx.mbeanServerDefaultDomain</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.camel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The default JMX domain of the <code>MBeanServer</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mbeanObjectDomainName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.camel.jmx.mbeanObjectDomainName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.camel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The JMX domain that all object names will use</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>createConnector</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.camel.jmx.createRmiConnect</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If
+we should create a JMX connector (to allow remote management) for the
+<code>MBeanServer</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>registryPort</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.camel.jmx.rmiConnector.registryPort</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1099</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The port that the JMX RMI registry will use</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>connectorPort</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.camel.jmx.rmiConnector.connectorPort</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-1
+(dynamic)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The port that the JMX RMI server will use</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serviceUrlPath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.camel.jmx.serviceUrlPath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/jmxrmi/camel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The path that JMX connector will be registered under</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>onlyRegisterProcessorWithCustomId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.camel.jmx.onlyRegisterProcessorWithCustomId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.0:</strong> If this option is enabled then only processors with a
+custom id set will be registered. This allows you to filer out unwanted
+processors in the JMX console.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>statisticsLevel</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>All / Default</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.1:</strong> Configures the
+level for whether performance statistics is enabled for the MBean. See
+section <em>Configuring level of granularity for performance statistics</em>
+for more details. From <strong>Camel 2.16</strong> onwards the All option is renamed to
+Default, and a new Extended option has been introduced which allows
+gathered additional runtime JMX metrics.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>includeHostName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.camel.jmx.includeHostName</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel
+2.13:</strong> Whether to include the hostname in the MBean naming. From Camel
+2.13 onwards this is default <code>false</code>, where as in older releases its
+default <code>true</code>. You can use this option to restore old behavior if
+really needed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>useHostIPAddress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.camel.jmx.useHostIPAddress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.16:</strong> Whether to use hostname or IP Address in the service url
+when creating the remote connector. By default the hostname will be
+used.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>loadStatisticsEnabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.camel.jmx.loadStatisticsEnabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.16:</strong>Whether load statistics is enabled (gathers
+load statistics using a background thread per CamelContext).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>endpointRuntimeStatisticsEnabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.camel.jmx.endpointRuntimeStatisticsEnabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel
+2.16:</strong> Whether endpoint runtime statistics is enabled (gathers runtime
+usage of each incoming and outgoing endpoints).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_configuring_whether_to_register_mbeans_always_for_new_routes_or_just_by_default">Configuring whether to register MBeans always, for new routes or just by default</h4>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.7</strong></p>
+</div>
+<div class="paragraph">
+<p>Camel now offers 2 settings to control whether or not to register mbeans</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 34%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>registerAlways</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If enabled then MBeans is always registered.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>registerNewRoutes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If enabled then adding new routes after
+<a href="camelcontext.html">CamelContext</a> has been started will also register
+MBeans from that given route.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>By default Camel registers MBeans for all the routes configured when its
+starting. The <code>registerNewRoutes</code> option control if MBeans should also
+be registered if you add new routes thereafter. You can disable this, if
+you for example add and remove temporary routes where management is not
+needed.</p>
+</div>
+<div class="paragraph">
+<p>Be a bit caution to use the <code>registerAlways</code> option when using dynamic
+<a href="eip.html">EIP</a> patterns such as the
+<a href="recipient-list.html">Recipient List</a> having unique endpoints. If so
+then each unique endpoint and its associated services/producers would
+also be registered. This could potential lead to system degration due
+the rising number of mbeans in the registry. A MBean is not a
+light-weight object and thus consumes memory.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_monitoring_camel_using_jmx">Monitoring Camel using JMX</h3>
+<div class="sect3">
+<h4 id="_using_jconsole_to_monitor_camel">Using JConsole to monitor Camel</h4>
+<div class="paragraph">
+<p>The <code>CamelContext</code> should appear in the list of local connections, if
+you are running JConsole on the same host as Camel.</p>
+</div>
+<div class="paragraph">
+<p>To connect to a remote Camel instance, or if the local process does not
+show up, use Remote Process option, and enter an URL. Here is an example
+localhost <code>URL:service:jmx:rmi:///jndi/rmi://localhost:1099/jmxrmi/camel</code>.</p>
+</div>
+<div class="paragraph">
+<p>Using the Apache Camel with JConsole:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="camel-jmx.png" alt="image"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_which_endpoints_are_registered">Which endpoints are registered</h4>
+<div class="paragraph">
+<p>In <strong>Camel 2.1</strong> onwards <strong>only</strong> <code>singleton</code> endpoints are registered as
+the overhead for non singleton will be substantial in cases where
+thousands or millions of endpoints are used. This can happens when using
+a <a href="recipient-list.html">Recipient List</a> EIP or from a
+<code>ProducerTemplate</code> that sends a lot of messages.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_which_processors_are_registered">Which processors are registered</h4>
+<div class="paragraph">
+<p>See <a href="why-is-my-processor-not-showing-up-in-jconsole.html">this FAQ</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_how_to_use_the_jmx_notificationlistener_to_listen_the_camel_events">How to use the JMX NotificationListener to listen the camel events?</h4>
+<div class="paragraph">
+<p>The Camel notification events give a coarse grained overview what is
+happening. You can see lifecycle event from context and endpoints and
+you can see exchanges being received by and sent to endpoints.</p>
+</div>
+<div class="paragraph">
+<p>From <strong>Camel 2.4</strong> you can use a custom JMX NotificationListener to listen
+the camel events.</p>
+</div>
+<div class="paragraph">
+<p>First you need to set up a <code>JmxNotificationEventNotifier</code> before you start
+the CamelContext:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// Set up the JmxNotificationEventNotifier
+notifier = new JmxNotificationEventNotifier();
+notifier.setSource("MyCamel");
+notifier.setIgnoreCamelContextEvents(true);
+notifier.setIgnoreRouteEvents(true);
+notifier.setIgnoreServiceEvents(true);
+
+CamelContext context = new DefaultCamelContext(createRegistry());
+context.getManagementStrategy().addEventNotifier(notifier);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Second you can register your listener for listening the event:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// register the NotificationListener
+ObjectName on = ObjectName.getInstance("org.apache.camel:context=camel-1,type=eventnotifiers,name=JmxEventNotifier");
+MyNotificationListener listener = new MyNotificationListener();
+context.getManagementStrategy().getManagementAgent().getMBeanServer().addNotificationListener(on,
+    listener,
+    new NotificationFilter() {
+        private static final long serialVersionUID = 1L;
+
+        public boolean isNotificationEnabled(Notification notification) {
+            return notification.getSource().equals("MyCamel");
+        }
+    }, null);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_the_tracer_mbean_to_get_fine_grained_tracing">Using the Tracer MBean to get fine grained tracing</h4>
+<div class="paragraph">
+<p>Additionally to the coarse grained notifications above <strong>Camel 2.9.0</strong>
+support JMX Notification for fine grained trace events.</p>
+</div>
+<div class="paragraph">
+<p>These can be found in the Tracer MBean. To activate fine grained tracing
+you first need to activate tracing on the context or on a route.</p>
+</div>
+<div class="paragraph">
+<p>This can either be done when configuring the context or on the context /
+route MBeans.</p>
+</div>
+<div class="paragraph">
+<p>As a second step you have to set the <code>jmxTraceNotifications</code> attribute
+to <code>true</code> on the tracer. This can again be done when configuring the
+context or at runtime on the tracer MBean.</p>
+</div>
+<div class="paragraph">
+<p>Now you can register for TraceEvent Notifications on the Tracer MBean
+using JConsole. There will be one Notification for every step on the
+route with all exchange and message details:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="jconsole_trace_notifications.png" alt="image"></span></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_jmx_for_your_own_camel_code">Using JMX for your own Camel Code</h3>
+<div class="sect3">
+<h4 id="_registering_your_own_managed_endpoints">Registering your own Managed Endpoints</h4>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.0</strong><br>
+You can decorate your own endpoints with Spring managed annotations
+<code>@ManagedResource</code> to allow to register them in the Camel <code>MBeanServer</code>
+and thus access your custom MBeans using JMX.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In <strong>Camel 2.1</strong> we have changed this to apply other than just
+endpoints but then you need to implement the interface
+<code>org.apache.camel.spi.ManagementAware</code> as well. More about this later.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For example we have the following custom endpoint where we define some
+options to be managed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ManagedResource(description = "Our custom managed endpoint")
+public class CustomEndpoint extends MockEndpoint implements ManagementAware&lt;CustomEndpoint&gt; {
+
+    public CustomEndpoint(final String endpointUri, final Component component) {
+        super(endpointUri, component);
+    }
+
+    public Object getManagedObject(CustomEndpoint object) {
+        return this;
+    }
+
+    public boolean isSingleton() {
+        return true;
+    }
+
+    protected String createEndpointUri() {
+        return "custom";
+    }
+
+    @ManagedAttribute
+    public String getFoo() {
+        return "bar";
+    }
+
+    @ManagedAttribute
+    public String getEndpointUri() {
+        return super.getEndpointUri();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice from <strong>Camel 2.9</strong> onwards its encouraged to use the
+<code>@ManagedResource</code>, <code>@ManagedAttribute</code>, and <code>@ManagedOperation</code> from
+the <code>org.apache.camel.api.management</code> package. This allows your custom
+code to not depend on Spring JARs.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_programming_your_own_managed_services">Programming your own Managed Services</h4>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.1</strong></p>
+</div>
+<div class="paragraph">
+<p>Camel now offers to use your own MBeans when registering services for
+management. What that means is for example you can develop a custom
+Camel component and have it expose MBeans for endpoints, consumers and
+producers etc. All you need to do is to implement the interface
+<code>org.apache.camel.spi.ManagementAware</code> and return the managed object
+Camel should use.</p>
+</div>
+<div class="paragraph">
+<p>Now before you think oh boys the JMX API is really painful and terrible,
+then yeah you are right. Lucky for us Spring though too and they created
+a range of annotations you can use to export management on an existing
+bean. That means that you often use that and just return <code>this</code> in the
+<code>getManagedObject</code> from the <code>ManagementAware</code> interface. For an example
+see the code example above with the <code>CustomEndpoint</code>.</p>
+</div>
+<div class="paragraph">
+<p>Now in <strong>Camel 2.1</strong> you can do this for all the objects that Camel
+registers for management which are quite a bunch, but not all.</p>
+</div>
+<div class="paragraph">
+<p>For services which do not implement this <code>ManagementAware</code> interface
+then Camel will fallback to using default wrappers as defined in the
+table below:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">MBean wrapper</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelContext</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ManagedCamelContext</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Component</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ManagedComponent</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Endpoint</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ManagedEndpoint</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Consumer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ManagedConsumer</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Producer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ManagedProducer</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Route</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ManagedRoute</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Processor</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ManagedProcessor</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Tracer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ManagedTracer</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Service</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ManagedService</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>In addition to that there are some extended wrappers for specialized
+types such as:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">MBean wrapper</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ScheduledPollConsumer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ManagedScheduledPollConsumer</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BrowsableEndpoint</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ManagedBrowseableEndpoint</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Throttler</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ManagedThrottler</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Delayer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ManagedDelayer</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SendProcessor</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ManagedSendProcessor</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>And in the future we will add additional wrappers for more EIP patterns.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_managementnamingstrategy">ManagementNamingStrategy</h4>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.1</strong></p>
+</div>
+<div class="paragraph">
+<p>Camel provides a pluggable API for naming strategy by
+<code>org.apache.camel.spi.ManagementNamingStrategy</code>. A default
+implementation is used to compute the MBean names that all MBeans are
+registered with.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_management_naming_pattern">Management naming pattern</h4>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.10</strong></p>
+</div>
+<div class="paragraph">
+<p>From <strong>Camel 2.10</strong> onwards we made it easier to configure a naming
+pattern for the MBeans. The pattern is used as part of the <code>ObjectName</code>
+as they key after the domain name.</p>
+</div>
+<div class="paragraph">
+<p>By default Camel will use MBean names for the <code>ManagedCamelContextMBean</code>
+as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>org.apache.camel:context=localhost/camel-1,type=context,name=camel-1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And from <strong>Camel 2.13</strong> onwards the hostname is not included in the MBean
+names, so the above example would be as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>org.apache.camel:context=camel-1,type=context,name=camel-1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you configure a name on the <code>CamelContext</code> then that name is part of
+the <code>ObjectName</code> as well. For example if we have</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext id="myCamel" ...&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then the MBean names will be as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>org.apache.camel:context=localhost/myCamel,type=context,name=myCamel</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now if there is a naming clash in the JVM, such as there already exists
+a MBean with that given name above, then Camel will by default try to
+auto correct this by finding a new free name in the <code>JMXMBeanServer</code> by
+using a counter. As shown below the counter is now appended, so we have
+<code>myCamel-1</code> as part of the <code>ObjectName</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>org.apache.camel:context=localhost/myCamel-1,type=context,name=myCamel</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is possible because Camel uses a naming pattern by default that
+supports the following tokens:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code><mark>camelId</mark></code> = the CamelContext id (eg the name)</p>
+</li>
+<li>
+<p><code><mark>name</mark></code> - same as <code><mark>camelId</mark></code></p>
+</li>
+<li>
+<p><code><mark>counter</mark></code> - an incrementing counter
+<code>* <mark>bundleId</mark></code> - the OSGi bundle id (only for OSGi environments)</p>
+</li>
+<li>
+<p><code><mark>symbolicName</mark></code> - the OSGi symbolic name (only for OSGi environments)</p>
+</li>
+<li>
+<p><code><mark>version</mark></code> - the OSGi bundle version (only for OSGi environments)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The default naming pattern is differentiated between OSGi and non-OSGi
+as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>non OSGI: <code><mark>name</mark></code></p>
+</li>
+<li>
+<p>OSGi: <code><mark>bundleId</mark>-<mark>name</mark></code></p>
+</li>
+<li>
+<p>OSGi <strong>Camel 2.13:</strong> <code><mark>symbolicName</mark></code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>However if there is a naming clash in the <code>JMXMBeanServer</code> then Camel
+will automatic fallback and use the <code><mark>counter</mark></code> in the pattern to remedy
+this. And thus the following patterns will then be used:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>non OSGI: <code><mark>name</mark>-<mark>counter</mark></code></p>
+</li>
+<li>
+<p>OSGi: <code><mark>bundleId</mark>-<mark>name</mark>-<mark>counter</mark></code></p>
+</li>
+<li>
+<p>OSGi <strong>Camel 2.13:</strong> <code><mark>symbolicName</mark>-<mark>counter</mark></code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you set an explicit naming pattern, then that pattern is always used,
+and the default patterns above is <strong>not</strong> used.</p>
+</div>
+<div class="paragraph">
+<p>This allows us to have full control, very easily, of the naming for both
+the <code>CamelContext</code> id in the <a href="registry.html">Registry</a> as well the
+JMX MBeans in the <code>JMXMBeanRegistry</code>.</p>
+</div>
+<div class="paragraph">
+<p>From <strong>Camel 2.15</strong> onwards you can configure the default management
+name pattern using a JVM system property, to configure this globally for
+the JVM. Notice that you can override this pattern by configure it
+explicit, as shown in the examples further below.</p>
+</div>
+<div class="paragraph">
+<p>Set a JVM system property to use a default management name pattern that
+prefixes the name with cool.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">System.setProperty(JmxSystemPropertyKeys.MANAGEMENT_NAME_PATTERN, "cool-#name#");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So if we want to explicit name both the <code>CamelContext</code> and to use fixed
+MBean names, that do not change (eg has no counters), then we can use
+the new <code>managementNamePattern</code> attribute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext id="myCamel" managementNamePattern="#name#"&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then the MBean names will always be as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>org.apache.camel:context=localhost/myCamel,type=context,name=myCamel</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In Java, you can configure the <code>managementNamePattern</code> as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">context.getManagementNameStrategy().setNamePattern("#name#");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also use a different name in the <code>managementNamePattern</code> than
+the id, so for example we can do:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext id="myCamel" managementNamePattern="coolCamel"&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You may want to do this in OSGi environments in case you do not want the
+OSGi bundle id as part of the MBean names. As the OSGi bundle id can
+change if you restart the server, or uninstall and install the same
+application. You can then do as follows to not use the OSGi bundle id as
+part of the name:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext id="myCamel" managementNamePattern="#name#"&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note this requires that <code>myCamel</code> is unique in the entire JVM. If you
+install a 2nd Camel application that has the same <code>CamelContext</code> id and
+<code>managementNamePattern</code> then Camel will fail upon starting, and report a
+MBean already exists exception.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_managementstrategy">ManagementStrategy</h4>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.1</strong></p>
+</div>
+<div class="paragraph">
+<p>Camel now provides a totally pluggable management strategy that allows
+you to be 100% in control of management. It is a rich interface with
+many methods for management. Not only for adding and removing managed
+objects from the <code>MBeanServer</code>, but also event notification is provided
+as well using the <code>org.apache.camel.spi.EventNotifier</code> API. What it
+does, for example, is make it easier to provide an adapter for other
+management products. In addition, it also allows you to provide more
+details and features that are provided out of the box at Apache.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_configuring_level_of_granularity_for_performance_statistics">Configuring level of granularity for performance statistics</h4>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.1</strong></p>
+</div>
+<div class="paragraph">
+<p>You can now set a pre set level whether performance statistics is
+enabled or not when Camel start ups. The levels are</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Extended</code> - As default but with additional statistics gathered during
+runtime such as fine grained level of usage of endpoints and more. This
+options requires Camel 2.16</p>
+</li>
+<li>
+<p><code>All</code> / <code>Default</code> - Camel will enable statistics for both routes and
+processors (fine grained). From <strong>Camel 2.16</strong> onwards the All option
+was renamed to Default.</p>
+</li>
+<li>
+<p><code>RoutesOnly</code> - Camel will only enable statistics for routes (coarse
+grained)</p>
+</li>
+<li>
+<p><code>Off</code> - Camel will not enable statistics for any.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>From <strong>Camel 2.9</strong> onwards the performance statistics also include average
+load statistics per CamelContext and Route MBeans. The statistics is
+average load based on the number of in-flight exchanges, on a per 1, 5,
+and 15 minute rate. This is similar to load statistics on Unix systems.
+<strong>Camel 2.11</strong> onwards allows you to explicit disable load performance
+statistics by setting <code>loadStatisticsEnabled=false</code> on the <code>&lt;jmxAgent&gt;</code>.
+Note that it will be off if the statics level is configured to off as
+well. From <strong>Camel 2.13</strong> onwards the load performance statistics is by
+default disabled. You can enable this by
+setting <code>loadStatisticsEnabled=true</code> on the <code>&lt;jmxAgent&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>At runtime you can always use the management console (such as JConsole)
+to change on a given route or processor whether its statistics are
+enabled or not.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>What does statistics enabled mean?</strong></p>
+</div>
+<div class="paragraph">
+<p>Statistics enabled means that Camel will do fine grained performance
+statistics for that particular MBean. The statistics you can see are
+many, such as: number of exchanges completed/failed,
+last/total/mina/max/mean processing time, first/last failed time, etc.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Using Java DSL you set this level by:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// only enable routes when Camel starts
+context.getManagementStrategy().setStatisticsLevel(ManagementStatisticsLevel.RoutesOnly);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And from Spring DSL you do:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
+    &lt;jmxAgent id="agent" statisticsLevel="RoutesOnly"/&gt;
+ ...
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hiding_sensitive_information">Hiding sensitive information</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.12</strong></p>
+</div>
+<div class="paragraph">
+<p>By default, Camel enlists MBeans in JMX such as endpoints configured
+using <a href="uris.html">URIs</a>. In this configuration, there may be
+sensitive information such as passwords.</p>
+</div>
+<div class="paragraph">
+<p>This information can be hidden by enabling the <code>mask</code> option as shown
+below:</p>
+</div>
+<div class="paragraph">
+<p>Using Java DSL you turn this on by:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">  // only enable routes when Camel starts
+  context.getManagementStrategy().getManagementAgent().setMask(true);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And from Spring DSL you do:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
+        &lt;jmxAgent id="agent" mask="true"/&gt;
+     ...
+    &lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will mask <a href="uris.html">URIs</a> having options such as password and
+passphrase, and use <code>xxxxxx</code> as the replacement value.</p>
+</div>
+<div class="sect3">
+<h4 id="_declaring_which_jmx_attributes_and_operations_to_mask">Declaring which JMX attributes and operations to mask</h4>
+<div class="paragraph">
+<p>On the <code>org.apache.camel.api.management.ManagedAttribute</code> and
+<code>org.apache.camel.api.management.ManagedOperation</code>, the attribute <code>mask</code>
+can be set to <code>true</code> to indicate that the result of this JMX
+attribute/operation should be masked (if enabled on JMX agent, see
+above).</p>
+</div>
+<div class="paragraph">
+<p>For example, on the default managed endpoints from camel-core
+<code>org.apache.camel.api.management.mbean.ManagedEndpointMBean</code>, we have
+declared that the <code>EndpointUri</code> JMX attribute is masked:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ManagedAttribute(description = "Endpoint URI", mask = true)
+String getEndpointUri();</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="management-example.html">Management Example</a></p>
+</li>
+<li>
+<p><a href="why-is-my-processor-not-showing-up-in-jconsole.html">Why is my
+processor not showing up in JConsole</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/jolt-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/jms-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='JPA Component Available as of Camel version 1.0
+ The jpa component enables you to store and retrieve Java objects from persistent storage using EJB 3&#8217;s Java Persistence Architecture (JPA), which is a standard interface layer that wraps Object/Relational Mapping (ORM) products such as OpenJPA, Hibernate, TopLink, and so on.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-jpa&lt;/artifactId&gt; &lt;version&gt;x.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='JPA Component Available as of Camel version 1.0
+ The jpa component enables you to store and retrieve Java objects from persistent storage using EJB 3&#8217;s Java Persistence Architecture (JPA), which is a standard interface layer that wraps Object/Relational Mapping (ORM) products such as OpenJPA, Hibernate, TopLink, and so on.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-jpa&lt;/artifactId&gt; &lt;version&gt;x.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/jpa-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/jpa-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_jpa_component">JPA Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 1.0</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>jpa</strong> component enables you to store and retrieve Java objects from
+persistent storage using EJB 3&#8217;s Java Persistence Architecture (JPA),
+which is a standard interface layer that wraps Object/Relational Mapping
+(ORM) products such as OpenJPA, Hibernate, TopLink, and so on.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-jpa&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sending_to_the_endpoint">Sending to the endpoint</h3>
+<div class="paragraph">
+<p>You can store a Java entity bean in a database by sending it to a JPA
+producer endpoint. The body of the <em>In</em> message is assumed to be an
+entity bean (that is, a POJO with an
+<a href="http://java.sun.com/javaee/5/docs/api/javax/persistence/Entity.html">@Entity</a>
+annotation on it) or a collection or array of entity beans.</p>
+</div>
+<div class="paragraph">
+<p>If the body is a List of entities, make sure to use
+<strong>entityType=java.util.ArrayList</strong> as a configuration passed to the
+producer endpoint.</p>
+</div>
+<div class="paragraph">
+<p>If the body does not contain one of the previous listed types, put a
+<a href="message-translator.html">Message Translator</a> in front of the
+endpoint to perform the necessary conversion first.</p>
+</div>
+<div class="paragraph">
+<p>From <strong>Camel 2.19</strong> onwards you can use <code>query</code>, <code>namedQuery</code> or <code>nativeQuery</code>
+for the producer as well. Also in the value of the <code>parameters</code>, you can use
+Simple expression which allows you to retrieve parameter values from Message body, header
+and etc. Those query can be used for retrieving a set of data with using <code>SELECT</code>
+JPQL/SQL statement as well as executing bulk update/delete with using <code>UPDATE</code>/<code>DELETE</code>
+JPQL/SQL statement. Please note that you need to specify <code>useExecuteUpdate</code> to <code>true</code>
+if you execute <code>UPDATE</code>/<code>DELETE</code> with <code>namedQuery</code> as camel don&#8217;t look into the
+named query unlike <code>query</code> and <code>nativeQuery</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_consuming_from_the_endpoint">Consuming from the endpoint</h3>
+<div class="paragraph">
+<p>Consuming messages from a JPA consumer endpoint removes (or updates)
+entity beans in the database. This allows you to use a database table as
+a logical queue: consumers take messages from the queue and then
+delete/update them to logically remove them from the queue.</p>
+</div>
+<div class="paragraph">
+<p>If you do not wish to delete the entity bean when it has been processed
+(and when routing is done), you can specify <code>consumeDelete=false</code> on the
+URI. This will result in the entity being processed each poll.</p>
+</div>
+<div class="paragraph">
+<p>If you would rather perform some update on the entity to mark it as
+processed (such as to exclude it from a future query) then you can
+annotate a method with
+<a href="http://camel.apache.org/maven/current/camel-jpa/apidocs/org/apache/camel/component/jpa/Consumed.html">@Consumed</a>
+which will be invoked on your entity bean when the entity bean when it
+has been processed (and when routing is done).</p>
+</div>
+<div class="paragraph">
+<p>From <strong>Camel 2.13</strong> onwards you can use
+<a href="http://camel.apache.org/maven/current/camel-jpa/apidocs/org/apache/camel/component/jpa/PreConsumed.html">@PreConsumed</a>
+which will be invoked on your entity bean before it has been processed
+(before routing).</p>
+</div>
+<div class="paragraph">
+<p>If you are consuming a lot (100K+) of rows and experience OutOfMemory
+problems you should set the maximumResults to sensible value.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">jpa:entityClassName[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For sending to the endpoint, the <em>entityClassName</em> is optional. If
+specified, it helps the <a href="type-converter.html">Type Converter</a> to
+ensure the body is of the correct type.</p>
+</div>
+<div class="paragraph">
+<p>For consuming, the <em>entityClassName</em> is mandatory.</p>
+</div>
+<div class="paragraph">
+<p>You can append query options to the URI in the following format,
+<code>?option=value&amp;option=value&amp;&#8230;&#8203;</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The JPA component supports 5 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>entityManagerFactory</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the EntityManagerFactory. This is strongly recommended to configure.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EntityManagerFactory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transactionManager</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the PlatformTransactionManager for managing transactions.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PlatformTransaction Manager</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>joinTransaction</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The camel-jpa component will join transaction by default. You can use this option to turn this off for example if you use LOCAL_RESOURCE and join transaction doesn&#8217;t work with your JPA provider. This option can also be set globally on the JpaComponent instead of having to set it on all endpoints.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sharedEntityManager</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to use Spring&#8217;s SharedEntityManager for the consumer/producer. Note in most cases joinTransaction should be set to false as this is not an EXTENDED EntityManager.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The JPA endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>jpa:entityType</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>entityType</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The JPA annotated class to use as entity.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class&lt;?&gt;</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_42_parameters">Query Parameters (42 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>joinTransaction</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The camel-jpa component will join transaction by default. You can use this option to turn this off for example if you use LOCAL_RESOURCE and join transaction doesn&#8217;t work with your JPA provider. This option can also be set globally on the JpaComponent instead of having to set it on all endpoints.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maximumResults</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the maximum number of results to retrieve on the Query.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">-1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>namedQuery</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a named query.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>nativeQuery</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom native query. You may want to use the option resultClass also when using native queries.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>parameters</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This key/value mapping is used for building the query parameters. It is expected to be of the generic type java.util.Map where the keys are the named parameters of a given JPA query and the values are their corresponding effective values you want to select for. When it&#8217;s used for producer Simple expression can be used as a parameter value. It allows you to retrieve parameter values from the message body header and etc.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>persistenceUnit</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The JPA persistence unit used by default.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">camel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>query</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom query.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resultClass</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines the type of the returned payload (we will call entityManager.createNativeQuery(nativeQuery resultClass) instead of entityManager.createNativeQuery(nativeQuery)). Without this option we will return an object array. Only has an affect when using in conjunction with native query when consuming data.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class&lt;?&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sharedEntityManager</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to use Spring&#8217;s SharedEntityManager for the consumer/producer. Note in most cases joinTransaction should be set to false as this is not an EXTENDED EntityManager.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>consumeDelete</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If true the entity is deleted after it is consumed; if false the entity is not deleted.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>consumeLockEntity</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether or not to set an exclusive lock on each entity bean while processing the results from polling.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>deleteHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom DeleteHandler to delete the row after the consumer is done processing the exchange</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>lockModeType</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure the lock mode on the consumer.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">PESSIMISTIC_WRITE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LockModeType</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxMessagesPerPoll</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An integer value to define the maximum number of messages to gather per poll. By default no maximum is set. Can be used to avoid polling many thousands of messages when starting up the server. Set a value of 0 or negative to disable.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>preDeleteHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom Pre-DeleteHandler to delete the row after the consumer has read the entity.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sendEmptyMessageWhenIdle</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the polling consumer did not poll any files you can enable this option to send an empty message (no body) instead.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>skipLockedEntity</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure whether to use NOWAIT on lock and silently skip the entity.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transacted</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to run the consumer in transacted mode by which all messages will either commit or rollback when the entire batch has been processed. The default behavior (false) is to commit all the previously successfully processed messages and only rollback the last failed message.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>pollStrategy</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pluggable org.apache.camel.PollingConsumerPollingStrategy allowing you to provide your custom implementation to control error handling usually occurred during the poll operation before an Exchange have been created and being routed in Camel.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PollingConsumerPoll Strategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>flushOnSend</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Flushes the EntityManager after the entity bean has been persisted.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>remove</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates to use entityManager.remove(entity).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useExecuteUpdate</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure whether to use executeUpdate() when producer executes a query. When you use INSERT UPDATE or DELETE statement as a named query you need to specify this option to 'true'.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>usePassedInEntityManager</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set to true then Camel will use the EntityManager from the header JpaConstants.ENTITYMANAGER instead of the configured entity manager on the component/endpoint. This allows end users to control which entity manager will be in use.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>usePersist</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates to use entityManager.persist(entity) instead of entityManager.merge(entity). Note: entityManager.persist(entity) doesn&#8217;t work for detached entities (where the EntityManager has to execute an UPDATE instead of an INSERT query)!</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>entityManagerProperties</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Additional properties for the entity manager to use.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backoffErrorThreshold</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of subsequent error polls (failed due some error) that should happen before the backoffMultipler should kick-in.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backoffIdleThreshold</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of subsequent idle polls that should happen before the backoffMultipler should kick-in.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backoffMultiplier</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the scheduled polling consumer backoff if there has been a number of subsequent idles/errors in a row. The multiplier is then the number of polls that will be skipped before the next actual attempt is happening again. When this option is in use then backoffIdleThreshold and/or backoffErrorThreshold must also be configured.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>delay</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Milliseconds before the next poll. You can also specify time values using units such as 60s (60 seconds) 5m30s (5 minutes and 30 seconds) and 1h (1 hour).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">500</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>greedy</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If greedy is enabled then the ScheduledPollConsumer will run immediately again if the previous run polled 1 or more messages.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>initialDelay</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Milliseconds before the first poll starts. You can also specify time values using units such as 60s (60 seconds) 5m30s (5 minutes and 30 seconds) and 1h (1 hour).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>runLoggingLevel</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The consumer logs a start/complete log line when it polls. This option allows you to configure the logging level for that.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">TRACE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LoggingLevel</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>scheduledExecutorService</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for configuring a custom/shared thread pool to use for the consumer. By default each consumer has its own single threaded thread pool.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ScheduledExecutor Service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>scheduler</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a cron scheduler from either camel-spring or camel-quartz2 component</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ScheduledPollConsumer Scheduler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>schedulerProperties</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure additional properties when using a custom scheduler or any of the Quartz2 Spring based scheduler.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>startScheduler</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the scheduler should be auto started.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>timeUnit</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time unit for initialDelay and delay options.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">MILLISECONDS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TimeUnit</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useFixedDelay</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Controls if fixed delay or fixed rate is used. See ScheduledExecutorService in JDK for details.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message_headers">Message Headers</h3>
+<div class="paragraph">
+<p>Camel adds the following message headers to the exchange:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Header</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelJpaTemplate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JpaTemplate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Not supported anymore since Camel 2.12:</strong> The <code>JpaTemplate</code> object that
+is used to access the entity bean. You need this object in some
+situations, for instance in a type converter or when you are doing some
+custom processing. See
+<a href="https://issues.apache.org/jira/browse/CAMEL-5932">CAMEL-5932</a> for the
+reason why the support for this header has been dropped.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelEntityManager</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>EntityManager</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.12: JPA consumer / Camel 2.12.2: JPA producer:</strong> The JPA
+<code>EntityManager</code> object being used by <code>JpaConsumer</code> or <code>JpaProducer</code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_configuring_entitymanagerfactory">Configuring EntityManagerFactory</h3>
+<div class="paragraph">
+<p>Its strongly advised to configure the JPA component to use a specific
+<code>EntityManagerFactory</code> instance. If failed to do so each <code>JpaEndpoint</code>
+will auto create their own instance of <code>EntityManagerFactory</code> which most
+often is not what you want.</p>
+</div>
+<div class="paragraph">
+<p>For example, you can instantiate a JPA component that references the
+<code>myEMFactory</code> entity manager factory, as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;bean id="jpa" class="org.apache.camel.component.jpa.JpaComponent"&gt;
+   &lt;property name="entityManagerFactory" ref="myEMFactory"/&gt;
+&lt;/bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In <strong>Camel 2.3</strong> the <code>JpaComponent</code> will auto lookup the
+<code>EntityManagerFactory</code> from the <a href="registry.html">Registry</a> which means
+you do not need to configure this on the <code>JpaComponent</code> as shown above.
+You only need to do so if there is ambiguity, in which case Camel will
+log a WARN.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configuring_transactionmanager">Configuring TransactionManager</h3>
+<div class="paragraph">
+<p>Since <strong>Camel 2.3</strong> the <code>JpaComponent</code> will auto lookup the
+<code>TransactionManager</code> from the <a href="registry.html">Registry.</a> If Camel
+won&#8217;t find any <code>TransactionManager</code> instance registered, it will also
+look up for the <code>TransactionTemplate</code> and try to
+extract <code>TransactionManager</code> from it.</p>
+</div>
+<div class="paragraph">
+<p>If none <code>TransactionTemplate</code> is available in the registry,
+<code>JpaEndpoint</code> will auto create their own instance of
+<code>TransactionManager</code> which most often is not what you want.</p>
+</div>
+<div class="paragraph">
+<p>If more than single instance of the <code>TransactionManager</code> is found, Camel
+will log a WARN. In such cases you might want to instantiate and
+explicitly configure a JPA component that references the
+<code>myTransactionManager</code> transaction manager, as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;bean id="jpa" class="org.apache.camel.component.jpa.JpaComponent"&gt;
+   &lt;property name="entityManagerFactory" ref="myEMFactory"/&gt;
+   &lt;property name="transactionManager" ref="myTransactionManager"/&gt;
+&lt;/bean&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_a_consumer_with_a_named_query">Using a consumer with a named query</h3>
+<div class="paragraph">
+<p>For consuming only selected entities, you can use the
+<code>consumer.namedQuery</code> URI query option. First, you have to define the
+named query in the JPA Entity class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Entity
+@NamedQuery(name = "step1", query = "select x from MultiSteps x where x.step = 1")
+public class MultiSteps {
+   ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After that you can define a consumer uri like this one:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("jpa://org.apache.camel.examples.MultiSteps?consumer.namedQuery=step1")
+.to("bean:myBusinessLogic");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_a_consumer_with_a_query">Using a consumer with a query</h3>
+<div class="paragraph">
+<p>For consuming only selected entities, you can use the <code>consumer.query</code>
+URI query option. You only have to define the query option:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("jpa://org.apache.camel.examples.MultiSteps?consumer.query=select o from org.apache.camel.examples.MultiSteps o where o.step = 1")
+.to("bean:myBusinessLogic");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_a_consumer_with_a_native_query">Using a consumer with a native query</h3>
+<div class="paragraph">
+<p>For consuming only selected entities, you can use the
+<code>consumer.nativeQuery</code> URI query option. You only have to define the
+native query option:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("jpa://org.apache.camel.examples.MultiSteps?consumer.nativeQuery=select * from MultiSteps where step = 1")
+.to("bean:myBusinessLogic");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you use the native query option, you will receive an object array in
+the message body.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_a_producer_with_a_named_query">Using a producer with a named query</h3>
+<div class="paragraph">
+<p>For retrieving selected entities or execute bulk update/delete, you can use the
+<code>namedQuery</code> URI query option. First, you have to define the
+named query in the JPA Entity class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Entity
+@NamedQuery(name = "step1", query = "select x from MultiSteps x where x.step = 1")
+public class MultiSteps {
+   ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After that you can define a producer uri like this one:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:namedQuery")
+.to("jpa://org.apache.camel.examples.MultiSteps?namedQuery=step1");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that you need to specify <code>useExecuteUpdate</code> option to <code>true</code> to execute <code>UPDATE</code>/<code>DELETE</code> statement
+as a named query.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_a_producer_with_a_query">Using a producer with a query</h3>
+<div class="paragraph">
+<p>For retrieving selected entities or execute bulk update/delete, you can use the <code>query</code>
+URI query option. You only have to define the query option:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:query")
+.to("jpa://org.apache.camel.examples.MultiSteps?query=select o from org.apache.camel.examples.MultiSteps o where o.step = 1");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_a_producer_with_a_native_query">Using a producer with a native query</h3>
+<div class="paragraph">
+<p>For retrieving selected entities or execute bulk update/delete, you can use the
+<code>nativeQuery</code> URI query option. You only have to define the
+native query option:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:nativeQuery")
+.to("jpa://org.apache.camel.examples.MultiSteps?resultClass=org.apache.camel.examples.MultiSteps&amp;nativeQuery=select * from MultiSteps where step = 1");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you use the native query option without specifying <code>resultClass</code>, you will receive an object array in
+the message body.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_example">Example</h3>
+<div class="paragraph">
+<p>See <a href="tracer-example.html">Tracer Example</a> for an example using
+<a href="jpa.html">JPA</a> to store traced messages into a database.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_the_jpa_based_idempotent_repository">Using the JPA based idempotent repository</h3>
+<div class="paragraph">
+<p>In this section we will use the JPA based idempotent repository.</p>
+</div>
+<div class="paragraph">
+<p>First we need to setup a <code>persistence-unit</code> in the persistence.xml file:</p>
+</div>
+<div class="paragraph">
+<p>Second we have to setup a <code>org.springframework.orm.jpa.JpaTemplate</code>
+which is used by the
+<code>org.apache.camel.processor.idempotent.jpa.JpaMessageIdRepository</code>:</p>
+</div>
+<div class="paragraph">
+<p>Error formatting macro: snippet: java.lang.IndexOutOfBoundsException:
+Index: 20, Size: 20</p>
+</div>
+<div class="paragraph">
+<p>Afterwards we can configure our
+<code>org.apache.camel.processor.idempotent.jpa.JpaMessageIdRepository</code>:</p>
+</div>
+<div class="paragraph">
+<p>And finally we can create our JPA idempotent repository in the spring
+XML file as well:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext xmlns="http://camel.apache.org/schema/spring"&gt;
+    &lt;route id="JpaMessageIdRepositoryTest"&gt;
+        &lt;from uri="direct:start" /&gt;
+        &lt;idempotentConsumer messageIdRepositoryRef="jpaStore"&gt;
+            &lt;header&gt;messageId&lt;/header&gt;
+            &lt;to uri="mock:result" /&gt;
+        &lt;/idempotentConsumer&gt;
+    &lt;/route&gt;
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>When running this Camel component tests inside your IDE</strong></p>
+</div>
+<div class="paragraph">
+<p>In case you run the
+<a href="https://svn.apache.org/repos/asf/camel/trunk/components/camel-jpa/src/test">tests
+of this component</a> directly inside your IDE (and not necessarily through
+Maven itself) then you could spot exceptions like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">org.springframework.transaction.CannotCreateTransactionException: Could not open JPA EntityManager for transaction; nested exception is
+&lt;openjpa-2.2.1-r422266:1396819 nonfatal user error&gt; org.apache.openjpa.persistence.ArgumentException: This configuration disallows runtime optimization,
+but the following listed types were not enhanced at build time or at class load time with a javaagent: "org.apache.camel.examples.SendEmail".
+    at org.springframework.orm.jpa.JpaTransactionManager.doBegin(JpaTransactionManager.java:427)
+    at org.springframework.transaction.support.AbstractPlatformTransactionManager.getTransaction(AbstractPlatformTransactionManager.java:371)
+    at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:127)
+    at org.apache.camel.processor.jpa.JpaRouteTest.cleanupRepository(JpaRouteTest.java:96)
+    at org.apache.camel.processor.jpa.JpaRouteTest.createCamelContext(JpaRouteTest.java:67)
+    at org.apache.camel.test.junit4.CamelTestSupport.doSetUp(CamelTestSupport.java:238)
+    at org.apache.camel.test.junit4.CamelTestSupport.setUp(CamelTestSupport.java:208)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The problem here is that the source has been compiled/recompiled through
+your IDE and not through Maven itself which would
+<a href="https://svn.apache.org/repos/asf/camel/trunk/components/camel-jpa/pom.xml">enhance
+the byte-code at build time</a>. To overcome this you would need to enable
+<a href="http://openjpa.apache.org/entity-enhancement.html#dynamic-enhancement">dynamic
+byte-code enhancement of OpenJPA</a>. As an example assuming the current
+OpenJPA version being used in Camel itself is 2.2.1, then as running the
+tests inside your favorite IDE you would need to pass the following
+argument to the JVM:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">-javaagent:&lt;path_to_your_local_m2_cache&gt;/org/apache/openjpa/openjpa/2.2.1/openjpa-2.2.1.jar</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then it will all become green again
+<span class="image"><img src="https://cwiki.apache.org/confluence/s/en_GB/5982/f2b47fb3d636c8bc9fd0b11c0ec6d0ae18646be7.1/_/images/icons/emoticons/smile.png" alt="(smile)"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+<li>
+<p><a href="tracer-example.html">Tracer Example</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/json-fastjson-dataformat/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/jolt-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

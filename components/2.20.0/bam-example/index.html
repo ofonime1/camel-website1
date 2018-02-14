@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Business Activity Monitor (BAM) Example The BAM (Business Activity Monitor) example shows how to monitor your transaction flows using Camel.
+ In this example we will use Camel to monitor a business process consisting of
+   purchase orders
+  invoices
+   Then we will check to see that for every purchase order created by system A, that system B will generate an invoice within the specified amount of time (2 seconds in this example).'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Business Activity Monitor (BAM) Example The BAM (Business Activity Monitor) example shows how to monitor your transaction flows using Camel.
+ In this example we will use Camel to monitor a business process consisting of
+   purchase orders
+  invoices
+   Then we will check to see that for every purchase order created by system A, that system B will generate an invoice within the specified amount of time (2 seconds in this example).'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/bam-example/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/bam-example/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_business_activity_monitor_bam_example">Business Activity Monitor (BAM) Example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <a href="bam.html">BAM</a> (Business Activity Monitor) example shows how to
+monitor your transaction flows using Camel.</p>
+</div>
+<div class="paragraph">
+<p>In this example we will use Camel to monitor a business process
+consisting of</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>purchase orders</p>
+</li>
+<li>
+<p>invoices</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Then we will check to see that for every purchase order created by
+system A, that system B will generate an invoice within the specified
+amount of time (2 seconds in this example). If an invoice is not
+generated within the allowed amount of time and error is generated and
+sent to an <a href="endpoint.html">Endpoint</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="_overview">Overview</h3>
+<div class="paragraph">
+<p>This example lives in the <em>examples/camel-example-bam</em> directory. It
+will poll the following directories</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the child <em>src/data/purchaseOrders</em> directory for XML purchase orders</p>
+</li>
+<li>
+<p>the child <em>src/data/invoices</em> directory for XML invoices</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The
+<a href="http://svn.apache.org/repos/asf/camel/trunk/examples/camel-example-bam/src/main/java/org/apache/camel/example/bam/MyActivities.java">MyActivities</a>
+class defines the <a href="bam.html">BAM</a> activities; that is</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the input sources (the two directories above) which could be any of
+the supported camel <a href="uris.html">URIs</a></p>
+</li>
+<li>
+<p>how the activities relate to each other - namely the
+<a href="correlation-identifier.html">Correlation Identifier</a> pattern</p>
+</li>
+<li>
+<p>the maixmum amount of time allowed from the time a purchase order is
+received when if an invoice is not received an error should be raised.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There is also a spring configuration file in
+<a href="http://svn.apache.org/repos/asf/camel/trunk/examples/camel-example-bam/src/main/resources/META-INF/spring/camel-context.xml">src/resources/META-INF/services/camel-context.xml</a>
+which defines the JPA <code>EntityManagerFactory</code> and tells Camel to look in
+the <strong>org.apache.camel.example.bam</strong> package to find its routes.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_bam">Using BAM</h3>
+<div class="paragraph">
+<p>So lets start with the activities definition in
+<a href="http://svn.apache.org/repos/asf/camel/trunk/examples/camel-example-bam/src/main/java/org/apache/camel/example/bam/MyActivities.java">MyActivities</a></p>
+</div>
+<div class="paragraph">
+<p>The first two lines of code sets up the inputs for the
+<a href="bam.html">BAM</a> activities via the <strong>activity()</strong> method which defines</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the <a href="uris.html">URIs</a> of the inputs (which could come from any of
+the Camel <a href="components.html">Components</a></p>
+</li>
+<li>
+<p>the <a href="correlation-identifier.html">Correlation Identifier</a> used to
+correlate together the purchase order and invoice messages which can be
+any <a href="expression.html">Expression</a> via any of the
+<a href="languages-supported.html">Languages Supported</a>. In this case we are
+using <a href="xpath.html">XPath</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Then the final line of code defines the temporal rules to use; namely
+that it is considered to be an error if an invoice is not received
+within 2 seconds of a purchase order being received. When a failure
+occurs in this example we just send it to the <a href="log.html">Log</a>
+component to log out an error level message to commons-logging / log4j.
+You could change this to use some of the other
+<a href="components.html">Components</a> such as <a href="activemq.html">ActiveMQ</a>,
+<a href="jms.html">JMS</a>, <a href="irc.html">IRC</a>, <a href="mail.html">Mail</a>,
+<a href="xmpp.html">XMPP</a> etc.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_running_the_example">Running the example</h3>
+<div class="paragraph">
+<p>To run the example we use the <a href="camel-maven-plugin.html">Camel Maven
+Plugin</a>. For example from the source or binary distribution the
+following should work</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">cd examples/camel-example-bam
+mvn camel:run</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you prefer you can just run the Main directly using</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">mvn compile exec:java</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Failing that you can run the Main from inside your IDE if you prefer.
+Follow the <a href="building.html">Building</a> instructions to create an
+Eclipse/IDEA project to import</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/bam/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/azure/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

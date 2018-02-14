@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='OpenTracing Component Available as of Camel 2.19
+ The camel-opentracing component is used for tracing and timing incoming and outgoing Camel messages using OpenTracing.
+ Events (spans) are captured for incoming and outgoing messages being sent to/from Camel.
+ See the OpenTracing website for a list of supported tracers.
+ Configuration There are three ways in which an OpenTracing tracer can be configured to provide distributed tracing for a Camel application:'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='OpenTracing Component Available as of Camel 2.19
+ The camel-opentracing component is used for tracing and timing incoming and outgoing Camel messages using OpenTracing.
+ Events (spans) are captured for incoming and outgoing messages being sent to/from Camel.
+ See the OpenTracing website for a list of supported tracers.
+ Configuration There are three ways in which an OpenTracing tracer can be configured to provide distributed tracing for a Camel application:'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/opentracing/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/opentracing/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="OpenTracing-OpenTracingComponent">OpenTracing Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel 2.19</strong></p>
+</div>
+<div class="paragraph">
+<p>The camel-opentracing component is used for tracing and timing incoming and
+outgoing Camel messages using <a href="http://opentracing.io/">OpenTracing</a>.</p>
+</div>
+<div class="paragraph">
+<p>Events (spans) are captured for incoming and outgoing messages being sent
+to/from Camel.</p>
+</div>
+<div class="paragraph">
+<p>See the <a href="http://opentracing.io/">OpenTracing</a> website for a list of supported tracers.</p>
+</div>
+<div class="sect2">
+<h3 id="_configuration">Configuration</h3>
+<div class="paragraph">
+<p>There are three ways in which an OpenTracing tracer can be configured to provide distributed tracing for a Camel application:</p>
+</div>
+<div class="sect3">
+<h4 id="_explicit">Explicit</h4>
+<div class="paragraph">
+<p>Include the <code>camel-opentracing</code> component in your POM, along with any specific dependencies associated with the chosen OpenTracing compliant Tracer.</p>
+</div>
+<div class="paragraph">
+<p>To explicitly configure OpenTracing support, instantiate the <code>OpenTracingTracer</code> and initialize the camel
+context. You can optionally specify a <code>Tracer</code>, or alternatively it can be implicitly discovered using the
+<code>Registry</code> or <code>ServiceLoader</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">OpenTracingTracer ottracer = new OpenTracingTracer();
+// By default it uses a Noop Tracer, but you can override it with a specific OpenTracing implementation.
+ottracer.setTracer(...);
+// And then initialize the context
+ottracer.init(camelContext);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To use OpenTracingTracer in XML, all you need to do is to define the
+OpenTracing tracer beans. Camel will automatically discover and use them.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">  &lt;bean id="tracer" class="..."/&gt;
+  &lt;bean id="ottracer" class="org.apache.camel.opentracing.OpenTracingTracer"&gt;
+    &lt;property name="tracer" ref="tracer"/&gt;
+  &lt;/bean&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_spring_boot">Spring Boot</h4>
+<div class="paragraph">
+<p>If you are using <a href="spring-boot.html">Spring Boot</a> then you can add
+the <code>camel-opentracing-starter</code> dependency, and turn on OpenTracing by annotating
+the main class with <code>@CamelOpenTracing</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Tracer</code> will be implicitly obtained from the camel context&#8217;s <code>Registry</code>, or the <code>ServiceLoader</code>, unless
+a <code>Tracer</code> bean has been defined by the application.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_java_agent">Java Agent</h4>
+<div class="paragraph">
+<p>The third approach is to use a Java Agent to automatically configure the OpenTracing support.</p>
+</div>
+<div class="paragraph">
+<p>Include the <code>camel-opentracing</code> component in your POM, along with any specific dependencies associated with the chosen OpenTracing compliant Tracer.</p>
+</div>
+<div class="paragraph">
+<p>The OpenTracing Java Agent is associated with the following dependency:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;dependency&gt;
+      &lt;groupId&gt;io.opentracing.contrib&lt;/groupId&gt;
+      &lt;artifactId&gt;opentracing-agent&lt;/artifactId&gt;
+    &lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>Tracer</code> used will be implicitly loaded from the camel context <code>Registry</code> or using the <code>ServiceLoader</code>.</p>
+</div>
+<div class="paragraph">
+<p>How this agent is used will be specific to how you execute your application. <em>Service2</em> in the <a href="https://github.com/apache/camel/tree/master/examples/camel-example-opentracing">camel-example-opentracing</a> downloads the agent into a local folder and then uses the <code>exec-maven-plugin</code> to launch the service with the <code>-javaagent</code> command line option.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_example">Example</h3>
+<div class="paragraph">
+<p>You can find an example demonstrating the three ways to configure OpenTracing here:
+<a href="https://github.com/apache/camel/tree/master/examples/camel-example-opentracing">camel-example-opentracing</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/optaplanner-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/openstack/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Test Spring Available since 2.10
+ Allows to test Camel with Spring applications such as Spring XML files or Spring-Boot.
+   Important  This documentation is old and needs to be updated
+     Testing is a crucial part of any development or integration work. The Spring Framework offers a number of features that makes it easy to test while using Spring for Inversion of Control which works with JUnit 3.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Test Spring Available since 2.10
+ Allows to test Camel with Spring applications such as Spring XML files or Spring-Boot.
+   Important  This documentation is old and needs to be updated
+     Testing is a crucial part of any development or integration work. The Spring Framework offers a number of features that makes it easy to test while using Spring for Inversion of Control which works with JUnit 3.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/test-spring/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/test-spring/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_test_spring">Test Spring</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available since 2.10</strong></p>
+</div>
+<div class="paragraph">
+<p>Allows to test Camel with Spring applications such as Spring XML files or Spring-Boot.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This documentation is old and needs to be updated</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><a href="http://camel.apache.org/testing.html">Testing</a> is a crucial part of any development or integration work. The Spring Framework offers a number of features that makes it easy to test while using Spring for Inversion of Control which works with JUnit 3.x, JUnit 4.x, and <a href="http://testng.org">TestNG</a>.</p>
+</div>
+<div class="paragraph">
+<p>We can use Spring for IoC and the Camel <a href="http://camel.apache.org/mock.html">Mock</a> and <a href="http://camel.apache.org/test.html">Test</a> endpoints to create sophisticated integration/unit tests that are easy to run and debug inside your IDE.  There are three supported approaches for testing with Spring in Camel.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 57.1428%;">
+<col style="width: 14.2858%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Testing Frameworks Supported</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Required Camel Test Dependencies</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#SpringTesting-CamelSpringTestSupport">CamelSpringTestSupport</a></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="ulist">
+<ul>
+<li>
+<p>JUnit 3.x (deprecated)</p>
+</li>
+<li>
+<p>JUnit 4.x</p>
+</li>
+<li>
+<p>TestNG - <strong>Camel 2.8</strong></p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Provided by:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>org.apache.camel.test.CamelSpringTestSupport</code></p>
+</li>
+<li>
+<p><code>org.apache.camel.test.junit4.CamelSpringTestSupport</code></p>
+</li>
+<li>
+<p><code>org.apache.camel.testng.CamelSpringTestSupport</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These base classes provide <a href="http://camel.apache.org/camel-test.html#CamelTest-FeaturesProvidedbyCamelTestSupport">feature parity</a> with the simple <code>CamelTestSupport</code> classes from <a href="http://camel.apache.org/camel-test.html">Camel Test</a> but do not support Spring annotations on the test class such as <code>@Autowired</code>, <code>@DirtiesContext</code>, and <code>@ContextConfiguration</code>.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="ulist">
+<ul>
+<li>
+<p>JUnit 3.x (deprecated) - camel-test-spring</p>
+</li>
+<li>
+<p>JUnit 4.x - camel-test-spring</p>
+</li>
+<li>
+<p>TestNG - camel-test-ng</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#SpringTesting-PlainSpringTest">Plain Spring Test</a></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="ulist">
+<ul>
+<li>
+<p>JUnit 3.x</p>
+</li>
+<li>
+<p>JUnit 4.x</p>
+</li>
+<li>
+<p>TestNG</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Either extend the abstract base classes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests</code></p>
+</li>
+<li>
+<p><code>org.springframework.test.context.junit38.AbstractJUnit4SpringContextTests</code></p>
+</li>
+<li>
+<p>etc.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>provided in Spring Test or use the Spring Test JUnit4 runner.</p>
+</div>
+<div class="paragraph">
+<p>These approaches support both the Camel annotations and Spring annotations. However, they do NOT have <a href="http://camel.apache.org/camel-test.html#CamelTest-FeaturesProvidedbyCamelTestSupport">feature parity</a> with:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>org.apache.camel.test.CamelTestSupport</code></p>
+</li>
+<li>
+<p><code>org.apache.camel.test.junit4.CamelTestSupport</code></p>
+</li>
+<li>
+<p><code>org.apache.camel.testng.CamelSpringTestSupport</code></p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="ulist">
+<ul>
+<li>
+<p>JUnit 3.x (deprecated) - None</p>
+</li>
+<li>
+<p>JUnit 4.x - None</p>
+</li>
+<li>
+<p>TestNG - None</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#SpringTesting-CamelEnhancedSpringTest">Camel Enhanced Spring Test</a></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="ulist">
+<ul>
+<li>
+<p>JUnit 4.x - <strong>Camel 2.10</strong></p>
+</li>
+<li>
+<p>TestNG - <strong>Camel 2.10</strong></p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Either:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>use the <code>org.apache.camel.test.junit4.CamelSpringJUnit4ClassRunner</code> runner with the <code>@RunWith</code> annotation,</p>
+</li>
+<li>
+<p>or extend <code>org.apache.camel.testng.AbstractCamelTestNGSpringContextTests</code> to enable <a href="http://camel.apache.org/camel-test.html#CamelTest-FeaturesProvidedbyCamelTestSupport">feature parity</a> with <code>org.apache.camel.test.CamelTestSupport</code> and <code>org.apache.camel.test.junit4.CamelTestSupport</code>. These classes support the full suite of Spring Test annotations such as <code>@Autowired</code>, <code>@DirtiesContext</code>, and <code>@ContextConfiguration</code>.</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="ulist">
+<ul>
+<li>
+<p>JUnit 3.x (deprecated) - camel-test-spring</p>
+</li>
+<li>
+<p>JUnit 4.x - camel-test-spring</p>
+</li>
+<li>
+<p>TestNG - camel-test-ng</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="_camelspringtestsupport">CamelSpringTestSupport</h3>
+<div class="paragraph">
+<p>The following Spring test support classes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>org.apache.camel.test.CamelSpringTestSupport</code></p>
+</li>
+<li>
+<p><code>org.apache.camel.test.junit4.CamelSpringTestSupport</code>, and</p>
+</li>
+<li>
+<p><code>org.apache.camel.testng.CamelSpringTestSupport</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>extend their non-Spring aware counterparts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>org.apache.camel.test.CamelTestSupport</code></p>
+</li>
+<li>
+<p><code>org.apache.camel.test.junit4.CamelTestSupport</code>, and</p>
+</li>
+<li>
+<p><code>org.apache.camel.testng.CamelTestSupport</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>and deliver integration with Spring into your test classes.</p>
+</div>
+<div class="paragraph">
+<p>Instead of instantiating the <code>CamelContext</code> and routes programmatically, these classes rely on a Spring context to wire the needed components together.  If your test extends one of these classes, you must provide the Spring context by implementing the following method.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">protected abstract AbstractApplicationContext createApplicationContext();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You are responsible for the instantiation of the Spring context in the method implementation.  All of the features available in the non-Spring aware counterparts from <a href="http://camel.apache.org/camel-test.html">Camel Test</a> are available in your test.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_plain_spring_test">Plain Spring Test</h3>
+<div class="paragraph">
+<p>In this approach, your test classes directly inherit from the Spring Test abstract test classes or use the JUnit 4.x test runner provided in Spring Test.  This approach supports dependency injection into your test class and the full suite of Spring Test annotations. However, it does not support the features provided by the <code>CamelSpringTestSupport</code> classes.</p>
+</div>
+<div class="sect3">
+<h4 id="_plain_spring_test_using_junit_3_x_with_xml_config_example">Plain Spring Test using JUnit 3.x with XML Config Example</h4>
+<div class="paragraph">
+<p>Here is a simple unit test using JUnit 3.x support from Spring Test using <a href="http://svn.apache.org/repos/asf/camel/trunk/components/camel-spring/src/test/java/org/apache/camel/spring/patterns/FilterTest.java">XML Config</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// tag::example[]
+@ContextConfiguration
+public class FilterTest extends SpringRunWithTestSupport {
+
+    @EndpointInject(uri = "mock:result")
+    protected MockEndpoint resultEndpoint;
+
+    @Produce(uri = "direct:start")
+    protected ProducerTemplate template;
+
+    @DirtiesContext
+    @Test
+    public void testSendMatchingMessage() throws Exception {
+        String expectedBody = "&lt;matched/&gt;";
+
+        resultEndpoint.expectedBodiesReceived(expectedBody);
+
+        template.sendBodyAndHeader(expectedBody, "foo", "bar");
+
+        resultEndpoint.assertIsSatisfied();
+    }
+
+    @DirtiesContext
+    @Test
+    public void testSendNotMatchingMessage() throws Exception {
+        resultEndpoint.expectedMessageCount(0);
+
+        template.sendBodyAndHeader("&lt;notMatched/&gt;", "foo", "notMatchedHeaderValue");
+
+        resultEndpoint.assertIsSatisfied();
+    }
+}
+// end::example[]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice that we use <code>@DirtiesContext</code> on the test methods to force Spring Testing to automatically reload the <a href="http://camel.apache.org/camelcontext.html">CamelContext</a> after each test method - this ensures that the tests don&#8217;t clash with each other, e.g., one test method sending to an endpoint that is then reused in another test method.</p>
+</div>
+<div class="paragraph">
+<p>Also notice the use of <code>@ContextConfiguration</code> to indicate that by default we should look for the file <a href="http://svn.apache.org/repos/asf/camel/trunk/components/camel-spring/src/test/resources/org/apache/camel/spring/patterns/FilterTest-context.xml">FilterTest-context.xml on the classpath</a> to configure the test case. The test context looks like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;!-- tag::example[] --&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+    "&gt;
+
+  &lt;camelContext xmlns="http://camel.apache.org/schema/spring"&gt;
+    &lt;route&gt;
+      &lt;from uri="direct:start"/&gt;
+      &lt;filter&gt;
+        &lt;xpath&gt;$foo = 'bar'&lt;/xpath&gt;
+        &lt;to uri="mock:result"/&gt;
+      &lt;/filter&gt;
+    &lt;/route&gt;
+  &lt;/camelContext&gt;
+
+&lt;/beans&gt;
+&lt;!-- end::example[] --&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This test will load a Spring XML configuration file called <code>FilterTest-context.xml</code> from the classpath in the same package structure as the <code>FilterTest</code> class and initialize it along with any Camel routes we define inside it, then inject the <code>CamelContext</code> instance into our test case.</p>
+</div>
+<div class="paragraph">
+<p>For instance, like this maven folder layout:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">src/test/java/org/apache/camel/spring/patterns/FilterTest.java
+src/test/resources/org/apache/camel/spring/patterns/FilterTest-context.xml</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_plain_spring_test_using_junit_4_x_with_java_config_example">Plain Spring Test Using JUnit 4.x With Java Config Example</h4>
+<div class="paragraph">
+<p>You can completely avoid using an XML configuration file by using <a href="http://camel.apache.org/spring-java-config.html">Spring Java Config</a>.  Here is a unit test using JUnit 4.x support from Spring Test using <a href="http://svn.apache.org/repos/asf/camel/trunk/components/camel-spring-javaconfig/src/test/java/org/apache/camel/spring/javaconfig/patterns/FilterTest.java">Java Config</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">// tag::example[]
+@RunWith(CamelSpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {FilterTest.ContextConfig.class}, loader = CamelSpringDelegatingTestContextLoader.class)
+public class FilterTest extends AbstractJUnit4SpringContextTests {
+
+    @EndpointInject(uri = "mock:result")
+    protected MockEndpoint resultEndpoint;
+
+    @Produce(uri = "direct:start")
+    protected ProducerTemplate template;
+
+    @DirtiesContext
+    @Test
+    public void testSendMatchingMessage() throws Exception {
+        String expectedBody = "&lt;matched/&gt;";
+
+        resultEndpoint.expectedBodiesReceived(expectedBody);
+
+        template.sendBodyAndHeader(expectedBody, "foo", "bar");
+
+        resultEndpoint.assertIsSatisfied();
+    }
+
+    @DirtiesContext
+    @Test
+    public void testSendNotMatchingMessage() throws Exception {
+        resultEndpoint.expectedMessageCount(0);
+
+        template.sendBodyAndHeader("&lt;notMatched/&gt;", "foo", "notMatchedHeaderValue");
+
+        resultEndpoint.assertIsSatisfied();
+    }
+
+    @Configuration
+    public static class ContextConfig extends SingleRouteCamelConfiguration {
+        @Bean
+        public RouteBuilder route() {
+            return new RouteBuilder() {
+                public void configure() {
+                    from("direct:start").filter(header("foo").isEqualTo("bar")).to("mock:result");
+                }
+            };
+        }
+    }
+}
+// end::example[]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is similar to the XML Config example above except that there is no XML file and instead the nested <code>ContextConfig</code> class does all of the configuration; so your entire test case is contained in a single Java class. We currently have to reference by class name this class in the <code>@ContextConfiguration</code> which is a bit ugly. Please vote for <a href="http://jira.springframework.org/browse/SJC-238">SJC-238</a> to address this and make Spring Test work more cleanly with Spring JavaConfig.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_plain_spring_test_using_junit_4_0_x_runner_with_xml_config">Plain Spring Test Using JUnit 4.0.x Runner With XML Config</h4>
+<div class="paragraph">
+<p>You can avoid extending Spring classes by using the <code>SpringJUnit4ClassRunner</code> provided by Spring Test.  This custom JUnit runner means you are free to choose your own class hierarchy while retaining all the capabilities of Spring Test.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+This is for Spring 4.0.x. If you use Spring 4.1 or newer, then see the next section.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration
+public class MyCamelTest {
+    @Autowired
+    protected CamelContext camelContext;
+
+    @EndpointInject(uri = "mock:foo")
+    protected MockEndpoint foo;
+
+    @Test
+    @DirtiesContext
+    public void testMocksAreValid() throws Exception {
+        // ...
+
+        foo.message(0).header("bar").isEqualTo("ABC");
+        MockEndpoint.assertIsSatisfied(camelContext);
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_plain_spring_test_using_junit_4_1_x_runner_with_xml_config">Plain Spring Test Using JUnit 4.1.x Runner With XML Config</h4>
+<div class="paragraph">
+<p>You can avoid extending Spring classes by using the <code>SpringJUnit4ClassRunner</code> provided by Spring Test.  This custom JUnit runner means you are free to choose your own class hierarchy while retaining all the capabilities of Spring Test.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+From <strong>Spring 4.1</strong>, you need to use the <code>@BootstrapWith</code> annotation to configure it to use Camel testing, as shown below.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@RunWith(CamelSpringJUnit4ClassRunner.class)
+@BootstrapWith(CamelTestContextBootstrapper.class)
+@ContextConfiguration
+public class MyCamelTest {
+    @Autowired
+    protected CamelContext camelContext;
+
+    @EndpointInject(uri = "mock:foo")
+    protected MockEndpoint foo;
+
+    @Test
+    @DirtiesContext
+    public void testMocksAreValid() throws Exception {
+        // ...
+
+        foo.message(0).header("bar").isEqualTo("ABC");
+        MockEndpoint.assertIsSatisfied(camelContext);
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_camel_enhanced_spring_test">Camel Enhanced Spring Test</h3>
+<div class="paragraph">
+<p>Using the <code>org.apache.camel.test.junit4.CamelSpringJUnit4ClassRunner</code> runner with the <code>@RunWith</code> annotation or extending <code>org.apache.camel.testng.AbstractCamelTestNGSpringContextTests</code> provides the full feature set of Spring Test with support for the feature set provided in the <code>CamelTestSupport</code> classes.</p>
+</div>
+<div class="paragraph">
+<p>A number of Camel specific annotations have been developed in order to provide for declarative manipulation of the Camel context(s) involved in the test.  These annotations free your test classes from having to inherit from the <code>CamelSpringTestSupport</code> classes and also reduce the amount of code required to customize the tests.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 50%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Annotation Class</th>
+<th class="tableblock halign-left valign-top">Applies To</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Default Behaviour If Not Present</th>
+<th class="tableblock halign-left valign-top">Default Behavior If Present</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.camel.test.spring.DisableJmx</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Class</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Indicates if JMX should be globally disabled in the CamelContexts that are bootstrapped  during the test through the use of Spring Test loaded application contexts.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>JMX is disabled</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>JMX is disabled</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.camel.test.spring.ExcludeRoutes</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Class</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Indicates if certain route builder classes should be excluded from discovery.  Initializes a <code>org.apache.camel.spi.PackageScanClassResolver</code> to exclude a set of given classes from being resolved. Typically this is used at test time to exclude certain routes, which might otherwise be just noisy, from being discovered and initialized.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Not enabled and no routes are excluded</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>No routes are excluded</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.camel.test.spring.LazyLoadTypeConverters</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Class</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><strong>Deprecated</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Indicates if the CamelContexts that are bootstrapped during the test through the use of Spring Test loaded application contexts should use lazy loading of type converters.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Type converters are not lazy loaded</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Type converters are not lazy loaded</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.camel.test.spring.MockEndpoints</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Class</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Triggers the auto-mocking of endpoints whose URIs match the provided filter.  The default filter is <code>"*"</code> which matches all endpoints.  See <code>org.apache.camel.impl.InterceptSendToMockEndpointStrategy</code> for more details on the registration of the mock endpoints.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Not enabled</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>All endpoints are sniffed and recorded in a mock endpoint.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.camel.test.spring.MockEndpointsAndSkip</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Class</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Triggers the auto-mocking of endpoints whose URIs match the provided filter.  The default filter is <code>"*"</code>, which matches all endpoints.  See <a href="http://svn.apache.org/viewvc/camel/trunk/camel-core/src/main/java/org/apache/camel/impl/InterceptSendToMockEndpointStrategy.java?view=markup">org.apache.camel.impl.InterceptSendToMockEndpointStrategy</a> for more details on the registration of the mock endpoints.  This annotation will also skip sending the message to matched endpoints as well.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Not enabled</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>All endpoints are sniffed and recorded in a mock endpoint. The original endpoint is not invoked.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.camel.test.spring.ProvidesBreakpoint</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Method</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Indicates that the annotated method returns an <code>org.apache.camel.spi.Breakpoint</code> for use in the test.  Useful for intercepting traffic to all endpoints or simply for setting a break point in an IDE for debugging.  The method must be public, static, take no arguments, and return <code>org.apache.camel.spi.Breakpoint</code>.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>N/A</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>The returned <code>Breakpoint</code> is registered in the CamelContext(s)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.camel.test.spring.ShutdownTimeout</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Class</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Indicates to set the shutdown timeout of all CamelContexts instantiated through the use of Spring Test loaded application contexts.  If no annotation is used, the timeout is automatically reduced to 10 seconds by the test framework.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>10 seconds</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>10 seconds</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.camel.test.spring.UseAdviceWith</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Class</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Indicates the use of <code>adviceWith()</code> within the test class.  If a class is annotated with this annotation and <code>UseAdviceWith#value()</code> returns true, any CamelContexts bootstrapped during the test through the use of Spring Test loaded application contexts will not be started automatically.</p>
+</div>
+<div class="paragraph">
+<p>The test author is responsible for injecting the Camel contexts into the test and executing <code>CamelContext#start()</code> on them at the appropriate time after any advice has been applied to the routes in the CamelContext(s).</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>CamelContexts do not automatically start.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>CamelContexts do not automatically start.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.camel.test.spring.UseOverridePropertiesWithPropertiesComponent</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Method</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><strong>Camel 2.16</strong>:Indicates that the annotated method returns a <code>java.util.Properties</code> for use in the test, and that those properties override any existing properties configured on the <code>PropertiesComponent</code>.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Override properties</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following example illustrates the use of the <code>@MockEndpoints</code> annotation in order to setup mock endpoints as interceptors on all endpoints using the Camel Log component and the <code>@DisableJmx</code> annotation to enable JMX which is disabled during tests by default.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+We still use the <code>@DirtiesContext</code> annotation to ensure that the CamelContext, routes, and mock endpoints are reinitialized between test methods.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@RunWith(CamelSpringJUnit4ClassRunner.class)
+@BootstrapWith(CamelTestContextBootstrapper.class)
+@ContextConfiguration
+@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
+@MockEndpoints("log:*")
+@DisableJmx(false)
+public class CamelSpringJUnit4ClassRunnerPlainTest {
+    @Autowired
+    protected CamelContext camelContext2;
+
+    protected MockEndpoint mockB;
+
+    @EndpointInject(uri = "mock:c", context = "camelContext2")
+    protected MockEndpoint mockC;
+
+    @Produce(uri = "direct:start2", context = "camelContext2")
+    protected ProducerTemplate start2;
+
+    @EndpointInject(uri = "mock:log:org.apache.camel.test.junit4.spring", context = "camelContext2")
+    protected MockEndpoint mockLog;
+
+    @Test
+    public void testPositive() throws Exception {
+        mockC.expectedBodiesReceived("David");
+        mockLog.expectedBodiesReceived("Hello David");
+
+        start2.sendBody("David");
+
+        MockEndpoint.assertIsSatisfied(camelContext);
+    }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_adding_more_mock_expectations">Adding More Mock Expectations</h3>
+<div class="paragraph">
+<p>If you wish to add any new assertions to your test you can easily do so with the following. Notice how we use <code>@EndpointInject</code> to inject a Camel endpoint into our code then the <a href="http://camel.apache.org/mock.html">Mock</a> API to add an expectation on a specific message.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ContextConfiguration
+public class MyCamelTest extends AbstractJUnit38SpringContextTests {
+    @Autowired
+    protected CamelContext camelContext;
+
+    @EndpointInject(uri = "mock:foo")
+    protected MockEndpoint foo;
+
+    public void testMocksAreValid() throws Exception {
+        // lets add more expectations
+        foo.message(0).header("bar").isEqualTo("ABC");
+
+        MockEndpoint.assertIsSatisfied(camelContext);
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_further_processing_the_received_messages">Further Processing the Received Messages</h3>
+<div class="paragraph">
+<p>Sometimes once a <a href="http://camel.apache.org/mock.html">Mock</a> endpoint has received some messages you want to then process them further to add further assertions that your test case worked as you expect.</p>
+</div>
+<div class="paragraph">
+<p>So you can then process the received message exchanges if you like&#8230;&#8203;</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@ContextConfiguration
+public class MyCamelTest extends AbstractJUnit38SpringContextTests {
+    @Autowired
+    protected CamelContext camelContext;
+
+    @EndpointInject(uri = "mock:foo")
+    protected MockEndpoint foo;
+
+    public void testMocksAreValid() throws Exception {
+        // lets add more expectations...
+
+        MockEndpoint.assertIsSatisfied(camelContext);
+
+        // now lets do some further assertions
+        List&lt;Exchange&gt; list = foo.getReceivedExchanges();
+        for (Exchange exchange : list) {
+            Message in = exchange.getIn();
+            // ...
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sending_and_receiving_messages">Sending and Receiving Messages</h3>
+<div class="paragraph">
+<p>It might be that the <a href="http://camel.apache.org/enterprise-integration-patterns.html">Enterprise Integration Patterns</a> you have defined in either <a href="http://camel.apache.org/spring.html">Spring</a> XML or using the Java <a href="http://camel.apache.org/dsl.html">DSL</a> do all of the sending and receiving and you might just work with the <a href="http://camel.apache.org/mock.html">Mock</a> endpoints as described above. However sometimes in a test case its useful to explicitly send or receive messages directly.</p>
+</div>
+<div class="paragraph">
+<p>To send or receive messages you should use the <a href="http://camel.apache.org/bean-integration.html">Bean Integration</a> mechanism. For example to send messages inject a <code>ProducerTemplate</code> using the <code>@EndpointInject</code> annotation then call the various send methods on this object to send a message to an endpoint. To consume messages use the <code>@MessageDriven</code> annotation on a method to have the method invoked when a message is received.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class Foo {
+  @EndpointInject(uri = "activemq:foo.bar")
+  ProducerTemplate producer;
+
+  public void doSomething() {
+    // lets send a message!
+    producer.sendBody("&lt;hello&gt;world!&lt;/hello&gt;");
+  }
+
+  // lets consume messages from the 'cheese' queue
+  @MessageDriven(uri="activemq:cheese")
+  public void onCheese(String name) {
+    // ...
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/test/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/test-karaf/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

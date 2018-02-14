@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Olingo2 Component Available as of Camel version 2.14
+ The Olingo2 component utilizes http://olingo.apache.org/[Apache Olingo] version 2.0 APIs to interact with OData 2.0 compliant services. A number of popular commercial and enterprise vendors and products support the OData protocol. A sample list of supporting products can be found on the OData website.
+ The Olingo2 component supports reading feeds, delta feeds, entities, simple and complex properties, links, counts, using custom and OData system query parameters.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Olingo2 Component Available as of Camel version 2.14
+ The Olingo2 component utilizes http://olingo.apache.org/[Apache Olingo] version 2.0 APIs to interact with OData 2.0 compliant services. A number of popular commercial and enterprise vendors and products support the OData protocol. A sample list of supporting products can be found on the OData website.
+ The Olingo2 component supports reading feeds, delta feeds, entities, simple and complex properties, links, counts, using custom and OData system query parameters.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/olingo2-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/olingo2-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_olingo2_component">Olingo2 Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.14</strong></p>
+</div>
+<div class="paragraph">
+<p>The Olingo2 component utilizes http://olingo.apache.org/[Apache Olingo]
+version 2.0 APIs to interact with OData 2.0 compliant services.
+A number of popular commercial and enterprise vendors and products
+support the OData protocol. A sample list of supporting products can be
+found on the OData <a href="http://www.odata.org/ecosystem/">website</a>.</p>
+</div>
+<div class="paragraph">
+<p>The Olingo2 component supports reading feeds, delta feeds, entities,
+simple and complex properties, links, counts, using custom and OData
+system query parameters. It supports updating entities, properties, and
+association links. It also supports submitting queries and change
+requests as a single OData batch operation.</p>
+</div>
+<div class="paragraph">
+<p>The component supports configuring HTTP connection parameters and
+headers for OData service connection. This allows configuring use of
+SSL, OAuth2.0, etc. as required by the target OData service.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their pom.xml
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+        &lt;artifactId&gt;camel-olingo2&lt;/artifactId&gt;
+        &lt;version&gt;${camel-version}&lt;/version&gt;
+    &lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    olingo2://endpoint/&lt;resource-path&gt;?[options]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_olingo2_options">Olingo2 Options</h3>
+<div class="paragraph">
+<p>The Olingo2 component supports 3 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>configuration</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the shared configuration</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Olingo2Configuration</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useGlobalSslContext Parameters</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable usage of global SSL context parameters.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Olingo2 endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>olingo2:apiName/methodName</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_2_parameters">Path Parameters (2 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>apiName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> What kind of operation to perform</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Olingo2ApiName</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>methodName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> What sub operation to use for the selected operation</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_14_parameters">Query Parameters (14 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectTimeout</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP connection creation timeout in milliseconds defaults to 30000 (30 seconds)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">30000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contentType</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Content-Type header value can be used to specify JSON or XML message format defaults to application/json;charset=utf-8</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">application/json;charset=utf-8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpAsyncClientBuilder</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Custom HTTP async client builder for more complex HTTP client configuration overrides connectionTimeout socketTimeout proxy and sslContext. Note that a socketTimeout MUST be specified in the builder otherwise OData requests could block indefinitely</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HttpAsyncClientBuilder</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpClientBuilder</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Custom HTTP client builder for more complex HTTP client configuration overrides connectionTimeout socketTimeout proxy and sslContext. Note that a socketTimeout MUST be specified in the builder otherwise OData requests could block indefinitely</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HttpClientBuilder</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>httpHeaders</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Custom HTTP headers to inject into every request this could include OAuth tokens etc.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>inBody</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the name of a parameter to be passed in the exchange In Body</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>proxy</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP proxy server configuration</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HttpHost</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>serviceUri</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Target OData service base URI e.g. <a href="http://services.odata.org/OData/OData.svc" class="bare">http://services.odata.org/OData/OData.svc</a></p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>socketTimeout</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP request timeout in milliseconds defaults to 30000 (30 seconds)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">30000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sslContextParameters</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure security using SSLContextParameters</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SSLContextParameters</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_producer_endpoints">Producer Endpoints</h3>
+<div class="paragraph">
+<p>Producer endpoints can use endpoint names and options listed
+next. Producer endpoints can also use a special option <strong><code>inBody</code></strong> that
+in turn should contain the name of the endpoint option whose value will
+be contained in the Camel Exchange In message. The <strong>inBody</strong> option
+defaults to <strong>data</strong> for endpoints that take that option.</p>
+</div>
+<div class="paragraph">
+<p>Any of the endpoint options can be provided in either the endpoint URI,
+or dynamically in a message header. The message header name must be of
+the format <strong><code>CamelOlingo2.&lt;option&gt;</code></strong>. Note that the <strong><code>inBody</code></strong> option
+overrides message header, i.e. the endpoint
+option <strong><code>inBody=option</code></strong> would override
+a <strong><code>CamelOlingo2.option</code></strong> header. In addition, query parameters can be
+specified</p>
+</div>
+<div class="paragraph">
+<p>Note that the resourcePath option can either in specified in the URI as
+a part of the URI path, as an endpoint option
+?resourcePath=&lt;resource-path&gt; or as a header value
+CamelOlingo2.resourcePath. The OData entity key predicate can either be
+a part of the resource path, e.g. <em>Manufacturers('1')</em>, where <em>'__1'</em> is
+the key predicate, or be specified separately with resource path
+<em>Manufacturers</em> and keyPredicate option <em>'1'</em>.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Endpoint</th>
+<th class="tableblock halign-left valign-top">Options</th>
+<th class="tableblock halign-left valign-top">HTTP Method</th>
+<th class="tableblock halign-left valign-top">Result Body Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">batch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST with multipart/mixed batch request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.util.List&lt;org.apache.camel.component.olingo2.api.batch.Olingo2BatchResponse&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">create</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">data, resourcePath</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.olingo.odata2.api.ep.entry.ODataEntry for new entries
+org.apache.olingo.odata2.api.commons.HttpStatusCodes for other OData resources</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">resourcePath</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DELETE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.olingo.odata2.api.commons.HttpStatusCodes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">merge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">data, resourcePath</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MERGE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.olingo.odata2.api.commons.HttpStatusCodes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">patch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">data, resourcePath</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PATCH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.olingo.odata2.api.commons.HttpStatusCodes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">read</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">queryParams, resourcePath</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Depends on OData resource being queried as described next</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">update</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">data, resourcePath</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.olingo.odata2.api.commons.HttpStatusCodes</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_odata_resource_type_mapping">OData Resource Type Mapping</h3>
+<div class="paragraph">
+<p>The result of <strong>read</strong> endpoint and data type of <strong>data</strong> option depends on
+the OData resource being queried, created or modified.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">OData Resource Type</th>
+<th class="tableblock halign-left valign-top">Resource URI from resourcePath and keyPredicate</th>
+<th class="tableblock halign-left valign-top">In or Out Body Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Entity data model</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">$metadata</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.olingo.odata2.api.edm.Edm</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Service document</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.olingo.odata2.api.servicedocument.ServiceDocument</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OData feed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;entity-set&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.olingo.odata2.api.ep.feed.ODataFeed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OData entry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;entity-set&gt;(&lt;key-predicate&gt;)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">org.apache.olingo.odata2.api.ep.entry.ODataEntry for Out body (response)
+java.util.Map&lt;String, Object&gt; for In body (request)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Simple property</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;entity-set&gt;(&lt;key-predicate&gt;)/&lt;simple-property&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Appropriate Java data type as described by Olingo EdmProperty</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Simple property value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;entity-set&gt;(&lt;key-predicate&gt;)/&lt;simple-property&gt;/$value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Appropriate Java data type as described by Olingo EdmProperty</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Complex property</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;entity-set&gt;(&lt;key-predicate&gt;)/&lt;complex-property&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.util.Map&lt;String, Object&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zero or one association link</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;entity-set&gt;(&lt;key-predicate&gt;/$link/&lt;one-to-one-entity-set-property&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String for response
+java.util.Map&lt;String, Object&gt; with key property names and values for request</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zero or many association links</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;entity-set&gt;(&lt;key-predicate&gt;/$link/&lt;one-to-many-entity-set-property&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.util.List&lt;String&gt; for response
+java.util.List&lt;java.util.Map&lt;String, Object&gt;&gt; containing list of key property names and values for request</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Count</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;resource-uri&gt;/$count</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.lang.Long</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_consumer_endpoints">Consumer Endpoints</h3>
+<div class="paragraph">
+<p>Only the <strong>read</strong> endpoint can be used as a consumer endpoint. Consumer
+endpoints can
+use http://camel.apache.org/polling-consumer.html#PollingConsumer-ScheduledPollConsumerOptions[Scheduled
+Poll Consumer Options] with a <strong><code>consumer.</code></strong> prefix to schedule endpoint
+invocation. By default consumer endpoints that return an array or
+collection will generate one exchange per element, and their routes will
+be executed once for each exchange. This behavior can be disabled by
+setting the endpoint property <strong>consumer.splitResult=false</strong>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message_headers">Message Headers</h3>
+<div class="paragraph">
+<p>Any URI option can be provided in a message header for producer
+endpoints with a <strong><code>CamelOlingo2.</code></strong> prefix.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message_body">Message Body</h3>
+<div class="paragraph">
+<p>All result message bodies utilize objects provided by the underlying
+<a href="http://olingo.apache.org/javadoc/odata2/index.html">Apache Olingo 2.0
+API</a> used by the Olingo2Component. Producer endpoints can specify the
+option name for incoming message body in the <strong><code>inBody</code></strong> endpoint URI
+parameter. For endpoints that return an array or collection, a consumer
+endpoint will map every element to distinct messages, unless
+<strong>consumer.splitResult</strong> is set to <strong>false</strong>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_use_cases">Use cases</h3>
+<div class="paragraph">
+<p>The following route reads top 5 entries from the Manufacturer feed
+ordered by ascending Name property.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:...")
+    .setHeader("CamelOlingo2.$top", "5");
+    .to("olingo2://read/Manufacturers?orderBy=Name%20asc");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following route reads Manufacturer entry using the key property
+value in incoming <strong>id</strong> header.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:...")
+    .setHeader("CamelOlingo2.keyPredicate", header("id"))
+    .to("olingo2://read/Manufacturers");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following route creates Manufacturer entry using the
+<strong>java.util.Map&lt;String, Object&gt;</strong> in body message.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:...")
+    .to("olingo2://create/Manufacturers");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following route polls Manufacturer
+<a href="http://olingo.apache.org/doc/tutorials/deltaClient.html">delta
+feed</a> every 30 seconds. The bean <strong>blah</strong> updates the bean <strong>paramsBean</strong> to
+add an updated <strong>!deltatoken</strong> property with the value returned in the
+<strong>ODataDeltaFeed</strong> result. Since the initial delta token is not known, the
+consumer endpoint will produce an <strong>ODataFeed</strong> value the first time, and
+<strong>ODataDeltaFeed</strong> on subsequent polls.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("olingo2://read/Manufacturers?queryParams=#paramsBean&amp;consumer.timeUnit=SECONDS&amp;consumer.delay=30")
+    .to("bean:blah");</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/olingo4-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/ognl-language/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

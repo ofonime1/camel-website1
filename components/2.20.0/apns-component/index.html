@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='APNS Component Available as of Camel version 2.8
+ The apns component is used for sending notifications to iOS devices. The apns components use javapns library.
+The component supports sending notifications to Apple Push Notification Servers (APNS) and consuming feedback from the servers.
+ The consumer is configured with 3600 seconds for polling by default because it is a best practice to consume feedback stream from Apple Push Notification Servers only from time to time.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='APNS Component Available as of Camel version 2.8
+ The apns component is used for sending notifications to iOS devices. The apns components use javapns library.
+The component supports sending notifications to Apple Push Notification Servers (APNS) and consuming feedback from the servers.
+ The consumer is configured with 3600 seconds for polling by default because it is a best practice to consume feedback stream from Apple Push Notification Servers only from time to time.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/apns-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/apns-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_apns_component">APNS Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.8</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>apns</strong> component is used for sending notifications to iOS devices.
+The apns components use <a href="https://github.com/notnoop/java-apns">javapns</a>
+library.<br>
+ The component supports sending notifications to Apple Push Notification
+Servers (APNS) and consuming feedback from the servers.</p>
+</div>
+<div class="paragraph">
+<p>The consumer is configured with 3600 seconds for polling by default
+because it is a best practice to consume feedback stream from Apple Push
+Notification Servers only from time to time. For example: every 1 hour
+to avoid flooding the servers.</p>
+</div>
+<div class="paragraph">
+<p>The feedback stream gives informations about inactive devices. You only
+need to get this informations every some hours if your mobile
+application is not a heavily used one.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-apns&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="paragraph">
+<p>To send notifications:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">apns:notify[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To consume feedback:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">apns:consumer[?options]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The APNS component supports 2 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>apnsService</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The ApnsService to use. The org.apache.camel.component.apns.factory.ApnsServiceFactory can be used to build a ApnsService</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ApnsService</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The APNS endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>apns:name</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>name</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the endpoint</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_20_parameters">Query Parameters (20 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>tokens</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configure this property in case you want to statically declare tokens related to devices you want to notify. Tokens are separated by comma.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sendEmptyMessageWhenIdle</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the polling consumer did not poll any files you can enable this option to send an empty message (no body) instead.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>pollStrategy</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pluggable org.apache.camel.PollingConsumerPollingStrategy allowing you to provide your custom implementation to control error handling usually occurred during the poll operation before an Exchange have been created and being routed in Camel.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PollingConsumerPoll Strategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backoffErrorThreshold</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of subsequent error polls (failed due some error) that should happen before the backoffMultipler should kick-in.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backoffIdleThreshold</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of subsequent idle polls that should happen before the backoffMultipler should kick-in.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backoffMultiplier</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the scheduled polling consumer backoff if there has been a number of subsequent idles/errors in a row. The multiplier is then the number of polls that will be skipped before the next actual attempt is happening again. When this option is in use then backoffIdleThreshold and/or backoffErrorThreshold must also be configured.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>delay</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Milliseconds before the next poll. You can also specify time values using units such as 60s (60 seconds) 5m30s (5 minutes and 30 seconds) and 1h (1 hour).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">500</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>greedy</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If greedy is enabled then the ScheduledPollConsumer will run immediately again if the previous run polled 1 or more messages.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>initialDelay</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Milliseconds before the first poll starts. You can also specify time values using units such as 60s (60 seconds) 5m30s (5 minutes and 30 seconds) and 1h (1 hour).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>runLoggingLevel</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The consumer logs a start/complete log line when it polls. This option allows you to configure the logging level for that.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">TRACE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LoggingLevel</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>scheduledExecutorService</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for configuring a custom/shared thread pool to use for the consumer. By default each consumer has its own single threaded thread pool.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ScheduledExecutor Service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>scheduler</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a cron scheduler from either camel-spring or camel-quartz2 component</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ScheduledPollConsumer Scheduler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>schedulerProperties</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure additional properties when using a custom scheduler or any of the Quartz2 Spring based scheduler.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>startScheduler</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the scheduler should be auto started.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>timeUnit</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time unit for initialDelay and delay options.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">MILLISECONDS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TimeUnit</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useFixedDelay</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Controls if fixed delay or fixed rate is used. See ScheduledExecutorService in JDK for details.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>You can append query options to the URI in the following format,
+<code>?option=value&amp;option=value&amp;&#8230;&#8203;</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_component">Component</h4>
+<div class="paragraph">
+<p>The <code>ApnsComponent</code> must be configured with a
+<code>com.notnoop.apns.ApnsService</code>. The service can be created and
+configured using the
+<code>org.apache.camel.component.apns.factory.ApnsServiceFactory</code>. See
+further below for an example. And as well in the
+<a href="https://github.com/apache/camel/tree/master/components/camel-apns">test
+source code</a>.</p>
+</div>
+<div class="sect4">
+<h5 id="_ssl_setting">SSL Setting</h5>
+<div class="paragraph">
+<p>In order to use secure connection, an instance of <code>org.apache.camel.util.jsse.SSLContextParameters</code>
+ should be injected to <code>org.apache.camel.component.apns.factory.ApnsServiceFactory</code> which is
+ used to configure the component. See the test resources for an example.
+ <a href="https://github.com/apache/camel/blob/master/components/camel-apns/src/test/resources/org/apache/camel/component/apns/spring/SpringApnsConsumerTest-context.xml">ssl example</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exchange_data_format">Exchange data format</h3>
+<div class="paragraph">
+<p>When Camel will fetch feedback data corresponding to inactive devices,
+it will retrieve a List of InactiveDevice objects. Each InactiveDevice
+object of the retrieved list will be setted as the In body, and then
+processed by the consumer endpoint.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message_headers">Message Headers</h3>
+<div class="paragraph">
+<p>Camel Apns uses these headers.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelApnsTokens</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Empty by default.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelApnsMessageType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STRING, PAYLOAD, APNS_NOTIFICATION</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In case you choose PAYLOAD for the message type, then the message will
+be considered as a APNS payload and sent as is. In case you choose
+STRING, message will be converted as a APNS payload. From <strong>Camel 2.16</strong>
+onwards APNS_NOTIFICATION is used for sending message body as
+com.notnoop.apns.ApnsNotification types.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_apnsservicefactory_builder_callback">ApnsServiceFactory builder callback</h3>
+<div class="paragraph">
+<p><code>ApnsServiceFactory</code> comes with the empty callback method that could be
+used to configure (or even replace) the default <code>ApnsServiceBuilder</code>
+instance. The signature of the method could look as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">protected ApnsServiceBuilder configureServiceBuilder(ApnsServiceBuilder serviceBuilder);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And could be used like as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">ApnsServiceFactory proxiedApnsServiceFactory = new ApnsServiceFactory(){
+
+  @Override
+  protected ApnsServiceBuilder configureServiceBuilder(ApnsServiceBuilder serviceBuilder) {
+    return serviceBuilder.withSocksProxy("my.proxy.com", 6666);
+  }
+
+};</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_samples">Samples</h3>
+<div class="sect3">
+<h4 id="_camel_xml_route">Camel Xml route</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd"&gt;
+
+    &lt;!-- Replace by desired values --&gt;
+    &lt;bean id="apnsServiceFactory" class="org.apache.camel.component.apns.factory.ApnsServiceFactory"&gt;
+
+        &lt;!-- Optional configuration of feedback host and port --&gt;
+        &lt;!-- &lt;property name="feedbackHost" value="localhost" /&gt; --&gt;
+        &lt;!-- &lt;property name="feedbackPort" value="7843" /&gt; --&gt;
+
+        &lt;!-- Optional configuration of gateway host and port --&gt;
+        &lt;!-- &lt;property name="gatewayHost" value="localhost" /&gt; --&gt;
+        &lt;!-- &lt;property name="gatewayPort" value="7654" /&gt; --&gt;
+
+        &lt;!-- Declaration of certificate used --&gt;
+                &lt;!-- from Camel 2.11 onwards you can use prefix: classpath:, file: to refer to load the certificate from classpath or file. Default it classpath --&gt;
+        &lt;property name="certificatePath" value="certificate.p12" /&gt;
+        &lt;property name="certificatePassword" value="MyCertPassword" /&gt;
+
+        &lt;!-- Optional connection strategy - By Default: No need to configure --&gt;
+        &lt;!-- Possible options: NON_BLOCKING, QUEUE, POOL or Nothing --&gt;
+        &lt;!-- &lt;property name="connectionStrategy" value="POOL" /&gt; --&gt;
+        &lt;!-- Optional pool size --&gt;
+        &lt;!-- &lt;property name="poolSize" value="15" /&gt; --&gt;
+
+        &lt;!-- Optional connection strategy - By Default: No need to configure --&gt;
+        &lt;!-- Possible options: EVERY_HALF_HOUR, EVERY_NOTIFICATION or Nothing (Corresponds to NEVER javapns option) --&gt;
+        &lt;!-- &lt;property name="reconnectionPolicy" value="EVERY_HALF_HOUR" /&gt; --&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id="apnsService" factory-bean="apnsServiceFactory" factory-method="getApnsService" /&gt;
+
+    &lt;!-- Replace this declaration by wanted configuration --&gt;
+    &lt;bean id="apns" class="org.apache.camel.component.apns.ApnsComponent"&gt;
+        &lt;property name="apnsService" ref="apnsService" /&gt;
+    &lt;/bean&gt;
+
+    &lt;camelContext id="camel-apns-test" xmlns="http://camel.apache.org/schema/spring"&gt;
+            &lt;route id="apns-test"&gt;
+                    &lt;from uri="apns:consumer?initialDelay=10&amp;amp;delay=3600&amp;amp;timeUnit=SECONDS" /&gt;
+                    &lt;to uri="log:org.apache.camel.component.apns?showAll=true&amp;amp;multiline=true" /&gt;
+                    &lt;to uri="mock:result" /&gt;
+            &lt;/route&gt;
+    &lt;/camelContext&gt;
+
+&lt;/beans&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_camel_java_route">Camel Java route</h4>
+<div id="APNS-Createcamelcontextanddeclareapnscomponentprogrammatically" class="paragraph">
+<p>Create camel context and declare apns component programmatically</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    protected CamelContext createCamelContext() throws Exception {
+        CamelContext camelContext = super.createCamelContext();
+
+        ApnsServiceFactory apnsServiceFactory = new ApnsServiceFactory();
+        apnsServiceFactory.setCertificatePath("classpath:/certificate.p12");
+        apnsServiceFactory.setCertificatePassword("MyCertPassword");
+
+        ApnsService apnsService = apnsServiceFactory.getApnsService(camelContext);
+
+        ApnsComponent apnsComponent = new ApnsComponent(apnsService);
+        camelContext.addComponent("apns", apnsComponent);
+
+        return camelContext;
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>[[APNS-ApnsProducer-iOStargetdevicedynamicallyconfiguredviaheader:"CamelApnsTokens"]]
+ApnsProducer - iOS target device dynamically configured via header:
+<code>"CamelApnsTokens"</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    protected RouteBuilder createRouteBuilder() throws Exception {
+        return new RouteBuilder() {
+            public void configure() throws Exception {
+                from("direct:test")
+                    .setHeader(ApnsConstants.HEADER_TOKENS, constant(IOS_DEVICE_TOKEN))
+                    .to("apns:notify");
+                }
+        }
+    }</code></pre>
+</div>
+</div>
+<div id="APNS-ApnsProducer-iOStargetdevicestaticallyconfiguredviauri" class="paragraph">
+<p>ApnsProducer - iOS target device statically configured via uri</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    protected RouteBuilder createRouteBuilder() throws Exception {
+        return new RouteBuilder() {
+            public void configure() throws Exception {
+                from("direct:test").
+                to("apns:notify?tokens=" + IOS_DEVICE_TOKEN);
+            }
+        };
+    }</code></pre>
+</div>
+</div>
+<div id="APNS-ApnsConsumer" class="paragraph">
+<p>ApnsConsumer</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("apns:consumer?initialDelay=10&amp;delay=3600&amp;timeUnit=SECONDS")
+    .to("log:com.apache.camel.component.apns?showAll=true&amp;multiline=true")
+    .to("mock:result");</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://camel.apache.org/component.html">Component</a></p>
+</li>
+<li>
+<p><a href="http://camel.apache.org/endpoint.html">Endpoint</a>
+*
+<a href="http://blog.xebia.fr/2010/09/30/creer-un-composant-apache-camel-de-connexion-a-lapns-1-sur-3/">Blog
+about using APNS (in french)</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/asterisk-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/amqp-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

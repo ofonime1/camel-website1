@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Spring Batch Component Available as of Camel version 2.10
+ The spring-batch: component and support classes provide integration bridge between Camel and Spring Batch infrastructure.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-spring-batch&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   URI format spring-batch:jobName[?options]   Where jobName represents the name of the Spring Batch job located in the Camel registry.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Spring Batch Component Available as of Camel version 2.10
+ The spring-batch: component and support classes provide integration bridge between Camel and Spring Batch infrastructure.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-spring-batch&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   URI format spring-batch:jobName[?options]   Where jobName represents the name of the Spring Batch job located in the Camel registry.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/spring-batch-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/spring-batch-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_spring_batch_component">Spring Batch Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.10</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>spring-batch:</strong> component and support classes provide integration
+bridge between Camel and <a href="http://www.springsource.org/spring-batch">Spring
+Batch</a> infrastructure.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-spring-batch&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">spring-batch:jobName[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where <strong>jobName</strong> represents the name of the Spring Batch job located in
+the Camel registry. Alternatively if a JobRegistry is provided it will be used
+to locate the job instead.</p>
+</div>
+<div class="paragraph">
+<p>WARNING:This component can only be used to define producer endpoints, which
+means that you cannot use the Spring Batch component in a <code>from()</code>
+statement.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The Spring Batch component supports 3 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>jobLauncher</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Explicitly specifies a JobLauncher to be used.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JobLauncher</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>jobRegistry</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Explicitly specifies a JobRegistry to be used.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JobRegistry</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Spring Batch endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>spring-batch:jobName</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>jobName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The name of the Spring Batch job located in the registry.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_4_parameters">Query Parameters (4 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>jobFromHeader</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Explicitly defines if the jobName should be taken from the headers instead of the URI.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>jobLauncher</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Explicitly specifies a JobLauncher to be used.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JobLauncher</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>jobRegistry</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Explicitly specifies a JobRegistry to be used.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JobRegistry</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_usage">Usage</h3>
+<div class="paragraph">
+<p>When Spring Batch component receives the message, it triggers the job
+execution. The job will be executed using the
+<code>org.springframework.batch.core.launch.JobLaucher</code> instance resolved
+according to the following algorithm:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>if <code>JobLauncher</code> is manually set on the component, then use it.</p>
+</li>
+<li>
+<p>if <code>jobLauncherRef</code> option is set on the component, then search Camel
+<a href="registry.html">Registry</a> for the <code>JobLauncher</code> with the given name.
+<strong>Deprecated and will be removed in Camel 3.0!</strong></p>
+</li>
+<li>
+<p>if there is <code>JobLauncher</code> registered in the Camel
+<a href="registry.html">Registry</a> under <strong>jobLauncher</strong> name, then use it.</p>
+</li>
+<li>
+<p>if none of the steps above allow to resolve the <code>JobLauncher</code> and
+there is exactly one <code>JobLauncher</code> instance in the Camel
+<a href="registry.html">Registry</a>, then use it.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>All headers found in the message are passed to the <code>JobLauncher</code> as job
+parameters. <code>String</code>, <code>Long</code>, <code>Double</code> and <code>java.util.Date</code> values are
+copied to the <code>org.springframework.batch.core.JobParametersBuilder</code> -
+other data types are converted to Strings.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examples">Examples</h3>
+<div class="paragraph">
+<p>Triggering the Spring Batch job execution:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:startBatch").to("spring-batch:myJob");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Triggering the Spring Batch job execution with the <code>JobLauncher</code> set
+explicitly.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:startBatch").to("spring-batch:myJob?jobLauncherRef=myJobLauncher");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Starting from the Camel <strong>2.11.1</strong> <code>JobExecution</code> instance returned by the
+<code>JobLauncher</code> is forwarded by the <code>SpringBatchProducer</code> as the output
+message. You can use the <code>JobExecution</code> instance to perform some
+operations using the Spring Batch API directly.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:startBatch").to("spring-batch:myJob").to("mock:JobExecutions");
+...
+MockEndpoint mockEndpoint = ...;
+JobExecution jobExecution = mockEndpoint.getExchanges().get(0).getIn().getBody(JobExecution.class);
+BatchStatus currentJobStatus = jobExecution.getStatus();</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_support_classes">Support classes</h3>
+<div class="paragraph">
+<p>Apart from the Component, Camel Spring Batch provides also support
+classes, which can be used to hook into Spring Batch infrastructure.</p>
+</div>
+<div class="sect3">
+<h4 id="_camelitemreader">CamelItemReader</h4>
+<div class="paragraph">
+<p><code>CamelItemReader</code> can be used to read batch data directly from the Camel
+infrastructure.</p>
+</div>
+<div class="paragraph">
+<p>For example the snippet below configures Spring Batch to read data from
+JMS queue.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;bean id="camelReader" class="org.apache.camel.component.spring.batch.support.CamelItemReader"&gt;
+  &lt;constructor-arg ref="consumerTemplate"/&gt;
+  &lt;constructor-arg value="jms:dataQueue"/&gt;
+&lt;/bean&gt;
+
+&lt;batch:job id="myJob"&gt;
+  &lt;batch:step id="step"&gt;
+    &lt;batch:tasklet&gt;
+      &lt;batch:chunk reader="camelReader" writer="someWriter" commit-interval="100"/&gt;
+    &lt;/batch:tasklet&gt;
+  &lt;/batch:step&gt;
+&lt;/batch:job&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_camelitemwriter">CamelItemWriter</h4>
+<div class="paragraph">
+<p><code>CamelItemWriter</code> has similar purpose as <code>CamelItemReader</code>, but it is
+dedicated to write chunk of the processed data.</p>
+</div>
+<div class="paragraph">
+<p>For example the snippet below configures Spring Batch to read data from
+JMS queue.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;bean id="camelwriter" class="org.apache.camel.component.spring.batch.support.CamelItemWriter"&gt;
+  &lt;constructor-arg ref="producerTemplate"/&gt;
+  &lt;constructor-arg value="jms:dataQueue"/&gt;
+&lt;/bean&gt;
+
+&lt;batch:job id="myJob"&gt;
+  &lt;batch:step id="step"&gt;
+    &lt;batch:tasklet&gt;
+      &lt;batch:chunk reader="someReader" writer="camelwriter" commit-interval="100"/&gt;
+    &lt;/batch:tasklet&gt;
+  &lt;/batch:step&gt;
+&lt;/batch:job&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_camelitemprocessor">CamelItemProcessor</h4>
+<div class="paragraph">
+<p><code>CamelItemProcessor</code> is the implementation of Spring Batch
+<code>org.springframework.batch.item.ItemProcessor</code> interface. The latter
+implementation relays on
+<a href="http://camel.apache.org/request-reply.html">Request Reply pattern</a> to
+delegate the processing of the batch item to the Camel infrastructure.
+The item to process is sent to the Camel endpoint as the body of the
+message.</p>
+</div>
+<div class="paragraph">
+<p>For example the snippet below performs simple processing of the batch
+item using the <a href="http://camel.apache.org/direct.html">Direct endpoint</a> and
+the <a href="http://camel.apache.org/simple.html">Simple expression language</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camel:camelContext&gt;
+  &lt;camel:route&gt;
+    &lt;camel:from uri="direct:processor"/&gt;
+    &lt;camel:setExchangePattern pattern="InOut"/&gt;
+    &lt;camel:setBody&gt;
+      &lt;camel:simple&gt;Processed ${body}&lt;/camel:simple&gt;
+    &lt;/camel:setBody&gt;
+  &lt;/camel:route&gt;
+&lt;/camel:camelContext&gt;
+
+&lt;bean id="camelProcessor" class="org.apache.camel.component.spring.batch.support.CamelItemProcessor"&gt;
+  &lt;constructor-arg ref="producerTemplate"/&gt;
+  &lt;constructor-arg value="direct:processor"/&gt;
+&lt;/bean&gt;
+
+&lt;batch:job id="myJob"&gt;
+  &lt;batch:step id="step"&gt;
+    &lt;batch:tasklet&gt;
+      &lt;batch:chunk reader="someReader" writer="someWriter" processor="camelProcessor" commit-interval="100"/&gt;
+    &lt;/batch:tasklet&gt;
+  &lt;/batch:step&gt;
+&lt;/batch:job&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cameljobexecutionlistener">CamelJobExecutionListener</h4>
+<div class="paragraph">
+<p><code>CamelJobExecutionListener</code> is the implementation of the
+<code>org.springframework.batch.core.JobExecutionListener</code> interface sending
+job execution events to the Camel endpoint.</p>
+</div>
+<div class="paragraph">
+<p>The <code>org.springframework.batch.core.JobExecution</code> instance produced by
+the Spring Batch is sent as a body of the message. To distinguish
+between before- and after-callbacks <code>SPRING_BATCH_JOB_EVENT_TYPE</code> header
+is set to the <code>BEFORE</code> or <code>AFTER</code> value.</p>
+</div>
+<div class="paragraph">
+<p>The example snippet below sends Spring Batch job execution events to the
+JMS queue.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;bean id="camelJobExecutionListener" class="org.apache.camel.component.spring.batch.support.CamelJobExecutionListener"&gt;
+  &lt;constructor-arg ref="producerTemplate"/&gt;
+  &lt;constructor-arg value="jms:batchEventsBus"/&gt;
+&lt;/bean&gt;
+
+&lt;batch:job id="myJob"&gt;
+  &lt;batch:step id="step"&gt;
+    &lt;batch:tasklet&gt;
+      &lt;batch:chunk reader="someReader" writer="someWriter" commit-interval="100"/&gt;
+    &lt;/batch:tasklet&gt;
+  &lt;/batch:step&gt;
+  &lt;batch:listeners&gt;
+    &lt;batch:listener ref="camelJobExecutionListener"/&gt;
+  &lt;/batch:listeners&gt;
+&lt;/batch:job&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/spring-boot/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/splunk-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

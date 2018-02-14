@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='CSV DataFormat Available as of Camel version 1.3
+ The CSV Data Format uses Apache Commons CSV to handle CSV payloads (Comma Separated Values) such as those exported/imported by Excel.
+ Options The CSV dataformat supports 27 options which are listed below.
+     Name Default Java Type Description     formatRef
+  String
+ The reference format to use it will be updated with the other format options the default value is CSVFormat.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='CSV DataFormat Available as of Camel version 1.3
+ The CSV Data Format uses Apache Commons CSV to handle CSV payloads (Comma Separated Values) such as those exported/imported by Excel.
+ Options The CSV dataformat supports 27 options which are listed below.
+     Name Default Java Type Description     formatRef
+  String
+ The reference format to use it will be updated with the other format options the default value is CSVFormat.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/csv-dataformat/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/csv-dataformat/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_csv_dataformat">CSV DataFormat</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 1.3</strong></p>
+</div>
+<div class="paragraph">
+<p>The CSV <a href="data-format.html">Data Format</a> uses
+<a href="http://commons.apache.org/proper/commons-csv/">Apache Commons CSV</a> to
+handle CSV payloads (Comma Separated Values) such as those
+exported/imported by Excel.</p>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The CSV dataformat supports 27 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Java Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>formatRef</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The reference format to use it will be updated with the other format options the default value is CSVFormat.DEFAULT</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>formatName</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the format to use the default value is CSVFormat.DEFAULT</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>commentMarkerDisabled</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Disables the comment marker of the reference format.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>commentMarker</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the comment marker of the reference format.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>delimiter</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the delimiter to use. The default value is (comma)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>escapeDisabled</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use for disabling using escape character</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>escape</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the escape character to use</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>headerDisabled</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use for disabling headers</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>header</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure the CSV headers</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>allowMissingColumnNames</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to allow missing column names.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>ignoreEmptyLines</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to ignore empty lines.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>ignoreSurroundingSpaces</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to ignore surrounding spaces</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>nullStringDisabled</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to disable null strings</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>nullString</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the null string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>quoteDisabled</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to disable quotes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>quote</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the quote which by default is</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>recordSeparatorDisabled</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used for disabling record separator</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>recordSeparator</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the record separator (aka new line) which by default is \r\n (CRLF)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>skipHeaderRecord</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to skip the header record in the output</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>quoteMode</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the quote mode</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>ignoreHeaderCase</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether or not to ignore case when accessing header names.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>trim</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether or not to trim leading and trailing blanks.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>trailingDelimiter</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether or not to add a trailing delimiter.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>lazyLoad</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the unmarshalling should produce an iterator that reads the lines on the fly or if all the lines must be read at one.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useMaps</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the unmarshalling should produce maps for the lines values instead of lists. It requires to have header (either defined or collected).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>recordConverterRef</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Refers to a custom CsvRecordConverter to lookup from the registry to use.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contentTypeHeader</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML or application/json for data formats marshalling to JSon etc.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_marshalling_a_map_to_csv">Marshalling a Map to CSV</h3>
+<div class="paragraph">
+<p>The component allows you to marshal a Java Map (or any other message
+type that can be <a href="type-converter.html">converted</a> in a Map) into a
+CSV payload.</p>
+</div>
+<div class="paragraph">
+<p>Considering the following body</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Map&lt;String, Object&gt; body = new LinkedHashMap&lt;&gt;();
+body.put("foo", "abc");
+body.put("bar", 123);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and this Java route definition</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start")
+    .marshal().csv()
+    .to("mock:result");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or this XML route definition</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+    &lt;from uri="direct:start" /&gt;
+    &lt;marshal&gt;
+        &lt;csv /&gt;
+    &lt;/marshal&gt;
+    &lt;to uri="mock:result" /&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>then it will produce</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">abc,123</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_unmarshalling_a_csv_message_into_a_java_list">Unmarshalling a CSV message into a Java List</h3>
+<div class="paragraph">
+<p>Unmarshalling will transform a CSV messsage into a Java List with CSV
+file lines (containing another List with all the field values).</p>
+</div>
+<div class="paragraph">
+<p>An example: we have a CSV file with names of persons, their IQ and their
+current activity.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">Jack Dalton, 115, mad at Averell
+Joe Dalton, 105, calming Joe
+William Dalton, 105, keeping Joe from killing Averell
+Averell Dalton, 80, playing with Rantanplan
+Lucky Luke, 120, capturing the Daltons</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We can now use the CSV component to unmarshal this file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("file:src/test/resources/?fileName=daltons.csv&amp;noop=true")
+    .unmarshal().csv()
+    .to("mock:daltons");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The resulting message will contain a <code>List&lt;List&lt;String&gt;&gt;</code> like&#8230;&#8203;</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">List&lt;List&lt;String&gt;&gt; data = (List&lt;List&lt;String&gt;&gt;) exchange.getIn().getBody();
+for (List&lt;String&gt; line : data) {
+    LOG.debug(String.format("%s has an IQ of %s and is currently %s", line.get(0), line.get(1), line.get(2)));
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_marshalling_a_list_map_to_csv">Marshalling a List&lt;Map&gt; to CSV</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.1</strong></p>
+</div>
+<div class="paragraph">
+<p>If you have multiple rows of data you want to be marshalled into CSV
+format you can now store the message payload as a
+<code>List&lt;Map&lt;String, Object&gt;&gt;</code> object where the list contains a Map for
+each row.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_file_poller_of_csv_then_unmarshaling">File Poller of CSV, then unmarshaling</h3>
+<div class="paragraph">
+<p>Given a bean which can handle the incoming data&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p><strong>MyCsvHandler.java</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// Some comments here
+public void doHandleCsvData(List&lt;List&lt;String&gt;&gt; csvData)
+{
+    // do magic here
+}</code></pre>
+</div>
+</div>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>your route then looks as follows</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+        &lt;!-- poll every 10 seconds --&gt;
+        &lt;from uri="file:///some/path/to/pickup/csvfiles?delete=true&amp;amp;consumer.delay=10000" /&gt;
+        &lt;unmarshal&gt;&lt;csv /&gt;&lt;/unmarshal&gt;
+        &lt;to uri="bean:myCsvHandler?method=doHandleCsvData" /&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_marshaling_with_a_pipe_as_delimiter">Marshaling with a pipe as delimiter</h3>
+<div class="paragraph">
+<p>Considering the following body</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Map&lt;String, Object&gt; body = new LinkedHashMap&lt;&gt;();
+body.put("foo", "abc");
+body.put("bar", 123);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and this Java route definition</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// Camel version &lt; 2.15
+CsvDataFormat oldCSV = new CsvDataFormat();
+oldCSV.setDelimiter("|");
+from("direct:start")
+    .marshal(oldCSV)
+    .to("mock:result")
+
+// Camel version &gt;= 2.15
+from("direct:start")
+    .marshal(new CsvDataFormat().setDelimiter(&amp;#39;|&amp;#39;))
+    .to("mock:result")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or this XML route definition</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+  &lt;from uri="direct:start" /&gt;
+  &lt;marshal&gt;
+    &lt;csv delimiter="|" /&gt;
+  &lt;/marshal&gt;
+  &lt;to uri="mock:result" /&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>then it will produce</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">abc|123</code></pre>
+</div>
+</div>
+<div id="CSV-UsingautogenColumns" class="paragraph">
+<p>Using autogenColumns, configRef and strategyRef attributes inside XML
+<mark>#</mark> DSL</p>
+</div>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.9.2 / 2.10 and deleted for Camel 2.15</strong></p>
+</div>
+<div class="paragraph">
+<p>You can customize the CSV <a href="data-format.html">Data Format</a> to make use
+of your own <code>CSVConfig</code> and/or <code>CSVStrategy</code>. Also note that the default
+value of the <code>autogenColumns</code> option is true. The following example
+should illustrate this customization.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+  &lt;from uri="direct:start" /&gt;
+  &lt;marshal&gt;
+    &lt;!-- make use of a strategy other than the default one which is 'org.apache.commons.csv.CSVStrategy.DEFAULT_STRATEGY' --&gt;
+    &lt;csv autogenColumns="false" delimiter="|" configRef="csvConfig" strategyRef="excelStrategy" /&gt;
+  &lt;/marshal&gt;
+  &lt;convertBodyTo type="java.lang.String" /&gt;
+  &lt;to uri="mock:result" /&gt;
+&lt;/route&gt;
+
+&lt;bean id="csvConfig" class="org.apache.commons.csv.writer.CSVConfig"&gt;
+  &lt;property name="fields"&gt;
+    &lt;list&gt;
+      &lt;bean class="org.apache.commons.csv.writer.CSVField"&gt;
+        &lt;property name="name" value="orderId" /&gt;
+      &lt;/bean&gt;
+      &lt;bean class="org.apache.commons.csv.writer.CSVField"&gt;
+        &lt;property name="name" value="amount" /&gt;
+      &lt;/bean&gt;
+    &lt;/list&gt;
+  &lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;bean id="excelStrategy" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean"&gt;
+  &lt;property name="staticField" value="org.apache.commons.csv.CSVStrategy.EXCEL_STRATEGY" /&gt;
+&lt;/bean&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_skipfirstline_option_while_unmarshaling">Using skipFirstLine option while unmarshaling</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.10 and deleted for Camel 2.15</strong></p>
+</div>
+<div class="paragraph">
+<p>You can instruct the CSV <a href="data-format.html">Data Format</a> to skip the
+first line which contains the CSV headers. Using the Spring/XML DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+  &lt;from uri="direct:start" /&gt;
+  &lt;unmarshal&gt;
+    &lt;csv skipFirstLine="true" /&gt;
+  &lt;/unmarshal&gt;
+  &lt;to uri="bean:myCsvHandler?method=doHandleCsv" /&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or the Java DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CsvDataFormat csv = new CsvDataFormat();
+csv.setSkipFirstLine(true);
+
+from("direct:start")
+  .unmarshal(csv)
+.to("bean:myCsvHandler?method=doHandleCsv");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_unmarshaling_with_a_pipe_as_delimiter">Unmarshaling with a pipe as delimiter</h3>
+<div class="paragraph">
+<p>Using the Spring/XML DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+  &lt;from uri="direct:start" /&gt;
+  &lt;unmarshal&gt;
+    &lt;csv delimiter="|" /&gt;
+  &lt;/unmarshal&gt;
+  &lt;to uri="bean:myCsvHandler?method=doHandleCsv" /&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or the Java DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CsvDataFormat csv = new CsvDataFormat();
+CSVStrategy strategy = CSVStrategy.DEFAULT_STRATEGY;
+strategy.setDelimiter('|');
+csv.setStrategy(strategy);
+
+from("direct:start")
+  .unmarshal(csv)
+  .to("bean:myCsvHandler?method=doHandleCsv");</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CsvDataFormat csv = new CsvDataFormat();
+csv.setDelimiter("|");
+
+from("direct:start")
+  .unmarshal(csv)
+  .to("bean:myCsvHandler?method=doHandleCsv");</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CsvDataFormat csv = new CsvDataFormat();
+CSVConfig csvConfig = new CSVConfig();
+csvConfig.setDelimiter(";");
+csv.setConfig(csvConfig);
+
+from("direct:start")
+  .unmarshal(csv)
+  .to("bean:myCsvHandler?method=doHandleCsv");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Issue in CSVConfig</strong></p>
+</div>
+<div class="paragraph">
+<p>It looks like that</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CSVConfig csvConfig = new CSVConfig();
+csvConfig.setDelimiter(';');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>doesn&#8217;t work. You have to set the delimiter as a String!</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dependencies">Dependencies</h3>
+<div class="paragraph">
+<p>To use CSV in your Camel routes you need to add a dependency on
+<strong>camel-csv</strong>, which implements this data format.</p>
+</div>
+<div class="paragraph">
+<p>If you use Maven you can just add the following to your pom.xml,
+substituting the version number for the latest and greatest release (see
+<a href="download.html">the download page for the latest versions</a>).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-csv&lt;/artifactId&gt;
+  &lt;version&gt;x.x.x&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/cxf-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/crypto-dataformat/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

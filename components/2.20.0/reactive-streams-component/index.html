@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Reactive Streams Component Available as of Camel version 2.19
+ The reactive-streams: component allows you to exchange messages with reactive stream processing libraries compatible with the reactive streams standard.
+ The component supports backpressure and has been tested using the reactive streams technology compatibility kit (TCK).
+ The Camel module provides a reactive-streams component that allows users to define incoming and outgoing streams within Camel routes, and a direct client API that allows using Camel endpoints directly into any external reactive framework.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Reactive Streams Component Available as of Camel version 2.19
+ The reactive-streams: component allows you to exchange messages with reactive stream processing libraries compatible with the reactive streams standard.
+ The component supports backpressure and has been tested using the reactive streams technology compatibility kit (TCK).
+ The Camel module provides a reactive-streams component that allows users to define incoming and outgoing streams within Camel routes, and a direct client API that allows using Camel endpoints directly into any external reactive framework.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/reactive-streams-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/reactive-streams-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_reactive_streams_component">Reactive Streams Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.19</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>reactive-streams:</strong> component allows you to exchange messages with reactive
+stream processing libraries compatible with the
+<a href="http://www.reactive-streams.org/">reactive streams</a> standard.</p>
+</div>
+<div class="paragraph">
+<p>The component supports backpressure and has been tested using the <a href="https://github.com/reactive-streams/reactive-streams-jvm/tree/master/tck">reactive streams technology
+compatibility kit (TCK)</a>.</p>
+</div>
+<div class="paragraph">
+<p>The Camel module provides a <strong>reactive-streams</strong> component that allows users to define incoming and
+outgoing streams within Camel routes, and a direct client API that allows using Camel endpoints
+ directly into any external reactive framework.</p>
+</div>
+<div class="paragraph">
+<p>Camel uses an internal implementation of the reactive streams
+ <em>Publisher</em> and <em>Subscriber</em>, so it&#8217;s not tied to any specific framework.
+The following reactive frameworks have been used in the integration tests: <a href="https://github.com/reactor/reactor-core">Reactor Core 3</a>, <a href="https://github.com/ReactiveX/RxJava">RxJava 2</a>.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-reactive-streams&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">reactive-streams://stream?[options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where <strong>stream</strong> is a logical stream name used to bind Camel routes to the
+external stream processing systems.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The Reactive Streams component supports 4 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>internalEngine Configuration</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configures the internal engine for Reactive Streams.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ReactiveStreamsEngine Configuration</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backpressureStrategy</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The backpressure strategy to use when pushing events to a slow subscriber.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">BUFFER</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ReactiveStreams BackpressureStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>serviceType</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the type of the underlying reactive streams implementation to use. The implementation is looked up from the registry or using a ServiceLoader the default implementation is DefaultCamelReactiveStreamsService</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Reactive Streams endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>reactive-streams:stream</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>stream</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the stream channel used by the endpoint to exchange messages.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_10_parameters">Query Parameters (10 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>concurrentConsumers</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of threads used to process exchanges in the Camel route.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangesRefillLowWatermark</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the low watermark of requested exchanges to the active subscription as percentage of the maxInflightExchanges. When the number of pending items from the upstream source is lower than the watermark new items can be requested to the subscription. If set to 0 the subscriber will request items in batches of maxInflightExchanges only after all items of the previous batch have been processed. If set to 1 the subscriber can request a new item each time an exchange is processed (chatty). Any intermediate value can be used.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0.25</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>forwardOnComplete</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines if onComplete events should be pushed to the Camel route.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>forwardOnError</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines if onError events should be pushed to the Camel route. Exceptions will be set as message body.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxInflightExchanges</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum number of exchanges concurrently being processed by Camel. This parameter controls backpressure on the stream. Setting a non-positive value will disable backpressure.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">128</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>backpressureStrategy</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The backpressure strategy to use when pushing events to a slow subscriber.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ReactiveStreams BackpressureStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_usage">Usage</h3>
+<div class="paragraph">
+<p>The library is aimed to support all the communication modes needed by an application to interact with Camel data:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Get</strong> data from Camel routes (In-Only from Camel)</p>
+</li>
+<li>
+<p><strong>Send</strong> data to Camel routes (In-Only towards Camel)</p>
+</li>
+<li>
+<p><strong>Request</strong> a transformation to a Camel route (In-Out towards Camel)</p>
+</li>
+<li>
+<p><strong>Process</strong> data flowing from a Camel route using a reactive processing step (In-Out from Camel)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_getting_data_from_camel">Getting data from Camel</h3>
+<div class="paragraph">
+<p>In order to subscribe to data flowing from a Camel route, exchanges should be redirected to
+a named stream, like in the following snippet:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("timer:clock")
+.setBody().header(Exchange.TIMER_COUNTER)
+.to("reactive-streams:numbers");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Routes can also be written using the XML DSL.</p>
+</div>
+<div class="paragraph">
+<p>In the example, an unbounded stream of numbers is associated to the name <code>numbers</code>.
+The stream can be accessed using the <code>CamelReactiveStreams</code> utility class.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CamelReactiveStreamsService camel = CamelReactiveStreams.get(context);
+
+// Getting a stream of exchanges
+Publisher&lt;Exchange&gt; exchanges = camel.fromStream("numbers");
+
+// Getting a stream of Integers (using Camel standard conversion system)
+Publisher&lt;Integer&gt; numbers = camel.fromStream("numbers", Integer.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The stream can be used easily with any reactive streams compatible library.
+Here is an example of how to use it with <a href="https://github.com/ReactiveX/RxJava">RxJava 2</a>
+(although any reactive framework can be used to process events).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Flowable.fromPublisher(integers)
+    .doOnNext(System.out::println)
+    .subscribe();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The example prints all numbers generated by Camel into <code>System.out</code>.</p>
+</div>
+<div class="sect3">
+<h4 id="_getting_data_from_camel_using_the_direct_api">Getting data from Camel using the direct API</h4>
+<div class="paragraph">
+<p>For short Camel routes and for users that prefer defining the whole processing flow
+using functional constructs of the reactive framework (without using the Camel DSL at all),
+streams can also be defined using Camel URIs.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CamelReactiveStreamsService camel = CamelReactiveStreams.get(context);
+
+// Get a stream from all the files in a directory
+Publisher&lt;String&gt; files = camel.from("file:folder", String.class);
+
+// Use the stream in RxJava2
+Flowable.fromPublisher(files)
+    .doOnNext(System.out::println)
+    .subscribe();</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sending_data_to_camel">Sending data to Camel</h3>
+<div class="paragraph">
+<p>When an external library needs to push events into a Camel route, the Reactive Streams
+endpoint must be set as consumer.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("reactive-streams:elements")
+.to("log:INFO");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A handle to the <code>elements</code> stream can be obtained from the <code>CamelReactiveStreams</code> utility class.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CamelReactiveStreamsService camel = CamelReactiveStreams.get(context);
+
+Subscriber&lt;String&gt; elements = camel.streamSubscriber("elements", String.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The subscriber can be used to push events to the Camel route that consumes from the <code>elements</code> stream.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example of how to use it with <a href="https://github.com/ReactiveX/RxJava">RxJava 2</a>
+(although any reactive framework can be used to publish events).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Flowable.interval(1, TimeUnit.SECONDS)
+    .map(i -&gt; "Item " + i)
+    .subscribe(elements);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>String items are generated every second by RxJava in the example and they are pushed into the Camel route defined above.</p>
+</div>
+<div class="sect3">
+<h4 id="_sending_data_to_camel_using_the_direct_api">Sending data to Camel using the direct API</h4>
+<div class="paragraph">
+<p>Also in this case, the direct API can be used to obtain a Camel subscriber from an endpoint URI.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CamelReactiveStreamsService camel = CamelReactiveStreams.get(context);
+
+// Send two strings to the "seda:queue" endpoint
+Flowable.just("hello", "world")
+    .subscribe(camel.subscriber("seda:queue", String.class));</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_request_a_transformation_to_camel">Request a transformation to Camel</h3>
+<div class="paragraph">
+<p>Routes defined in some Camel DSL can be used within a reactive stream framework to perform a
+specific transformation (the same mechanism can be also used to eg. just send data to a <em>http</em> endpoint and continue).</p>
+</div>
+<div class="paragraph">
+<p>The following snippet shows how RxJava functional code can request the task of loading and marshalling files to Camel.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CamelReactiveStreamsService camel = CamelReactiveStreams.get(context);
+
+// Process files starting from their names
+Flowable.just(new File("file1.txt"), new File("file2.txt"))
+    .flatMap(file -&gt; camel.toStream("readAndMarshal", String.class))
+    // Camel output will be converted to String
+    // other steps
+    .subscribe();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In order this to work, a route like the following should be defined in the Camel context:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("reactive-streams:readAndMarshal")
+.marshal() // ... other details</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_request_a_transformation_to_camel_using_the_direct_api">Request a transformation to Camel using the direct API</h4>
+<div class="paragraph">
+<p>An alternative approach consists in using the URI endpoints directly in the reactive flow:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CamelReactiveStreamsService camel = CamelReactiveStreams.get(context);
+
+// Process files starting from their names
+Flowable.just(new File("file1.txt"), new File("file2.txt"))
+    .flatMap(file -&gt; camel.to("direct:process", String.class))
+    // Camel output will be converted to String
+    // other steps
+    .subscribe();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When using the <em>to()</em> method instead of the <em>toStream</em>, there is no need to define the
+route using "reactive-streams:" endpoints (although they are used under the hood).</p>
+</div>
+<div class="paragraph">
+<p>In this case, the Camel transformation can be just:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:process")
+.marshal() // ... other details</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_process_camel_data_into_the_reactive_framework">Process Camel data into the reactive framework</h3>
+<div class="paragraph">
+<p>While a reactive streams <em>Publisher</em> allows exchanging data in a unidirectional way,
+Camel routes often use a in-out exchange pattern (eg. to define REST endpoints and, in general,
+where a reply is needed for each request).</p>
+</div>
+<div class="paragraph">
+<p>In these circumstances, users can add a reactive processing step to the flow, to enhance a Camel route or to
+define the entire transformation using the reactive framework.</p>
+</div>
+<div class="paragraph">
+<p>For example, given the following route:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("timer:clock")
+.setBody().header(Exchange.TIMER_COUNTER)
+.to("direct:reactive")
+.log("Continue with Camel route... n=${body}");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A reactive processing step can be associated to the "direct:reactive" endpoint:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CamelReactiveStreamsService camel = CamelReactiveStreams.get(context);
+
+camel.process("direct:reactive", Integer.class, items -&gt;
+    Flowable.fromPublisher(items) // RxJava2
+        .map(n -&gt; -n)); // make every number negative</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Data flowing in the Camel route will be processed by the external reactive
+framework then continue the processing flow inside Camel.</p>
+</div>
+<div class="paragraph">
+<p>This mechanism can also be used to define a In-Out exchange in a completely
+reactive way.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CamelReactiveStreamsService camel = CamelReactiveStreams.get(context);
+
+// requires a rest-capable Camel component
+camel.process("rest:get:orders", exchange -&gt;
+                    Flowable.fromPublisher(exchange)
+                            .flatMap(ex -&gt; allOrders())); // retrieve orders asynchronously</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See Camel examples (<strong>camel-example-reactive-streams</strong>) for details.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_advanced_topics">Advanced Topics</h3>
+<div class="sect3">
+<h4 id="_controlling_backpressure_producer_side">Controlling Backpressure (producer side)</h4>
+<div class="paragraph">
+<p>When routing Camel exchanges to an external subscriber, backpressure is handled by an internal buffer that caches exchanges
+before delivering them.
+If the subscriber is slower than the exchange rate, the buffer may become too big. In many circumstances this must be avoided.</p>
+</div>
+<div class="paragraph">
+<p>Considering the following route:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("jms:queue")
+.to("reactive-streams:flow");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the JMS queue contains a high number of messages and the Subscriber associated with the <code>flow</code> stream is too slow,
+messages are dequeued from JMS and appended to the buffer, possibly causing a "out of memory" error.
+To avoid such problems, a <code>ThrottlingInflightRoutePolicy</code> can be set in the route.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">ThrottlingInflightRoutePolicy policy = new ThrottlingInflightRoutePolicy();
+policy.setMaxInflightExchanges(10);
+
+from("jms:queue")
+.routePolicy(policy)
+.to("reactive-streams:flow");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The policy limits the maximum number of active exchanges (and so the maximum size of the buffer),
+keeping it lower than the threshold (<code>10</code> in the example).
+When more than <code>10</code> messages are in flight, the route is suspended, waiting for the subscriber to process them.</p>
+</div>
+<div class="paragraph">
+<p>With this mechanism, the subscriber controls the route suspension/resume automatically, through backpressure.
+When multiple subscribers are consuming items from the same stream, the slowest one controls the route status automatically.</p>
+</div>
+<div class="paragraph">
+<p>In other circumstances, eg. when using a <code>http</code> consumer, the route suspension makes the http service unavailable, so
+using the default configuration (no policy, unbounded buffer) should be preferable. Users should try to avoid memory issues
+by limiting the number of requests to the http service (eg. scaling out).</p>
+</div>
+<div class="paragraph">
+<p>In contexts where a certain amount of data loss is acceptable, setting a backpressure strategy other than <code>BUFFER</code> can
+ be a solution for dealing with fast sources.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:thermostat")
+.to("reactive-streams:flow?backpressureStrategy=LATEST");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the <code>LATEST</code> backpressure strategy is used, only the last exchange received from the route is kept by the publisher, while older data is discarded (other options are available).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_controlling_backpressure_consumer_side">Controlling Backpressure (consumer side)</h4>
+<div class="paragraph">
+<p>When Camel consumes items from a reactive-streams publisher, the maximum number of inflight exchanges can be set as endpoint option.</p>
+</div>
+<div class="paragraph">
+<p>The subscriber associated with the consumer interacts with the publisher to keep the number of messages in the route lower than the threshold.</p>
+</div>
+<div class="paragraph">
+<p>An example of backpressure-aware route:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("reactive-streams:numbers?maxInflightExchanges=10")
+.to("direct:endpoint");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The number of items that Camel requests to the source publisher (through the reactive streams backpressure mechanism)
+is always lower than <code>10</code>. Messages are processed by a single thread in the Camel side.</p>
+</div>
+<div class="paragraph">
+<p>The number of concurrent consumers (threads) can also be set as endpoint option (<code>concurrentConsumers</code>).
+When using 1 consumer (the default), the order of items in the source stream is maintained.
+When this value is increased, items will be processed concurrently by multiple threads (so not preserving the order).</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_camel_reactive_streams_starter">Camel Reactive Streams Starter</h3>
+<div class="paragraph">
+<p>A starter module is available to spring-boot users. When using the starter,
+the <code>CamelReactiveStreamsService</code> can be directly injected into Spring components.</p>
+</div>
+<div class="paragraph">
+<p>To use the starter, add the following to your spring boot pom.xml file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-reactive-streams-starter&lt;/artifactId&gt;
+    &lt;version&gt;${camel.version}&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/reactor-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/rabbitmq-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

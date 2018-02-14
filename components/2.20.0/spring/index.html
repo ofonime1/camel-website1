@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Spring Support Apache Camel is designed to work nicely with the Spring Framework in a number of ways.
+   Camel uses Spring Transactions as the default transaction handling in components like JMS and JPA
+  Camel works with Spring 2 XML processing with the Xml Configuration
+  Camel Spring XML Schema&#8217;s is defined at Xml Reference
+  Camel supports a powerful version of Spring Remoting which can use powerful routing between the client and server side along with using all of the available Components for the transport'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Spring Support Apache Camel is designed to work nicely with the Spring Framework in a number of ways.
+   Camel uses Spring Transactions as the default transaction handling in components like JMS and JPA
+  Camel works with Spring 2 XML processing with the Xml Configuration
+  Camel Spring XML Schema&#8217;s is defined at Xml Reference
+  Camel supports a powerful version of Spring Remoting which can use powerful routing between the client and server side along with using all of the available Components for the transport'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/spring/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/spring/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_spring_support">Spring Support</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Apache Camel is designed to work nicely with the
+<a href="http://www.springframework.org/">Spring Framework</a> in a number of ways.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Camel uses Spring Transactions as the default transaction handling in
+components like <a href="jms.html">JMS</a> and <a href="jpa.html">JPA</a></p>
+</li>
+<li>
+<p>Camel works with Spring 2 XML processing with the
+<a href="xml-configuration.html">Xml Configuration</a></p>
+</li>
+<li>
+<p>Camel Spring XML Schema&#8217;s is defined at <a href="xml-reference.html">Xml
+Reference</a></p>
+</li>
+<li>
+<p>Camel supports a powerful version of <a href="spring-remoting.html">Spring
+Remoting</a> which can use powerful routing between the client and server
+side along with using all of the available
+<a href="components.html">Components</a> for the transport</p>
+</li>
+<li>
+<p>Camel provides powerful <a href="bean-integration.html">Bean Integration</a>
+with any bean defined in a Spring ApplicationContext</p>
+</li>
+<li>
+<p>Camel integrates with various Spring helper classes; such as providing
+<a href="type-converter.html">Type Converter</a> support for Spring Resources
+etc</p>
+</li>
+<li>
+<p>Allows Spring to dependency inject <a href="component.html">Component</a>
+instances or the <a href="camelcontext.html">CamelContext</a> instance itself
+and auto-expose Spring beans as components and endpoints.</p>
+</li>
+<li>
+<p>Allows you to reuse the <a href="spring-testing.html">Spring Testing</a>
+framework to simplify your unit and integration testing using
+<a href="enterprise-integration-patterns.html">Enterprise Integration
+Patterns</a> and Camel&#8217;s powerful <a href="mock.html">Mock</a> and
+<a href="test.html">Test</a> endpoints</p>
+</li>
+<li>
+<p>From <strong>Camel 2.15</strong> onwards Camel supports Spring Boot using
+the <code>camel-spring-boot</code> component.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_using_spring_to_configure_the_camelcontext">Using Spring to configure the CamelContext</h3>
+<div class="paragraph">
+<p>You can configure a CamelContext inside any spring.xml using the
+<a href="http://camel.apache.org/maven/current/camel-spring/apidocs/org/apache/camel/spring/CamelContextFactoryBean.html">CamelContextFactoryBean</a>.
+This will automatically <a href="lifecycle.html">start</a> the
+<a href="camelcontext.html">CamelContext</a> along with any referenced
+<a href="routes.html">Routes</a> along any referenced
+<a href="component.html">Component</a> and <a href="endpoint.html">Endpoint</a>
+instances.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Adding Camel schema</p>
+</li>
+<li>
+<p>Configure <a href="routes.html">Routes</a> in two ways:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Using Java Code</p>
+</li>
+<li>
+<p>Using Spring XML</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_adding_camel_schema">Adding Camel Schema</h3>
+<div class="paragraph">
+<p>For Camel 1.x you need to use the following namespace:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">http://activemq.apache.org/camel/schema/spring</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following schema location:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">http://activemq.apache.org/camel/schema/spring/camel-spring.xsd</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You need to add Camel to the <code>schemaLocation</code> declaration</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So the XML file looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd"&gt;</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_camel_namespace">Using camel: namespace</h4>
+<div class="paragraph">
+<p>Or you can refer to camel XSD in the XML declaration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">xmlns:camel="http://camel.apache.org/schema/spring"</code></pre>
+</div>
+</div>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>so the declaration is:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd"&gt;</code></pre>
+</div>
+</div>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>and then use the camel: namespace prefix, and you can omit the
+inline namespace declaration:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camel:camelContext id="camel5"&gt;
+  &lt;camel:package&gt;org.apache.camel.spring.example&lt;/camel:package&gt;
+&lt;/camel:camelContext&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_advanced_configuration_using_spring">Advanced configuration using Spring</h4>
+<div class="paragraph">
+<p>See more details at
+<a href="advanced-configuration-of-camelcontext-using-spring.html">Advanced
+configuration of CamelContext using Spring</a></p>
+</div>
+<div class="paragraph">
+<p>$<mark>#</mark> Using Java Code</p>
+</div>
+<div class="paragraph">
+<p>You can use Java Code to define your
+<a href="routebuilder.html">RouteBuilder</a> implementations. These can be
+defined as beans in spring and then referenced in your camel context
+e.g.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_package">Using &lt;package&gt;</h4>
+<div class="paragraph">
+<p>Camel also provides a powerful feature that allows for the automatic
+discovery and initialization of routes in given packages. This is
+configured by adding tags to the camel context in your spring context
+definition, specifying the packages to be recursively searched for
+<a href="routebuilder.html">RouteBuilder</a> implementations. To use this
+feature in 1.X, requires a &lt;package&gt;&lt;/package&gt; tag specifying a comma
+separated list of packages that should be searched e.g.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">  &lt;camelContext xmlns="http://camel.apache.org/schema/spring"&gt;
+    &lt;package&gt;org.apache.camel.spring.config.scan.route&lt;/package&gt;
+  &lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>WARNING:Use caution when specifying the package name as <code>org.apache.camel</code> or a
+sub package of this. This causes Camel to search in its own packages for
+your routes which could cause problems.</p>
+</div>
+<div class="paragraph">
+<p>INFO:*Will ignore already instantiated classes*.
+The &lt;package&gt; and &lt;packageScan&gt; will skip any classes which has already
+been created by Spring etc. So if you define a route builder as a spring
+bean tag then that class will be skipped. You can include those beans
+using <code>&lt;routeBuilder ref="theBeanId"/&gt;</code> or the <code>&lt;contextScan&gt;</code> feature.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_packagescan">Using &lt;packageScan&gt;</h4>
+<div class="paragraph">
+<p>In Camel 2.0 this has been extended to allow selective inclusion and
+exclusion of discovered route classes using Ant like path matching. In
+spring this is specified by adding a &lt;packageScan/&gt; tag. The tag must
+contain one or more 'package' elements (similar to 1.x), and optionally
+one or more 'includes' or 'excludes' elements specifying patterns to be
+applied to the fully qualified names of the discovered classes. e.g.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">  &lt;camelContext xmlns="http://camel.apache.org/schema/spring"&gt;
+    &lt;packageScan&gt;
+      &lt;package&gt;org.example.routes&lt;/package&gt;
+      &lt;excludes&gt;**.*Excluded*&lt;/excludes&gt;
+      &lt;includes&gt;**.*&lt;/includes&gt;
+    &lt;/packageScan&gt;
+  &lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Exclude patterns are applied before the include patterns. If no include
+or exclude patterns are defined then all the Route classes discovered in
+the packages will be returned.</p>
+</div>
+<div class="paragraph">
+<p>In the above example, camel will scan all the 'org.example.routes'
+package and any subpackages for RouteBuilder classes. Say the scan finds
+two RouteBuilders, one in org.example.routes called 'MyRoute" and
+another 'MyExcludedRoute' in a subpackage 'excluded'. The fully
+qualified names of each of the classes are extracted
+(org.example.routes.MyRoute,
+org.example.routes.excluded.MyExcludedRoute) and the include and exclude
+patterns are applied.</p>
+</div>
+<div class="paragraph">
+<p>The exclude pattern <strong>*.*Excluded</strong> is going to match the fqcn
+'org.example.routes.excluded.MyExcludedRoute' and veto camel from
+initializing it.</p>
+</div>
+<div class="paragraph">
+<p>Under the covers, this is using Spring&#8217;s
+<a href="http://static.springframework.org/spring/docs/2.5.x/api/org/springframework/util/AntPathMatcher.html">AntPatternMatcher</a>
+implementation, which matches as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">? matches one character
+* matches zero or more characters
+** matches zero or more segments of a fully qualified name</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="paragraph">
+<p><strong>*.*Excluded</strong> would match org.simple.Excluded,
+org.apache.camel.SomeExcludedRoute or org.example.RouteWhichIsExcluded</p>
+</div>
+<div class="paragraph">
+<p><strong>*.??cluded</strong> would match org.simple.IncludedRoute, org.simple.Excluded
+but not match org.simple.PrecludedRoute</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_contextscan">Using contextScan</h4>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.4</strong></p>
+</div>
+<div class="paragraph">
+<p>You can allow Camel to scan the container context, e.g. the Spring
+<code>ApplicationContext</code> for route builder instances. This allow you to use
+the Spring <code>&lt;component-scan&gt;</code> feature and have Camel pickup any
+RouteBuilder instances which was created by Spring in its scan process.</p>
+</div>
+<div class="paragraph">
+<p>This allows you to just annotate your routes using the Spring
+<code>@Component</code> and have those routes included by Camel</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Component
+public class MyRoute extends SpringRouteBuilder {
+
+    @Override
+    public void configure() throws Exception {
+        from("direct:start").to("mock:result");
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also use the ANT style for inclusion and exclusion, as mentioned
+above in the <code>&lt;packageScan&gt;</code> documentation.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_how_do_i_import_routes_from_other_xml_files">How do I import routes from other XML files</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.3</strong></p>
+</div>
+<div class="paragraph">
+<p>When defining routes in Camel using <a href="xml-configuration.html">Xml
+Configuration</a> you may want to define some routes in other XML files.
+For example you may have many routes and it may help to maintain the
+application if some of the routes are in separate XML files. You may
+also want to store common and reusable routes in other XML files, which
+you can simply import when needed.</p>
+</div>
+<div class="paragraph">
+<p>In <strong>Camel 2.3</strong> it is now possible to define routes outside
+<code>&lt;camelContext/&gt;</code> which you do in a new <code>&lt;routeContext/&gt;</code> tag.</p>
+</div>
+<div class="paragraph">
+<p><strong>Notice:</strong> When you use &lt;routeContext&gt; then they are separated, and
+cannot reuse existing &lt;onException&gt;, &lt;intercept&gt;, &lt;dataFormats&gt; and
+similar cross cutting functionality defined in the &lt;camelContext&gt;. In
+other words the &lt;routeContext&gt; is currently isolated. This may change in
+Camel 3.x.</p>
+</div>
+<div class="paragraph">
+<p>For example we could have a file named <code>myCoolRoutes.xml</code> which contains
+a couple of routes as shown:</p>
+</div>
+<div class="paragraph">
+<p><strong>myCoolRoutes.xml</strong></p>
+</div>
+<div class="paragraph">
+<p>Then in your XML file which contains the CamelContext you can use Spring
+to import the <code>myCoolRoute.xml</code> file.<br>
+ And then inside <code>&lt;camelContext/&gt;</code> you can refer to the
+<code>&lt;routeContext/&gt;</code> by its id as shown below:</p>
+</div>
+<div class="paragraph">
+<p>Also notice that you can mix and match, having routes inside
+CamelContext and also externalized in RouteContext.</p>
+</div>
+<div class="paragraph">
+<p>You can have as many <code>&lt;routeContextRef/&gt;</code> as you like.</p>
+</div>
+<div class="paragraph">
+<p><strong>Reusable routes</strong></p>
+</div>
+<div class="paragraph">
+<p>The routes defined in <code>&lt;routeContext/&gt;</code> can be reused by multiple
+<code>&lt;camelContext/&gt;</code>. However its only the definition which is reused. At
+runtime each CamelContext will create its own instance of the route
+based on the definition.</p>
+</div>
+<div class="sect3">
+<h4 id="_test_time_exclusion">Test time exclusion.</h4>
+<div class="paragraph">
+<p>At test time it is often desirable to be able to selectively exclude
+matching routes from being initalized that are not applicable or useful
+to the test scenario. For instance you might a spring context file
+routes-context.xml and three Route builders RouteA, RouteB and RouteC in
+the 'org.example.routes' package. The packageScan definition would
+discover all three of these routes and initialize them.</p>
+</div>
+<div class="paragraph">
+<p>Say RouteC is not applicable to our test scenario and generates a lot of
+noise during test. It would be nice to be able to exclude this route
+from this specific test. The SpringTestSupport class has been modified
+to allow this. It provides two methods (excludedRoute and
+excludedRoutes) that may be overridden to exclude a single class or an
+array of classes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class RouteAandRouteBOnlyTest extends SpringTestSupport {
+    @Override
+    protected Class excludeRoute() {
+        return RouteC.class;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In order to hook into the camelContext initialization by spring to
+exclude the MyExcludedRouteBuilder.class we need to intercept the spring
+context creation. When overriding createApplicationContext to create the
+spring context, we call the getRouteExcludingApplicationContext() method
+to provide a special parent spring context that takes care of the
+exclusion.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Override
+protected AbstractXmlApplicationContext createApplicationContext() {
+    return new ClassPathXmlApplicationContext(new String[] {"routes-context.xml"}, getRouteExcludingApplicationContext());
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>RouteC will now be excluded from initialization. Similarly, in another
+test that is testing only RouteC, we could exclude RouteB and RouteA by
+overriding</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Override
+protected Class[] excludeRoutes() {
+    return new Class[]{RouteA.class, RouteB.class};
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_spring_xml">Using Spring XML</h3>
+<div class="paragraph">
+<p>You can use Spring 2.0 XML configuration to specify your
+<a href="xml-configuration.html">Xml Configuration</a> for
+<a href="routes.html">Routes</a> such as in the following
+<a href="http://svn.apache.org/repos/asf/camel/trunk/components/camel-spring/src/test/resources/org/apache/camel/spring/routingUsingCamelContextFactory.xml">example</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configuring_components_and_endpoints">Configuring Components and Endpoints</h3>
+<div class="paragraph">
+<p>You can configure your <a href="component.html">Component</a> or
+<a href="endpoint.html">Endpoint</a> instances in your <a href="spring.html">Spring</a>
+XML as follows in
+<a href="http://svn.apache.org/repos/asf/camel/trunk/components/camel-jms/src/test/resources/org/apache/camel/component/jms/jmsRouteUsingSpring.xml">this
+example</a>.</p>
+</div>
+<div class="paragraph">
+<p>Which allows you to configure a component using some name (activemq in
+the above example), then you can refer to the component using
+<strong>activemq:[queue:|topic:]destinationName</strong>. This works by the
+SpringCamelContext lazily fetching components from the spring context
+for the scheme name you use for <a href="endpoint.html">Endpoint</a>
+<a href="uris.html">URIs</a>.</p>
+</div>
+<div class="paragraph">
+<p>For more detail see <a href="how-do-i-configure-endpoints.html">Configuring
+Endpoints and Components</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_camelcontextaware">CamelContextAware</h3>
+<div class="paragraph">
+<p>If you want to be injected with the <a href="camelcontext.html">CamelContext</a>
+in your POJO just implement the
+<a href="http://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/CamelContextAware.html">CamelContextAware
+interface</a>; then when Spring creates your POJO the CamelContext will be
+injected into your POJO. Also see the <a href="bean-integration.html">Bean
+Integration</a> for further injections.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_integration_testing">Integration Testing</h3>
+<div class="paragraph">
+<p>To avoid a hung route when testing using Spring Transactions see the
+note about Spring Integration Testing
+under <a href="transactional-client.html">Transactional Client</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="tutorial-jmsremoting.html">Spring JMS Tutorial</a></p>
+</li>
+<li>
+<p><a href="creating-a-new-spring-based-camel-route.html">Creating a new
+Spring based Camel Route</a></p>
+</li>
+<li>
+<p><a href="spring-example.html">Spring example</a></p>
+</li>
+<li>
+<p><a href="xml-reference.html">Xml Reference</a></p>
+</li>
+<li>
+<p><a href="advanced-configuration-of-camelcontext-using-spring.html">Advanced
+configuration of CamelContext using Spring</a></p>
+</li>
+<li>
+<p><a href="how-do-i-import-routes-from-other-xml-files.html">How do I import
+routes from other XML files</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/sql-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/spring-ws-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

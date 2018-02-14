@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='MIME Multipart DataFormat Available as of Camel version 2.17
+ This data format that can convert a Camel message with attachments into a Camel message having a MIME-Multipart message as message body (and no attachments).
+ The use case for this is to enable the user to send attachments over endpoints that do not directly support attachments, either as special protocol implementation (e.g. send a MIME-multipart over an HTTP endpoint) or as a kind of tunneling solution (e.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='MIME Multipart DataFormat Available as of Camel version 2.17
+ This data format that can convert a Camel message with attachments into a Camel message having a MIME-Multipart message as message body (and no attachments).
+ The use case for this is to enable the user to send attachments over endpoints that do not directly support attachments, either as special protocol implementation (e.g. send a MIME-multipart over an HTTP endpoint) or as a kind of tunneling solution (e.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/mime-multipart-dataformat/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/mime-multipart-dataformat/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_mime_multipart_dataformat">MIME Multipart DataFormat</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.17</strong></p>
+</div>
+<div class="paragraph">
+<p>This data format that can convert a Camel message with attachments into
+a Camel message having a MIME-Multipart message as message body (and no
+attachments).</p>
+</div>
+<div class="paragraph">
+<p>The use case for this is to enable the user to send attachments over
+endpoints that do not directly support attachments, either as special
+protocol implementation (e.g. send a MIME-multipart over an HTTP
+endpoint) or as a kind of tunneling solution (e.g. because camel-jms
+does not support attachments but by marshalling the message with
+attachments into a MIME-Multipart, sending that to a JMS queue,
+receiving the message from the JMS queue and unmarshalling it again
+(into a message body with attachments).</p>
+</div>
+<div class="paragraph">
+<p>The marshal option of the mime-multipart data format will convert a
+message with attachments into a MIME-Multipart message. If the parameter
+"multipartWithoutAttachment" is set to true it will also marshal
+messages without attachments into a multipart message with a single
+part, if the parameter is set to false it will leave the message alone.</p>
+</div>
+<div class="paragraph">
+<p>MIME headers of the mulitpart as "MIME-Version" and "Content-Type" are
+set as camel headers to the message. If the parameter "headersInline" is
+set to true it will also create a MIME multipart message in any case. <br>
+Furthermore the MIME headers of the multipart are written as part of the
+message body, not as camel headers.</p>
+</div>
+<div class="paragraph">
+<p>The unmarshal option of the mime-multipart data format will convert a
+MIME-Multipart message into a camel message with attachments and leaves
+other messages alone. MIME-Headers of the MIME-Multipart message have to
+be set as Camel headers. The unmarshalling will only take place if the
+"Content-Type" header is set to a "multipart" type. If the option
+"headersInline" is set to true, the body is always parsed as a MIME
+message.As a consequence if the message body is a stream and stream
+caching is not enabled, a message body that is actually not a MIME
+message with MIME headers in the message body will be replaced by an
+empty message. Up to Camel version 2.17.1 this will happen all message
+bodies that do not contain a MIME multipart message regardless of body
+type and stream cache setting.</p>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The MIME Multipart dataformat supports 6 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Java Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>multipartSubType</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mixed</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specify the subtype of the MIME Multipart. Default is mixed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>multipartWithoutAttachment</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines whether a message without attachment is also marshaled into a MIME Multipart (with only one body part). Default is false.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>headersInline</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines whether the MIME-Multipart headers are part of the message body (true) or are set as Camel headers (false). Default is false.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>includeHeaders</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A regex that defines which Camel headers are also included as MIME headers into the MIME multipart. This will only work if headersInline is set to true. Default is to include no headers</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>binaryContent</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines whether the content of binary parts in the MIME multipart is binary (true) or Base-64 encoded (false) Default is false.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contentTypeHeader</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML or application/json for data formats marshalling to JSon etc.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_message_headers_marshal">Message Headers (marshal)</h3>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message-Id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The marshal operation will set this parameter to the generated MIME
+message id if the "headersInline" parameter is set to false.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MIME-Version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The marshal operation will set this parameter to the applied MIME
+version (1.0) if the "headersInline" parameter is set to false.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Content-Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The content of this header will be used as a content type for the
+message body part. If no content type is set, "application/octet-stream"
+is assumed. After the marshal operation the content type is set to
+"multipart/related" or empty if the "headersInline" parameter is set to
+true.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Content-Encoding</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the incoming content type is "text/*" the content encoding will be
+set to the encoding parameter of the Content-Type MIME header of the
+body part. Furthermore the given charset is applied for text to binary
+conversions.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_message_headers_unmarshal">Message Headers (unmarshal)</h3>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Content-Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If this header is not set to "multipart/*" the unmarshal operation will
+not do anything. In other cases the multipart will be parsed into a
+camel message with attachments and the header is set to the Content-Type
+header of the body part, except if this is application/octet-stream. In
+the latter case the header is removed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Content-Encoding</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the content-type of the body part contains an encoding parameter this
+header will be set to the value of this encoding parameter (converted
+from MIME endoding descriptor to Java encoding descriptor)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MIME-Version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unmarshal operation will read this header and use it for parsing the
+MIME multipart. The header is removed afterwards</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_examples">Examples</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from(...).marshal().mimeMultipart()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With a message where no Content-Type header is set, will create a
+Message with the following message Camel headers:</p>
+</div>
+<div class="paragraph">
+<p><strong>Camel Message Headers</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Content-Type=multipart/mixed; \n boundary="----=_Part_0_14180567.1447658227051"
+Message-Id=&lt;...&gt;
+MIME-Version=1.0</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>The message body will be:</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Camel Message Body</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">------=_Part_0_14180567.1447658227051
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: base64
+Qm9keSB0ZXh0
+------=_Part_0_14180567.1447658227051
+Content-Type: application/binary
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Attachment File Name"
+AAECAwQFBgc=
+------=_Part_0_14180567.1447658227051--</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A message with the header Content-Type set to "text/plain" sent to the
+route</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("...").marshal().mimeMultipart("related", true, true, "(included|x-.*)", true);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>will create a message without any specific MIME headers set as Camel
+headers (the Content-Type header is removed from the Camel message) and
+the following message body that includes also all headers of the
+original message starting with "x-" and the header with name "included":</p>
+</div>
+<div class="paragraph">
+<p><strong>Camel Message Body</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Message-ID: &lt;...&gt;
+MIME-Version: 1.0
+Content-Type: multipart/related;
+    boundary="----=_Part_0_1134128170.1447659361365"
+x-bar: also there
+included: must be included
+x-foo: any value
+
+------=_Part_0_1134128170.1447659361365
+Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
+
+Body text
+------=_Part_0_1134128170.1447659361365
+Content-Type: application/binary
+Content-Transfer-Encoding: binary
+Content-Disposition: attachment; filename="Attachment File Name"
+
+[binary content]
+------=_Part_0_1134128170.1447659361365</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dependencies">Dependencies</h3>
+<div class="paragraph">
+<p>To use MIME-Multipart in your Camel routes you need to add a dependency
+on <strong>camel-mail</strong> which implements this data format.</p>
+</div>
+<div class="paragraph">
+<p>If you use Maven you can just add the following to your pom.xml:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-mail&lt;/artifactId&gt;
+  &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/mina-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/milo-server-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

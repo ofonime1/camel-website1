@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='JClouds Component Available as of Camel version 2.9
+ This component allows interaction with cloud provider key-value engines (blobstores) and compute services. The component uses jclouds which is
+a library that provides abstractions for blobstores and compute services.
+ ComputeService simplifies the task of managing machines in the cloud. For example, you can use ComputeService to start 5 machines and install your software on them.
+BlobStore simplifies dealing with key-value providers such as Amazon S3.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='JClouds Component Available as of Camel version 2.9
+ This component allows interaction with cloud provider key-value engines (blobstores) and compute services. The component uses jclouds which is
+a library that provides abstractions for blobstores and compute services.
+ ComputeService simplifies the task of managing machines in the cloud. For example, you can use ComputeService to start 5 machines and install your software on them.
+BlobStore simplifies dealing with key-value providers such as Amazon S3.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/jclouds-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/jclouds-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_jclouds_component">JClouds Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.9</strong></p>
+</div>
+<div class="paragraph">
+<p>This component allows interaction with cloud provider key-value engines
+(blobstores) and compute services. The component uses
+<a href="http://code.google.com/p/jclouds">jclouds</a> which is<br>
+ a library that provides abstractions for blobstores and compute
+services.</p>
+</div>
+<div class="paragraph">
+<p><strong>ComputeService</strong> simplifies the task of managing machines in the cloud.
+For example, you can use ComputeService to start 5 machines and install
+your software on them.<br>
+ <strong>BlobStore</strong> simplifies dealing with key-value providers such as Amazon
+S3. For example, BlobStore can give you a simple Map view of a
+container.</p>
+</div>
+<div class="paragraph">
+<p>The camel jclouds component allows you to use both abstractions, as it
+specifes two types of endpoint the JcloudsBlobStoreEndpoint and the
+JcloudsComputeEndpoint. You can have both producers and consumers on a
+blobstore endpoint but you can only have producers on compute endpoints.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-jclouds&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configuring_the_component">Configuring the component</h3>
+<div class="paragraph">
+<p>The camel jclouds component will make use of multiple jclouds blobstores
+and compute services as long as they are passed to the component during
+initialization. The component accepts a list blobstores and compute
+services. Here is how it can be configured.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;bean id="jclouds" class="org.apache.camel.component.jclouds.JcloudsComponent"&gt;
+        &lt;property name="computeServices"&gt;
+            &lt;list&gt;
+                &lt;ref bean="computeService"/&gt;
+            &lt;/list&gt;
+        &lt;/property&gt;
+        &lt;property name="blobStores"&gt;
+            &lt;list&gt;
+                &lt;ref bean="blobStore"/&gt;
+            &lt;/list&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- Creating a blobstore from spring / blueprint xml --&gt;
+    &lt;bean id="blobStoreContextFactory" class="org.jclouds.blobstore.BlobStoreContextFactory"/&gt;
+
+    &lt;bean id="blobStoreContext" factory-bean="blobStoreContextFactory" factory-method="createContext"&gt;
+        &lt;constructor-arg name="provider" value="PROVIDER_NAME"/&gt;
+        &lt;constructor-arg name="identity"  value="IDENTITY"/&gt;
+        &lt;constructor-arg name="credential" value="CREDENTIAL"/&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id="blobStore" factory-bean="blobStoreContext" factory-method="getBlobStore"/&gt;
+
+    &lt;!-- Creating a compute service from spring / blueprint xml --&gt;
+    &lt;bean id="computeServiceContextFactory" class="org.jclouds.compute.ComputeServiceContextFactory"/&gt;
+
+    &lt;bean id="computeServiceContext" factory-bean="computeServiceContextFactory" factory-method="createContext"&gt;
+        &lt;constructor-arg name="provider" value="PROVIDER_NAME"/&gt;
+        &lt;constructor-arg name="identity"  value="IDENTITY"/&gt;
+        &lt;constructor-arg name="credential" value="CREDENTIAL"/&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id="computeService" factory-bean="computeServiceContext" factory-method="getComputeService"/&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see the component is capable of handling multiple blobstores
+and compute services. The actual implementation that will be used by
+each endpoint is specified by passing the provider inside the URI.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_jclouds_options">Jclouds Options</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">jclouds:blobstore:[provider id][?options]
+jclouds:compute:[provider id][?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <strong>provider id</strong> is the name of the cloud provider that provides the
+target service (<em>e.g. aws-s3 or aws_ec2</em>).</p>
+</div>
+<div class="paragraph">
+<p>You can append query options to the URI in the following format,
+<code>?option=value&amp;option=value&amp;&#8230;&#8203;</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_blobstore_uri_options">Blobstore URI Options</h3>
+<div class="paragraph">
+<p>The JClouds component supports 3 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>blobStores</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the given BlobStore which must be configured when using blobstore.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>computeServices</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the given ComputeService which must be configured when use compute.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The JClouds endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>jclouds:command:providerId</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_2_parameters">Path Parameters (2 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>command</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> What command to execute such as blobstore or compute.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JcloudsCommand</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>providerId</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The name of the cloud provider that provides the target service (e.g. aws-s3 or aws_ec2).</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_15_parameters">Query Parameters (15 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>blobName</strong> (blobstore)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the blob.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>container</strong> (blobstore)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the blob container.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>directory</strong> (blobstore)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An optional directory name to use</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>group</strong> (compute)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The group that will be assigned to the newly created node. Values depend on the actual cloud provider.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>hardwareId</strong> (compute)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The hardware that will be used for creating a node. Values depend on the actual cloud provider.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>imageId</strong> (compute)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The imageId that will be used for creating a node. Values depend on the actual cloud provider.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>locationId</strong> (compute)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The location that will be used for creating a node. Values depend on the actual cloud provider.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>nodeId</strong> (compute)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The id of the node that will run the script or destroyed.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>nodeState</strong> (compute)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To filter by node status to only select running nodes etc.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>operation</strong> (compute)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the type of operation that will be performed to the blobstore.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>user</strong> (compute)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user on the target node that will run the script.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>You can have as many of these options as you like.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">jclouds:blobstore:aws-s3?operation=CamelJcloudsGet&amp;container=mycontainer&amp;blobName=someblob</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For producer endpoint you can override all of the above URI options by
+passing the appropriate headers to the message.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_message_headers_for_blobstore">Message Headers for blobstore</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Header</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelJcloudsOperation</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The operation to be performed on the blob. The valid options are
+* PUT
+* GET</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelJcloudsContainer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the blob container.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelJcloudsBlobName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the blob.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_blobstore_usage_samples">Blobstore Usage Samples</h3>
+<div class="sect3">
+<h4 id="_example_1_putting_to_the_blob">Example 1: Putting to the blob</h4>
+<div class="paragraph">
+<p>This example will show you how you can store any message inside a blob
+using the jclouds component.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start")
+    .to("jclouds:blobstore:aws-s3" +
+        "?operation=PUT" +
+        "&amp;container=mycontainer" +
+        "&amp;blobName=myblob");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the above example you can override any of the URI parameters with
+headers on the message.
+Here is how the above example would look like using xml to define our
+route.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+    &lt;from uri="direct:start"/&gt;
+    &lt;to uri="jclouds:blobstore:aws-s3?operation=PUT&amp;container=mycontainer&amp;blobName=myblob"/&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_2_getting_reading_from_a_blob">Example 2: Getting/Reading from a blob</h4>
+<div class="paragraph">
+<p>This example will show you how you can read the contnet of a blob using
+the jclouds component.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start")
+    .to("jclouds:blobstore:aws-s3" +
+        "?operation=GET" +
+        "&amp;container=mycontainer" +
+        "&amp;blobName=myblob");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the above example you can override any of the URI parameters with
+headers on the message.
+ Here is how the above example would look like using xml to define our
+route.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+    &lt;from uri="direct:start"/&gt;
+    &lt;to uri="jclouds:blobstore:aws-s3?operation=PUT&amp;container=mycontainer&amp;blobName=myblob"/&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_3_consuming_a_blob">Example 3: Consuming a blob</h4>
+<div class="paragraph">
+<p>This example will consume all blob that are under the specified
+container. The generated exchange will contain the payload of the blob
+as body.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    from("jclouds:blobstore:aws-s3" +
+        "?container=mycontainer")
+        .to("direct:next");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can achieve the same goal by using xml, as you can see below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+    &lt;from uri="jclouds:blobstore:aws-s3?operation=GET&amp;container=mycontainer&amp;blobName=myblob"/&gt;
+    &lt;to uri="direct:next"/&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">jclouds:compute:aws-ec2?operation=CamelJcloudsCreateNode&amp;imageId=AMI_XXXXX&amp;locationId=eu-west-1&amp;group=mygroup</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_compute_usage_samples">Compute Usage Samples</h3>
+<div class="paragraph">
+<p>Below are some examples that demonstrate the use of jclouds compute
+producer in java dsl and spring/blueprint xml.</p>
+</div>
+<div class="sect3">
+<h4 id="_example_1_listing_the_available_images">Example 1: Listing the available images.</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    from("jclouds:compute:aws-ec2" +
+        "&amp;operation=CamelJCloudsListImages")
+        .to("direct:next");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will create a message that will contain the list of images inside
+its body. You can also do the same using xml.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+    &lt;from uri="jclouds:compute:aws-ec2?operation=CamelJCloudsListImages"/&gt;
+    &lt;to uri="direct:next"/&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_2_create_a_new_node">Example 2: Create a new node.</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    from("direct:start").
+    to("jclouds:compute:aws-ec2" +
+        "?operation=CamelJcloudsCreateNode" +
+        "&amp;imageId=AMI_XXXXX" +
+        "&amp;locationId=XXXXX" +
+        "&amp;group=myGroup");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will create a new node on the cloud provider. The out message in
+this case will be a set of metadata that contains information about the
+newly created node (e.g. the ip, hostname etc). Here is the same using
+spring xml.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+    &lt;from uri="direct:start"/&gt;
+    &lt;to uri="jclouds:compute:aws-ec2?operation=CamelJcloudsCreateNode&amp;imageId=AMI_XXXXX&amp;locationId=XXXXX&amp;group=myGroup"/&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_3_run_a_shell_script_on_running_node">Example 3: Run a shell script on running node.</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    from("direct:start").
+    to("jclouds:compute:aws-ec2" +
+        "?operation=CamelJcloudsRunScript" +
+        "?nodeId=10" +
+        "&amp;user=ubuntu");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The sample above will retrieve the body of the in message, which is
+expected to contain the shell script to be executed. Once the script is
+retrieved, it will be sent to the node for execution under the specified
+user (<em>in order case ubuntu</em>). The target node is specified using its
+nodeId. The nodeId can be retrieved either upon the creation of the
+node, it will be part of the resulting metadata or by a executing a
+LIST_NODES operation.</p>
+</div>
+<div class="paragraph">
+<p><strong>Note</strong> This will require that the compute service that will be passed to
+the component, to be initialized with the appropriate jclouds ssh
+capable module (<em>e.g. jsch or sshj</em>).</p>
+</div>
+<div class="paragraph">
+<p>Here is the same using spring xml.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+    &lt;from uri="direct:start"/&gt;
+    &lt;to uri="jclouds:compute:aws-ec2?operation=CamelJcloudsListNodes&amp;?nodeId=10&amp;user=ubuntu"/&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_see_also">See also</h4>
+<div class="paragraph">
+<p>If you want to find out more about jclouds here is list of interesting
+resources</p>
+</div>
+<div class="paragraph">
+<p><a href="http://jclouds.incubator.apache.org/documentation/userguide/blobstore-guide/">Jclouds
+Blobstore wiki</a></p>
+</div>
+<div class="paragraph">
+<p><a href="http://jclouds.incubator.apache.org/documentation/userguide/compute/">Jclouds
+Compute wiki</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/jcr-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/jcache-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

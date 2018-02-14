@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Elasticsearch5 Component Available as of Camel version 2.19
+ The ElasticSearch component allows you to interface with an ElasticSearch 5.x API.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-elasticsearch5&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   URI format elasticsearch5://clusterName[?options]    Endpoint Options The Elasticsearch5 component has no options.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Elasticsearch5 Component Available as of Camel version 2.19
+ The ElasticSearch component allows you to interface with an ElasticSearch 5.x API.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-elasticsearch5&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   URI format elasticsearch5://clusterName[?options]    Endpoint Options The Elasticsearch5 component has no options.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/elasticsearch5-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/elasticsearch5-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_elasticsearch5_component">Elasticsearch5 Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.19</strong></p>
+</div>
+<div class="paragraph">
+<p>The ElasticSearch component allows you to interface with an
+<a href="https://www.elastic.co/products/elasticsearch">ElasticSearch</a> 5.x API.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-elasticsearch5&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">elasticsearch5://clusterName[?options]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_endpoint_options">Endpoint Options</h3>
+<div class="paragraph">
+<p>The Elasticsearch5 component has no options.</p>
+</div>
+<div class="paragraph">
+<p>The Elasticsearch5 endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>elasticsearch5:clusterName</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>clusterName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Name of the cluster</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_9_parameters">Query Parameters (9 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>clientTransportSniff</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is the client allowed to sniff the rest of the cluster or not (default true). This setting map to the client.transport.sniff setting.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>indexName</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the index to act against</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>indexType</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The type of the index to act against</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>ip</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The TransportClient remote host ip to use</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>operation</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What operation to perform</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ElasticsearchOperation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>port</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The TransportClient remote port to use (defaults to 9300)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">9300</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transportAddresses</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comma separated list with ip:port formatted remote transport addresses to use. The ip and port options must be left blank for transportAddresses to be considered instead.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>waitForActiveShards</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Index creation waits for the write consistency number of shards to be available</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message_operations">Message Operations</h3>
+<div class="paragraph">
+<p>The following ElasticSearch operations are currently supported. Simply
+set an endpoint URI option or exchange header with a key of "operation"
+and a value set to one of the following. Some operations also require
+other parameters or the message body to be set.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">operation</th>
+<th class="tableblock halign-left valign-top">message body</th>
+<th class="tableblock halign-left valign-top">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INDEX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map, String, byte[] or XContentBuilder content to index</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds content to an index and returns the content&#8217;s indexId in the body.
+You can set the indexId by setting the message header with
+the key "indexId".</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GET_BY_ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">index id of content to retrieve</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Retrieves the specified index and returns a GetResult object in the body</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DELETE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">index name and type of content to delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes the specified indexName and indexType and returns a DeleteResponse object in the
+body</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DELETE_INDEX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">index name of content to delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes the specified indexName and returns a DeleteIndexResponse object in the
+body</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BULK_INDEX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a <strong>List</strong> or <strong>Collection</strong> of any type that is already accepted
+(XContentBuilder, Map, byte[], String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds content to an index and return a List of the id of the
+successfully indexed documents in the body</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BULK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a <strong>List</strong> or <strong>Collection</strong> of any type that is already accepted
+(XContentBuilder, Map, byte[], String)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds content to an index and returns the BulkResponse
+object in the body</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SEARCH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map, String or SearchRequest Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Search the content with the map of query string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MULTIGET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List of MultigetRequest.Item object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Retrieves the specified indexes, types etc. in
+MultigetRequest and returns a MultigetResponse object in the body</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MULTISEARCH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List of SearchRequest object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Search for parameters specified in MultiSearchRequest and
+returns a MultiSearchResponse object in the body</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EXISTS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Index name as header</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Checks the index exists or not and returns a Boolean flag in the body</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UPDATE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map, String, byte[] or XContentBuilder content to update</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Updates content to an index and returns the content&#8217;s
+indexId in the body.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_index_example">Index Example</h3>
+<div class="paragraph">
+<p>Below is a simple INDEX example</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:index")
+.to("elasticsearch5://elasticsearch?operation=INDEX&amp;indexName=twitter&amp;indexType=tweet");</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+    &lt;from uri="direct:index" /&gt;
+    &lt;to uri="elasticsearch5://elasticsearch?operation=INDEX&amp;indexName=twitter&amp;indexType=tweet"/&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A client would simply need to pass a body message containing a Map to
+the route. The result body contains the indexId created.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
+map.put("content", "test");
+String indexId = template.requestBody("direct:index", map, String.class);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_for_more_information_see_these_resources">For more information, see these resources</h3>
+<div class="paragraph">
+<p><a href="http://www.elastic.co">Elastic Main Site</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/java-api.html">ElasticSearch Java API</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/elsql-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/elasticsearch-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

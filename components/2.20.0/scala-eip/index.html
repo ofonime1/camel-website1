@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Scala Supported DSL The Scala DSL supports every DSL from the Java DSL.
+ On this page we have examples for a number of the EIPs.
+You can check the unit test source code for the Scala Component to find more examples.
+   1 Messaging systems
+  1.1 Pipeline
+  1.2 Filter
+     2 Messaging channels
+  2.1 Dead letter channel'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Scala Supported DSL The Scala DSL supports every DSL from the Java DSL.
+ On this page we have examples for a number of the EIPs.
+You can check the unit test source code for the Scala Component to find more examples.
+   1 Messaging systems
+  1.1 Pipeline
+  1.2 Filter
+     2 Messaging channels
+  2.1 Dead letter channel'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/scala-eip/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/scala-eip/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect3">
+<h4 id="ScalaDSL-SupportedDSL">Scala Supported DSL</h4>
+<div class="paragraph">
+<p>The <a href="scala-dsl.html">Scala DSL</a> supports <strong>every</strong> DSL from the
+<a href="dsl.html">Java DSL</a>.</p>
+</div>
+<div class="paragraph">
+<p>On this page we have examples for a number of the <a href="eip.html">EIP</a>s.<br>
+ You can check the
+<a href="https://svn.apache.org/repos/asf/camel/trunk/components/camel-scala/src/test/scala/">unit
+test source code</a> for the Scala Component to find more examples.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1 <a href="#ScalaDSL-EIP-Messagingsystems">Messaging systems</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>1.1 <a href="#ScalaDSL-EIP-Pipelinepipeline">Pipeline</a></p>
+</li>
+<li>
+<p>1.2 <a href="#ScalaDSL-EIP-Filterfilter">Filter</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>2 <a href="#ScalaDSL-EIP-Messagingchannels">Messaging channels</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>2.1 <a href="#ScalaDSL-EIP-Deadletterchannel">Dead letter channel</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3 <a href="#ScalaDSL-EIP-Messagerouting">Message routing</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>3.1 <a href="#ScalaDSL-EIP-Aggregator">Aggregator</a></p>
+</li>
+<li>
+<p>3.2 <a href="#ScalaDSL-EIP-Contentbasedrouter">Content based router</a></p>
+</li>
+<li>
+<p>3.3 <a href="#ScalaDSL-EIP-Delayer">Delayer</a></p>
+</li>
+<li>
+<p>3.4 <a href="#ScalaDSL-EIP-Loadbalancer">Load balancer</a></p>
+</li>
+<li>
+<p>3.5 <a href="#ScalaDSL-EIP-Multicast">Multicast</a></p>
+</li>
+<li>
+<p>3.6 <a href="#ScalaDSL-EIP-Recipientlist">Recipient list</a></p>
+</li>
+<li>
+<p>3.7 <a href="#ScalaDSL-EIP-Resequencer">Resequencer</a></p>
+</li>
+<li>
+<p>3.8 <a href="#ScalaDSL-EIP-Splitter">Splitter</a></p>
+</li>
+<li>
+<p>3.9 <a href="#ScalaDSL-EIP-Throttler">Throttler</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>4 <a href="#ScalaDSL-EIP-Messagetransformation">Message transformation</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>4.1 <a href="#ScalaDSL-EIP-Contentenricher">Content enricher</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ScalaDSL-EIP-Messagingsystems">Messaging systems</h4>
+<div class="sect4">
+<h5 id="ScalaDSL-EIP-Pipelinepipeline">Pipeline</h5>
+<div class="paragraph">
+<p>There is a simple syntax available for specifying pipeline, by simple
+putting <code>to</code> or <code>→</code> between the different steps in the pipeline.</p>
+</div>
+<div class="paragraph">
+<p>For more advanced use cases, you can also use a block-based syntax,
+where every step in the pipeline starts with either <code>to</code> or <code>→</code>.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ScalaDSL-EIP-Filterfilter">Filter</h5>
+<div class="paragraph">
+<p>For a message filter, use the <code>when()</code> method with a parameter of type
+The <code>Exchange ⇒ Boolean</code>. In the example below, we use a Scala
+convenience method named <code>in</code> to access the 'in' message body; only
+messages where the 'in' message is <code>&lt;hello/&gt;</code> will arrive at the
+<code>mock:a</code> endpoint.</p>
+</div>
+<div class="paragraph">
+<p>Once again, if you need to specify a more advanced route, you can use
+the more elaborate syntax.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ScalaDSL-EIP-Messagingchannels">Messaging channels</h4>
+<div class="sect4">
+<h5 id="ScalaDSL-EIP-Deadletterchannel">Dead letter channel</h5>
+<div class="paragraph">
+<p>The <a href="http://www.eaipatterns.com/DeadLetterChannel.html">dead letter
+channel</a> can be created with the syntax similar to the one used in
+<a href="http://camel.apache.org/dead-letter-channel.html">Java DSL</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">"jms:in" errorHandler(deadLetterChannel("jms:error")) to "jms:out"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also use different error handler available for the
+<a href="http://camel.apache.org/error-handler.html">Java DSL</a>. In particular
+Scala DSL supports
+<a href="http://camel.apache.org/defaulterrorhandler.html">DefaultErrorHandler</a>
+and
+<a href="http://camel.apache.org/error-handler.html#ErrorHandler-LoggingErrorHandler">LoggingErrorHandler</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// DefaultErrorHandler
+"jms:in" errorHandler(defaultErrorHandler) to "jms:out"
+
+// LoggingErrorHandler
+"jms:in" errorHandler(loggingErrorHandler.level(LoggingLevel.INFO).logName("com.example.MyLogger")) to "jms:out"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ScalaDSL-EIP-Messagerouting">Message routing</h4>
+<div class="sect4">
+<h5 id="ScalaDSL-EIP-Aggregator">Aggregator</h5>
+<div class="paragraph">
+<p>The aggregator EIP aggregates messages based on some message correlation
+criteria. In the Scala DSL, the <code>aggregate</code> method takes a function
+<code>Exchange ⇒ Any</code> to determine the correlation value for the exchange. In
+the sample below, message are being aggregated if the first 7 letters in
+the message body are the same.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ScalaDSL-EIP-Contentbasedrouter">Content based router</h5>
+<div class="paragraph">
+<p>Similar to the <a href="scala-dsl-eip.html">Filter</a>, the content based router
+uses <code>when</code> methods with <code>Exchange ⇒ Boolean</code> function literals and an
+optional <code>otherwise</code>. The function literal can contain plain Scala code
+as well as any of the <a href="scala-dsl-supported-languages.html">supported
+languages</a>. The example below routes a given message based on the
+language of the message body.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ScalaDSL-EIP-Delayer">Delayer</h5>
+<div class="paragraph">
+<p>Unlike a throttler, which only slows down messages if the rate exceeds a
+treshold, a delayer delays every messages with a fixed amount of time.
+An example: to delay every message going from <code>seda:a</code> to <code>mock:a</code> with
+1 second, you write&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>Our second example will delay the entire block (containing <code>mock:c</code>)
+without doing anything to <code>mock:b</code></p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ScalaDSL-EIP-Loadbalancer">Load balancer</h5>
+<div class="paragraph">
+<p>To distribute the message handling load over multiple endpoints, we add
+a <code>loadbalance</code> to our route definition. You can optionally specify a
+load balancer strategy, like <code>roundrobin</code></p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ScalaDSL-EIP-Multicast">Multicast</h5>
+<div class="paragraph">
+<p>Multicast allows you to send a message to multiple endpoints at the same
+time. In a simple route, you can specify multiple targets in the <code>to</code> or
+<code>→</code> method call:</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ScalaDSL-EIP-Recipientlist">Recipient list</h5>
+<div class="paragraph">
+<p>You can handle a static recipient list with a multicast or
+<a href="scala-dsl-eip.html">pipeline</a>, but this EIP is usually applied when
+you want to dynamically determine the name(s) of the next endpoint(s) to
+route to. Use the <code>recipients()</code> method with a function literal
+(<code>Exchange &#8658; Any</code>) that returns the endpoint name(s). In the example
+below, the target endpoint name can be found in the String message
+starting at position 21.</p>
+</div>
+<div class="paragraph">
+<p>Because the <code>recipients()</code> method just takes a function literal, you can
+basically use any kind of valid Scala code to determine the endpoint
+name. Have a look at the next example which uses pattern matching to
+figure out where to send the message:</p>
+</div>
+<div class="paragraph">
+<p>Again, we can also use the same thing in a more block-like syntax. For
+this example, we use the Scala DSL&#8217;s
+<a href="scala-dsl-supported-languages.html">support for JXPath</a> to determine
+the target.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ScalaDSL-EIP-Resequencer">Resequencer</h5>
+<div class="paragraph">
+<p>Use the <code>resequence</code> method to add a resequencer to the RouteBuilder.
+The method takes a function (<code>Exchange ⇒ Unit</code>) that determines the
+value to resequence on. In this example, we resequence messages based on
+the 'in' message body.</p>
+</div>
+<div class="paragraph">
+<p>The same EIP can also be used with a block-like syntax&#8230;&#8203;</p>
+</div>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>and with configurable batch size. In this last example, messages
+will be send to <code>mock:e</code> whenever a batch of 5 messages is available.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ScalaDSL-EIP-Splitter">Splitter</h5>
+<div class="paragraph">
+<p>To handle large message in smaller chunks, you can write a Scala
+<code>Exchange ⇒ Any*</code> method and add it to your route with the <code>splitter</code>
+method. As with many other EIPs, we support a short, in-line version as
+well as a more elaborate block based one.</p>
+</div>
+<div class="paragraph">
+<p>The above examples also show you how
+<a href="scala-dsl-supported-languages.html">other languages</a> like XPath can
+be within the Scala DSL.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ScalaDSL-EIP-Throttler">Throttler</h5>
+<div class="paragraph">
+<p>The throttler allows you to slow down messages before sending them
+along. The <code>throttle</code> methods allows you to specify the maximum
+throughput rate of message:</p>
+</div>
+<div class="paragraph">
+<p>It can also be used in front of block to throttle messages at that
+point. In the example below, message are passed on to <code>mock:b</code> in a
+normal rate (i.e. as fast as possible), but a maximum 3 messages/2
+seconds will arrive at the <code>mock:c</code> endpoint.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ScalaDSL-EIP-Messagetransformation">Message transformation</h4>
+<div class="sect4">
+<h5 id="ScalaDSL-EIP-Contentenricher">Content enricher</h5>
+<div class="paragraph">
+<p>Using a processor function (<code>Exchange → Unit</code>), you can alter/enrich the
+message content. This example uses a simple function literal to append
+<code>" says Hello"</code> to the message content:</p>
+</div>
+<div class="paragraph">
+<p>However, you can also define a separate method/function to handle the
+transformation and pass that to the <code>process</code> method instead. The
+example below uses pattern matching to enrich the message content:</p>
+</div>
+<div class="paragraph">
+<p>Off course, you can also use any other Camel component (e.g.
+<a href="velocity.html">Velocity</a>) to enrich the content and add it to a
+pipeline</p>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/scala-getting-started/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/sap-netweaver-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

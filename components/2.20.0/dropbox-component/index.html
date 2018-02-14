@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Dropbox Component Available as of Camel version 2.14
+ The dropbox: component allows you to treat Dropbox remote folders as a producer or consumer of messages. Using the Dropbox Java Core API (reference version for this component is 1.7.x), this camel component has the following features:
+   As a consumer, download files and search files by queries
+  As a producer, download files, move files between remote directories, delete files/dir, upload files and search files by queries'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Dropbox Component Available as of Camel version 2.14
+ The dropbox: component allows you to treat Dropbox remote folders as a producer or consumer of messages. Using the Dropbox Java Core API (reference version for this component is 1.7.x), this camel component has the following features:
+   As a consumer, download files and search files by queries
+  As a producer, download files, move files between remote directories, delete files/dir, upload files and search files by queries'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/dropbox-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/dropbox-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_dropbox_component">Dropbox Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.14</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>dropbox:</strong> component allows you to treat
+<a href="https://www.dropbox.com">Dropbox</a> remote folders as a producer or
+consumer of messages. Using the
+<a href="http://dropbox.github.io/dropbox-sdk-java/api-docs/v1.7.x/">Dropbox Java
+Core API</a> (reference version for this component is 1.7.x), this camel
+component has the following features:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>As a consumer, download files and search files by queries</p>
+</li>
+<li>
+<p>As a producer, download files, move files between remote directories,
+delete files/dir, upload files and search files by queries</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-dropbox&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">dropbox://[operation]?[options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where <strong>operation</strong> is the specific action (typically is a CRUD action) to
+perform on Dropbox remote folder.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_operations">Operations</h3>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Operation</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>del</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deletes files or directories on Dropbox</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>get</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">download files from Dropbox</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>move</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">move files from folders on Dropbox</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>put</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">upload files on Dropbox</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>search</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">search files on Dropbox based on string queries</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Operations</strong> require additional options to work, some are mandatory for
+the specific operation.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>In order to work with Dropbox API you need to obtain an <strong>accessToken</strong>
+and a <strong>clientIdentifier.</strong><br>
+You can refer to the
+<a href="https://www.dropbox.com/developers/core/start/java">Dropbox
+documentation</a> that explains how to get them.</p>
+</div>
+<div class="paragraph">
+<p>The Dropbox component has no options.</p>
+</div>
+<div class="paragraph">
+<p>The Dropbox endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>dropbox:operation</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>operation</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The specific action (typically is a CRUD action) to perform on Dropbox remote folder.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DropboxOperation</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_12_parameters">Query Parameters (12 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>accessToken</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The access token to make API requests for a specific Dropbox user</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>client</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use an existing DbxClient instance as DropBox client.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DbxClient</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>clientIdentifier</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Name of the app registered to make API requests</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>localPath</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Folder or file to upload on Dropbox from the local filesystem.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>newRemotePath</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Destination file or folder</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>query</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A space-separated list of sub-strings to search for. A file matches only if it contains all the sub-strings. If this option is not set all files will be matched.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>remotePath</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Original file or folder to move</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>uploadMode</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which mode to upload. in case of add the new file will be renamed if a file with the same name already exists on dropbox. in case of force if a file with the same name already exists on dropbox this will be overwritten.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DropboxUploadMode</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_del_operation">Del operation</h3>
+<div class="paragraph">
+<p>Delete files on Dropbox.</p>
+</div>
+<div class="paragraph">
+<p>Works only as Camel producer.</p>
+</div>
+<div class="paragraph">
+<p>Below are listed the options for this operation:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remotePath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Folder or file to delete on Dropbox</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_samples">Samples</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start").to("dropbox://del?accessToken=XXX&amp;clientIdentifier=XXX&amp;remotePath=/root/folder1").to("mock:result");
+
+from("direct:start").to("dropbox://del?accessToken=XXX&amp;clientIdentifier=XXX&amp;remotePath=/root/folder1/file1.tar.gz").to("mock:result");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_result_message_headers">Result Message Headers</h4>
+<div class="paragraph">
+<p>The following headers are set on message result:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DELETED_PATH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name of the path deleted on dropbox</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_result_message_body">Result Message Body</h4>
+<div class="paragraph">
+<p>The following objects are set on message body result:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Object type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name of the path deleted on dropbox</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get_download_operation">Get (download) operation</h3>
+<div class="paragraph">
+<p>Download files from Dropbox.</p>
+</div>
+<div class="paragraph">
+<p>Works as Camel producer or Camel consumer.</p>
+</div>
+<div class="paragraph">
+<p>Below are listed the options for this operation:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remotePath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Folder or file to download from Dropbox</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_samples_2">Samples</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start").to("dropbox://get?accessToken=XXX&amp;clientIdentifier=XXX&amp;remotePath=/root/folder1/file1.tar.gz").to("file:///home/kermit/?fileName=file1.tar.gz");
+
+from("direct:start").to("dropbox://get?accessToken=XXX&amp;clientIdentifier=XXX&amp;remotePath=/root/folder1").to("mock:result");
+
+from("dropbox://get?accessToken=XXX&amp;clientIdentifier=XXX&amp;remotePath=/root/folder1").to("file:///home/kermit/");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_result_message_headers_2">Result Message Headers</h4>
+<div class="paragraph">
+<p>The following headers are set on message result:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DOWNLOADED_FILE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in case of single file download, path of the remote file downloaded</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DOWNLOADED_FILES</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in case of multiple files download, path of the remote files downloaded</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_result_message_body_2">Result Message Body</h4>
+<div class="paragraph">
+<p>The following objects are set on message body result:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Object type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ByteArrayOutputStream</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in case of single file download, stream representing the file downloaded</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Map&lt;String, ByteArrayOutputStream&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in case of multiple files download, a map with as key the path of the
+remote file downloaded and as value the stream representing the file
+downloaded</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_move_operation">Move operation</h3>
+<div class="paragraph">
+<p>Move files on Dropbox between one folder to another.</p>
+</div>
+<div class="paragraph">
+<p>Works only as Camel producer.</p>
+</div>
+<div class="paragraph">
+<p>Below are listed the options for this operation:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remotePath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Original file or folder to move</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>newRemotePath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Destination file or folder</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_samples_3">Samples</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start").to("dropbox://move?accessToken=XXX&amp;clientIdentifier=XXX&amp;remotePath=/root/folder1&amp;newRemotePath=/root/folder2").to("mock:result");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_result_message_headers_3">Result Message Headers</h4>
+<div class="paragraph">
+<p>The following headers are set on message result:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MOVED_PATH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name of the path moved on dropbox</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_result_message_body_3">Result Message Body</h4>
+<div class="paragraph">
+<p>The following objects are set on message body result:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Object type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name of the path moved on dropbox</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_put_upload_operation">Put (upload) operation</h3>
+<div class="paragraph">
+<p>Upload files on Dropbox.</p>
+</div>
+<div class="paragraph">
+<p>Works as Camel producer.</p>
+</div>
+<div class="paragraph">
+<p>Below are listed the options for this operation:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>uploadMode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add or force this option specifies how a file should be saved on
+dropbox: in case of "add" the new file will be renamed if a file with the same
+name already exists on dropbox. In case of "force" if a file with the same name already exists on
+dropbox, this will be overwritten.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>localPath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Folder or file to upload on Dropbox from the local filesystem .</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remotePath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Folder destination on Dropbox. If the property is not set, the component
+will upload the file on a remote path equal to the local path.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_samples_4">Samples</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start").to("dropbox://put?accessToken=XXX&amp;clientIdentifier=XXX&amp;uploadMode=add&amp;localPath=/root/folder1").to("mock:result");
+
+from("direct:start").to("dropbox://put?accessToken=XXX&amp;clientIdentifier=XXX&amp;uploadMode=add&amp;localPath=/root/folder1&amp;remotePath=/root/folder2").to("mock:result");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_result_message_headers_4">Result Message Headers</h4>
+<div class="paragraph">
+<p>The following headers are set on message result:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UPLOADED_FILE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in case of single file upload, path of the remote path uploaded</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UPLOADED_FILES</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in case of multiple files upload, string with the remote paths uploaded</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_result_message_body_4">Result Message Body</h4>
+<div class="paragraph">
+<p>The following objects are set on message body result:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Object type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in case of single file upload, result of the upload operation, OK or KO</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Map&lt;String, DropboxResultCode&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in case of multiple files upload, a map with as key the path of the
+remote file uploaded and as value the result of the upload operation, OK
+or KO</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_search_operation">Search operation</h3>
+<div class="paragraph">
+<p>Search inside a remote Dropbox folder including its sub directories.</p>
+</div>
+<div class="paragraph">
+<p>Works as Camel producer and as Camel consumer.</p>
+</div>
+<div class="paragraph">
+<p>Below are listed the options for this operation:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remotePath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Folder on Dropbox where to search in.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>query</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A space-separated list of sub-strings to search for. A file matches only
+if it contains all the sub-strings. If this option is not set, all files
+will be matched.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_samples_5">Samples</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("dropbox://search?accessToken=XXX&amp;clientIdentifier=XXX&amp;remotePath=/XXX&amp;query=XXX").to("mock:result");
+
+from("direct:start").to("dropbox://search?accessToken=XXX&amp;clientIdentifier=XXX&amp;remotePath=/XXX").to("mock:result");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_result_message_headers_5">Result Message Headers</h4>
+<div class="paragraph">
+<p>The following headers are set on message result:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>FOUNDED_FILES</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">list of file path founded</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_result_message_body_5">Result Message Body</h4>
+<div class="paragraph">
+<p>The following objects are set on message body result:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Object type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;DbxEntry&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">list of file path founded. For more information on this object refer to
+Dropbox documentation,</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="http://dropbox.github.io/dropbox-sdk-java/api-docs/v1.7.x/com/dropbox/core/DbxEntry.html">http://dropbox.github.io/dropbox-sdk-java/api-docs/v1.7.x/com/dropbox/core/DbxEntry.html</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/eclipse/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/drill-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

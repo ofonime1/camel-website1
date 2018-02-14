@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Spring Security Available as of Camel 2.3
+ The camel-spring-security component provides role-based authorization for Camel routes. It leverages the authentication and user services provided by Spring Security (formerly Acegi Security) and adds a declarative, role-based policy system to control whether a route can be executed by a given principal.
+ If you are not familiar with the Spring Security authentication and authorization system, please review the current reference documentation on the SpringSource web site linked above.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Spring Security Available as of Camel 2.3
+ The camel-spring-security component provides role-based authorization for Camel routes. It leverages the authentication and user services provided by Spring Security (formerly Acegi Security) and adds a declarative, role-based policy system to control whether a route can be executed by a given principal.
+ If you are not familiar with the Spring Security authentication and authorization system, please review the current reference documentation on the SpringSource web site linked above.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/spring-security/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/spring-security/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect2">
+<h3 id="SpringSecurity-SpringSecurity">Spring Security</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.3</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>camel-spring-security</strong> component provides role-based authorization
+for Camel routes. It leverages the authentication and user services
+provided by
+<a href="http://static.springsource.org/spring-security/site/index.html">Spring
+Security</a> (formerly Acegi Security) and adds a declarative, role-based
+policy system to control whether a route can be executed by a given
+principal.</p>
+</div>
+<div class="paragraph">
+<p>If you are not familiar with the Spring Security authentication and
+authorization system, please review the current reference documentation
+on the SpringSource web site linked above.</p>
+</div>
+<div class="sect3">
+<h4 id="SpringSecurity-Creatingauthorizationpolicies">Creating authorization policies</h4>
+<div class="paragraph">
+<p>Access to a route is controlled by an instance of a
+<code>SpringSecurityAuthorizationPolicy</code> object. A policy object contains the
+name of the Spring Security authority (role) required to run a set of
+endpoints and references to Spring Security <code>AuthenticationManager</code> and
+<code>AccessDecisionManager</code> objects used to determine whether the current
+principal has been assigned that role. Policy objects may be configured
+as Spring beans or by using an <code>&lt;authorizationPolicy&gt;</code> element in Spring
+XML.</p>
+</div>
+<div class="paragraph">
+<p>The <code>&lt;authorizationPolicy&gt;</code> element may contain the following
+attributes:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unique Spring bean identifier which is used to reference the policy
+in routes (required)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>access</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Spring Security authority name that is passed to the access decision
+manager (required)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>authenticationManager</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>authenticationManager</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the Spring Security <code>AuthenticationManager</code> object in the
+context</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>accessDecisionManager</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>accessDecisionManager</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the Spring Security <code>AccessDecisionManager</code> object in the
+context</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>authenticationAdapter</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DefaultAuthenticationAdapter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.4</strong> The name of a <strong>camel-spring-security</strong>
+<code>AuthenticationAdapter</code> object in the context that is used to convert a
+<code>javax.security.auth.Subject</code> into a Spring Security <code>Authentication</code>
+instance.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>useThreadSecurityContext</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If a <code>javax.security.auth.Subject</code> cannot be found in the In message
+header under Exchange.AUTHENTICATION, check the Spring Security
+<code>SecurityContextHolder</code> for an <code>Authentication</code> object.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>alwaysReauthenticate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set to true, the <code>SpringSecurityAuthorizationPolicy</code> will always call
+<code>AuthenticationManager.authenticate()</code> each time the policy is accessed.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="SpringSecurity-ControllingaccesstoCamelroutes">Controlling access to Camel routes</h4>
+<div class="paragraph">
+<p>A Spring Security <code>AuthenticationManager</code> and <code>AccessDecisionManager</code>
+are required to use this component. Here is an example of how to
+configure these objects in Spring XML using the Spring Security
+namespace:</p>
+</div>
+<div class="paragraph">
+<p>Now that the underlying security objects are set up, we can use them to
+configure an authorization policy and use that policy to control access
+to a route:</p>
+</div>
+<div class="paragraph">
+<p>In this example, the endpoint <code>mock:end</code> will not be executed unless a
+Spring Security <code>Authentication</code> object that has been or can be
+authenticated and contains the <code>ROLE_ADMIN</code> authority can be located by
+the <em>admin</em> <code>SpringSecurityAuthorizationPolicy</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="SpringSecurity-Authentication">Authentication</h4>
+<div class="paragraph">
+<p>The process of obtaining security credentials that are used for
+authorization is not specified by this component. You can write your own
+processors or components which get authentication information from the
+exchange depending on your needs. For example, you might create a
+processor that gets credentials from an HTTP request header originating
+in the <a href="jetty.html">Jetty</a> component. No matter how the credentials
+are collected, they need to be placed in the In message or the
+<code>SecurityContextHolder</code> so the Camel <a href="spring-security.html">Spring
+Security</a> component can access them:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import javax.security.auth.Subject;
+import org.apache.camel.*;
+import org.apache.commons.codec.binary.Base64;
+import org.springframework.security.authentication.*;
+
+
+public class MyAuthService implements Processor {
+    public void process(Exchange exchange) throws Exception {
+        // get the username and password from the HTTP header
+        // http://en.wikipedia.org/wiki/Basic_access_authentication
+        String userpass = new String(Base64.decodeBase64(exchange.getIn().getHeader("Authorization", String.class)));
+        String[] tokens = userpass.split(":");
+
+        // create an Authentication object
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(tokens[0], tokens[1]);
+
+        // wrap it in a Subject
+        Subject subject = new Subject();
+        subject.getPrincipals().add(authToken);
+
+        // place the Subject in the In message
+        exchange.getIn().setHeader(Exchange.AUTHENTICATION, subject);
+
+        // you could also do this if useThreadSecurityContext is set to true
+        // SecurityContextHolder.getContext().setAuthentication(authToken);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>SpringSecurityAuthorizationPolicy</code> will automatically authenticate
+the <code>Authentication</code> object if necessary.</p>
+</div>
+<div class="paragraph">
+<p>There are two issues to be aware of when using the
+<code>SecurityContextHolder</code> instead of or in addition to the
+<code>Exchange.AUTHENTICATION</code> header. First, the context holder uses a
+thread-local variable to hold the <code>Authentication</code> object. Any routes
+that cross thread boundaries, like <strong>seda</strong> or <strong>jms</strong>, will lose the
+<code>Authentication</code> object. Second, the Spring Security system appears to
+expect that an <code>Authentication</code> object in the context is already
+authenticated and has roles (see the Technical Overview
+<a href="http://static.springsource.org/spring-security/site/docs/3.0.x/reference/technical-overview.html#tech-intro-authentication">section
+5.3.1</a> for more details).</p>
+</div>
+<div class="paragraph">
+<p>The default behavior of <strong>camel-spring-security</strong> is to look for a
+<code>Subject</code> in the <code>Exchange.AUTHENTICATION</code> header. This <code>Subject</code> must
+contain at least one principal, which must be a subclass of
+<code>org.springframework.security.core.Authentication</code>. You can customize
+the mapping of <code>Subject</code> to <code>Authentication</code> object by providing an
+implementation of the
+<code>org.apache.camel.component.spring.security.AuthenticationAdapter</code> to
+your <code>&lt;authorizationPolicy&gt;</code> bean. This can be useful if you are working
+with components that do not use Spring Security but do provide a
+<code>Subject</code>. At this time, only the <a href="cxf.html">CXF</a> component populates
+the <code>Exchange.AUTHENTICATION</code> header.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="SpringSecurity-Handlingauthenticationandauthorizationerrors">Handling authentication and authorization errors</h4>
+<div class="paragraph">
+<p>If authentication or authorization fails in the
+<code>SpringSecurityAuthorizationPolicy</code>, a <code>CamelAuthorizationException</code>
+will be thrown. This can be handled using Camel&#8217;s standard exception
+handling methods, like the <a href="exception-clause.html">Exception Clause</a>.
+The <code>CamelAuthorizationException</code> will have a reference to the ID of the
+policy which threw the exception so you can handle errors based on the
+policy as well as the type of exception:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;onException&gt;
+  &lt;exception&gt;org.springframework.security.authentication.AccessDeniedException&lt;/exception&gt;
+  &lt;choice&gt;
+    &lt;when&gt;
+      &lt;simple&gt;${exception.policyId} == 'user'&lt;/simple&gt;
+      &lt;transform&gt;
+        &lt;constant&gt;You do not have ROLE_USER access!&lt;/constant&gt;
+      &lt;/transform&gt;
+    &lt;/when&gt;
+    &lt;when&gt;
+      &lt;simple&gt;${exception.policyId} == 'admin'&lt;/simple&gt;
+      &lt;transform&gt;
+        &lt;constant&gt;You do not have ROLE_ADMIN access!&lt;/constant&gt;
+      &lt;/transform&gt;
+    &lt;/when&gt;
+  &lt;/choice&gt;
+&lt;/onException&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="SpringSecurity-Dependencies">Dependencies</h4>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-spring-security&lt;/artifactId&gt;
+  &lt;version&gt;2.4.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This dependency will also pull in
+<code>org.springframework.security:spring-security-core:3.0.3.RELEASE</code> and
+<code>org.springframework.security:spring-security-config:3.0.3.RELEASE</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="SpringSecurity-SeeAlso">See Also</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+<li>
+<p><a href="components.html">Components</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/spring-ws-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/spring-redis-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Restlet Component Available as of Camel version 2.0
+ The Restlet component provides Restlet based endpoints for consuming and producing RESTful resources.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-restlet&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   URI format restlet:restletUrl[?options]   Format of restletUrl:
+ protocol://hostname[:port][/resourcePattern]   Restlet promotes decoupling of protocol and application concerns.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Restlet Component Available as of Camel version 2.0
+ The Restlet component provides Restlet based endpoints for consuming and producing RESTful resources.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-restlet&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   URI format restlet:restletUrl[?options]   Format of restletUrl:
+ protocol://hostname[:port][/resourcePattern]   Restlet promotes decoupling of protocol and application concerns.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/restlet-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/restlet-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_restlet_component">Restlet Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.0</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>Restlet</strong> component provides <a href="http://www.restlet.org">Restlet</a> based
+<a href="endpoint.html">endpoints</a> for consuming and producing RESTful
+resources.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-restlet&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">restlet:restletUrl[?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Format of restletUrl:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">protocol://hostname[:port][/resourcePattern]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Restlet promotes decoupling of protocol and application concerns. The
+reference implementation of
+<a href="http://www.noelios.com/products/restlet-engine">Restlet Engine</a> supports
+a number of protocols. However, we have tested the HTTP protocol only.
+The default port is port 80. We do not automatically switch default port
+based on the protocol yet.</p>
+</div>
+<div class="paragraph">
+<p>You can append query options to the URI in the following format,
+<code>?option=value&amp;option=value&amp;&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>INFO: It seems Restlet is case sensitive in understanding headers. For example
+to use content-type, use Content-Type, and for location use Location and
+so on.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+We have received a report about drop in performance in camel-restlet in
+Camel 2.14.0 and 2.14.1. We have reported this to the Restlet team in
+<a href="https://github.com/restlet/restlet-framework-java/issues/996">issue 996</a>.
+To remedy the issue then from Camel 2.14.2 onwards you can set
+synchronous=true as option on the endpoint uris, Or set it on the
+RestletComponent as a global option so all endpoints inherit this
+option.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The Restlet component supports 22 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>controllerDaemon</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates if the controller thread should be a daemon (not blocking JVM exit).</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>controllerSleepTimeMs</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time for the controller thread to sleep between each control.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>inboundBufferSize</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The size of the buffer when reading messages.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxConnectionsPerHost</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum number of concurrent connections per host (IP address).</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxThreads</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum threads that will service requests.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>lowThreads</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of worker threads determining when the connector is considered overloaded.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxTotalConnections</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum number of concurrent connections in total.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>minThreads</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Minimum threads waiting to service requests.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>outboundBufferSize</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The size of the buffer when writing messages.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>persistingConnections</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates if connections should be kept alive after a call.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>pipeliningConnections</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates if pipelining connections are supported.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>threadMaxIdleTimeMs</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time for an idle thread to wait for an operation before being collected.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useForwardedForHeader</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lookup the X-Forwarded-For header supported by popular proxies and caches and uses it to populate the Request.getClientAddresses() method result. This information is only safe for intermediary components within your local network. Other addresses could easily be changed by setting a fake header and should not be trusted for serious security checks.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>reuseAddress</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable/disable the SO_REUSEADDR socket option. See java.io.ServerSocketreuseAddress property for additional details.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maxQueued</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum number of calls that can be queued if there aren&#8217;t any worker thread available to service them. If the value is '0' then no queue is used and calls are rejected if no worker thread is immediately available. If the value is '-1' then an unbounded queue is used and calls are never rejected.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>disableStreamCache</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines whether or not the raw input stream from Restlet is cached or not (Camel will read the stream into a in memory/overflow to file Stream caching) cache. By default Camel will cache the Restlet input stream to support reading it multiple times to ensure Camel can retrieve all data from the stream. However you can set this option to true when you for example need to access the raw stream such as streaming it directly to a file or other persistent store. DefaultRestletBinding will copy the request input stream into a stream cache and put it into message body if this option is false to support reading the stream multiple times.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>port</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure the port number for the restlet consumer routes. This allows to configure this once to reuse the same port for these consumers.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to use synchronous Restlet Client for the producer. Setting this option to true can yield faster performance as it seems the Restlet synchronous Client works better.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>enabledConverters</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A list of converters to enable as full class name or simple class name. All the converters automatically registered are enabled if empty or null</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useGlobalSslContext Parameters</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable usage of global SSL context parameters.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>headerFilterStrategy</strong> (filter)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HeaderFilterStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Restlet endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>restlet:protocol:host:port/uriPattern</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_4_parameters">Path Parameters (4 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>protocol</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The protocol to use which is http or https</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>host</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The hostname of the restlet service</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>port</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The port number of the restlet service</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">80</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>uriPattern</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The resource pattern such as /customer/id</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_18_parameters">Query Parameters (18 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>restletMethod</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">On a producer endpoint specifies the request method to use. On a consumer endpoint specifies that the endpoint consumes only restletMethod requests.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">GET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Method</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>restletMethods</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specify one or more methods separated by commas (e.g. restletMethods=postput) to be serviced by a restlet consumer endpoint. If both restletMethod and restletMethods options are specified the restletMethod setting is ignored. The possible methods are: ALLCONNECTDELETEGETHEADOPTIONSPATCHPOSTPUTTRACE</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>restletUriPatterns</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specify one ore more URI templates to be serviced by a restlet consumer endpoint using the notation to reference a List in the Camel Registry. If a URI pattern has been defined in the endpoint URI both the URI pattern defined in the endpoint and the restletUriPatterns option will be honored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>disableStreamCache</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines whether or not the raw input stream from Restlet is cached or not (Camel will read the stream into a in memory/overflow to file Stream caching) cache. By default Camel will cache the Restlet input stream to support reading it multiple times to ensure Camel can retrieve all data from the stream. However you can set this option to true when you for example need to access the raw stream such as streaming it directly to a file or other persistent store. DefaultRestletBinding will copy the request input stream into a stream cache and put it into message body if this option is false to support reading the stream multiple times.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectTimeout</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Client will give up connection if the connection is timeout 0 for unlimited wait.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">30000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>cookieHandler</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configure a cookie handler to maintain a HTTP session</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CookieHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>socketTimeout</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Client socket receive timeout 0 for unlimited wait.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">30000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>throwExceptionOnFailure</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to throw exception on a producer failure. If this option is false then the http status code is set as a message header which can be checked if it has an error value.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>autoCloseStream</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to auto close the stream representation as response from calling a REST service using the restlet producer. If the response is streaming and the option streamRepresentation is enabled then you may want to auto close the InputStream from the streaming response to ensure the input stream is closed when the Camel Exchange is done being routed. However if you need to read the stream outside a Camel route you may need to not auto close the stream.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>streamRepresentation</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to support stream representation as response from calling a REST service using the restlet producer. If the response is streaming then this option can be enabled to use an java.io.InputStream as the message body on the Camel Message body. If using this option you may want to enable the autoCloseStream option as well to ensure the input stream is closed when the Camel Exchange is done being routed. However if you need to read the stream outside a Camel route you may need to not auto close the stream.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>headerFilterStrategy</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom HeaderFilterStrategy to filter header to and from Camel message.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HeaderFilterStrategy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>restletBinding</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom RestletBinding to bind between Restlet and Camel message.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RestletBinding</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>restletRealm</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure the security realms of restlet as a map.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sslContextParameters</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure security using SSLContextParameters.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SSLContextParameters</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message_headers">Message Headers</h3>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the content type, which can be set on the OUT message by the
+application/processor. The value is the <code>content-type</code> of the response
+message. If this header is not set, the content type is based on the
+object type of the OUT message body. In Camel 2.3 onward, if the
+Content-Type header is specified in the Camel IN message, the value of
+the header determine the content type for the Restlet request message.
+Otherwise, it is defaulted to "application/x-www-form-urlencoded'. Prior
+to release 2.3, it is not possible to change the request content type
+default.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelAcceptContentType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Since Camel 2.9.3, 2.10.0:</strong> The HTTP Accept request header.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHttpMethod</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The HTTP request method. This is set in the IN message header.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHttpQuery</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The query string of the request URI. It is set on the IN message by
+<code>DefaultRestletBinding</code> when the restlet component receives a request.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHttpResponseCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code> or <code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The response code can be set on the OUT message by the
+application/processor. The value is the response code of the response
+message. If this header is not set, the response code is set by the
+restlet runtime engine.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelHttpUri</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The HTTP request URI. This is set in the IN message header.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelRestletLogin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Login name for basic authentication. It is set on the IN message by the
+application and gets filtered before the restlet request header by
+Camel.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelRestletPassword</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Password name for basic authentication. It is set on the IN message by
+the application and gets filtered before the restlet request header by
+Camel.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelRestletRequest</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Request</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.8:</strong> The <code>org.restlet.Request</code> object which holds all request
+details.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CamelRestletResponse</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Response</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.8:</strong> The <code>org.restlet.Response</code> object. You can use this to
+create responses using the API from Restlet. See examples below.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.restlet.*</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attributes of a Restlet message that get propagated to Camel IN headers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cache-control</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code> or <code>List&lt;CacheDirective&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.11:</strong> User can set the cache-control with the String value or
+the List of CacheDirective of Restlet from the camel message header.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_message_body">Message Body</h3>
+<div class="paragraph">
+<p>Camel will store the restlet response from the external server on the
+OUT body. All headers from the IN message will be copied to the OUT
+message, so that headers are preserved during routing.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_samples">Samples</h3>
+<div class="sect3">
+<h4 id="_restlet_endpoint_with_authentication">Restlet Endpoint with Authentication</h4>
+<div class="paragraph">
+<p>The following route starts a <code>restlet</code> consumer endpoint that listens
+for <code>POST</code> requests on <a href="http://localhost:8080" class="bare">http://localhost:8080</a>. The processor creates a
+response that echoes the request body and the value of the <code>id</code> header.</p>
+</div>
+<div class="paragraph">
+<p>The <code>restletRealm</code> setting in the URI query is used to look up a Realm
+Map in the registry. If this option is specified, the restlet consumer
+uses the information to authenticate user logins. Only <em>authenticated</em>
+requests can access the resources. In this sample, we create a Spring
+application context that serves as a registry. The bean ID of the Realm
+Map should match the <em>restletRealmRef</em>.</p>
+</div>
+<div class="paragraph">
+<p>The following sample starts a <code>direct</code> endpoint that sends requests to
+the server on <a href="http://localhost:8080" class="bare">http://localhost:8080</a> (that is, our restlet consumer
+endpoint).</p>
+</div>
+<div class="paragraph">
+<p>That is all we need. We are ready to send a request and try out the
+restlet component:</p>
+</div>
+<div class="paragraph">
+<p>The sample client sends a request to the <code>direct:start-auth</code> endpoint
+with the following headers:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>CamelRestletLogin</code> (used internally by Camel)</p>
+</li>
+<li>
+<p><code>CamelRestletPassword</code> (used internally by Camel)</p>
+</li>
+<li>
+<p><code>id</code> (application header)</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<code>org.apache.camel.restlet.auth.login</code> and
+<code>org.apache.camel.restlet.auth.password</code> will not be propagated as
+Restlet header.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The sample client gets a response like the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">received [&lt;order foo='1'/&gt;] as an order id = 89531</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_single_restlet_endpoint_to_service_multiple_methods_and_uri_templates">Single restlet endpoint to service multiple methods and URI templates</h4>
+<div class="paragraph">
+<p>It is possible to create a single route to service multiple HTTP methods
+using the <code>restletMethods</code> option. This snippet also shows how to
+retrieve the request method from the header:</p>
+</div>
+<div class="paragraph">
+<p>In addition to servicing multiple methods, the next snippet shows how to
+create an endpoint that supports multiple URI templates using the
+<code>restletUriPatterns</code> option. The request URI is available in the header
+of the IN message as well. If a URI pattern has been defined in the
+endpoint URI (which is not the case in this sample), both the URI
+pattern defined in the endpoint and the <code>restletUriPatterns</code> option will
+be honored.</p>
+</div>
+<div class="paragraph">
+<p>The <code>restletUriPatterns=#uriTemplates</code> option references the
+<code>List&lt;String&gt;</code> bean defined in the Spring XML configuration.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;util:list id="uriTemplates"&gt;
+    &lt;value&gt;/users/{username}&lt;/value&gt;
+    &lt;value&gt;/atom/collection/{id}/component/{cid}&lt;/value&gt;
+&lt;/util:list&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_restlet_api_to_populate_response">Using Restlet API to populate response</h4>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.8</strong></p>
+</div>
+<div class="paragraph">
+<p>You may want to use the <code>org.restlet.Response</code> API to populate the
+response. This gives you full access to the Restlet API and fine grained
+control of the response. See the route snippet below where we generate
+the response from an inlined Camel <a href="processor.html">Processor</a>:</p>
+</div>
+<div class="paragraph">
+<p><strong>Generating response using Restlet Response API</strong></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_configuring_max_threads_on_component">Configuring max threads on component</h4>
+<div class="paragraph">
+<p>To configure the max threads options you must do this on the component,
+such as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;bean id="restlet" class="org.apache.camel.component.restlet.RestletComponent"&gt;
+  &lt;property name="maxThreads" value="100"/&gt;
+&lt;/bean&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_the_restlet_servlet_within_a_webapp">Using the Restlet servlet within a webapp</h4>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.8</strong><br>
+ There are
+<a href="http://www.restlet.org/documentation/2.0/jee/ext/org/restlet/ext/servlet/ServerServlet.html">three
+possible ways</a> to configure a Restlet application within a servlet
+container and using the subclassed SpringServerServlet enables
+configuration within Camel by injecting the Restlet Component.</p>
+</div>
+<div class="paragraph">
+<p>Use of the Restlet servlet within a servlet container enables routes to
+be configured with relative paths in URIs (removing the restrictions of
+hard-coded absolute URIs) and for the hosting servlet container to
+handle incoming requests (rather than have to spawn a separate server
+process on a new port).</p>
+</div>
+<div class="paragraph">
+<p>To configure, add the following to your camel-context.xml;</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext&gt;
+  &lt;route id="RS_RestletDemo"&gt;
+    &lt;from uri="restlet:/demo/{id}" /&gt;
+    &lt;transform&gt;
+      &lt;simple&gt;Request type : ${header.CamelHttpMethod} and ID : ${header.id}&lt;/simple&gt;
+    &lt;/transform&gt;
+  &lt;/route&gt;
+&lt;/camelContext&gt;
+
+&lt;bean id="RestletComponent" class="org.restlet.Component" /&gt;
+
+&lt;bean id="RestletComponentService" class="org.apache.camel.component.restlet.RestletComponent"&gt;
+  &lt;constructor-arg index="0"&gt;
+    &lt;ref bean="RestletComponent" /&gt;
+  &lt;/constructor-arg&gt;
+&lt;/bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And add this to your web.xml;</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;!-- Restlet Servlet --&gt;
+&lt;servlet&gt;
+  &lt;servlet-name&gt;RestletServlet&lt;/servlet-name&gt;
+  &lt;servlet-class&gt;org.restlet.ext.spring.SpringServerServlet&lt;/servlet-class&gt;
+  &lt;init-param&gt;
+    &lt;param-name&gt;org.restlet.component&lt;/param-name&gt;
+    &lt;param-value&gt;RestletComponent&lt;/param-value&gt;
+  &lt;/init-param&gt;
+&lt;/servlet&gt;
+
+&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;RestletServlet&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;/rs/*&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will then be able to access the deployed route at
+<a href="http://localhost:8080/mywebapp/rs/demo/1234" class="bare">http://localhost:8080/mywebapp/rs/demo/1234</a> where;</p>
+</div>
+<div class="paragraph">
+<p>localhost:8080 is the server and port of your servlet container<br>
+ mywebapp is the name of your deployed webapp<br>
+ Your browser will then show the following content;</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">"Request type : GET and ID : 1234"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will need to add dependency on the Spring extension to restlet which
+you can do in your Maven pom.xml file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.restlet.jee&lt;/groupId&gt;
+  &lt;artifactId&gt;org.restlet.ext.spring&lt;/artifactId&gt;
+  &lt;version&gt;${restlet-version}&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And you would need to add dependency on the restlet maven repository as
+well:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;repository&gt;
+   &lt;id&gt;maven-restlet&lt;/id&gt;
+   &lt;name&gt;Public online Restlet repository&lt;/name&gt;
+   &lt;url&gt;http://maven.restlet.org&lt;/url&gt;
+&lt;/repository&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/ribbon/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/rest-swagger-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

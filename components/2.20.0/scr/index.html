@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Camel SCR (deprecated) Available as of Camel 2.15
+ SCR stands for Service Component Runtime and is an implementation of OSGi Declarative Services specification. SCR enables any plain old Java object to expose and use OSGi services with no boilerplate code.
+ OSGi framework knows your object by looking at SCR descriptor files in its bundle which are typically generated from Java annotations by a plugin such as org.apache.felix:maven-scr-plugin.
+ Running Camel in an SCR bundle is a great alternative for Spring DM and Blueprint based solutions having significantly fewer lines of code between you and the OSGi framework.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Camel SCR (deprecated) Available as of Camel 2.15
+ SCR stands for Service Component Runtime and is an implementation of OSGi Declarative Services specification. SCR enables any plain old Java object to expose and use OSGi services with no boilerplate code.
+ OSGi framework knows your object by looking at SCR descriptor files in its bundle which are typically generated from Java annotations by a plugin such as org.apache.felix:maven-scr-plugin.
+ Running Camel in an SCR bundle is a great alternative for Spring DM and Blueprint based solutions having significantly fewer lines of code between you and the OSGi framework.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/scr/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/scr/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_camel_scr_deprecated">Camel SCR (deprecated)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel 2.15</strong></p>
+</div>
+<div class="paragraph">
+<p>SCR stands for Service Component Runtime and is an implementation of
+OSGi Declarative Services specification. SCR enables any plain old Java
+object to expose and use OSGi services with no boilerplate code.</p>
+</div>
+<div class="paragraph">
+<p>OSGi framework knows your object by looking at SCR descriptor files in
+its bundle which are typically generated from Java annotations by a
+plugin such as <code>org.apache.felix:maven-scr-plugin</code>.</p>
+</div>
+<div class="paragraph">
+<p>Running Camel in an SCR bundle is a great alternative for Spring DM and
+Blueprint based solutions having significantly fewer lines of code
+between you and the OSGi framework. Using SCR your bundle can remain
+completely in Java world; there is no need to edit XML or properties
+files. This offers you full control over everything and means your IDE
+of choice knows exactly what is going on in your project.</p>
+</div>
+<div class="sect2">
+<h3 id="_camel_scr_support">Camel SCR support</h3>
+<div class="paragraph">
+<p>Camel-scr bundle is not included in Apache Camel versions prior 2.15.0,
+but the artifact itself can be used with any Camel version since 2.12.0.</p>
+</div>
+<div class="paragraph">
+<p><code>org.apache.camel/camel-scr</code> bundle provides a base class,
+<code>AbstractCamelRunner</code>, which manages a Camel context for you and a
+helper class, <code>ScrHelper</code>, for using your SCR properties in unit tests.
+Camel-scr feature for Apache Karaf defines all features and bundles
+required for running Camel in SCR bundles.</p>
+</div>
+<div class="paragraph">
+<p><code>AbstractCamelRunner</code> class ties CamelContext&#8217;s lifecycle to Service
+Component&#8217;s lifecycle and handles configuration with help of Camel&#8217;s
+PropertiesComponent. All you have to do to make a Service Component out
+of your java class is to extend it from <code>AbstractCamelRunner</code> and add
+the following <code>org.apache.felix.scr.annotations</code> on class level:</p>
+</div>
+<div class="paragraph">
+<p><strong>Add required annotations</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Component
+@References({
+    @Reference(name = "camelComponent",referenceInterface = ComponentResolver.class,
+        cardinality = ReferenceCardinality.MANDATORY_MULTIPLE, policy = ReferencePolicy.DYNAMIC,
+        policyOption = ReferencePolicyOption.GREEDY, bind = "gotCamelComponent", unbind = "lostCamelComponent")
+})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then implement <code>getRouteBuilders()</code> method which returns the Camel
+routes you want to run:</p>
+</div>
+<div class="paragraph">
+<p><strong>Implement getRouteBuilders()</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    @Override
+    protected List&lt;RoutesBuilder&gt; getRouteBuilders() {
+        List&lt;RoutesBuilder&gt; routesBuilders = new ArrayList&lt;&gt;();
+        routesBuilders.add(new YourRouteBuilderHere(registry));
+        routesBuilders.add(new AnotherRouteBuilderHere(registry));
+        return routesBuilders;
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And finally provide the default configuration with:</p>
+</div>
+<div class="paragraph">
+<p><strong>Default configuration in annotations</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Properties({
+   @Property(name = "camelContextId", value = "my-test"),
+   @Property(name = "active", value = "true"),
+   @Property(name = "...", value = "..."),
+   ...
+})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That&#8217;s all. And if you used <code>camel-archetype-scr</code> to generate a project
+all this is already taken care of.</p>
+</div>
+<div class="paragraph">
+<p>Below is an example of a complete Service Component class, generated by
+<code>camel-archetype-scr:</code></p>
+</div>
+<div class="paragraph">
+<p><strong>CamelScrExample.java</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// This file was generated from org.apache.camel.archetypes/camel-archetype-scr/2.15-SNAPSHOT
+package example;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.camel.scr.AbstractCamelRunner;
+import example.internal.CamelScrExampleRoute;
+import org.apache.camel.RoutesBuilder;
+import org.apache.camel.spi.ComponentResolver;
+import org.apache.felix.scr.annotations.*;
+
+@Component(label = CamelScrExample.COMPONENT_LABEL, description = CamelScrExample.COMPONENT_DESCRIPTION, immediate = true, metatype = true)
+@Properties({
+    @Property(name = "camelContextId", value = "camel-scr-example"),
+    @Property(name = "camelRouteId", value = "foo/timer-log"),
+    @Property(name = "active", value = "true"),
+    @Property(name = "from", value = "timer:foo?period=5000"),
+    @Property(name = "to", value = "log:foo?showHeaders=true"),
+    @Property(name = "messageOk", value = "Success: {{from}} -&gt; {{to}}"),
+    @Property(name = "messageError", value = "Failure: {{from}} -&gt; {{to}}"),
+    @Property(name = "maximumRedeliveries", value = "0"),
+    @Property(name = "redeliveryDelay", value = "5000"),
+    @Property(name = "backOffMultiplier", value = "2"),
+    @Property(name = "maximumRedeliveryDelay", value = "60000")
+})
+@References({
+    @Reference(name = "camelComponent",referenceInterface = ComponentResolver.class,
+        cardinality = ReferenceCardinality.MANDATORY_MULTIPLE, policy = ReferencePolicy.DYNAMIC,
+        policyOption = ReferencePolicyOption.GREEDY, bind = "gotCamelComponent", unbind = "lostCamelComponent")
+})
+public class CamelScrExample extends AbstractCamelRunner {
+
+    public static final String COMPONENT_LABEL = "example.CamelScrExample";
+    public static final String COMPONENT_DESCRIPTION = "This is the description for camel-scr-example.";
+
+    @Override
+    protected List&lt;RoutesBuilder&gt; getRouteBuilders() {
+        List&lt;RoutesBuilder&gt; routesBuilders = new ArrayList&lt;&gt;();
+        routesBuilders.add(new CamelScrExampleRoute(registry));
+        return routesBuilders;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>CamelContextId</code> and <code>active</code> properties control the CamelContext&#8217;s name
+(defaults to "camel-runner-default") and whether it will be started or
+not (defaults to "false"), respectively. In addition to these you can
+add and use as many properties as you like. Camel&#8217;s PropertiesComponent
+handles recursive properties and prefixing with fallback without
+problem.</p>
+</div>
+<div class="paragraph">
+<p><code>AbstractCamelRunner</code> will make these properties available to your
+RouteBuilders with help of Camel&#8217;s PropertiesComponent and it will also
+inject these values into your Service Component&#8217;s and RouteBuilder&#8217;s
+fields when their names match. The fields can be declared with any
+visibility level, and many types are supported (String, int, boolean,
+URL, &#8230;&#8203;).</p>
+</div>
+<div class="paragraph">
+<p>Below is an example of a RouteBuilder class generated by
+<code>camel-archetype-scr</code>:</p>
+</div>
+<div class="paragraph">
+<p><strong>CamelScrExampleRoute.java</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// This file was generated from org.apache.camel.archetypes/camel-archetype-scr/2.15-SNAPSHOT
+package example.internal;
+
+import org.apache.camel.LoggingLevel;
+import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.impl.SimpleRegistry;
+import org.apache.commons.lang.Validate;
+
+public class CamelScrExampleRoute extends RouteBuilder {
+
+    SimpleRegistry registry;
+
+    // Configured fields
+    private String camelRouteId;
+    private Integer maximumRedeliveries;
+    private Long redeliveryDelay;
+    private Double backOffMultiplier;
+    private Long maximumRedeliveryDelay;
+
+    public CamelScrExampleRoute(final SimpleRegistry registry) {
+        this.registry = registry;
+    }
+
+    @Override
+    public void configure() throws Exception {
+        checkProperties();
+
+        // Add a bean to Camel context registry
+        registry.put("test", "bean");
+
+        errorHandler(defaultErrorHandler()
+            .retryAttemptedLogLevel(LoggingLevel.WARN)
+            .maximumRedeliveries(maximumRedeliveries)
+            .redeliveryDelay(redeliveryDelay)
+            .backOffMultiplier(backOffMultiplier)
+            .maximumRedeliveryDelay(maximumRedeliveryDelay));
+
+        from("{{from}}")
+            .startupOrder(2)
+            .routeId(camelRouteId)
+            .onCompletion()
+                .to("direct:processCompletion")
+            .end()
+            .removeHeaders("CamelHttp*")
+            .to("{{to}}");
+
+
+        from("direct:processCompletion")
+            .startupOrder(1)
+            .routeId(camelRouteId + ".completion")
+            .choice()
+                .when(simple("${exception} == null"))
+                    .log("{{messageOk}}")
+                .otherwise()
+                    .log(LoggingLevel.ERROR, "{{messageError}}")
+            .end();
+        }
+    }
+
+    public void checkProperties() {
+        Validate.notNull(camelRouteId, "camelRouteId property is not set");
+        Validate.notNull(maximumRedeliveries, "maximumRedeliveries property is not set");
+        Validate.notNull(redeliveryDelay, "redeliveryDelay property is not set");
+        Validate.notNull(backOffMultiplier, "backOffMultiplier property is not set");
+        Validate.notNull(maximumRedeliveryDelay, "maximumRedeliveryDelay property is not set");
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s take a look at <code>CamelScrExampleRoute</code> in more detail.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    // Configured fields
+    private String camelRouteId;
+    private Integer maximumRedeliveries;
+    private Long redeliveryDelay;
+    private Double backOffMultiplier;
+    private Long maximumRedeliveryDelay;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The values of these fields are set with values from properties by
+matching their names.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">        // Add a bean to Camel context registry
+        registry.put("test", "bean");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you need to add some beans to CamelContext&#8217;s registry for your
+routes, you can do it like this.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    public void checkProperties() {
+        Validate.notNull(camelRouteId, "camelRouteId property is not set");
+        Validate.notNull(maximumRedeliveries, "maximumRedeliveries property is not set");
+        Validate.notNull(redeliveryDelay, "redeliveryDelay property is not set");
+        Validate.notNull(backOffMultiplier, "backOffMultiplier property is not set");
+        Validate.notNull(maximumRedeliveryDelay, "maximumRedeliveryDelay property is not set");
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is a good idea to check that required parameters are set and they
+have meaningful values before allowing the routes to start.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">        from("{{from}}")
+            .startupOrder(2)
+            .routeId(camelRouteId)
+            .onCompletion()
+                .to("direct:processCompletion")
+            .end()
+            .removeHeaders("CamelHttp*")
+            .to("{{to}}");
+
+
+        from("direct:processCompletion")
+            .startupOrder(1)
+            .routeId(camelRouteId + ".completion")
+            .choice()
+                .when(simple("${exception} == null"))
+                    .log("{{messageOk}}")
+                .otherwise()
+                    .log(LoggingLevel.ERROR, "{{messageError}}")
+            .end();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that pretty much everything in the route is configured with
+properties. This essentially makes your RouteBuilder a template. SCR
+allows you to create more instances of your routes just by providing
+alternative configurations. More on this in section <em>Using Camel SCR
+bundle as a template</em>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_abstractcamelrunner_s_lifecycle_in_scr">AbstractCamelRunner&#8217;s lifecycle in SCR</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>When component&#8217;s configuration policy and mandatory references are
+satisfied SCR calls <code>activate()</code>. This creates and sets up a
+CamelContext through the following call chain:
+<code>activate()</code> → <code>prepare()</code> → <code>createCamelContext()</code>
+→ <code>setupPropertiesComponent()</code> → <code>configure()</code> → <code>setupCamelContext()</code>.
+Finally, the context is scheduled to start after a delay defined in
+<code>AbstractCamelRunner.START_DELAY</code> with <code>runWithDelay()</code>.</p>
+</li>
+<li>
+<p>When Camel components (<code>ComponentResolver</code> services, to be exact)
+are registered in OSGi, SCR calls <code>gotCamelComponent`</code>()` which
+reschedules/delays the CamelContext start further by the same
+<code>AbstractCamelRunner.START_DELAY</code>. This in effect makes CamelContext
+wait until all Camel components are loaded or there is a sufficient gap
+between them. The same logic will tell a failed-to-start CamelContext to
+try again whenever we add more Camel components.</p>
+</li>
+<li>
+<p>When Camel components are unregistered SCR calls
+<code>lostCamelComponent`</code>()`. This call does nothing.</p>
+</li>
+<li>
+<p>When one of the requirements that caused the call to <code>activate<code>()</code>
+is lost SCR will call <code>deactivate</code>()</code>. This will shutdown the
+CamelContext.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>In (non-OSGi) unit tests you should use <code>prepare()</code> → <code>run()</code> → <code>stop()</code>
+instead of <code>activate()</code> → <code>deactivate()</code> for more fine-grained control.
+Also, this allows us to avoid possible SCR specific operations in tests.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_camel_archetype_scr">Using camel-archetype-scr</h3>
+<div class="paragraph">
+<p>The easiest way to create an Camel SCR bundle project is to use
+<code>camel-archetype-scr</code> and Maven.</p>
+</div>
+<div class="paragraph">
+<p>You can generate a project with the following steps:</p>
+</div>
+<div class="paragraph">
+<p><strong>Generating a project</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text">$ mvn archetype:generate -Dfilter=org.apache.camel.archetypes:camel-archetype-scr
+
+Choose archetype:
+1: local -&gt; org.apache.camel.archetypes:camel-archetype-scr (Creates a new Camel SCR bundle project for Karaf)
+Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
+Define value for property 'groupId': : example
+[INFO] Using property: groupId = example
+Define value for property 'artifactId': : camel-scr-example
+Define value for property 'version': 1.0-SNAPSHOT: :
+Define value for property 'package': example: :
+[INFO] Using property: archetypeArtifactId = camel-archetype-scr
+[INFO] Using property: archetypeGroupId = org.apache.camel.archetypes
+[INFO] Using property: archetypeVersion = 2.15-SNAPSHOT
+Define value for property 'className': : CamelScrExample
+Confirm properties configuration:
+groupId: example
+artifactId: camel-scr-example
+version: 1.0-SNAPSHOT
+package: example
+archetypeArtifactId: camel-archetype-scr
+archetypeGroupId: org.apache.camel.archetypes
+archetypeVersion: 2.15-SNAPSHOT
+className: CamelScrExample
+Y: :</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Done!</p>
+</div>
+<div class="paragraph">
+<p>Now run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">mvn install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and the bundle is ready to be deployed.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_unit_testing_camel_routes">Unit testing Camel routes</h3>
+<div class="paragraph">
+<p>Service Component is a POJO and has no special requirements for
+(non-OSGi) unit testing. There are however some techniques that are
+specific to Camel SCR or just make testing easier.</p>
+</div>
+<div class="paragraph">
+<p>Below is an example unit test, generated by <code>camel-archetype-scr</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// This file was generated from org.apache.camel.archetypes/camel-archetype-scr/2.15-SNAPSHOT
+package example;
+
+import java.util.List;
+
+import org.apache.camel.scr.internal.ScrHelper;
+import org.apache.camel.builder.AdviceWithRouteBuilder;
+import org.apache.camel.component.mock.MockComponent;
+import org.apache.camel.component.mock.MockEndpoint;
+import org.apache.camel.model.ModelCamelContext;
+import org.apache.camel.model.RouteDefinition;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TestName;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+@RunWith(JUnit4.class)
+public class CamelScrExampleTest {
+
+    Logger log = LoggerFactory.getLogger(getClass());
+
+    @Rule
+    public TestName testName = new TestName();
+
+    CamelScrExample integration;
+    ModelCamelContext context;
+
+    @Before
+    public void setUp() throws Exception {
+        log.info("*******************************************************************");
+        log.info("Test: " + testName.getMethodName());
+        log.info("*******************************************************************");
+
+        // Set property prefix for unit testing
+        System.setProperty(CamelScrExample.PROPERTY_PREFIX, "unit");
+
+        // Prepare the integration
+        integration = new CamelScrExample();
+        integration.prepare(null, ScrHelper.getScrProperties(integration.getClass().getName()));
+        context = integration.getContext();
+
+        // Disable JMX for test
+        context.disableJMX();
+
+        // Fake a component for test
+        context.addComponent("amq", new MockComponent());
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        integration.stop();
+    }
+
+    @Test
+    public void testRoutes() throws Exception {
+        // Adjust routes
+        List&lt;RouteDefinition&gt; routes = context.getRouteDefinitions();
+
+        routes.get(0).adviceWith(context, new AdviceWithRouteBuilder() {
+            @Override
+            public void configure() throws Exception {
+                // Replace "from" endpoint with direct:start
+                replaceFromWith("direct:start");
+                // Mock and skip result endpoint
+                mockEndpoints("log:*");
+            }
+        });
+
+        MockEndpoint resultEndpoint = context.getEndpoint("mock:log:foo", MockEndpoint.class);
+        // resultEndpoint.expectedMessageCount(1); // If you want to just check the number of messages
+        resultEndpoint.expectedBodiesReceived("hello"); // If you want to check the contents
+
+        // Start the integration
+        integration.run();
+
+        // Send the test message
+        context.createProducerTemplate().sendBody("direct:start", "hello");
+
+        resultEndpoint.assertIsSatisfied();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, let&#8217;s take a look at the interesting bits one by one.</p>
+</div>
+<div class="paragraph">
+<p><strong>Using property prefixing</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">        // Set property prefix for unit testing
+        System.setProperty(CamelScrExample.PROPERTY_PREFIX, "unit");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This allows you to override parts of the configuration by prefixing
+properties with "unit.". For example, <code>unit.from</code> overrides <code>from</code> for
+the unit test.</p>
+</div>
+<div class="paragraph">
+<p>Prefixes can be used to handle the differences between the runtime
+environments where your routes might run. Moving the unchanged bundle
+through development, testing and production environments is a typical
+use case.</p>
+</div>
+<div class="paragraph">
+<p><strong>Getting test configuration from annotations</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">        integration.prepare(null, ScrHelper.getScrProperties(integration.getClass().getName()));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here we configure the Service Component in test with the same properties
+that would be used in OSGi environment.</p>
+</div>
+<div class="paragraph">
+<p><strong>Mocking components for test</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">        // Fake a component for test
+        context.addComponent("amq", new MockComponent());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Components that are not available in test can be mocked like this to
+allow the route to start.</p>
+</div>
+<div class="paragraph">
+<p><strong>Adjusting routes for test</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">        // Adjust routes
+        List&lt;RouteDefinition&gt; routes = context.getRouteDefinitions();
+
+        routes.get(0).adviceWith(context, new AdviceWithRouteBuilder() {
+            @Override
+            public void configure() throws Exception {
+                // Replace "from" endpoint with direct:start
+                replaceFromWith("direct:start");
+                // Mock and skip result endpoint
+                mockEndpoints("log:*");
+            }
+        });</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Camel&#8217;s AdviceWith feature allows routes to be modified for test.</p>
+</div>
+<div class="paragraph">
+<p><strong>Starting the routes</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">        // Start the integration
+        integration.run();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here we start the Service Component and along with it the routes.</p>
+</div>
+<div class="paragraph">
+<p><strong>Sending a test message</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">        // Send the test message
+        context.createProducerTemplate().sendBody("direct:start", "hello");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here we send a message to a route in test.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_running_the_bundle_in_apache_karaf">Running the bundle in Apache Karaf</h3>
+<div class="paragraph">
+<p>Once the bundle has been built with <code>mvn install</code> it&#8217;s ready to be
+deployed. To deploy the bundle on Apache Karaf perform the following
+steps on Karaf command line:</p>
+</div>
+<div class="paragraph">
+<p><strong>Deploying the bundle in Apache Karaf</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text"># Add Camel feature repository
+karaf@root&gt; features:chooseurl camel 2.15-SNAPSHOT
+
+# Install camel-scr feature
+karaf@root&gt; features:install camel-scr
+
+# Install commons-lang, used in the example route to validate parameters
+karaf@root&gt; osgi:install mvn:commons-lang/commons-lang/2.6
+
+# Install and start your bundle
+karaf@root&gt; osgi:install -s mvn:example/camel-scr-example/1.0-SNAPSHOT
+
+# See how it's running
+karaf@root&gt; log:tail -n 10
+
+Press ctrl-c to stop watching the log.</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_overriding_the_default_configuration">Overriding the default configuration</h4>
+<div class="paragraph">
+<p>By default, Service Component&#8217;s configuration PID equals the fully
+qualified name of its class. You can change the example bundle&#8217;s
+properties with Karaf&#8217;s <code>config:*</code> commands:</p>
+</div>
+<div class="paragraph">
+<p><strong>Override a property</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text"># Override 'messageOk' property
+karaf@root&gt; config:propset -p example.CamelScrExample messageOk "This is better logging"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or you can change the configuration by editing property files in Karaf&#8217;s
+<code>etc</code> folder.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_camel_scr_bundle_as_a_template">Using Camel SCR bundle as a template</h4>
+<div class="paragraph">
+<p>Let&#8217;s say you have a Camel SCR bundle that implements an integration
+pattern that you use frequently, say, <strong>from → to</strong>, with success/failure
+logging and redelivery which also happens to be the pattern our example
+route implements. You probably don&#8217;t want to create a separate bundle
+for every instance. No worries, SCR has you covered.</p>
+</div>
+<div class="paragraph">
+<p>Create a configuration PID for your Service Component, but add a tail
+with a dash and SCR will use that configuration to create a new instance
+of your component.</p>
+</div>
+<div class="paragraph">
+<p><strong>Creating a new Service Component instance</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-text" data-lang="text"># Create a PID with a tail
+karaf@root&gt; config:edit example.CamelScrExample-anotherone
+
+# Override some properties
+karaf@root&gt; config:propset camelContextId my-other-context
+karaf@root&gt; config:propset to "file://removeme?fileName=removemetoo.txt"
+
+# Save the PID
+karaf@root&gt; config:update</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will start a new CamelContext with your overridden properties. How
+convenient.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_notes">Notes</h3>
+<div class="paragraph">
+<p>When designing a Service Component to be a template you typically don&#8217;t
+want it to start without a "tailed" configuration i.e. with the default
+configuration.</p>
+</div>
+<div class="paragraph">
+<p>To prevent your Service Component from starting with the default
+configuration add <code>policy = ConfigurationPolicy.REQUIRE `to the class
+level `@Component</code> annotation.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/script/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/scp-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

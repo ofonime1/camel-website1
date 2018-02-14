@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='uniVocity Fixed Length DataFormat Available as of Camel version 2.15
+ This Data Format uses http://www.univocity.com/pages/about-parsers[uniVocity-parsers] for reading and writing 3 kinds of tabular data text files:
+   CSV (Comma Separated Values), where the values are separated by a symbol (usually a comma)
+  fixed-width, where the values have known sizes
+  TSV (Tabular Separated Values), where the fields are separated by a tabulation
+   Thus there are 3 data formats based on uniVocity-parsers.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='uniVocity Fixed Length DataFormat Available as of Camel version 2.15
+ This Data Format uses http://www.univocity.com/pages/about-parsers[uniVocity-parsers] for reading and writing 3 kinds of tabular data text files:
+   CSV (Comma Separated Values), where the values are separated by a symbol (usually a comma)
+  fixed-width, where the values have known sizes
+  TSV (Tabular Separated Values), where the fields are separated by a tabulation
+   Thus there are 3 data formats based on uniVocity-parsers.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/univocity-fixed-dataformat/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/univocity-fixed-dataformat/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_univocity_fixed_length_dataformat">uniVocity Fixed Length DataFormat</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.15</strong></p>
+</div>
+<div class="paragraph">
+<p>This <a href="data-format.html">Data
+Format</a> uses http://www.univocity.com/pages/about-parsers[uniVocity-parsers]
+for reading and writing 3 kinds of tabular data text files:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CSV (Comma Separated Values), where the values are separated by a
+symbol (usually a comma)</p>
+</li>
+<li>
+<p>fixed-width, where the values have known sizes</p>
+</li>
+<li>
+<p>TSV (Tabular Separated Values), where the fields are separated by a
+tabulation</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Thus there are 3 data formats based on uniVocity-parsers.</p>
+</div>
+<div class="paragraph">
+<p>If you use Maven you can just add the following to your pom.xml,
+substituting the version number for the latest and greatest release
+(see https://cwiki.apache.org/confluence/display/CAMEL/Download[the
+download page for the latest versions]).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-univocity-parsers&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>Most configuration options of the uniVocity-parsers are available in the
+data formats. If you want more information about a particular option,
+please refer to their
+<a href="http://www.univocity.com/pages/parsers-documentation">documentation
+page</a>.</p>
+</div>
+<div class="paragraph">
+<p>The 3 data formats share common options and have dedicated ones, this
+section presents them all.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options_2">Options</h3>
+<div class="paragraph">
+<p>The uniVocity Fixed Length dataformat supports 17 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Java Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>skipTrailingCharsUntilNewline</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not the trailing characters until new line must be ignored. The default value is false</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>recordEndsOnNewline</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not the record ends on new line. The default value is false</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>padding</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The padding character. The default value is a space</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>nullValue</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The string representation of a null value. The default value is null</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>skipEmptyLines</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not the empty lines must be ignored. The default value is true</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>ignoreTrailingWhitespaces</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not the trailing white spaces must ignored. The default value is true</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>ignoreLeadingWhitespaces</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not the leading white spaces must be ignored. The default value is true</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>headersDisabled</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not the headers are disabled. When defined this option explicitly sets the headers as null which indicates that there is no header. The default value is false</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>headerExtractionEnabled</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not the header must be read in the first line of the test document The default value is false</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>numberOfRecordsToRead</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum number of record to read.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>emptyValue</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The String representation of an empty value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>lineSeparator</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The line separator of the files The default value is to use the JVM platform line separator</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>normalizedLineSeparator</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>\n</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The normalized line separator of the files The default value is \n</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>comment</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>#</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The comment symbol. The default value is</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>lazyLoad</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the unmarshalling should produce an iterator that reads the lines on the fly or if all the lines must be read at one. The default value is false</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>asMap</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the unmarshalling should produce maps for the lines values instead of lists. It requires to have header (either defined or collected). The default value is false</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contentTypeHeader</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML or application/json for data formats marshalling to JSon etc.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_marshalling_usages">Marshalling usages</h3>
+<div class="paragraph">
+<p>The marshalling accepts either:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A list of maps (L`ist&lt;Map&lt;String, ?&gt;&gt;`), one for each line</p>
+</li>
+<li>
+<p>A single map (<code>Map&lt;String, ?&gt;</code>), for a single line</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Any other body will throws an exception.</p>
+</div>
+<div class="sect3">
+<h4 id="_usage_example_marshalling_a_map_into_csv_format">Usage example: marshalling a Map into CSV format</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+    &lt;from uri="direct:input"/&gt;
+    &lt;marshal&gt;
+        &lt;univocity-csv/&gt;
+    &lt;/marshal&gt;
+    &lt;to uri="mock:result"/&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_usage_example_marshalling_a_map_into_fixed_width_format">Usage example: marshalling a Map into fixed-width format</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+    &lt;from uri="direct:input"/&gt;
+    &lt;marshal&gt;
+        &lt;univocity-fixed padding="_"&gt;
+            &lt;univocity-header length="5"/&gt;
+            &lt;univocity-header length="5"/&gt;
+            &lt;univocity-header length="5"/&gt;
+        &lt;/univocity-fixed&gt;
+    &lt;/marshal&gt;
+    &lt;to uri="mock:result"/&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_usage_example_marshalling_a_map_into_tsv_format">Usage example: marshalling a Map into TSV format</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+    &lt;from uri="direct:input"/&gt;
+    &lt;marshal&gt;
+        &lt;univocity-tsv/&gt;
+    &lt;/marshal&gt;
+    &lt;to uri="mock:result"/&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_unmarshalling_usages">Unmarshalling usages</h3>
+<div class="paragraph">
+<p>The unmarshalling uses an <code>InputStream</code> in order to read the data.</p>
+</div>
+<div class="paragraph">
+<p>Each row produces either:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a list with all the values in it (<code>asMap</code> option with <code>false</code>);</p>
+</li>
+<li>
+<p>A map with all the values indexed by the
+headers (<code>asMap</code> option with <code>true</code>).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>All the rows can either:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>be collected at once into a list (<code>lazyLoad</code> option with <code>false</code>);</p>
+</li>
+<li>
+<p>be read on the fly using an iterator (<code>lazyLoad</code> option with <code>true</code>).</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_usage_example_unmarshalling_a_csv_format_into_maps_with_automatic_headers">Usage example: unmarshalling a CSV format into maps with automatic headers</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+    &lt;from uri="direct:input"/&gt;
+    &lt;unmarshal&gt;
+        &lt;univocity-csv headerExtractionEnabled="true" asMap="true"/&gt;
+    &lt;/unmarshal&gt;
+    &lt;to uri="mock:result"/&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_usage_example_unmarshalling_a_fixed_width_format_into_lists">Usage example: unmarshalling a fixed-width format into lists</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+    &lt;from uri="direct:input"/&gt;
+    &lt;unmarshal&gt;
+        &lt;univocity-fixed&gt;
+            &lt;univocity-header length="5"/&gt;
+            &lt;univocity-header length="5"/&gt;
+            &lt;univocity-header length="5"/&gt;
+        &lt;/univocity-fixed&gt;
+    &lt;/unmarshal&gt;
+    &lt;to uri="mock:result"/&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/univocity-tsv-dataformat/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/univocity-csv-dataformat/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

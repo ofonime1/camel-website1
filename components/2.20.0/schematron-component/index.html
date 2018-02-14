@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Schematron Component Available as of Camel version 2.15
+ Schematron is an XML-based language for validating XML instance documents. It is used to make assertions about data in an XML document and it is also used to express operational and business rules. Schematron is an http://standards.iso.org/ittf/PubliclyAvailableStandards/index.html[ISO Standard]. The schematron component uses the leading implementation of ISO schematron. It is an XSLT based implementation. The schematron rules is run through four XSLT pipelines, which generates a final XSLT which will be used as the basis for running the assertion against the XML document.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Schematron Component Available as of Camel version 2.15
+ Schematron is an XML-based language for validating XML instance documents. It is used to make assertions about data in an XML document and it is also used to express operational and business rules. Schematron is an http://standards.iso.org/ittf/PubliclyAvailableStandards/index.html[ISO Standard]. The schematron component uses the leading implementation of ISO schematron. It is an XSLT based implementation. The schematron rules is run through four XSLT pipelines, which generates a final XSLT which will be used as the basis for running the assertion against the XML document.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/schematron-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/schematron-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_schematron_component">Schematron Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.15</strong></p>
+</div>
+<div class="paragraph">
+<p><a href="http://www.schematron.com/index.html">Schematron</a> is an XML-based
+language for validating XML instance documents. It is used to make
+assertions about data in an XML document and it is also used to express
+operational and business rules. Schematron is
+an http://standards.iso.org/ittf/PubliclyAvailableStandards/index.html[ISO
+Standard]. The schematron component uses the leading
+<a href="http://www.schematron.com/implementation.html">implementation</a> of ISO
+schematron. It is an XSLT based implementation. The schematron rules is
+run through <a href="http://www.schematron.com/implementation.html">four XSLT
+pipelines</a>, which generates a final XSLT which will be used as the basis
+for running the assertion against the XML document. The component is
+written in a way that Schematron rules are loaded at the start of the
+endpoint (only once) this is to minimise the overhead of instantiating a
+Java Templates object representing the rules.</p>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">schematron://path?[options]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_options">URI options</h3>
+<div class="paragraph">
+<p>The Schematron component has no options.</p>
+</div>
+<div class="paragraph">
+<p>The Schematron endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>schematron:path</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_1_parameters">Path Parameters (1 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>path</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The path to the schematron rules file. Can either be in class path or location in the file system.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_4_parameters">Query Parameters (4 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>abort</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Flag to abort the route and throw a schematron validation exception.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>rules</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the given schematron rules instead of loading from the path</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Templates</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>uriResolver</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the URIResolver to be used for resolving schematron includes in the rules file.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URIResolver</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_headers">Headers</h3>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">In/Out</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelSchematronValidationStatus</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The schematron validation status: SUCCESS / FAILED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IN</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CamelSchematronValidationReport</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The schematrion report body in XML format. See an example below</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IN</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_uri_and_path_syntax">URI and path syntax</h3>
+<div class="paragraph">
+<p>The following example shows how to invoke the schematron processor in
+Java DSL. The schematron rules file is sourced from the class path:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start").to("schematron://sch/schematron.sch").to("mock:result")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following example shows how to invoke the schematron processor in
+XML DSL. The schematrion rules file is sourced from the file system:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;route&gt;
+   &lt;from uri="direct:start" /&gt;
+   &lt;to uri="schematron:///usr/local/sch/schematron.sch" /&gt;
+   &lt;log message="Schematron validation status: ${in.header.CamelSchematronValidationStatus}" /&gt;
+   &lt;choice&gt;
+      &lt;when&gt;
+         &lt;simple&gt;${in.header.CamelSchematronValidationStatus} == 'SUCCESS'&lt;/simple&gt;
+         &lt;to uri="mock:success" /&gt;
+      &lt;/when&gt;
+      &lt;otherwise&gt;
+         &lt;log message="Failed schematron validation" /&gt;
+         &lt;setBody&gt;
+            &lt;header&gt;CamelSchematronValidationReport&lt;/header&gt;
+         &lt;/setBody&gt;
+         &lt;to uri="mock:failure" /&gt;
+      &lt;/otherwise&gt;
+   &lt;/choice&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<strong>Where to store schematron rules?</strong>
+Schematron rules can change with business requirement, as such it is
+recommended to store these rules somewhere in file system. When the
+schematron component endpoint is started, the rules are compiled into
+XSLT as a  Java Templates Object. This is done only once to minimise the
+overhead of instantiating Java Templates object, which can be an
+expensive operation for large set of rules and given that the process
+goes through four pipelines
+of http://www.schematron.com/implementation.html[XSLT transformations].
+So if you happen to store the rules in the file system, in the event of
+an update, all you need is to restart the route or the component. No
+harm in storing these rules in the class path though, but you will have
+to build and deploy the component to pick up the changes.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_schematron_rules_and_report_samples">Schematron rules and report samples</h3>
+<div class="paragraph">
+<p>Here is an example of schematron rules</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;schema xmlns="http://purl.oclc.org/dsdl/schematron"&gt;
+   &lt;title&gt;Check Sections 12/07&lt;/title&gt;
+   &lt;pattern id="section-check"&gt;
+      &lt;rule context="section"&gt;
+         &lt;assert test="title"&gt;This section has no title&lt;/assert&gt;
+         &lt;assert test="para"&gt;This section has no paragraphs&lt;/assert&gt;
+      &lt;/rule&gt;
+   &lt;/pattern&gt;
+&lt;/schema&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is an example of schematron report:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+ xmlns:iso="http://purl.oclc.org/dsdl/schematron"
+ xmlns:saxon="http://saxon.sf.net/"
+ xmlns:schold="http://www.ascc.net/xml/schematron"
+ xmlns:xhtml="http://www.w3.org/1999/xhtml"
+ xmlns:xs="http://www.w3.org/2001/XMLSchema"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema" schemaVersion="" title=""&gt;
+
+   &lt;svrl:active-pattern document="" /&gt;
+   &lt;svrl:fired-rule context="chapter" /&gt;
+   &lt;svrl:failed-assert test="title" location="/doc[1]/chapter[1]"&gt;
+      &lt;svrl:text&gt;A chapter should have a title&lt;/svrl:text&gt;
+   &lt;/svrl:failed-assert&gt;
+   &lt;svrl:fired-rule context="chapter" /&gt;
+   &lt;svrl:failed-assert test="title" location="/doc[1]/chapter[2]"&gt;
+      &lt;svrl:text&gt;A chapter should have a title&lt;/svrl:text&gt;
+   &lt;/svrl:failed-assert&gt;
+   &lt;svrl:fired-rule context="chapter" /&gt;
+&lt;/svrl:schematron-output&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<strong>Useful Links and resources</strong>
+* <a href="http://www.mulberrytech.com/papers/schematron-Philly.pdf">Introduction
+to Schematron</a> by Mulleberry technologies. An excellent document in PDF
+to get you started on Schematron.
+* <a href="http://www.schematron.com">Schematron official site</a>. This contains
+links to other resources
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/scp-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/scala/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

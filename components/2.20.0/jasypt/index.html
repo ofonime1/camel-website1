@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Jasypt component Available as of Camel 2.5
+ Jasypt is a simplified encryption library which makes encryption and decryption easy. Camel integrates with Jasypt to allow sensitive information in Properties files to be encrypted. By dropping camel-jasypt on the classpath those encrypted values will automatically be decrypted on-the-fly by Camel. This ensures that human eyes can&#8217;t easily spot sensitive information such as usernames and passwords.
+ Maven users will need to add the following dependency to their pom.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Jasypt component Available as of Camel 2.5
+ Jasypt is a simplified encryption library which makes encryption and decryption easy. Camel integrates with Jasypt to allow sensitive information in Properties files to be encrypted. By dropping camel-jasypt on the classpath those encrypted values will automatically be decrypted on-the-fly by Camel. This ensures that human eyes can&#8217;t easily spot sensitive information such as usernames and passwords.
+ Maven users will need to add the following dependency to their pom.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/jasypt/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/jasypt/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_jasypt_component">Jasypt component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel 2.5</strong></p>
+</div>
+<div class="paragraph">
+<p><a href="http://www.jasypt.org/">Jasypt</a> is a simplified encryption library which
+makes encryption and decryption easy. Camel integrates with Jasypt to
+allow sensitive information in <a href="properties.html">Properties</a> files to
+be encrypted. By dropping <strong><code>camel-jasypt</code></strong> on the classpath those
+encrypted values will automatically be decrypted on-the-fly by Camel.
+This ensures that human eyes can&#8217;t easily spot sensitive information
+such as usernames and passwords.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-jasypt&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tooling">Tooling</h3>
+<div class="paragraph">
+<p>The <a href="jasypt.html">Jasypt</a> component provides a little command line
+tooling to encrypt or decrypt values.</p>
+</div>
+<div class="paragraph">
+<p>The console output the syntax and which options it provides:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Apache Camel Jasypt takes the following options
+
+  -h or -help = Displays the help screen
+  -c or -command &lt;command&gt; = Command either encrypt or decrypt
+  -p or -password &lt;password&gt; = Password to use
+  -i or -input &lt;input&gt; = Text to encrypt or decrypt
+  -a or -algorithm &lt;algorithm&gt; = Optional algorithm to use</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example to encrypt the value <code>tiger</code> you run with the following
+parameters. In the apache camel kit, you cd into the lib folder and run
+the following java cmd, where <em>&lt;CAMEL_HOME&gt;</em> is where you have
+downloaded and extract the Camel distribution.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">$ cd &lt;CAMEL_HOME&gt;/lib
+$ java -jar camel-jasypt-2.5.0.jar -c encrypt -p secret -i tiger</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Which outputs the following result</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Encrypted text: qaEEacuW7BUti8LcMgyjKw==</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This means the encrypted representation <code>qaEEacuW7BUti8LcMgyjKw==</code> can
+be decrypted back to <code>tiger</code> if you know the master password which was
+<code>secret</code>.<br>
+ If you run the tool again then the encrypted value will return a
+different result. But decrypting the value will always return the
+correct original value.</p>
+</div>
+<div class="paragraph">
+<p>So you can test it by running the tooling using the following
+parameters:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">$ cd &lt;CAMEL_HOME&gt;/lib
+$ java -jar camel-jasypt-2.5.0.jar -c decrypt -p secret -i qaEEacuW7BUti8LcMgyjKw==</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Which outputs the following result:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Decrypted text: tiger</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The idea is then to use those encrypted values in your
+<a href="properties.html">Properties</a> files. Notice how the password value is
+encrypted and the value has the tokens surrounding <code>ENC(value here)</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+When running jasypt tooling, if you come across <code>java.lang.NoClassDefFoundError: org/jasypt/encryption/pbe/StandardPBEStringEncryptor</code> this means you have to include jasypt{version}.jar in your classpath. Example of adding jar to classpath may be copying jasypt{version}.jar to $JAVA_HOME\jre\lib\ext if you are going to run as <code>java -jar &#8230;&#8203;</code>. The latter may be adding jasypt{version}.jar to classpath using <code>-cp</code>, in that case you should provide main class to execute as eg: <code>java -cp jasypt-1.9.2.jar:camel-jasypt-2.18.2.jar org.apache.camel.component.jasypt.Main -c encrypt -p secret -i tiger</code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_options">URI Options</h3>
+<div class="paragraph">
+<p>The options below are exclusive for the <a href="jasypt.html">Jasypt</a>
+component.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default Value</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>password</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the master password to use for decrypting. This option is
+mandatory. See below for more details.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>algorithm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of an optional algorithm to use.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_protecting_the_master_password">Protecting the master password</h3>
+<div class="paragraph">
+<p>The master password used by <a href="jasypt.html">Jasypt</a> must be provided,
+so that it&#8217;s capable of decrypting the values. However having this
+master password out in the open may not be an ideal solution. Therefore
+you could for example provide it as a JVM system property or as a OS
+environment setting. If you decide to do so then the <code>password</code> option
+supports prefixes which dictates this. <code>sysenv:</code> means to lookup the OS
+system environment with the given key. <code>sys:</code> means to lookup a JVM
+system property.</p>
+</div>
+<div class="paragraph">
+<p>For example you could provided the password before you start the
+application</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">$ export CAMEL_ENCRYPTION_PASSWORD=secret</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then start the application, such as running the start script.</p>
+</div>
+<div class="paragraph">
+<p>When the application is up and running you can unset the environment</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">$ unset CAMEL_ENCRYPTION_PASSWORD</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>password</code> option is then a matter of defining as follows:
+<code>password=sysenv:CAMEL_ENCRYPTION_PASSWORD</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_example_with_java_dsl">Example with Java DSL</h3>
+<div class="paragraph">
+<p>In Java DSL you need to configure <a href="jasypt.html">Jasypt</a> as a
+<code>JasyptPropertiesParser</code> instance and set it on the
+<a href="properties.html">Properties</a> component as show below:</p>
+</div>
+<div class="paragraph">
+<p>The properties file <code>myproperties.properties</code> then contain the encrypted
+value, such as shown below. Notice how the password value is encrypted
+and the value has the tokens surrounding <code>ENC(value here)</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_example_with_spring_xml">Example with Spring XML</h3>
+<div class="paragraph">
+<p>In Spring XML you need to configure the <code>JasyptPropertiesParser</code> which
+is shown below. Then the Camel <a href="properties.html">Properties</a>
+component is told to use <code>jasypt</code> as the properties parser, which means
+<a href="jasypt.html">Jasypt</a> has its chance to decrypt values looked up in
+the properties.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;!-- define the jasypt properties parser with the given password to be used --&gt;
+&lt;bean id="jasypt" class="org.apache.camel.component.jasypt.JasyptPropertiesParser"&gt;
+    &lt;property name="password" value="secret"/&gt;
+&lt;/bean&gt;
+
+&lt;!-- define the camel properties component --&gt;
+&lt;bean id="properties" class="org.apache.camel.component.properties.PropertiesComponent"&gt;
+    &lt;!-- the properties file is in the classpath --&gt;
+    &lt;property name="location" value="classpath:org/apache/camel/component/jasypt/myproperties.properties"/&gt;
+    &lt;!-- and let it leverage the jasypt parser --&gt;
+    &lt;property name="propertiesParser" ref="jasypt"/&gt;
+&lt;/bean&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <a href="properties.html">Properties</a> component can also be inlined
+inside the <code>&lt;camelContext&gt;</code> tag which is shown below. Notice how we use
+the <code>propertiesParserRef</code> attribute to refer to
+<a href="jasypt.html">Jasypt</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;!-- define the jasypt properties parser with the given password to be used --&gt;
+&lt;bean id="jasypt" class="org.apache.camel.component.jasypt.JasyptPropertiesParser"&gt;
+    &lt;!-- password is mandatory, you can prefix it with sysenv: or sys: to indicate it should use
+         an OS environment or JVM system property value, so you dont have the master password defined here --&gt;
+    &lt;property name="password" value="secret"/&gt;
+&lt;/bean&gt;
+
+&lt;camelContext xmlns="http://camel.apache.org/schema/spring"&gt;
+    &lt;!-- define the camel properties placeholder, and let it leverage jasypt --&gt;
+    &lt;propertyPlaceholder id="properties"
+                         location="classpath:org/apache/camel/component/jasypt/myproperties.properties"
+                         propertiesParserRef="jasypt"/&gt;
+    &lt;route&gt;
+        &lt;from uri="direct:start"/&gt;
+        &lt;to uri="{{cool.result}}"/&gt;
+    &lt;/route&gt;
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_example_with_blueprint_xml">Example with Blueprint XML</h3>
+<div class="paragraph">
+<p>In Blueprint XML you need to configure
+the <code>JasyptPropertiesParser</code> which is shown below. Then the
+Camel <a href="properties.html">Properties</a> component is told to
+use <code>jasypt</code> as the properties parser, which
+means <a href="jasypt.html">Jasypt</a> has its chance to decrypt values looked
+up in the properties.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+           xsi:schemaLocation="
+           http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd"&gt;
+
+  &lt;cm:property-placeholder id="myblue" persistent-id="mypersistent"&gt;
+      &lt;!-- list some properties for this test --&gt;
+      &lt;cm:default-properties&gt;
+          &lt;cm:property name="cool.result" value="mock:{{cool.password}}"/&gt;
+          &lt;cm:property name="cool.password" value="ENC(bsW9uV37gQ0QHFu7KO03Ww==)"/&gt;
+      &lt;/cm:default-properties&gt;
+  &lt;/cm:property-placeholder&gt;
+
+    &lt;!-- define the jasypt properties parser with the given password to be used --&gt;
+    &lt;bean id="jasypt" class="org.apache.camel.component.jasypt.JasyptPropertiesParser"&gt;
+        &lt;property name="password" value="secret"/&gt;
+    &lt;/bean&gt;
+
+    &lt;camelContext xmlns="http://camel.apache.org/schema/blueprint"&gt;
+      &lt;!-- define the camel properties placeholder, and let it leverage jasypt --&gt;
+      &lt;propertyPlaceholder id="properties"
+                           location="blueprint:myblue"
+                           propertiesParserRef="jasypt"/&gt;
+        &lt;route&gt;
+            &lt;from uri="direct:start"/&gt;
+            &lt;to uri="{{cool.result}}"/&gt;
+        &lt;/route&gt;
+    &lt;/camelContext&gt;
+
+&lt;/blueprint&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <a href="properties.html">Properties</a> component can also be inlined
+inside the <code>&lt;camelContext&gt;</code> tag which is shown below. Notice how we use
+the <code>propertiesParserRef</code> attribute to refer
+to <a href="jasypt.html">Jasypt</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+           xsi:schemaLocation="
+           http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd"&gt;
+
+    &lt;!-- define the jasypt properties parser with the given password to be used --&gt;
+    &lt;bean id="jasypt" class="org.apache.camel.component.jasypt.JasyptPropertiesParser"&gt;
+        &lt;property name="password" value="secret"/&gt;
+    &lt;/bean&gt;
+
+    &lt;camelContext xmlns="http://camel.apache.org/schema/blueprint"&gt;
+      &lt;!-- define the camel properties placeholder, and let it leverage jasypt --&gt;
+      &lt;propertyPlaceholder id="properties"
+                           location="classpath:org/apache/camel/component/jasypt/myproperties.properties"
+                           propertiesParserRef="jasypt"/&gt;
+        &lt;route&gt;
+            &lt;from uri="direct:start"/&gt;
+            &lt;to uri="{{cool.result}}"/&gt;
+        &lt;/route&gt;
+    &lt;/camelContext&gt;
+
+&lt;/blueprint&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="security.html">Security</a></p>
+</li>
+<li>
+<p><a href="properties.html">Properties</a></p>
+</li>
+<li>
+<p><a href="http://activemq.apache.org/encrypted-passwords.html">Encrypted
+passwords in ActiveMQ</a> - ActiveMQ has a similar feature as this
+<code>camel-jasypt</code> component</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/javascript-language/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/jacksonxml-dataformat/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Protobuf DataFormat Available as of Camel version 2.2.0
+   Protobuf - Protocol Buffers &#34;Protocol Buffers - Google&#8217;s data interchange format&#34;
+ Camel provides a Data Format to serialize between Java and the Protocol Buffer protocol. The project&#8217;s site details why you may wish to choose this format over xml. Protocol Buffer is language-neutral and platform-neutral, so messages produced by your Camel routes may be consumed by other language implementations.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Protobuf DataFormat Available as of Camel version 2.2.0
+   Protobuf - Protocol Buffers &#34;Protocol Buffers - Google&#8217;s data interchange format&#34;
+ Camel provides a Data Format to serialize between Java and the Protocol Buffer protocol. The project&#8217;s site details why you may wish to choose this format over xml. Protocol Buffer is language-neutral and platform-neutral, so messages produced by your Camel routes may be consumed by other language implementations.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/protobuf-dataformat/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/protobuf-dataformat/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_protobuf_dataformat">Protobuf DataFormat</h2>
+<div class="sectionbody">
+<div id="Protobuf-Protobuf-ProtocolBuffers" class="paragraph">
+<p><strong>Available as of Camel version 2.2.0</strong></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_protobuf_protocol_buffers">Protobuf - Protocol Buffers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>"Protocol Buffers - Google&#8217;s data interchange format"</p>
+</div>
+<div class="paragraph">
+<p>Camel provides a <a href="data-format.html">Data Format</a> to serialize between
+Java and the Protocol Buffer protocol. The project&#8217;s site details why
+you may wish to
+<a href="https://developers.google.com/protocol-buffers/docs/overview">choose this format over xml</a>.
+Protocol Buffer is language-neutral and
+platform-neutral, so messages produced by your Camel routes may be
+consumed by other language implementations.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://developers.google.com/protocol-buffers/docs/reference/java/">API Site</a><br>
+<a href="https://github.com/google/protobuf">Protobuf Implementation</a><br></p>
+</div>
+<div class="paragraph">
+<p><a href="https://developers.google.com/protocol-buffers/docs/javatutorial">Protobuf Java Tutorial</a></p>
+</div>
+<div class="sect2">
+<h3 id="_protobuf_options">Protobuf Options</h3>
+<div class="paragraph">
+<p>The Protobuf dataformat supports 3 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Java Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>instanceClass</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of class to use when unarmshalling</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contentTypeFormat</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>native</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defines a content type format in which protobuf message will be serialized/deserialized from(to) the Java been. The format can either be native or json for either native protobuf or json fields representation. The default value is native.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contentTypeHeader</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML or application/json for data formats marshalling to JSon etc.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_content_type_format_starting_from_strong_camel_2_19_strong">Content type format (starting from <strong>Camel 2.19</strong>)</h3>
+<div class="paragraph">
+<p>It&#8217;s possible to parse JSON message to convert it to the protobuf format and unparse it back using native util converter.
+To use this option, set contentTypeFormat value to 'json' or call protobuf with second parameter.
+If default instance is not specified, always use native protobuf format.
+The sample code shows below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:marshal")
+    .unmarshal()
+    .protobuf("org.apache.camel.dataformat.protobuf.generated.AddressBookProtos$Person", "json")
+    .to("mock:reverse");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_protobuf_overview">Protobuf overview</h3>
+<div class="paragraph">
+<p>This quick overview of how to use Protobuf. For more detail see the
+<a href="http://code.google.com/apis/protocolbuffers/docs/javatutorial.html">complete tutorial</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_defining_the_proto_format">Defining the proto format</h3>
+<div class="paragraph">
+<p>The first step is to define the format for the body of your exchange.
+This is defined in a .proto file as so:</p>
+</div>
+<div class="paragraph">
+<p><strong>addressbook.proto</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">syntax = "proto2";
+
+package org.apache.camel.component.protobuf;
+
+option java_package = "org.apache.camel.component.protobuf";
+option java_outer_classname = "AddressBookProtos";
+
+message Person {
+  required string name = 1;
+  required int32 id = 2;
+  optional string email = 3;
+
+  enum PhoneType {
+    MOBILE = 0;
+    HOME = 1;
+    WORK = 2;
+  }
+
+  message PhoneNumber {
+    required string number = 1;
+    optional PhoneType type = 2 [default = HOME];
+  }
+
+  repeated PhoneNumber phone = 4;
+}
+
+message AddressBook {
+  repeated Person person = 1;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_generating_java_classes">Generating Java classes</h3>
+<div class="paragraph">
+<p>The Protobuf SDK provides a compiler which will generate the Java
+classes for the format we defined in our .proto file.
+If your operating system is supporting by <a href="https://www.xolstice.org/protobuf-maven-plugin">Protobuf Java code generator maven plugin</a>,
+you can automate protobuf Java code generating by adding following configurations to your pom.xml:</p>
+</div>
+<div class="paragraph">
+<p>Insert operating system and CPU architecture detection extension inside <strong>&lt;build&gt;</strong> tag of the project pom.xml or set ${os.detected.classifier} parameter manually</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;extensions&gt;
+  &lt;extension&gt;
+    &lt;groupId&gt;kr.motd.maven&lt;/groupId&gt;
+    &lt;artifactId&gt;os-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;1.4.1.Final&lt;/version&gt;
+  &lt;/extension&gt;
+&lt;/extensions&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Insert gRPC and protobuf Java code generator plugin <strong>&lt;plugins&gt;</strong> tag of the project pom.xml</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.xolstice.maven.plugins&lt;/groupId&gt;
+  &lt;artifactId&gt;protobuf-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;0.5.0&lt;/version&gt;
+  &lt;extensions&gt;true&lt;/extensions&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;test-compile&lt;/goal&gt;
+        &lt;goal&gt;compile&lt;/goal&gt;
+      &lt;/goals&gt;
+      &lt;configuration&gt;
+        &lt;protocArtifact&gt;com.google.protobuf:protoc:${protobuf-version}:exe:${os.detected.classifier}&lt;/protocArtifact&gt;
+      &lt;/configuration&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+&lt;/plugin&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also run the compiler for any additional supported languages you require manually.</p>
+</div>
+<div class="paragraph">
+<p><code>protoc --java_out=. ./proto/addressbook.proto</code></p>
+</div>
+<div class="paragraph">
+<p>This will generate a single Java class named AddressBookProtos which
+contains inner classes for Person and AddressBook. Builders are also
+implemented for you. The generated classes implement
+com.google.protobuf.Message which is required by the serialization
+mechanism. For this reason it important that only these classes are used
+in the body of your exchanges. Camel will throw an exception on route
+creation if you attempt to tell the <a href="data-format.html">Data Format</a>
+to use a class that does not implement com.google.protobuf.Message. Use
+the generated builders to translate the data from any of your existing
+domain classes.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_java_dsl">Java DSL</h3>
+<div class="paragraph">
+<p>You can use create the ProtobufDataFormat instance and pass it to Camel
+DataFormat marshal and unmarshal API like this.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">   ProtobufDataFormat format = new ProtobufDataFormat(Person.getDefaultInstance());
+
+   from("direct:in").marshal(format);
+   from("direct:back").unmarshal(format).to("mock:reverse");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or use the DSL protobuf() passing the unmarshal default instance or
+default instance class name like this.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">   // You don't need to specify the default instance for protobuf marshaling
+   from("direct:marshal").marshal().protobuf();
+   from("direct:unmarshalA").unmarshal()
+       .protobuf("org.apache.camel.dataformat.protobuf.generated.AddressBookProtos$Person")
+       .to("mock:reverse");
+
+   from("direct:unmarshalB").unmarshal().protobuf(Person.getDefaultInstance()).to("mock:reverse");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_spring_dsl">Spring DSL</h3>
+<div class="paragraph">
+<p>The following example shows how to use Protobuf to unmarshal using Spring
+configuring the protobuf data type</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
+  &lt;route&gt;
+    &lt;from uri="direct:start"/&gt;
+    &lt;unmarshal&gt;
+      &lt;protobuf instanceClass="org.apache.camel.dataformat.protobuf.generated.AddressBookProtos$Person" /&gt;
+    &lt;/unmarshal&gt;
+    &lt;to uri="mock:result"/&gt;
+  &lt;/route&gt;
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dependencies">Dependencies</h3>
+<div class="paragraph">
+<p>To use Protobuf in your camel routes you need to add the a dependency on
+<strong>camel-protobuf</strong> which implements this data format.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-protobuf&lt;/artifactId&gt;
+  &lt;version&gt;x.x.x&lt;/version&gt;
+  &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="grpc.html">Camel gRPC component</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/pubnub-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/php-language/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

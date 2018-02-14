@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='RabbitMQ Component Available as of Camel version 2.12
+ The rabbitmq: component allows you produce and consume messages from RabbitMQ instances. Using the RabbitMQ AMQP client, this component offers a pure RabbitMQ approach over the generic AMQP component.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-rabbitmq&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   URI format rabbitmq://hostname[:port]/exchangeName?'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='RabbitMQ Component Available as of Camel version 2.12
+ The rabbitmq: component allows you produce and consume messages from RabbitMQ instances. Using the RabbitMQ AMQP client, this component offers a pure RabbitMQ approach over the generic AMQP component.
+ Maven users will need to add the following dependency to their pom.xml for this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-rabbitmq&lt;/artifactId&gt; &lt;version&gt;x.x.x&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt; &lt;/dependency&gt;   URI format rabbitmq://hostname[:port]/exchangeName?'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/rabbitmq-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/rabbitmq-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_rabbitmq_component">RabbitMQ Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.12</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>rabbitmq:</strong> component allows you produce and consume messages from
+<a href="http://www.rabbitmq.com/">RabbitMQ</a> instances. Using the RabbitMQ AMQP
+client, this component offers a pure RabbitMQ approach over the generic
+<a href="http://camel.apache.org/amqp.html">AMQP</a> component.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-rabbitmq&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">rabbitmq://hostname[:port]/exchangeName?[options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where <strong>hostname</strong> is the hostname of the running rabbitmq instance or
+cluster. Port is optional and if not specified then defaults to the
+RabbitMQ client default (5672). The exchange name determines which
+exchange produced messages will sent to. In the case of consumers, the
+exchange name determines which exchange the queue will bind to.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The RabbitMQ component has no options.</p>
+</div>
+<div class="paragraph">
+<p>The RabbitMQ endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>rabbitmq:hostname:portNumber/exchangeName</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_3_parameters">Path Parameters (3 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>hostname</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The hostname of the running rabbitmq instance or cluster.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>portNumber</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Port number for the host with the running rabbitmq instance or cluster. Default value is 5672.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5672</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangeName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The exchange name determines which exchange produced messages will sent to. In the case of consumers the exchange name determines which exchange the queue will bind to.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_57_parameters">Query Parameters (57 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>autoDelete</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If it is true the exchange will be deleted when it is no longer in use</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionTimeout</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connection timeout</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">60000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>deadLetterExchange</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the dead letter exchange</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>deadLetterExchangeType</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The type of the dead letter exchange</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">direct</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>deadLetterQueue</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the dead letter queue</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>deadLetterRoutingKey</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The routing key for the dead letter exchange</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>declare</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the option is true camel declare the exchange and queue name and bind them together. If the option is false camel won&#8217;t declare the exchange and queue name on the server.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>durable</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If we are declaring a durable exchange (the exchange will survive a server restart)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangeType</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The exchange type such as direct or topic.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">direct</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exclusive</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exclusive queues may only be accessed by the current connection and are deleted when that connection closes.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>queue</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The queue to receive messages from</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>routingKey</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The routing key to use when binding a consumer queue to the exchange. For producer routing keys you set the header rabbitmq.ROUTING_KEY.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>skipExchangeDeclare</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This can be used if we need to declare the queue but not the exchange</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>skipQueueBind</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If true the queue will not be bound to the exchange after declaring it</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>skipQueueDeclare</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If true the producer will not declare and bind a queue. This can be used for directing messages via an existing routing key.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>vhost</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The vhost for the channel</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">/</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>autoAck</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If messages should be auto acknowledged</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>concurrentConsumers</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of concurrent consumers when consuming from broker. (eg similar as to the same option for the JMS component).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>prefetchCount</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum number of messages that the server will deliver 0 if unlimited. You need to specify the option of prefetchSize prefetchCount prefetchGlobal at the same time</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>prefetchEnabled</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables the quality of service on the RabbitMQConsumer side. You need to specify the option of prefetchSize prefetchCount prefetchGlobal at the same time</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>prefetchGlobal</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the settings should be applied to the entire channel rather than each consumer You need to specify the option of prefetchSize prefetchCount prefetchGlobal at the same time</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>prefetchSize</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum amount of content (measured in octets) that the server will deliver 0 if unlimited. You need to specify the option of prefetchSize prefetchCount prefetchGlobal at the same time</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>threadPoolSize</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The consumer uses a Thread Pool Executor with a fixed number of threads. This setting allows you to set that number of threads.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeEndpoint</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the bridgeEndpoint is true the producer will ignore the message header of rabbitmq.EXCHANGE_NAME and rabbitmq.ROUTING_KEY</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>channelPoolMaxSize</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get maximum number of opened channel in pool</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>channelPoolMaxWait</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the maximum number of milliseconds to wait for a channel from the pool</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>guaranteedDeliveries</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When true an exception will be thrown when the message cannot be delivered (basic.return) and the message is marked as mandatory. PublisherAcknowledgement will also be activated in this case See also publisher acknowledgements - When will messages be confirmed</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>immediate</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This flag tells the server how to react if the message cannot be routed to a queue consumer immediately. If this flag is set the server will return an undeliverable message with a Return method. If this flag is zero the server will queue the message but with no guarantee that it will ever be consumed. If the header is present rabbitmq.IMMEDIATE it will override this option.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>mandatory</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This flag tells the server how to react if the message cannot be routed to a queue. If this flag is set the server will return an unroutable message with a Return method. If this flag is zero the server silently drops the message. If the header is present rabbitmq.MANDATORY it will override this option.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>publisherAcknowledgements</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When true the message will be published with publisher acknowledgements turned on</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>publisherAcknowledgements Timeout</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The amount of time in milliseconds to wait for a basic.ack response from RabbitMQ server</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>addresses</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If this option is set camel-rabbitmq will try to create connection based on the setting of option addresses. The addresses value is a string which looks like server1:12345 server2:12345</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Address[]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>args</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specify arguments for configuring the different RabbitMQ concepts a different prefix is required for each: Exchange: arg.exchange. Queue: arg.queue. Binding: arg.binding. For example to declare a queue with message ttl argument: <a href="http://localhost:5672/exchange/queueargs=arg.queue.x-message-ttl=60000" class="bare">http://localhost:5672/exchange/queueargs=arg.queue.x-message-ttl=60000</a></p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>automaticRecoveryEnabled</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables connection automatic recovery (uses connection implementation that performs automatic recovery when connection shutdown is not initiated by the application)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bindingArgs</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key/value args for configuring the queue binding parameters when declare=true</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>clientProperties</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connection client properties (client info used in negotiating with the server)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>connectionFactory</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom RabbitMQ connection factory. When this option is set all connection options (connectionTimeout requestedChannelMax&#8230;&#8203;) set on URI are not used</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ConnectionFactory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangeArgs</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key/value args for configuring the exchange parameters when declare=true</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangeArgsConfigurer</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the configurer for setting the exchange args in Channel.exchangeDeclare</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ArgsConfigurer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>networkRecoveryInterval</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Network recovery interval in milliseconds (interval used when recovering from network failure)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>queueArgs</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key/value args for configuring the queue parameters when declare=true</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>queueArgsConfigurer</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the configurer for setting the queue args in Channel.queueDeclare</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ArgsConfigurer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>requestedChannelMax</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connection requested channel max (max number of channels offered)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>requestedFrameMax</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connection requested frame max (max size of frame offered)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>requestedHeartbeat</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connection requested heartbeat (heart-beat in seconds offered)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">60</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>requestTimeout</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set timeout for waiting for a reply when using the InOut Exchange Pattern (in milliseconds)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>requestTimeoutChecker Interval</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set requestTimeoutCheckerInterval for inOut exchange</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>topologyRecoveryEnabled</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables connection topology recovery (should topology recovery be performed)</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transferException</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When true and an inOut Exchange failed on the consumer side send the caused Exception back in the response</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>password</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Password for authenticated access</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">guest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sslProtocol</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables SSL on connection accepted value are true TLS and 'SSLv3</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>trustManager</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configure SSL trust manager SSL should be enabled for this option to be effective</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TrustManager</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>username</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Username in case of authenticated access</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">guest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>See
+<a href="http://www.rabbitmq.com/releases/rabbitmq-java-client/current-javadoc/com/rabbitmq/client/ConnectionFactory.html">http://www.rabbitmq.com/releases/rabbitmq-java-client/current-javadoc/com/rabbitmq/client/ConnectionFactory.html</a>
+and the AMQP specification for more information on connection options.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_custom_connection_factory">Custom connection factory</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;bean id="customConnectionFactory" class="com.rabbitmq.client.ConnectionFactory"&gt;
+  &lt;property name="host" value="localhost"/&gt;
+  &lt;property name="port" value="5672"/&gt;
+  &lt;property name="username" value="camel"/&gt;
+  &lt;property name="password" value="bugsbunny"/&gt;
+&lt;/bean&gt;
+&lt;camelContext&gt;
+  &lt;route&gt;
+    &lt;from uri="direct:rabbitMQEx2"/&gt;
+    &lt;to uri="rabbitmq://localhost:5672/ex2?connectionFactory=#customConnectionFactory"/&gt;
+  &lt;/route&gt;
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Headers</p>
+</div>
+<div class="paragraph">
+<p>The following headers are set on exchanges when consuming messages.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rabbitmq.ROUTING_KEY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The routing key that was used to receive the message, or the routing key
+that will be used when producing a message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rabbitmq.EXCHANGE_NAME</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The exchange the message was received from</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rabbitmq.DELIVERY_TAG</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The rabbitmq delivery tag of the received message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rabbitmq.REQUEUE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.14.2:</strong> This is used by the consumer to control rejection of the
+message. When the consumer is complete processing the exchange, and if
+the exchange failed, then the consumer is going to reject the message
+from the RabbitMQ broker. The value of this header controls this
+behavior. If the value is false (by default) then the message is
+discarded/dead-lettered. If the value is true, then the message is
+re-queued.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following headers are used by the producer. If these are set on the
+camel exchange then they will be set on the RabbitMQ message.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rabbitmq.ROUTING_KEY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The routing key that will be used when sending the message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rabbitmq.EXCHANGE_NAME</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The exchange the message was received from, or sent to</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rabbitmq.CONTENT_TYPE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The contentType to set on the RabbitMQ message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rabbitmq.PRIORITY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The priority header to set on the RabbitMQ message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rabbitmq.CORRELATIONID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The correlationId to set on the RabbitMQ message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rabbitmq.MESSAGE_ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The message id to set on the RabbitMQ message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rabbitmq.DELIVERY_MODE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the message should be persistent or not</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rabbitmq.USERID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The userId to set on the RabbitMQ message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rabbitmq.CLUSTERID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The clusterId to set on the RabbitMQ message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rabbitmq.REPLY_TO</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The replyTo to set on the RabbitMQ message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rabbitmq.CONTENT_ENCODING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The contentEncoding to set on the RabbitMQ message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rabbitmq.TYPE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The type to set on the RabbitMQ message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rabbitmq.EXPIRATION</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The expiration to set on the RabbitMQ message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rabbitmq.TIMESTAMP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timestamp to set on the RabbitMQ message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rabbitmq.APP_ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The appId to set on the RabbitMQ message</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Headers are set by the consumer once the message is received. The
+producer will also set the headers for downstream processors once the
+exchange has taken place. Any headers set prior to production that the
+producer sets will be overriden.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message_body">Message Body</h3>
+<div class="paragraph">
+<p>The component will use the camel exchange in body as the rabbit mq
+message body. The camel exchange in object must be convertible to a byte
+array. Otherwise the producer will throw an exception of unsupported
+body type.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_samples">Samples</h3>
+<div class="paragraph">
+<p>To receive messages from a queue that is bound to an exchange A with the
+routing key B,</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("rabbitmq://localhost/A?routingKey=B")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To receive messages from a queue with a single thread with auto
+acknowledge disabled.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("rabbitmq://localhost/A?routingKey=B&amp;threadPoolSize=1&amp;autoAck=false")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To send messages to an exchange called C</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">...to("rabbitmq://localhost/B")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Declaring a headers exchange and queue</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("rabbitmq://localhost/ex?exchangeType=headers&amp;queue=q&amp;bindingArgs=#bindArgs")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and place corresponding Map&lt;String, Object&gt; with the id of "bindArgs" in the Registry.</p>
+</div>
+<div class="paragraph">
+<p>For example declaring a method in spring</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Bean(name="bindArgs")
+public Map&lt;String, Object&gt; bindArgsBuilder() {
+    return Collections.singletonMap("foo", "bar");
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/reactive-streams-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/quickfix-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

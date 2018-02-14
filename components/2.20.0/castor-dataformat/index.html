@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Castor DataFormat Available as of Camel version 2.1
+ Castor is a Data Format which uses the Castor XML library to unmarshal an XML payload into Java objects or to marshal Java objects into an XML payload.
+ As usually you can use either Java DSL or Spring XML to work with Castor Data Format.
+ Using the Java DSL from(&#34;direct:order&#34;). marshal().castor(). to(&#34;activemq:queue:order&#34;);   For example the following uses a named DataFormat of Castor which uses default Castor data binding features.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Castor DataFormat Available as of Camel version 2.1
+ Castor is a Data Format which uses the Castor XML library to unmarshal an XML payload into Java objects or to marshal Java objects into an XML payload.
+ As usually you can use either Java DSL or Spring XML to work with Castor Data Format.
+ Using the Java DSL from(&#34;direct:order&#34;). marshal().castor(). to(&#34;activemq:queue:order&#34;);   For example the following uses a named DataFormat of Castor which uses default Castor data binding features.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/castor-dataformat/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/castor-dataformat/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_castor_dataformat">Castor DataFormat</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.1</strong></p>
+</div>
+<div class="paragraph">
+<p>Castor is a <a href="data-format.html">Data Format</a> which uses the
+<a href="http://www.castor.org/">Castor XML library</a> to unmarshal an XML payload
+into Java objects or to marshal Java objects into an XML payload.</p>
+</div>
+<div class="paragraph">
+<p>As usually you can use either Java DSL or Spring XML to work with Castor
+Data Format.</p>
+</div>
+<div class="sect2">
+<h3 id="_using_the_java_dsl">Using the Java DSL</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:order").
+  marshal().castor().
+  to("activemq:queue:order");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example the following uses a named DataFormat of Castor which uses
+default Castor data binding features.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CastorDataFormat castor = new CastorDataFormat ();
+
+from("activemq:My.Queue").
+  unmarshal(castor).
+  to("mqseries:Another.Queue");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you prefer to use a named reference to a data format which can then
+be defined in your Registry such as via your Spring XML file. e.g.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("activemq:My.Queue").
+  unmarshal("mycastorType").
+  to("mqseries:Another.Queue");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to override default mapping schema by providing a mapping
+file you can set it as follows.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CastorDataFormat castor = new CastorDataFormat ();
+castor.setMappingFile("mapping.xml");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Also if you want to have more control on Castor Marshaller and
+Unmarshaller you can access them as below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">castor.getMarshaller();
+castor.getUnmarshaller();</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_spring_xml">Using Spring XML</h3>
+<div class="paragraph">
+<p>The following example shows how to use Castor to unmarshal using Spring
+configuring the castor data type</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
+  &lt;route&gt;
+    &lt;from uri="direct:start"/&gt;
+    &lt;unmarshal&gt;
+      &lt;castor validation="true" /&gt;
+    &lt;/unmarshal&gt;
+    &lt;to uri="mock:result"/&gt;
+  &lt;/route&gt;
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This example shows how to configure the data type just once and reuse it
+on multiple routes. You have to set the &lt;castor&gt; element directly in
+&lt;camelContext&gt;.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;camelContext&gt;
+&lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
+  &lt;dataFormats&gt;
+    &lt;castor id="myCastor"/&gt;
+  &lt;/dataFormats&gt;
+
+  &lt;route&gt;
+    &lt;from uri="direct:start"/&gt;
+    &lt;marshal ref="myCastor"/&gt;
+    &lt;to uri="direct:marshalled"/&gt;
+  &lt;/route&gt;
+  &lt;route&gt;
+    &lt;from uri="direct:marshalled"/&gt;
+    &lt;unmarshal ref="myCastor"/&gt;
+    &lt;to uri="mock:result"/&gt;
+  &lt;/route&gt;
+
+&lt;/camelContext&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The Castor dataformat supports 6 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Java Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>mappingFile</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path to a Castor mapping file to load from the classpath.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>validation</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether validation is turned on or off. Is by default true.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>encoding</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UTF-8</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Encoding to use when marshalling an Object to XML. Is by default UTF-8</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>packages</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String[]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add additional packages to Castor XmlContext</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>classes</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String[]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add additional class names to Castor XmlContext</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contentTypeHeader</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML or application/json for data formats marshalling to JSon etc.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_dependencies">Dependencies</h3>
+<div class="paragraph">
+<p>To use Castor in your camel routes you need to add the a dependency on
+<strong>camel-castor</strong> which implements this data format.</p>
+</div>
+<div class="paragraph">
+<p>If you use maven you could just add the following to your pom.xml,
+substituting the version number for the latest &amp; greatest release (see
+<a href="download.html">the download page for the latest versions</a>).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;artifactId&gt;camel-castor&lt;/artifactId&gt;
+  &lt;version&gt;x.x.x&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/cdi/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/caffeine-loadcache-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

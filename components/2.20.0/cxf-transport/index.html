@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='What&#8217;s the Camel Transport for CXF In CXF you offer or consume a webservice by defining its address. The first part of the address specifies the protocol to use. For example address=&#34;http://localhost:9000&#34; in an endpoint configuration means your service will be offered using the http protocol on port 9000 of localhost. When you integrate Camel Tranport into CXF you get a new transport &#34;camel&#34;. So you can specify address=&#34;camel://direct:MyEndpointName&#34; to bind the CXF service address to a camel direct endpoint.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='What&#8217;s the Camel Transport for CXF In CXF you offer or consume a webservice by defining its address. The first part of the address specifies the protocol to use. For example address=&#34;http://localhost:9000&#34; in an endpoint configuration means your service will be offered using the http protocol on port 9000 of localhost. When you integrate Camel Tranport into CXF you get a new transport &#34;camel&#34;. So you can specify address=&#34;camel://direct:MyEndpointName&#34; to bind the CXF service address to a camel direct endpoint.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/cxf-transport/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/cxf-transport/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect2">
+<h3 id="CamelTransportforCXF-WhatstheCamelTransportforCXF">What&#8217;s the Camel Transport for CXF</h3>
+<div class="paragraph">
+<p>In CXF you offer or consume a webservice by defining its address. The
+first part of the address specifies the protocol to use. For example
+address="http://localhost:9000" in an endpoint configuration means your
+service will be offered using the http protocol on port 9000 of
+localhost. When you integrate Camel Tranport into CXF you get a new
+transport "camel". So you can specify
+address="camel://direct:MyEndpointName" to bind the CXF service address
+to a camel direct endpoint.</p>
+</div>
+<div class="paragraph">
+<p>Technically speaking Camel transport for CXF is a component which
+implements the
+<a href="http://cwiki.apache.org/CXF20DOC/cxf-architecture.html#CXFArchitecture-Transports">CXF
+transport API</a> with the Camel core library. This allows you to easily
+use Camel&#8217;s routing engine and integration patterns support together
+with your CXF services.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="CamelTransportforCXF-IntegrateCamelintoCXFtransportlayer">Integrate Camel into CXF transport layer</h3>
+<div class="paragraph">
+<p>To include the Camel Tranport into your CXF bus you use the
+CamelTransportFactory. You can do this in Java as well as in Spring.</p>
+</div>
+<div class="sect3">
+<h4 id="CamelTransportforCXF-SettinguptheCamelTransportinSpring">Setting up the Camel Transport in Spring</h4>
+<div class="paragraph">
+<p>You can use the following snippet in your applicationcontext if you want
+to configure anything special. If you only want to activate the camel
+transport you do not have to do anything in your application context. As
+soon as you include the camel-cxf-transport jar (or camel-cxf.jar if
+your camel version is less than 2.7.x) in your app, cxf will scan the
+jar and load a CamelTransportFactory for you.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;!-- you don't need to specify the CamelTransportFactory configuration as it is auto load by CXF bus --&gt;
+&lt;bean class="org.apache.camel.component.cxf.transport.CamelTransportFactory"&gt;
+  &lt;property name="bus" ref="cxf" /&gt;
+  &lt;property name="camelContext" ref="camelContext" /&gt;
+  &lt;!-- checkException new added in Camel 2.1 and Camel 1.6.2 --&gt;
+  &lt;!-- If checkException is true , CamelDestination will check the outMessage's
+     exception and set it into camel exchange. You can also override this value
+     in CamelDestination's configuration. The default value is false.
+     This option should be set true when you want to leverage the camel's error
+     handler to deal with fault message --&gt;
+  &lt;property name="checkException" value="true" /&gt;
+  &lt;property name="transportIds"&gt;
+    &lt;list&gt;
+      &lt;value&gt;http://cxf.apache.org/transports/camel&lt;/value&gt;
+    &lt;/list&gt;
+  &lt;/property&gt;
+&lt;/bean&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="CamelTransportforCXF-IntegratingtheCamelTransportinaprogrammaticway">Integrating the Camel Transport in a programmatic way</h4>
+<div class="paragraph">
+<p>Camel transport provides a setContext method that you could use to set
+the Camel context into the transport factory. If you want this factory
+take effect, you need to register the factory into the CXF bus. Here is
+a full example for you.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import org.apache.cxf.Bus;
+import org.apache.cxf.BusFactory;
+import org.apache.cxf.transport.ConduitInitiatorManager;
+import org.apache.cxf.transport.DestinationFactoryManager;
+...
+
+BusFactory bf = BusFactory.newInstance();
+Bus bus = bf.createBus();
+CamelTransportFactory camelTransportFactory = new CamelTransportFactory();
+// set up the CamelContext which will be use by the CamelTransportFactory
+camelTransportFactory.setCamelContext(context)
+// if you are using CXF higher then 2.4.x the
+camelTransportFactory.setBus(bus);
+
+// if you are lower CXF, you need to register the ConduitInitiatorManager and DestinationFactoryManager like below
+// register the conduit initiator
+ConduitInitiatorManager cim = bus.getExtension(ConduitInitiatorManager.class);
+cim.registerConduitInitiator(CamelTransportFactory.TRANSPORT_ID, camelTransportFactory);
+// register the destination factory
+DestinationFactoryManager dfm = bus.getExtension(DestinationFactoryManager.class);
+dfm.registerDestinationFactory(CamelTransportFactory.TRANSPORT_ID, camelTransportFactory);
+// set or bus as the default bus for cxf
+BusFactory.setDefaultBus(bus);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="CamelTransportforCXF-ConfigurethedestinationandconduitwithSpring">Configure the destination and conduit with Spring</h3>
+<div class="sect3">
+<h4 id="CamelTransportforCXF-Namespace">Namespace</h4>
+<div class="paragraph">
+<p>The elements used to configure an Camel transport endpoint are defined
+in the namespace <code><a href="http://cxf.apache.org/transports/camel" class="bare">http://cxf.apache.org/transports/camel</a></code>. It is
+commonly referred to using the prefix <code>camel</code>. In order to use the Camel
+transport configuration elements, you will need to add the lines shown
+below to the beans element of your endpoint&#8217;s configuration file. In
+addition, you will need to add the configuration elements' namespace to
+the <code>xsi:schemaLocation</code> attribute.</p>
+</div>
+<div class="paragraph">
+<p><strong>Adding the Configuration Namespace</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;beans ...
+       xmlns:camel="http://cxf.apache.org/transports/camel
+       ...
+       xsi:schemaLocation="...
+                           http://cxf.apache.org/transports/camel
+                           http://cxf.apache.org/transports/camel.xsd
+                          ...&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="CamelTransportforCXF-Thedestinationelement">The <code>destination</code> element</h4>
+<div class="paragraph">
+<p>You configure an Camel transport server endpoint using the
+<code>camel:destination</code> element and its children. The <code>camel:destination</code>
+element takes a single attribute, <code>name</code>, that specifies the WSDL port
+element that corresponds to the endpoint. The value for the <code>name</code>
+attribute takes the form <em>portQName</em>`.camel-destination`. The example
+below shows the <code>camel:destination</code> element that would be used to add
+configuration for an endpoint that was specified by the WSDL fragment
+<code>&lt;port binding="widgetSOAPBinding" name="widgetSOAPPort"&gt;</code> if the
+endpoint&#8217;s target namespace was <code><a href="http://widgets.widgetvendor.net" class="bare">http://widgets.widgetvendor.net</a></code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>camel:destination Element</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">...
+  &lt;camel:destination name="{http://widgets/widgetvendor.net}widgetSOAPPort.http-destination&gt;
+    &lt;camelContext id="context" xmlns="http://activemq.apache.org/camel/schema/spring"&gt;
+         &lt;route&gt;
+           &lt;from uri="direct:EndpointC" /&gt;
+           &lt;to uri="direct:EndpointD" /&gt;
+         &lt;/route&gt;
+     &lt;/camelContext&gt;
+  &lt;/camel:destination&gt;
+
+  &lt;!-- new added feature since Camel 2.11.x
+  &lt;camel:destination name="{http://widgets/widgetvendor.net}widgetSOAPPort.camel-destination" camelContextId="context" /&gt;
+
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>camel:destination</code> element for Spring has a number of child
+elements that specify configuration information. They are described
+below.</p>
+</div>
+<div class="paragraph">
+<p>Element</p>
+</div>
+<div class="paragraph">
+<p>Description</p>
+</div>
+<div class="paragraph">
+<p><code>camel-spring:camelContext</code></p>
+</div>
+<div class="paragraph">
+<p>You can specify the camel context in the camel destination</p>
+</div>
+<div class="paragraph">
+<p><code>camel:camelContextRef</code></p>
+</div>
+<div class="paragraph">
+<p>The camel context id which you want inject into the camel destination</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="CamelTransportforCXF-Theconduitelement">The <code>conduit</code> element</h4>
+<div class="paragraph">
+<p>You configure a Camel transport client using the <code>camel:conduit</code> element
+and its children. The <code>camel:conduit</code> element takes a single attribute,
+<code>name</code>, that specifies the WSDL port element that corresponds to the
+endpoint. The value for the <code>name</code> attribute takes the form
+<em>portQName</em>`.camel-conduit`. For example, the code below shows the
+<code>camel:conduit</code> element that would be used to add configuration for an
+endpoint that was specified by the WSDL fragment
+<code>&lt;port binding="widgetSOAPBinding" name="widgetSOAPPort"&gt;</code> if the
+endpoint&#8217;s target namespace was <code><a href="http://widgets.widgetvendor.net" class="bare">http://widgets.widgetvendor.net</a></code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>http-conf:conduit Element</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">...
+  &lt;camelContext id="conduit_context" xmlns="http://activemq.apache.org/camel/schema/spring"&gt;
+       &lt;route&gt;
+           &lt;from uri="direct:EndpointA" /&gt;
+           &lt;to uri="direct:EndpointB" /&gt;
+       &lt;/route&gt;
+   &lt;/camelContext&gt;
+
+  &lt;camel:conduit name="{http://widgets/widgetvendor.net}widgetSOAPPort.camel-conduit"&gt;
+     &lt;camel:camelContextRef&gt;conduit_context&lt;/camel:camelContextRef&gt;
+  &lt;/camel:conduit&gt;
+
+  &lt;!-- new added feature since Camel 2.11.x
+  &lt;camel:conduit name="{http://widgets/widgetvendor.net}widgetSOAPPort.camel-conduit" camelContextId="conduit_context" /&gt;
+
+
+  &lt;camel:conduit name="*.camel-conduit"&gt;
+  &lt;!-- you can also using the wild card to specify the camel-conduit that you want to configure --&gt;
+    ...
+  &lt;/camel:conduit&gt;
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>camel:conduit</code> element has a number of child elements that specify
+configuration information. They are described below.</p>
+</div>
+<div class="paragraph">
+<p>Element</p>
+</div>
+<div class="paragraph">
+<p>Description</p>
+</div>
+<div class="paragraph">
+<p><code>camel-spring:camelContext</code></p>
+</div>
+<div class="paragraph">
+<p>You can specify the camel context in the camel conduit</p>
+</div>
+<div class="paragraph">
+<p><code>camel:camelContextRef</code></p>
+</div>
+<div class="paragraph">
+<p>The camel context id which you want inject into the camel conduit</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="CamelTransportforCXF-ConfigurethedestinationandconduitwithBlueprint">Configure the destination and conduit with Blueprint</h3>
+<div class="paragraph">
+<p>From <strong>Camel 2.11.x</strong>, Camel Transport supports to be configured with
+Blueprint.</p>
+</div>
+<div class="paragraph">
+<p>If you are using blueprint, you should use the the namespace
+<code><a href="http://cxf.apache.org/transports/camel/blueprint" class="bare">http://cxf.apache.org/transports/camel/blueprint</a></code> and import the schema
+like the blow.</p>
+</div>
+<div class="paragraph">
+<p><strong>Adding the Configuration Namespace for blueprint</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;beans ...
+       xmlns:camel="http://cxf.apache.org/transports/camel/blueprint"
+       ...
+       xsi:schemaLocation="...
+                           http://cxf.apache.org/transports/camel/blueprint
+                           http://cxf.apache.org/schmemas/blueprint/camel.xsd
+                          ...&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In blueprint <code>camel:conduit</code> <code>camel:destination</code> only has one
+camelContextId attribute, they doesn&#8217;t support to specify the camel
+context in the camel destination.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">  &lt;camel:conduit id="*.camel-conduit" camelContextId="camel1" /&gt;
+  &lt;camel:destination id="*.camel-destination" camelContextId="camel1" /&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="CamelTransportforCXF-ExampleUsingCamelasaloadbalancerforCXF">Example Using Camel as a load balancer for CXF</h3>
+<div class="paragraph">
+<p>This example shows how to use the camel load balancing feature in CXF.
+You need to load the configuration file in CXF and publish the endpoints
+on the address "camel://direct:EndpointA" and "camel://direct:EndpointB"</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="CamelTransportforCXF-CompleteHowtoandExampleforattachingCameltoCXF">Complete Howto and Example for attaching Camel to CXF</h3>
+<div class="paragraph">
+<p><a href="better-jms-transport-for-cxf-webservice-using-apache-camel.html">Better
+JMS Transport for CXF Webservice using Apache Camel</a></p>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/cxfrs-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/cxf-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

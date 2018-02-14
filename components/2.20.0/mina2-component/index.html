@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Mina2 Component Available as of Camel version 2.10
+ The mina2: component is a transport for working with Apache MINA 2.x
+   Tip  Favor using Netty as Netty is a much more active maintained and popular project than Apache Mina currently is     INFO: Be careful with sync=false on consumer endpoints. Since camel-mina2 all consumer exchanges are InOut. This is different to camel-mina.
+ Maven users will need to add the following dependency to their pom.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Mina2 Component Available as of Camel version 2.10
+ The mina2: component is a transport for working with Apache MINA 2.x
+   Tip  Favor using Netty as Netty is a much more active maintained and popular project than Apache Mina currently is     INFO: Be careful with sync=false on consumer endpoints. Since camel-mina2 all consumer exchanges are InOut. This is different to camel-mina.
+ Maven users will need to add the following dependency to their pom.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/mina2-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/mina2-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_mina2_component">Mina2 Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.10</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>mina2:</strong> component is a transport for working with
+<a href="http://mina.apache.org/">Apache MINA 2.x</a></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+Favor using <a href="netty.html">Netty</a> as Netty is a much more active
+maintained and popular project than Apache Mina currently is
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>INFO: Be careful with sync=false on consumer endpoints. Since camel-mina2 all
+consumer exchanges are InOut. This is different to camel-mina.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-mina2&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">mina2:tcp://hostname[:port][?options]
+mina2:udp://hostname[:port][?options]
+mina2:vm://hostname[:port][?options]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can specify a codec in the <a href="registry.html">Registry</a> using the
+<strong>codec</strong> option. If you are using TCP and no codec is specified then the
+<code>textline</code> flag is used to determine if text line based codec or object
+serialization should be used instead. By default the object
+serialization is used.</p>
+</div>
+<div class="paragraph">
+<p>For UDP if no codec is specified the default uses a basic <code>ByteBuffer</code>
+based codec.</p>
+</div>
+<div class="paragraph">
+<p>The VM protocol is used as a direct forwarding mechanism in the same
+JVM.</p>
+</div>
+<div class="paragraph">
+<p>A Mina producer has a default timeout value of 30 seconds, while it
+waits for a response from the remote server.</p>
+</div>
+<div class="paragraph">
+<p>In normal use, <code>camel-mina</code> only supports marshalling the body
+content—message headers and exchange properties are not sent.<br>
+ However, the option, <strong>transferExchange</strong>, does allow you to transfer the
+exchange itself over the wire. See options below.</p>
+</div>
+<div class="paragraph">
+<p>You can append query options to the URI in the following format,
+<code>?option=value&amp;option=value&amp;&#8230;&#8203;</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The Mina2 component supports 3 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>configuration</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the shared mina configuration.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mina2Configuration</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>useGlobalSslContext Parameters</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable usage of global SSL context parameters.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Mina2 endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>mina2:protocol:host:port</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_3_parameters">Path Parameters (3 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>protocol</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Protocol to use</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>host</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Hostname to use. Use localhost or 0.0.0.0 for local server as consumer. For producer use the hostname or ip address of the remote server.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>port</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> Port number</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_27_parameters">Query Parameters (27 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>disconnect</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not to disconnect(close) from Mina session right after use. Can be used for both consumer and producer.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>minaLogger</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">You can enable the Apache MINA logging filter. Apache MINA uses slf4j logging at INFO level to log all input and output.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sync</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Setting to set endpoint as one-way or request-response.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>timeout</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">You can configure the timeout that specifies how long to wait for a response from a remote server. The timeout unit is in milliseconds so 60000 is 60 seconds.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">30000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>writeTimeout</strong> (common)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum amount of time it should take to send data to the MINA session. Default is 10000 milliseconds.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">10000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>clientMode</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the clientMode is true mina consumer will connect the address as a TCP client.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>disconnectOnNoReply</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If sync is enabled then this option dictates MinaConsumer if it should disconnect where there is no reply to send back.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>noReplyLogLevel</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If sync is enabled this option dictates MinaConsumer which logging level to use when logging a there is no reply to send back.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">WARN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LoggingLevel</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>cachedAddress</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to create the InetAddress once and reuse. Setting this to false allows to pickup DNS changes in the network.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>lazySessionCreation</strong> (producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sessions can be lazily created to avoid exceptions if the remote server is not up and running when the Camel producer is started.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>maximumPoolSize</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of worker threads in the worker pool for TCP and UDP</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>orderedThreadPoolExecutor</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to use ordered thread pool to ensure events are processed orderly on the same channel.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>transferExchange</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only used for TCP. You can transfer the exchange over the wire instead of just the body. The following fields are transferred: In body Out body fault body In headers Out headers fault headers exchange properties exchange exception. This requires that the objects are serializable. Camel will exclude any non-serializable objects and log it at WARN level.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>allowDefaultCodec</strong> (codec)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The mina component installs a default codec if both codec is null and textline is false. Setting allowDefaultCodec to false prevents the mina component from installing a default codec as the first element in the filter chain. This is useful in scenarios where another filter must be the first in the filter chain like the SSL filter.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>codec</strong> (codec)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use a custom minda codec implementation.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ProtocolCodecFactory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>decoderMaxLineLength</strong> (codec)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To set the textline protocol decoder max line length. By default the default value of Mina itself is used which are 1024.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1024</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>encoderMaxLineLength</strong> (codec)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To set the textline protocol encoder max line length. By default the default value of Mina itself is used which are Integer.MAX_VALUE.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">-1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>encoding</strong> (codec)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">You can configure the encoding (a charset name) to use for the TCP textline codec and the UDP protocol. If not provided Camel will use the JVM default Charset</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>filters</strong> (codec)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">You can set a list of Mina IoFilters to use.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>textline</strong> (codec)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only used for TCP. If no codec is specified you can use this flag to indicate a text line based codec; if not specified or the value is false then Object Serialization is assumed over TCP.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>textlineDelimiter</strong> (codec)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only used for TCP and if textline=true. Sets the text line delimiter to use. If none provided Camel will use DEFAULT. This delimiter is used to mark the end of text.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mina2TextLineDelimiter</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>autoStartTls</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to auto start SSL handshake.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>sslContextParameters</strong> (security)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure SSL security.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SSLContextParameters</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_a_custom_codec">Using a custom codec</h3>
+<div class="paragraph">
+<p>See the Mina how to write your own codec. To use your custom codec with
+<code>camel-mina</code>, you should register your codec in the
+<a href="registry.html">Registry</a>; for example, by creating a bean in the
+Spring XML file. Then use the <code>codec</code> option to specify the bean ID of
+your codec. See <a href="hl7.html">HL7</a> that has a custom codec.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sample_with_sync_false">Sample with sync=false</h3>
+<div class="paragraph">
+<p>In this sample, Camel exposes a service that listens for TCP connections
+on port 6200. We use the <strong>textline</strong> codec. In our route, we create a
+Mina consumer endpoint that listens on port 6200:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("mina2:tcp://localhost:" + port1 + "?textline=true&amp;sync=false").to("mock:result");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As the sample is part of a unit test, we test it by sending some data to
+it on port 6200.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">MockEndpoint mock = getMockEndpoint("mock:result");
+mock.expectedBodiesReceived("Hello World");
+
+template.sendBody("mina2:tcp://localhost:" + port1 + "?textline=true&amp;sync=false", "Hello World");
+
+assertMockEndpointsSatisfied();</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sample_with_sync_true">Sample with sync=true</h3>
+<div class="paragraph">
+<p>In the next sample, we have a more common use case where we expose a TCP
+service on port 6201 also use the textline codec. However, this time we
+want to return a response, so we set the <code>sync</code> option to <code>true</code> on the
+consumer.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("mina2:tcp://localhost:" + port2 + "?textline=true&amp;sync=true").process(new Processor() {
+    public void process(Exchange exchange) throws Exception {
+        String body = exchange.getIn().getBody(String.class);
+        exchange.getOut().setBody("Bye " + body);
+    }
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then we test the sample by sending some data and retrieving the response
+using the <code>template.requestBody()</code> method. As we know the response is a
+<code>String</code>, we cast it to <code>String</code> and can assert that the response is, in
+fact, something we have dynamically set in our processor code logic.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">String response = (String)template.requestBody("mina2:tcp://localhost:" + port2 + "?textline=true&amp;sync=true", "World");
+assertEquals("Bye World", response);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sample_with_spring_dsl">Sample with Spring DSL</h3>
+<div class="paragraph">
+<p>Spring DSL can, of course, also be used for <a href="mina.html">MINA</a>. In the
+sample below we expose a TCP server on port 5555:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">   &lt;route&gt;
+     &lt;from uri="mina2:tcp://localhost:5555?textline=true"/&gt;
+     &lt;to uri="bean:myTCPOrderHandler"/&gt;
+  &lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the route above, we expose a TCP server on port 5555 using the
+textline codec. We let the Spring bean with ID, <code>myTCPOrderHandler</code>,
+handle the request and return a reply. For instance, the handler bean
+could be implemented as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    public String handleOrder(String payload) {
+        ...
+        return "Order: OK"
+   }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_closing_session_when_complete">Closing Session When Complete</h3>
+<div class="paragraph">
+<p>When acting as a server you sometimes want to close the session when,
+for example, a client conversion is finished. To instruct Camel to close
+the session, you should add a header with the key
+<code>CamelMinaCloseSessionWhenComplete</code> set to a boolean <code>true</code> value.</p>
+</div>
+<div class="paragraph">
+<p>For instance, the example below will close the session after it has
+written the <code>bye</code> message back to the client:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">        from("mina2:tcp://localhost:8080?sync=true&amp;textline=true").process(new Processor() {
+            public void process(Exchange exchange) throws Exception {
+                String body = exchange.getIn().getBody(String.class);
+                exchange.getOut().setBody("Bye " + body);
+                exchange.getOut().setHeader(Mina2Constants.MINA_CLOSE_SESSION_WHEN_COMPLETE, true);
+            }
+        });</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get_the_iosession_for_message">Get the IoSession for message</h3>
+<div class="paragraph">
+<p>You can get the IoSession from the message header with this key
+<code>Mina2Constants.MINA_IOSESSION</code>, and also get the local host address
+with the key <code>Mina2Constants.MINA_LOCAL_ADDRESS</code> and remote host address
+with the key <code>Mina2Constants.MINA_REMOTE_ADDRESS</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configuring_mina_filters">Configuring Mina filters</h3>
+<div class="paragraph">
+<p>Filters permit you to use some Mina Filters, such as <code>SslFilter</code>. You
+can also implement some customized filters. Please note that <code>codec</code> and
+<code>logger</code> are also implemented as Mina filters of type, <code>IoFilter</code>. Any
+filters you may define are appended to the end of the filter chain; that
+is, after <code>codec</code> and <code>logger</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+<li>
+<p><a href="mina.html">MINA</a></p>
+</li>
+<li>
+<p><a href="netty.html">Netty</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/mllp-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/mina-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

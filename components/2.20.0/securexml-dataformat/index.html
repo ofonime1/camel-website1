@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='XML Security DataFormat Available as of Camel version 2.0
+ The XMLSecurity Data Format facilitates encryption and decryption of XML payloads at the Document, Element, and Element Content levels (including simultaneous multi-node encryption/decryption using XPath). To sign messages using the XML Signature specification, please see the Camel XML Security component.
+ The encryption capability is based on formats supported using the Apache XML Security (Santuario) project. Symmetric encryption/decryption is currently supported using Triple-DES and AES (128, 192, and 256) encryption formats.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='XML Security DataFormat Available as of Camel version 2.0
+ The XMLSecurity Data Format facilitates encryption and decryption of XML payloads at the Document, Element, and Element Content levels (including simultaneous multi-node encryption/decryption using XPath). To sign messages using the XML Signature specification, please see the Camel XML Security component.
+ The encryption capability is based on formats supported using the Apache XML Security (Santuario) project. Symmetric encryption/decryption is currently supported using Triple-DES and AES (128, 192, and 256) encryption formats.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/securexml-dataformat/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/securexml-dataformat/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_xml_security_dataformat">XML Security DataFormat</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 2.0</strong></p>
+</div>
+<div class="paragraph">
+<p>The XMLSecurity Data Format facilitates encryption and decryption of XML
+payloads at the Document, Element, and Element Content levels (including
+simultaneous multi-node encryption/decryption using XPath). To sign
+messages using the XML Signature specification, please see the Camel XML
+Security <a href="xml-security-component.html">component</a>.</p>
+</div>
+<div class="paragraph">
+<p>The encryption capability is based on formats supported using the Apache
+XML Security (Santuario) project. Symmetric encryption/decryption is
+currently supported using Triple-DES and AES (128, 192, and 256)
+encryption formats. Additional formats can be easily added later as
+needed. This capability allows Camel users to encrypt/decrypt payloads
+while being dispatched or received along a route.</p>
+</div>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.9</strong><br>
+ The XMLSecurity Data Format supports asymmetric key encryption. In this
+encryption model a symmetric key is generated and used to perform XML
+content encryption or decryption. This "content encryption key" is then
+itself encrypted using an asymmetric encryption algorithm that leverages
+the recipient&#8217;s public key as the "key encryption key". Use of an
+asymmetric key encryption algorithm ensures that only the holder of the
+recipient&#8217;s private key can access the generated symmetric encryption
+key. Thus, only the private key holder can decode the message. The
+XMLSecurity Data Format handles all of the logic required to encrypt and
+decrypt the message content and encryption key(s) using asymmetric key
+encryption.</p>
+</div>
+<div class="paragraph">
+<p>The XMLSecurity Data Format also has improved support for namespaces
+when processing the XPath queries that select content for encryption. A
+namespace definition mapping can be included as part of the data format
+configuration. This enables true namespace matching, even if the prefix
+values in the XPath query and the target xml document are not equivalent
+strings.</p>
+</div>
+<div class="sect2">
+<h3 id="_xmlsecurity_options">XMLSecurity Options</h3>
+<div class="paragraph">
+<p>The XML Security dataformat supports 12 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Java Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>xmlCipherAlgorithm</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TRIPLEDES</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The cipher algorithm to be used for encryption/decryption of the XML message content. The available choices are: XMLCipher.TRIPLEDES XMLCipher.AES_128 XMLCipher.AES_128_GCM XMLCipher.AES_192 XMLCipher.AES_192_GCM XMLCipher.AES_256 XMLCipher.AES_256_GCM XMLCipher.SEED_128 XMLCipher.CAMELLIA_128 XMLCipher.CAMELLIA_192 XMLCipher.CAMELLIA_256 The default value is MLCipher.TRIPLEDES</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>passPhrase</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A String used as passPhrase to encrypt/decrypt content. The passPhrase has to be provided. If no passPhrase is specified a default passPhrase is used. The passPhrase needs to be put together in conjunction with the appropriate encryption algorithm. For example using TRIPLEDES the passPhase can be a Only another 24 Byte key</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>secureTag</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The XPath reference to the XML Element selected for encryption/decryption. If no tag is specified the entire payload is encrypted/decrypted.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>secureTagContents</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A boolean value to specify whether the XML Element is to be encrypted or the contents of the XML Element false = Element Level true = Element Content Level</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>keyCipherAlgorithm</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RSA_OAEP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The cipher algorithm to be used for encryption/decryption of the asymmetric key. The available choices are: XMLCipher.RSA_v1dot5 XMLCipher.RSA_OAEP XMLCipher.RSA_OAEP_11 The default value is XMLCipher.RSA_OAEP</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>recipientKeyAlias</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The key alias to be used when retrieving the recipient&#8217;s public or private key from a KeyStore when performing asymmetric key encryption or decryption.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>keyOrTrustStoreParametersId</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Refers to a KeyStore instance to lookup in the registry which is used for configuration options for creating and loading a KeyStore instance that represents the sender&#8217;s trustStore or recipient&#8217;s keyStore.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>keyPassword</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The password to be used for retrieving the private key from the KeyStore. This key is used for asymmetric decryption.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>digestAlgorithm</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SHA1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The digest algorithm to use with the RSA OAEP algorithm. The available choices are: XMLCipher.SHA1 XMLCipher.SHA256 XMLCipher.SHA512 The default value is XMLCipher.SHA1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>mgfAlgorithm</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MGF1_SHA1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The MGF Algorithm to use with the RSA OAEP algorithm. The available choices are: EncryptionConstants.MGF1_SHA1 EncryptionConstants.MGF1_SHA256 EncryptionConstants.MGF1_SHA512 The default value is EncryptionConstants.MGF1_SHA1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>addKeyValueForEncryptedKey</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to add the public key used to encrypt the session key as a KeyValue in the EncryptedKey structure or not.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contentTypeHeader</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the data format should set the Content-Type header with the type from the data format if the data format is capable of doing so. For example application/xml for data formats marshalling to XML or application/json for data formats marshalling to JSon etc.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_key_cipher_algorithm">Key Cipher Algorithm</h4>
+<div class="paragraph">
+<p>As of Camel 2.12.0, the default Key Cipher Algorithm is now
+XMLCipher.RSA_OAEP instead of XMLCipher.RSA_v1dot5. Usage of
+XMLCipher.RSA_v1dot5 is discouraged due to various attacks. Requests
+that use RSA v1.5 as the key cipher algorithm will be rejected unless it
+has been explicitly configured as the key cipher algorithm.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_marshal">Marshal</h3>
+<div class="paragraph">
+<p>In order to encrypt the payload, the <code>marshal</code> processor needs to be
+applied on the route followed by the <strong><code>secureXML()</code></strong> tag.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_unmarshal">Unmarshal</h3>
+<div class="paragraph">
+<p>In order to decrypt the payload, the <code>unmarshal</code> processor needs to be
+applied on the route followed by the <strong><code>secureXML()</code></strong> tag.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examples">Examples</h3>
+<div class="paragraph">
+<p>Given below are several examples of how marshalling could be performed
+at the Document, Element, and Content levels.</p>
+</div>
+<div class="sect3">
+<h4 id="_full_payload_encryption_decryption">Full Payload encryption/decryption</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("direct:start")
+    .marshal().secureXML()
+    .unmarshal().secureXML()
+    .to("direct:end");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_partial_payload_content_only_encryption_decryption">Partial Payload Content Only encryption/decryption</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">String tagXPATH = "//cheesesites/italy/cheese";
+boolean secureTagContent = true;
+...
+from("direct:start")
+    .marshal().secureXML(tagXPATH, secureTagContent)
+    .unmarshal().secureXML(tagXPATH, secureTagContent)
+    .to("direct:end");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_partial_multi_node_payload_content_only_encryption_decryption">Partial Multi Node Payload Content Only encryption/decryption</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">String tagXPATH = "//cheesesites/*/cheese";
+boolean secureTagContent = true;
+...
+from("direct:start")
+    .marshal().secureXML(tagXPATH, secureTagContent)
+    .unmarshal().secureXML(tagXPATH, secureTagContent)
+    .to("direct:end");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_partial_payload_content_only_encryption_decryption_with_choice_of_passphrase_password">Partial Payload Content Only encryption/decryption with choice of passPhrase(password)</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">String tagXPATH = "//cheesesites/italy/cheese";
+boolean secureTagContent = true;
+...
+String passPhrase = "Just another 24 Byte key";
+from("direct:start")
+    .marshal().secureXML(tagXPATH, secureTagContent, passPhrase)
+    .unmarshal().secureXML(tagXPATH, secureTagContent, passPhrase)
+    .to("direct:end");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_partial_payload_content_only_encryption_decryption_with_passphrase_password_and_algorithm">Partial Payload Content Only encryption/decryption with passPhrase(password) and Algorithm</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">import org.apache.xml.security.encryption.XMLCipher;
+....
+String tagXPATH = "//cheesesites/italy/cheese";
+boolean secureTagContent = true;
+String passPhrase = "Just another 24 Byte key";
+String algorithm= XMLCipher.TRIPLEDES;
+from("direct:start")
+    .marshal().secureXML(tagXPATH, secureTagContent, passPhrase, algorithm)
+    .unmarshal().secureXML(tagXPATH, secureTagContent, passPhrase, algorithm)
+    .to("direct:end");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_partial_payload_content_with_namespace_support">Partial Payload Content with Namespace support</h4>
+<div id="XMLSecurityDataFormat-JavaDSL" class="paragraph">
+<p>Java DSL</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">final Map&lt;String, String&gt; namespaces = new HashMap&lt;String, String&gt;();
+namespaces.put("cust", "http://cheese.xmlsecurity.camel.apache.org/");
+
+final KeyStoreParameters tsParameters = new KeyStoreParameters();
+tsParameters.setPassword("password");
+tsParameters.setResource("sender.ts");
+
+context.addRoutes(new RouteBuilder() {
+    public void configure() {
+        from("direct:start")
+           .marshal().secureXML("//cust:cheesesites/italy", namespaces, true, "recipient",
+                                testCypherAlgorithm, XMLCipher.RSA_v1dot5, tsParameters)
+           .to("mock:encrypted");
+    }
+}</code></pre>
+</div>
+</div>
+<div id="XMLSecurityDataFormat-SpringXML" class="paragraph">
+<p>Spring XML</p>
+</div>
+<div class="paragraph">
+<p>A namespace prefix that is defined as part of the <code>camelContext</code>
+definition can be re-used in context within the data format <code>secureTag</code>
+attribute of the <code>secureXML</code> element.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;camelContext id="springXmlSecurityDataFormatTestCamelContext"
+              xmlns="http://camel.apache.org/schema/spring"
+              xmlns:cheese="http://cheese.xmlsecurity.camel.apache.org/"&gt;
+    &lt;route&gt;
+        &lt;from uri="direct://start"/&gt;
+            &lt;marshal&gt;
+                &lt;secureXML secureTag="//cheese:cheesesites/italy"
+                           secureTagContents="true"/&gt;
+            &lt;/marshal&gt;
+            ...</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_asymmetric_key_encryption">Asymmetric Key Encryption</h4>
+<div id="XMLSecurityDataFormat-SpringXMLSender" class="paragraph">
+<p>Spring XML Sender</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;!--  trust store configuration --&gt;
+&lt;camel:keyStoreParameters id="trustStoreParams" resource="./sender.ts" password="password"/&gt;
+
+&lt;camelContext id="springXmlSecurityDataFormatTestCamelContext"
+              xmlns="http://camel.apache.org/schema/spring"
+              xmlns:cheese="http://cheese.xmlsecurity.camel.apache.org/"&gt;
+    &lt;route&gt;
+        &lt;from uri="direct://start"/&gt;
+            &lt;marshal&gt;
+                &lt;secureXML secureTag="//cheese:cheesesites/italy"
+                           secureTagContents="true"
+                           xmlCipherAlgorithm="http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+                           keyCipherAlgorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"
+                           recipientKeyAlias="recipient"
+                           keyOrTrustStoreParametersId="trustStoreParams"/&gt;
+            &lt;/marshal&gt;
+            ...</code></pre>
+</div>
+</div>
+<div id="XMLSecurityDataFormat-SpringXMLRecipient" class="paragraph">
+<p>Spring XML Recipient</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;!--  key store configuration --&gt;
+&lt;camel:keyStoreParameters id="keyStoreParams" resource="./recipient.ks" password="password" /&gt;
+
+&lt;camelContext id="springXmlSecurityDataFormatTestCamelContext"
+              xmlns="http://camel.apache.org/schema/spring"
+              xmlns:cheese="http://cheese.xmlsecurity.camel.apache.org/"&gt;
+    &lt;route&gt;
+        &lt;from uri="direct://encrypted"/&gt;
+            &lt;unmarshal&gt;
+                &lt;secureXML secureTag="//cheese:cheesesites/italy"
+                           secureTagContents="true"
+                           xmlCipherAlgorithm="http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+                           keyCipherAlgorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"
+                           recipientKeyAlias="recipient"
+                           keyOrTrustStoreParametersId="keyStoreParams"
+                           keyPassword="privateKeyPassword" /&gt;
+            &lt;/unmarshal&gt;
+            ...</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dependencies">Dependencies</h3>
+<div class="paragraph">
+<p>This data format is provided within the <strong>camel-xmlsecurity</strong> component.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/servicenow-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/script/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

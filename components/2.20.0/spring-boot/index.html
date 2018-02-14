@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Spring Boot Available as of Camel 2.15
+ Spring Boot component provides auto-configuration for Apache Camel. Our opinionated auto-configuration of the Camel context auto-detects Camel routes available in the Spring context and registers the key Camel utilities (like producer template, consumer template and the type converter) as beans.
+ Maven users will need to add the following dependency to their pom.xml in order to use this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-spring-boot&lt;/artifactId&gt; &lt;version&gt;${camel.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Spring Boot Available as of Camel 2.15
+ Spring Boot component provides auto-configuration for Apache Camel. Our opinionated auto-configuration of the Camel context auto-detects Camel routes available in the Spring context and registers the key Camel utilities (like producer template, consumer template and the type converter) as beans.
+ Maven users will need to add the following dependency to their pom.xml in order to use this component:
+ &lt;dependency&gt; &lt;groupId&gt;org.apache.camel&lt;/groupId&gt; &lt;artifactId&gt;camel-spring-boot&lt;/artifactId&gt; &lt;version&gt;${camel.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/spring-boot/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/spring-boot/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect2">
+<h3 id="SpringBoot-SpringBoot">Spring Boot</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.15</strong></p>
+</div>
+<div class="paragraph">
+<p>Spring Boot component provides auto-configuration for Apache Camel. Our
+opinionated auto-configuration of the Camel context auto-detects Camel
+routes available in the Spring context and registers the key Camel
+utilities (like producer template, consumer template and the type
+converter) as beans.</p>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+in order to use this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-spring-boot&lt;/artifactId&gt;
+    &lt;version&gt;${camel.version}&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>camel-spring-boot</code> jar comes with the <code>spring.factories</code> file, so as
+soon as you add that dependency into your classpath, Spring Boot will
+automatically auto-configure Camel for you.</p>
+</div>
+<div class="sect3">
+<h4 id="SpringBoot-CamelSpringBootStarter">Camel Spring Boot Starter</h4>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.17</strong></p>
+</div>
+<div class="paragraph">
+<p>Apache Camel ships
+a https://github.com/spring-projects/spring-boot/tree/master/spring-boot-starters[Spring
+Boot Starter] module that allows you to develop Spring Boot applications
+using starters. There is a
+<a href="https://github.com/apache/camel/tree/master/examples/camel-example-spring-boot-starter">sample
+application</a> in the source code also.</p>
+</div>
+<div class="paragraph">
+<p>To use the starter, add the following to your spring boot pom.xml file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-spring-boot-starter&lt;/artifactId&gt;
+    &lt;version&gt;2.17.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then you can just add classes with your Camel routes such as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package com.example;
+
+import org.apache.camel.builder.RouteBuilder;
+import org.springframework.stereotype.Component;
+
+@Component
+public class MyRoute extends RouteBuilder {
+
+    @Override
+    public void configure() throws Exception {
+        from("timer:foo").to("log:bar");
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then these routes will be started automatically.</p>
+</div>
+<div class="paragraph">
+<p>You can customize the Camel application in the <code>application.properties</code>
+or <code>application.yml</code> file.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="SpringBoot-Auto-configuredCamelcontext">Auto-configured Camel context</h4>
+<div class="paragraph">
+<p>The most important piece of functionality provided by the Camel
+auto-configuration is <code>CamelContext</code> instance.
+Camel auto-configuration creates a <code>SpringCamelContext</code> for you and
+takes care of the proper initialization and shutdown of that context.
+The created Camel context is also registered in the Spring application
+context (under <code>camelContext</code> bean name), so you can access it just as
+ any other Spring bean.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Configuration
+public class MyAppConfig {
+
+  @Autowired
+  CamelContext camelContext;
+
+  @Bean
+  MyService myService() {
+    return new DefaultMyService(camelContext);
+  }
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="SpringBoot-Auto-detectingCamelroutes">Auto-detecting Camel routes</h4>
+<div class="paragraph">
+<p>Camel auto-configuration collects all the <code>RouteBuilder</code> instances from
+the Spring context and automatically injects them into the provided
+<code>CamelContext</code>. That means that creating new Camel route with the Spring
+Boot starter is as simple as adding the <code>@Component</code> annotated class to
+your classpath:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Component
+public class MyRouter extends RouteBuilder {
+
+  @Override
+  public void configure() throws Exception {
+    from("jms:invoices").to("file:/invoices");
+  }
+
+}</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre> +
+...or creating a new route `RouteBuilder` bean in your `@Configuration`
+class:</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Configuration
+public class MyRouterConfiguration {
+
+  @Bean
+  RoutesBuilder myRouter() {
+    return new RouteBuilder() {
+
+      @Override
+      public void configure() throws Exception {
+        from("jms:invoices").to("file:/invoices");
+      }
+
+    };
+  }
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="SpringBoot-Camelproperties">Camel properties</h4>
+<div class="paragraph">
+<p>Spring Boot auto-configuration automatically connects
+to http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config[Spring
+Boot external configuration] (like properties placeholders, OS
+environment variables or system properties) with
+the <a href="properties.html">Camel properties support</a>. It basically means
+that any property defined in <code>application.properties</code> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">route.from = jms:invoices</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>&#8230;&#8203;or set via system property&#8230;&#8203;</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">java -Droute.to=jms:processed.invoices -jar mySpringApp.jar</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>&#8230;&#8203;can be used as placeholders in Camel route:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Component
+public class MyRouter extends RouteBuilder {
+
+  @Override
+  public void configure() throws Exception {
+    from("{{route.from}}").to("{{route.to}}");
+  }
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="SpringBoot-CustomCamelcontextconfiguration">Custom Camel context configuration</h4>
+<div class="paragraph">
+<p>If you would like to perform some operations on <code>CamelContext</code> bean
+created by Camel auto-configuration,
+register <code>CamelContextConfiguration</code> instance in your Spring context:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Configuration
+public class MyAppConfig {
+
+  ...
+
+  @Bean
+  CamelContextConfiguration contextConfiguration() {
+    return new CamelContextConfiguration() {
+      @Override
+      void beforeApplicationStart(CamelContext context) {
+        // your custom configuration goes here
+      }
+    };
+  }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Method
+C`amelContextConfiguration#<code>`beforeApplicationStart(CamelContext)</code> will
+be called just before the Spring context is started, so the
+<code>CamelContext</code> instance passed to this callback is
+fully auto-configured. You can add many instances of
+C`amelContextConfiguration` into your Spring context - all of them will
+be executed.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="SpringBoot-DisablingJMX">Disabling JMX</h4>
+<div class="paragraph">
+<p>To disable JMX of the auto-configured <code>CamelContext</code> use
+<code>camel.springboot.jmxEnabled</code> property (JMX is enabled by default). For
+example you could add the following property to your
+<code>application.properties</code> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">camel.springboot.jmxEnabled = false</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="SpringBoot-Auto-configuredconsumerandproducertemplates">Auto-configured consumer and producer templates</h4>
+<div class="paragraph">
+<p>Camel auto-configuration provides pre-configured <code>ConsumerTemplate</code> and
+<code>ProducerTemplate</code> instances. You can simply inject them into your
+Spring-managed beans:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Component
+public class InvoiceProcessor {
+
+  @Autowired
+  private ProducerTemplate producerTemplate;
+
+  @Autowired
+  private ConsumerTemplate consumerTemplate;
+  public void processNextInvoice() {
+    Invoice invoice = consumerTemplate.receiveBody("jms:invoices", Invoice.class);
+    ...
+    producerTemplate.sendBody("netty-http:http://invoicing.com/received/" + invoice.id());
+  }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default consumer templates and producer templates come with the
+endpoint cache sizes set to 1000. You can change those values via the
+following Spring properties:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">camel.springboot.consumerTemplateCacheSize = 100
+camel.springboot.producerTemplateCacheSize = 200</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="SpringBoot-Auto-configuredTypeConverter">Auto-configured TypeConverter</h4>
+<div class="paragraph">
+<p>Camel auto-configuration registers a <code>TypeConverter</code> instance named
+<code>typeConverter</code> in the Spring context.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Component
+public class InvoiceProcessor {
+
+  @Autowired
+  private TypeConverter typeConverter;
+
+  public long parseInvoiceValue(Invoice invoice) {
+    String invoiceValue = invoice.grossValue();
+    return typeConverter.convertTo(Long.class, invoiceValue);
+  }
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="SpringBoot-SpringtypeconversionAPIbridge">Spring type conversion API bridge</h4>
+<div class="paragraph">
+<p>Spring comes with
+the powerful http://docs.spring.io/spring/docs/current/spring-framework-reference/html/validation.html#core-convert[type
+conversion API]. Spring API happens to be very similar to the Camel
+<a href="type-converter.html">type converter API</a>. As those APIs are so
+similar, Camel Spring Boot automatically registers a bridge converter
+(<code>SpringTypeConverter</code>) that delegates to the Spring conversion API.That
+means that out-of-the-box Camel will treat Spring Converters like Camel
+ones. With this approach you can enjoy both Camel and Spring converters
+accessed via Camel <code>TypeConverter</code> API:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Component
+public class InvoiceProcessor {
+
+  @Autowired
+  private TypeConverter typeConverter;
+
+  public UUID parseInvoiceId(Invoice invoice) {
+    // Using Spring's StringToUUIDConverter
+    UUID id = invoice.typeConverter.convertTo(UUID.class, invoice.getId());
+  }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Under the hood Camel Spring Boot delegates conversion to the Spring&#8217;s
+<code>ConversionService</code> instances available in the application context. If
+no <code>ConversionService</code> instance is available, Camel Spring Boot
+auto-configuration will create one for you.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="SpringBoot-Disablingtypeconversionsfeatures">Disabling type conversions features</h4>
+<div class="paragraph">
+<p>If you don&#8217;t want Camel Spring Boot to register type-conversions related
+features (like <code>TypeConverter</code> instance or Spring bridge) set the
+<code>camel.springboot.typeConversion</code> property to <code>false</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">camel.springboot.typeConversion = false</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="SpringBoot-Blockingmainthread">Blocking main thread</h4>
+<div class="paragraph">
+<p>This feature is available starting from Camel <strong>2.15.2</strong>. Camel
+applications extending FatJarRouter by default block the main thread of
+the application. It means that after you start your fat jar, your
+application waits for Ctrl+C signal and does not exit immediately. If
+you would like to achieve similar behavior for non-<code>FatJarRouter</code>
+applications, retrieve <code>CamelSpringBootApplicationController `bean from
+your `ApplicationContext</code> and use the former to block the main thread of
+your application using
+<code>CamelSpringBootApplicationController#blockMainThread()</code> method.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public static void main(String... args) {
+    ApplicationContext applicationContext = new SpringApplication(MyCamelApplication.class).run(args);
+    CamelSpringBootApplicationController applicationController =
+            applicationContext.getBean(CamelSpringBootApplicationController.class);
+    applicationController.blockMainThread();
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="SpringBoot-AddingXMLroutes">Adding XML routes</h4>
+<div class="paragraph">
+<p>By default you can put Camel XML routes in the classpath under the
+directory camel, which camel-spring-boot will auto detect and include.
+From <strong>Camel 2.17</strong> onwards you can configure the directory name or turn
+this off using the configuration option</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// turn off
+camel.springboot.xmlRoutes = false
+// scan in the com/foo/routes classpath
+camel.springboot.xmlRoutes = classpath:com/foo/routes/*.xml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The XML files should be Camel XML routes (not CamelContext) such as</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">   &lt;routes xmlns="http://camel.apache.org/schema/spring"&gt;
+        &lt;route id="test"&gt;
+            &lt;from uri="timer://trigger"/&gt;
+            &lt;transform&gt;
+                &lt;simple&gt;ref:myBean&lt;/simple&gt;
+            &lt;/transform&gt;
+            &lt;to uri="log:out"/&gt;
+        &lt;/route&gt;
+    &lt;/routes&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="SpringBoot-AddingREST">Adding XML Rest-DSL</h4>
+<div class="paragraph">
+<p>By default you can put Camel Rest-DSL XML routes in the classpath under the
+directory camel-rest, which camel-spring-boot will auto detect and include.
+You can configure the directory name or turn this off using the configuration option</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">// turn off
+camel.springboot.xmlRests = false
+// scan in the com/foo/routes classpath
+camel.springboot.xmlRests = classpath:com/foo/rests/*.xml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The Rest-DSL XML files should be Camel XML rests (not CamelContext) such as</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">   &lt;rests xmlns="http://camel.apache.org/schema/spring"&gt;
+      &lt;rest&gt;
+         &lt;post uri="/persons"&gt;
+            &lt;to uri="direct:postPersons"/&gt;
+         &lt;/post&gt;
+         &lt;get uri="/persons"&gt;
+            &lt;to uri="direct:getPersons"/&gt;
+         &lt;/get&gt;
+         &lt;get uri="/persons/{personId}"&gt;
+             &lt;to uri="direct:getPersionId"/&gt;
+         &lt;/get&gt;
+         &lt;put uri="/persons/{personId}"&gt;
+             &lt;to uri="direct:putPersionId"/&gt;
+         &lt;/put&gt;
+         &lt;delete uri="/persons/{personId}"&gt;
+             &lt;to uri="direct:deletePersionId"/&gt;
+         &lt;/delete&gt;
+      &lt;/rest&gt;
+    &lt;/rests&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="SpringBoot-SeeAlso">See Also</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/spring-cloud-netflix/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/spring-batch-component/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+

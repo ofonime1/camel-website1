@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Quartz Component (deprecated) Available as of Camel version 1.0
+ The quartz: component provides a scheduled delivery of messages using the Quartz Scheduler 1.x. Each endpoint represents a different timer (in Quartz terms, a Trigger and JobDetail).
+   Tip  If you are using Quartz 2.x then from Camel 2.12 onwards there is a Quartz2 component you should use     Maven users will need to add the following dependency to their pom.'>
+
+<meta property='og:title' content=' • Apache Camel: Integration that you want'>
+<meta property='og:description' content='Quartz Component (deprecated) Available as of Camel version 1.0
+ The quartz: component provides a scheduled delivery of messages using the Quartz Scheduler 1.x. Each endpoint represents a different timer (in Quartz terms, a Trigger and JobDetail).
+   Tip  If you are using Quartz 2.x then from Camel 2.12 onwards there is a Quartz2 component you should use     Maven users will need to add the following dependency to their pom.'>
+<meta property='og:url' content='https://camel.apache.org/components/2.20.0/quartz-component/'>
+<meta property='og:site_name' content='Apache Camel: Integration that you want'>
+<meta property='og:type' content='article'><meta property='article:section' content='Components'>
+
+  <base href='https://camel.apache.org/'>
+  <title> • Apache Camel: Integration that you want</title>
+  <link rel='canonical' href='https://camel.apache.org/components/2.20.0/quartz-component/'>
+  <link href='' rel='alternate' type='application/rss+xml' title='Apache Camel: Integration that you want' />
+  <link rel='icon' href='/favicon.ico'>
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='/css/site.142da777720723dd4ecadc8e70926967.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='u-full-width u-max-full-width container'>
+    <header class='header'>
+      <div class='site-header'>
+        
+        <p class='title'>Apache Camel: Integration that you want</p>
+        
+        <p>Apache Camel framework for easy integration</p>
+      </div>
+    </header>
+
+    <nav class='navbar' aria-label='Main Menu'>
+  <div class='container'>
+    <ul class='navbar-list'>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/'>Home</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/about/'>About</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/blog/'>News</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/getting-started/'>Getting started</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/manual/'>Manual</a>
+      </li>
+      
+      <li class='navbar-item'>
+        <a class='navbar-link' href='/components/'>Components</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+
+
+<main class='row content'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'></h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <div class="sect1">
+<h2 id="_quartz_component_deprecated">Quartz Component (deprecated)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Available as of Camel version 1.0</strong></p>
+</div>
+<div class="paragraph">
+<p>The <strong>quartz:</strong> component provides a scheduled delivery of messages using
+the <a href="http://www.quartz-scheduler.org/">Quartz Scheduler 1.x</a>. <br>
+ Each endpoint represents a different timer (in Quartz terms, a Trigger
+and JobDetail).</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+If you are using Quartz 2.x then from Camel 2.12 onwards there is a
+<a href="quartz2.html">Quartz2</a> component you should use
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Maven users will need to add the following dependency to their <code>pom.xml</code>
+for this component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-quartz&lt;/artifactId&gt;
+    &lt;version&gt;x.x.x&lt;/version&gt;
+    &lt;!-- use the same version as your Camel core version --&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uri_format">URI format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">quartz://timerName?options
+quartz://groupName/timerName?options
+quartz://groupName/timerName?cron=expression
+quartz://timerName?cron=expression</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The component uses either a <code>CronTrigger</code> or a <code>SimpleTrigger</code>. If no
+cron expression is provided, the component uses a simple trigger. If no
+<code>groupName</code> is provided, the quartz component uses the <code>Camel</code> group
+name.</p>
+</div>
+<div class="paragraph">
+<p>You can append query options to the URI in the following format,
+<code>?option=value&amp;option=value&amp;&#8230;&#8203;</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_options">Options</h3>
+<div class="paragraph">
+<p>The Quartz component supports 8 options which are listed below.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>factory</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the custom SchedulerFactory which is used to create the Scheduler.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SchedulerFactory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>scheduler</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To use the custom configured Quartz scheduler instead of creating a new Scheduler.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scheduler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>properties</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Properties to configure the Quartz scheduler.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Properties</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>propertiesFile</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">File name of the properties to load from the classpath</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>startDelayedSeconds</strong> (scheduler)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Seconds to wait before starting the quartz scheduler.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>autoStartScheduler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not the scheduler should be auto started. This options is default true</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>enableJmx</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to enable Quartz JMX which allows to manage the Quartz scheduler from JMX. This options is default true</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>resolveProperty Placeholders</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the component should resolve property placeholders on itself when starting. Only properties which are of String type can use property placeholders.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Quartz endpoint is configured using URI syntax:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>quartz:groupName/timerName</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with the following path and query parameters:</p>
+</div>
+<div class="sect3">
+<h4 id="_path_parameters_2_parameters">Path Parameters (2 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>groupName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The quartz group name to use. The combination of group name and timer name should be unique.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Camel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>timerName</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required</strong> The quartz timer name to use. The combination of group name and timer name should be unique.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_query_parameters_13_parameters">Query Parameters (13 parameters):</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-center valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>bridgeErrorHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>cron</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies a cron expression to define when to trigger.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>deleteJob</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set to true then the trigger automatically delete when route stop. Else if set to false it will remain in scheduler. When set to false it will also mean user may reuse pre-configured trigger with camel Uri. Just ensure the names match. Notice you cannot have both deleteJob and pauseJob set to true.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>fireNow</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to fire the scheduler asap when its started using the simple trigger (this option does not support cron)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>pauseJob</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set to true then the trigger automatically pauses when route stop. Else if set to false it will remain in scheduler. When set to false it will also mean user may reuse pre-configured trigger with camel Uri. Just ensure the names match. Notice you cannot have both deleteJob and pauseJob set to true.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>startDelayedSeconds</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Seconds to wait before starting the quartz scheduler.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>stateful</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Uses a Quartz StatefulJob instead of the default job.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>usingFixedCamelContextName</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If it is true JobDataMap uses the CamelContext name directly to reference the CamelContext if it is false JobDataMap uses use the CamelContext management name which could be changed during the deploy time.</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exceptionHandler</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExceptionHandler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>exchangePattern</strong> (consumer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the exchange pattern when the consumer creates an exchange.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExchangePattern</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>jobParameters</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure additional options on the job.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>synchronous</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets whether synchronous processing should be strictly used or Camel is allowed to use asynchronous processing (if supported).</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>triggerParameters</strong> (advanced)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To configure additional options on the trigger.</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>When using a
+<a href="http://quartz-scheduler.org/api/2.0.0/org/quartz/StatefulJob.html">StatefulJob</a>,
+the
+<a href="http://quartz-scheduler.org/api/2.0.0/org/quartz/JobDataMap.html">JobDataMap</a>
+is re-persisted after every execution of the job, thus preserving state
+for the next execution.</p>
+</div>
+<div class="paragraph">
+<p>INFO: <strong>Running in OSGi and having multiple bundles with quartz
+routes</strong>
+If you run in OSGi such as Apache ServiceMix, or Apache Karaf, and have
+multiple bundles with Camel routes that start from
+<a href="quartz.html">Quartz</a> endpoints, then make sure if you assign<br>
+ an <code>id</code> to the &lt;camelContext&gt; that this id is unique, as this is
+required by the <code>QuartzScheduler</code> in the OSGi container. If you do not
+set any <code>id</code> on &lt;camelContext&gt; then<br>
+ a unique id is auto assigned, and there is no problem.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configuring_quartz_properties_file">Configuring quartz.properties file</h3>
+<div class="paragraph">
+<p>By default Quartz will look for a <code>quartz.properties</code> file in the
+<code>org/quartz</code> directory of the classpath. If you are using WAR
+deployments this means just drop the quartz.properties in
+<code>WEB-INF/classes/org/quartz</code>.</p>
+</div>
+<div class="paragraph">
+<p>However the Camel <a href="quartz.html">Quartz</a> component also allows you to
+configure properties:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>properties</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Properties</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.4</strong>: You can configure a <code>java.util.Properties</code> instance.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>propertiesFile</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Camel 2.4</strong>: File name of the properties to load from the classpath</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>To do this you can configure this in Spring XML as follows</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;bean id="quartz" class="org.apache.camel.component.quartz.QuartzComponent"&gt;
+    &lt;property name="propertiesFile" value="com/mycompany/myquartz.properties"/&gt;
+&lt;/bean&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_enabling_quartz_scheduler_in_jmx">Enabling Quartz scheduler in JMX</h3>
+<div class="paragraph">
+<p>You need to configure the quartz scheduler properties to enable JMX.<br>
+ That is typically setting the option
+<code>"org.quartz.scheduler.jmx.export"</code> to a <code>true</code> value in the
+configuration file.</p>
+</div>
+<div class="paragraph">
+<p>From Camel 2.13 onwards Camel will automatic set this option to true,
+unless explicit disabled.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_starting_the_quartz_scheduler">Starting the Quartz scheduler</h3>
+<div class="paragraph">
+<p>This is an example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;bean id="quartz" class="org.apache.camel.component.quartz.QuartzComponent"&gt;
+    &lt;property name="startDelayedSeconds" value="5"/&gt;
+&lt;/bean&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_clustering">Clustering</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.4</strong></p>
+</div>
+<div class="paragraph">
+<p>If you use Quartz in clustered mode, e.g. the <code>JobStore</code> is clustered.
+Then from Camel 2.4 onwards the <a href="quartz.html">Quartz</a> component will
+<strong>not</strong> pause/remove triggers when a node is being stopped/shutdown. This
+allows the trigger to keep running on the other nodes in the cluster.</p>
+</div>
+<div class="paragraph">
+<p><strong>Note</strong>: When running in clustered node no checking is done to ensure
+unique job name/group for endpoints.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message_headers">Message Headers</h3>
+<div class="paragraph">
+<p>Camel adds the getters from the Quartz Execution Context as header
+values. The following headers are added:<br>
+ <code>calendar</code>, <code>fireTime</code>, <code>jobDetail</code>, <code>jobInstance</code>, <code>jobRuntTime</code>,
+<code>mergedJobDataMap</code>, <code>nextFireTime</code>, <code>previousFireTime</code>, <code>refireCount</code>,
+<code>result</code>, <code>scheduledFireTime</code>, <code>scheduler</code>, <code>trigger</code>, <code>triggerName</code>,
+<code>triggerGroup</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>fireTime</code> header contains the <code>java.util.Date</code> of when the exchange
+was fired.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_cron_triggers">Using Cron Triggers</h3>
+<div class="paragraph">
+<p>Quartz supports
+<a href="http://www.quartz-scheduler.org/documentation/quartz-2.1.x/tutorials/crontrigger">Cron-like
+expressions</a> for specifying timers in a handy format. You can use these
+expressions in the <code>cron</code> URI parameter; though to preserve valid URI
+encoding we allow + to be used instead of spaces. Quartz provides a
+<a href="http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html">little
+tutorial</a> on how to use cron expressions.</p>
+</div>
+<div class="paragraph">
+<p>For example, the following will fire a message every five minutes
+starting at 12pm (noon) to 6pm on weekdays:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">from("quartz://myGroup/myTimerName?cron=0+0/5+12-18+?+*+MON-FRI").to("activemq:Totally.Rocks");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>which is equivalent to using the cron expression</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">0 0/5 12-18 ? * MON-FRI</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following table shows the URI character encodings we use to preserve
+valid URI syntax:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">URI Character</th>
+<th class="tableblock halign-left valign-top">Cron character</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>+</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Space</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_specifying_time_zone">Specifying time zone</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.8.1</strong><br>
+ The Quartz Scheduler allows you to configure time zone per trigger. For
+example to use a timezone of your country, then you can do as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">quartz://groupName/timerName?cron=0+0/5+12-18+?+*+MON-FRI&amp;trigger.timeZone=Europe/Stockholm</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The timeZone value is the values accepted by <code>java.util.TimeZone</code>.</p>
+</div>
+<div class="paragraph">
+<p>In Camel 2.8.0 or older versions you would have to provide your custom
+<code>String</code> to <code>java.util.TimeZone</code> <a href="type-converter.html">Type
+Converter</a> to be able configure this from the endpoint uri.<br>
+ From Camel 2.8.1 onwards we have included such a
+<a href="type-converter.html">Type Converter</a> in the camel-core.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_see_also">See Also</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="configuring-camel.html">Configuring Camel</a></p>
+</li>
+<li>
+<p><a href="component.html">Component</a></p>
+</li>
+<li>
+<p><a href="endpoint.html">Endpoint</a></p>
+</li>
+<li>
+<p><a href="getting-started.html">Getting Started</a></p>
+</li>
+<li>
+<p><a href="quartz2.html">Quartz2</a></p>
+</li>
+<li>
+<p><a href="timer.html">Timer</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+<nav class='entry-nav'>
+  <div class='entry-nav-links'><div class='prev-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/quartz2-component/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span></a>
+    </div><div class='next-entry'>
+      <a href='https://camel.apache.org/components/2.20.0/python-language/'>
+        <span class='screen-reader'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+          <nav aria-label='Social Menu'>
+  <ul class='social-menu'>
+  
+  </ul>
+</nav>
+
+        </div>
+
+        <div class='copyright'>
+          <p>
+    
+      
+    
+  
+  &copy; 2004-2018 The Apache Software Foundation.
+</p>
+<p>
+  Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/js/site.36395d52b78f93dc7cc7.js'></script>
+  
+
+</body>
+
+</html>
+
