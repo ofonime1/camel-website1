@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untitled :: Apache Camel</title>
+    <link rel="canonical" href="https://camel.apache.org/manual/latest/transactionerrorhandler.html">
+    <meta name="generator" content="Antora 2.0.0-rc.1">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://camel.apache.org">Apache Camel</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Products</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Product A</a>
+            <a class="navbar-item" href="#">Product B</a>
+            <a class="navbar-item" href="#">Product C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Service A</a>
+            <a class="navbar-item" href="#">Service B</a>
+            <a class="navbar-item" href="#">Service C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Resources</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Resource A</a>
+            <a class="navbar-item" href="#">Resource B</a>
+            <a class="navbar-item" href="#">Resource C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="main-wrapper">
+<div class="navigation-container" data-component="manual" data-version="latest">
+  <aside class="navigation">
+    <div class="panels">
+<div class="navigation-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">User manual</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="getting-started.html">Getting started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="book-getting-started.html">Getting Started with Apache Camel</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="architecture.html">Architecture</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="async.html">Async</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="asynchronous-routing-engine.html">Asynchronous Routing Engine</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="backlogdebugger.html">Backlog debugger</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="bam.html">Business Activity Monitoring</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="batch-consumer.html">Batch Consumer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="browsable-endpoint.html">BrowsableEndpoint</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="camel-core.html">Core</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="camelcontext.html">Context</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="endpoint.html">Endpoints</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="cep.html">Complex Event Processing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="component.html">Component</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="debugger.html">Debugger</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="delay-interceptor.html">Delay interceptor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dependency-injection.html">Dependency Injection</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dozer-type-conversion.html">Dozer Type Conversion</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="bean-integration.html">Bean Integration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="error-handler.html">Error Handler</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="exchange.html">Message Exchange</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="exchange-pattern.html">Exchange Pattern</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="expression.html">Expressions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="injector.html">Injector</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="intercept.html">Intercept</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="inversion-of-control-with-smart-defaults.html">Inversion Of Control With Smart Defaults</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lifecycle.html">Camel Lifecycle</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="oncompletion.html">OnCompletion</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="predicate.html">Predicates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="registry.html">Registry</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="route-builder.html">RouteBuilder</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="routes.html">Routes</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-toggle"></button>
+    <span class="nav-text">Domain Specific Languages</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dsl.html">Camel Domain Specific Language</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="java-dsl.html">Java DSL</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="spring.html">Spring support</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="groovy-dsl.html">Groovy DSL</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-toggle"></button>
+    <span class="nav-text">Scala DSL</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="scala-dsl.html">About the Scala DSL</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="scala-dsl-getting-started.html">Getting Started</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="scala-dsl-eip.html">EIP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="scala-dsl-supported-languages.html">Supported languages</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="using-osgi-blueprint-with-camel.html">Using OSGi blueprint with Camel</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="navigation-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">User manual</span>
+    <span class="version">latest</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <span class="title">Component reference</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../components/2.24.0-SNAPSHOT/index.html">2.24.0-SNAPSHOT</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <span class="title">User manual</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">latest</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+  <main class="main">
+<div class="toolbar" role="navigation">
+  <button class="navigation-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="crumbs" aria-label="breadcrumbs">
+</nav>
+</div>
+<article class="doc">
+<div class="sect2">
+<h3 id="TransactionErrorHandler-TransactionErrorHandler"><a class="anchor" href="#TransactionErrorHandler-TransactionErrorHandler"></a>TransactionErrorHandler</h3>
+<div class="paragraph">
+<p><strong>Available as of Camel 2.0</strong></p>
+</div>
+<div class="paragraph">
+<p>This is the new default transaction error handler in Camel 2.0 onwards,
+used for transacted routes.</p>
+</div>
+<div class="paragraph">
+<p>It uses the same base as the
+<a href="defaulterrorhandler.adoc">DefaultErrorHandler</a> so it has the same
+feature set as this error handler.</p>
+</div>
+<div class="paragraph">
+<p>By default any exception thrown during routing will be propagated back
+to the caller and the <a href="exchange.adoc">Exchange</a> ends immediately.
+However you can use the <a href="exception-clause.adoc">Exception Clause</a> to
+catch a given exception and lower the exception by marking it as
+handled. If so the exception will <strong>not</strong> be sent back to the caller and
+the <a href="exchange.adoc">Exchange</a> continues to be routed.</p>
+</div>
+<div class="sect3">
+<h4 id="TransactionErrorHandler-Example"><a class="anchor" href="#TransactionErrorHandler-Example"></a>Example</h4>
+<div class="paragraph">
+<p>In this route below, any exception thrown in eg the <code>validateOrder</code> bean
+will be propagated back to the caller, and its the jetty endpoint. It
+will return a HTTP error message back to the client.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">from("jetty:http://localhost/myservice/order").transacted().to("bean:validateOrder").to("jms:queue:order");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We can add a <strong>onException</strong> in case we want to catch certain exceptions
+and route them differently, for instance to catch a
+<strong>ValidationException</strong> and return a fixed response to the caller.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">onException(ValidationException.class).handled(true).transform(body(constant("INVALID ORDER")));
+
+from("jetty:http://localhost/myservice/order").transacted().to("bean:validateOrder").to("jms:queue:order");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the <strong>ValidationException</strong> is thrown from the validate order bean it
+is intercepted by the
+<a href="transactionerrorhandler.adoc">TransactionErrorHandler</a> and it let
+the <code>onException(ValidationException.class</code> handle it so the
+<a href="exchange.adoc">Exchange</a> is routed to this route and since we use
+<strong>handled(true)</strong> then the original exception is lowered (= cleared) and
+we transform the message into a fixed response that are returned to
+jetty endpoint that returns it to the original caller.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="TransactionErrorHandler-Conventionoverconfiguration"><a class="anchor" href="#TransactionErrorHandler-Conventionoverconfiguration"></a>Convention over configuration</h4>
+<div class="paragraph">
+<p>When you configure a route to be transacted you just mark it as
+transacted as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">from("jms:queue:foo").transacted().to("bean:handleFoo");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And in Spring DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;route&gt;
+   &lt;from uri="jms:queue:foo"/&gt;
+   &lt;transacted/&gt;
+   &lt;to uri="bean:handleFoo"/&gt;
+&lt;/route&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>What happens is that Camel will automatic lookup the right Spring
+transaction manager. It does using the following rules, in order:<br>
+1. If there is only 1 bean with the type
+<code>org.apache.camel.spi.TransactedPolicy</code> then its used.<br>
+2. If there is a bean with id <code>PROPAGATION_REQUIRED</code> and of type
+<code>org.apache.camel.spi.TransactedPolicy</code> then its used.<br>
+3. If there is only 1 bean with the type
+<code>org.springframework.transaction.PlatformTransactionManager</code> then its
+used.</p>
+</div>
+<div class="paragraph">
+<p>However you can explicit configure what you want to use. For instance
+the <strong>transacted</strong> DSL accepts a String reference parameter to indicate
+the bean id of the <code>org.apache.camel.spi.TransactedPolicy</code> bean to use
+in case you have multiple beans. For instance a PROPAGATION_REQUIRES_NEW
+bean.</p>
+</div>
+<div class="paragraph">
+<p>The <strong>transactionErrorHandler</strong> like the <strong>transacted</strong> also supprts
+convention over configuration and it will also automatic lookup the
+right Spring transaction manager. It does using the following rules, in
+order:<br>
+1. If there is only 1 bean with the type
+<code>org.apache.camel.spi.TransactedPolicy</code> then its used.<br>
+2. If there is a bean with id <code>PROPAGATION_REQUIRED</code> and of type
+<code>org.apache.camel.spi.TransactedPolicy</code> then its used.<br>
+3. If there is only 1 bean with the type
+<code>org.springframework.transaction.support.TransactionTemplate</code> then its
+used.<br>
+4. If there is only 1 bean with the type
+<code>org.springframework.transaction.PlatformTransactionManager</code> then its
+used.</p>
+</div>
+<div class="paragraph">
+<p>However you can explicit configure what you want to use. For instance
+the <strong>transactionErrorHandler</strong> DSL accepts either a TransactedPolicy, a
+TransactionTemplate or a PlatformTransactionManager.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="TransactionErrorHandler-UsingCameltodoredeliveries"><a class="anchor" href="#TransactionErrorHandler-UsingCameltodoredeliveries"></a>Using Camel to do redeliveries</h4>
+<div class="paragraph">
+<p>As the <a href="transactionerrorhandler.adoc">TransactionErrorHandler</a> also
+supports to let Camel do redeliveries you can use both worlds. Letting
+Camel do some redeliveries and at the end the backing transaction
+manager doing other redeliveries. In fact in the end the transaction
+manager have the final word. That means if Camel cannot process the
+exchange then its thrown back to the transaction manager that will
+perform the rollback, and redelivery.</p>
+</div>
+<div class="sect4">
+<h5 id="TransactionErrorHandler-ExamplewithusingCameltodoredeliveries"><a class="anchor" href="#TransactionErrorHandler-ExamplewithusingCameltodoredeliveries"></a>Example with using Camel to do redeliveries</h5>
+<div class="paragraph">
+<p>In the route below we have configured a transaction error handler. It
+will by default do local redeliveries up till 6 times. In Case Camel
+could not redeliver the message it will be thrown back to the
+transaction manager that will do a rollback, and a redelivery if it was
+configured to do so.</p>
+</div>
+<div class="paragraph">
+<p>Notice that as we have all the powers from
+<a href="defaulterrorhandler.adoc">DefaultErrorHandler</a> we can configure an
+<strong>onException</strong> where we state that in case of this particular exception,
+an IllegalArgumentException we will only do redeliveries up till 4
+times. (Yes the code is based on an unit test).</p>
+</div>
+<div class="paragraph">
+<p>And also notice that we mark the routes as transacted using
+<strong>transacted</strong>. This is always needed to instruct Camel that these routes
+are transacted.</p>
+</div>
+<div class="paragraph">
+<p>If you do not provide any Spring TransactionTemplate to either the
+<strong>transactionErrorHandler</strong>, then Camel will automatic lookup in the
+Spring application context for a transaction manager to use. See more in
+the Convention over configuration section on this page.</p>
+</div>
+<div class="paragraph">
+<p>And now the route:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// configure transacted error handler to use up till 4 redeliveries
+// we have not passed in any spring TX manager. Camel will automatic
+// find it in the spring application context. You only need to help
+// Camel in case you have multiple TX managers
+errorHandler(transactionErrorHandler().maximumRedeliveries(6));
+
+// speical for this exception we only want to do it at most 4 times
+onException(IllegalArgumentException.class).maximumRedeliveries(4);
+
+from("direct:okay")
+    // marks this route as transacted, and we dont pass in any parameters so we
+    // will auto lookup and use the Policy defined in the spring XML file
+    .transacted()
+    .setBody(constant("Tiger in Action")).bean("bookService")
+    .setBody(constant("Elephant in Action")).bean("bookService");
+
+// marks this route as transacted that will use the single policy defined in the registry
+from("direct:fail")
+    // marks this route as transacted, and we dont pass in any parameters so we
+    // will auto lookup and use the Policy defined in the spring XML file
+    .transacted()
+    .setBody(constant("Tiger in Action")).bean("bookService")
+    .setBody(constant("Donkey in Action")).bean("bookService");</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="TransactionErrorHandler-SeeAlso"><a class="anchor" href="#TransactionErrorHandler-SeeAlso"></a>See Also</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="error-handler.adoc">Error Handler</a></p>
+</li>
+<li>
+<p><a href="error-handling-in-camel.adoc">Error handling in Camel</a></p>
+</li>
+<li>
+<p><a href="#transactionalClient-eip">Transactional Client</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script src="../../_/js/vendor/highlight.js"></script>
+<script>hljs.initHighlighting()</script>
+  </body>
+</html>
