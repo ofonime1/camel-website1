@@ -16,7 +16,7 @@ from("activemq:My.Queue").
             &lt;json id="jack" library="Jackson" unmarshalTypeName="org.apache.camel.component.jackson.TestPojo"/&gt;
         &lt;/dataFormats&gt;</code></pre></div></div><div class="paragraph"><p>And then you can refer to this id in the route:</p></div><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">       &lt;route&gt;
             &lt;from uri="direct:back"/&gt;
-            &lt;unmarshal ref="jack"/&gt;
+            &lt;unmarshal&gt;&lt;custom ref="jack"/&gt;&lt;/unmarshal&gt;
             &lt;to uri="mock:reverse"/&gt;
         &lt;/route&gt;</code></pre></div></div></div></div><div class="sect3"><h4 id="JSON-ExcludingPOJOfieldsfrommarshalling"><a class="anchor" href="#JSON-ExcludingPOJOfieldsfrommarshalling"></a>Excluding POJO fields from marshalling</h4><div class="paragraph"><p><strong>As of Camel 2.10</strong><br>When marshalling a POJO to JSON you might want to exclude certain fields from the JSON output. With Jackson you can use<a href="http://wiki.fasterxml.com/JacksonJsonViews">JSON views</a>to accomplish this. First create one or more marker classes.</p></div><div class="paragraph"><p>Use the marker classes with the<code>@JsonView</code>annotation to include/exclude certain fields. The annotation also works on getters.</p></div><div class="paragraph"><p>Finally use the Camel<code>JacksonDataFormat</code>to marshall the above POJO to JSON.</p></div><div class="paragraph"><p>Note that the height field is missing in the resulting JSON:</p></div><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">{"age":30, "weight":70}</code></pre></div></div><div class="paragraph"><p>The GSON library supports a similar feature through the notion of<a href="http://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/ExclusionStrategy.html">ExclusionStrategies</a>:</p></div><div class="paragraph"><p>The<code>GsonDataFormat</code>accepts an<code>ExclusionStrategy</code>in its constructor:</p></div><div class="paragraph"><p>The line above will exclude fields annotated with<code>@ExcludeAge</code>when marshalling to JSON.</p></div></div><div class="sect3"><h4 id="JSON-Configuringfieldnamingpolicy"><a class="anchor" href="#JSON-Configuringfieldnamingpolicy"></a>Configuring field naming policy</h4><div class="paragraph"><p><strong>Available as of Camel 2.11</strong></p></div><div class="paragraph"><p>The GSON library supports specifying policies and strategies for mapping from json to POJO fields. A common naming convention is to map json fields using lower case with underscores.</p></div><div class="paragraph"><p>We may have this JSON string</p></div><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">{
   "id" : 123,
@@ -61,12 +61,12 @@ from("activemq:My.Queue").
 
         &lt;route&gt;
             &lt;from uri="direct:inPojo"/&gt;
-            &lt;marshal ref="gson"/&gt;
+            &lt;marshal&gt;&lt;custom ref="gson"/&gt;&lt;/marshal&gt;
         &lt;/route&gt;
 
         &lt;route&gt;
             &lt;from uri="direct:backPojo"/&gt;
-            &lt;unmarshal ref="gson"/&gt;
+            &lt;unmarshal&gt;&lt;custom ref="gson"/&gt;&lt;/unmarshal&gt;
         &lt;/route&gt;
 
     &lt;/camelContext&gt;</code></pre></div></div></div><div class="sect3"><h4 id="JSON-IncludeExcludefieldsusingthejsonViewattributewithJacksonDataFormat"><a class="anchor" href="#JSON-IncludeExcludefieldsusingthejsonViewattributewithJacksonDataFormat"></a>Include/Exclude fields using the<code>jsonView</code>attribute with<code>JacksonDataFormat</code></h4><div class="paragraph"><p><strong>Available as of Camel 2.12</strong></p></div><div class="paragraph"><p>As an example of using this attribute you can instead of:</p></div><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">JacksonDataFormat ageViewFormat = new JacksonDataFormat(TestPojoView.class, Views.Age.class);
