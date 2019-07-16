@@ -68,7 +68,73 @@ TargetCompID=YOUR_TARGET</code></pre> </div> </div> </div> </div> <div class="se
         &lt;/entry&gt;
     &lt;/util:map&gt;
 &lt;/property&gt;
-&lt;/bean&gt;</code></pre> </div> </div> <div class="paragraph"> <p>The QuickFIX/J component includes a <code>QuickfixjConfiguration</code> class for configuring the session settings. A type converter for QuickFIX/J session ID strings is also included. The following example shows a simple configuration of an acceptor and initiator session with default settings for both sessions.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">Unresolved include directive in modules/ROOT/pages/quickfix-component.adoc - include::../../test/resources/org/apache/camel/component/quickfixj/QuickfixjSpringTest-context.xml[]</code></pre> </div> </div> </div> <div class="sect2"> <h3 id="_exception_handling"><a class="anchor" href="#_exception_handling"></a>Exception handling</h3> <div class="paragraph"> <p>QuickFIX/J behavior can be modified if certain exceptions are thrown during processing of a message. If a <code>RejectLogon</code> exception is thrown while processing an incoming logon administrative message, then the logon will be rejected.</p> </div> <div class="paragraph"> <p>Normally, QuickFIX/J handles the logon process automatically. However, sometimes an outgoing logon message must be modified to include credentials required by a FIX counterparty. If the FIX logon message body is modified when sending a logon message (EventCategory=<code>AdminMessageSent</code> the modified message will be sent to the counterparty. It is important that the outgoing logon message is being processed <em>synchronously</em>. If it is processed asynchronously (on another thread), the FIX engine will immediately send the unmodified outgoing message when it&#8217;s callback method returns.</p> </div> </div> <div class="sect2"> <h3 id="_fix_sequence_number_management"><a class="anchor" href="#_fix_sequence_number_management"></a>FIX Sequence Number Management</h3> <div class="paragraph"> <p>If an application exception is thrown during <em>synchronous</em> exchange processing, this will cause QuickFIX/J to not increment incoming FIX message sequence numbers and will cause a resend of the counterparty message. This FIX protocol behavior is primarily intended to handle <em>transport</em> errors rather than application errors. There are risks associated with using this mechanism to handle application errors. The primary risk is that the message will repeatedly cause application errors each time it&#8217;s re-received. A better solution is to persist the incoming message (database, JMS queue) immediately before processing it. This also allows the application to process messages asynchronously without losing messages when errors occur.</p> </div> <div class="paragraph"> <p>Although it&#8217;s possible to send messages to a FIX session before it&#8217;s logged on (the messages will be sent at logon time), it is usually a better practice to wait until the session is logged on. This eliminates the required sequence number resynchronization steps at logon. Waiting for session logon can be done by setting up a route that processes the <code>SessionLogon</code> event category and signals the application to start sending messages.</p> </div> <div class="paragraph"> <p>See the FIX protocol specifications and the QuickFIX/J documentation for more details about FIX sequence number management.</p> </div> </div> <div class="sect2"> <h3 id="_route_examples"><a class="anchor" href="#_route_examples"></a>Route Examples</h3> <div class="paragraph"> <p>Several examples are included in the QuickFIX/J component source code (test subdirectories). One of these examples implements a trival trade excecution simulation. The example defines an application component that uses the URI scheme "trade-executor".</p> </div> <div class="paragraph"> <p>The following route receives messages for the trade executor session and passes application messages to the trade executor component.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">from("quickfix:examples/inprocess.cfg?sessionID=FIX.4.2:MARKET-&gt;TRADER").
+&lt;/bean&gt;</code></pre> </div> </div> <div class="paragraph"> <p>The QuickFIX/J component includes a <code>QuickfixjConfiguration</code> class for configuring the session settings. A type converter for QuickFIX/J session ID strings is also included. The following example shows a simple configuration of an acceptor and initiator session with default settings for both sessions.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">    &lt;!-- camel route --&gt;
+    &lt;camelContext id="quickfixjContext" xmlns="http://camel.apache.org/schema/spring"&gt;
+        &lt;route&gt;
+            &lt;from uri="quickfix:example"/&gt;
+            &lt;filter&gt;
+                &lt;simple&gt;${in.header.EventCategory} == 'AppMessageReceived'&lt;/simple&gt;
+                &lt;to uri="log:test"/&gt;
+            &lt;/filter&gt;
+        &lt;/route&gt;
+        &lt;route&gt;
+            &lt;from uri="vm:test"/&gt;
+            &lt;to uri="lazyQuickfix:example"/&gt;
+        &lt;/route&gt;
+    &lt;/camelContext&gt;
+
+    &lt;!-- quickfix component --&gt;
+    &lt;bean id="quickfix" class="org.apache.camel.component.quickfixj.QuickfixjComponent"&gt;
+        &lt;property name="configurations"&gt;
+            &lt;util:map&gt;
+                &lt;entry key="example" value-ref="quickfixjConfiguration"/&gt;
+            &lt;/util:map&gt;
+        &lt;/property&gt;
+        &lt;property name="messageFactory"&gt;
+            &lt;bean class="org.apache.camel.component.quickfixj.QuickfixjSpringTest.CustomMessageFactory"/&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- lazy quickfix component --&gt;
+    &lt;bean id="lazyQuickfix" class="org.apache.camel.component.quickfixj.QuickfixjComponent"&gt;
+        &lt;property name="lazyCreateEngines" value="true" /&gt;
+        &lt;property name="configurations"&gt;
+            &lt;util:map&gt;
+                &lt;entry key="example" value-ref="lazyQuickfixjConfiguration"/&gt;
+            &lt;/util:map&gt;
+        &lt;/property&gt;
+        &lt;property name="messageFactory"&gt;
+            &lt;bean class="org.apache.camel.component.quickfixj.QuickfixjSpringTest.CustomMessageFactory"/&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- quickfix settings --&gt;
+    &lt;bean id="quickfixjConfiguration" class="org.apache.camel.component.quickfixj.QuickfixjConfiguration"&gt;
+        &lt;property name="defaultSettings"&gt;
+            &lt;util:map&gt;
+                &lt;entry key="SocketConnectProtocol" value="VM_PIPE"/&gt;
+                &lt;entry key="SocketAcceptProtocol" value="VM_PIPE"/&gt;
+                &lt;entry key="UseDataDictionary" value="N"/&gt;
+            &lt;/util:map&gt;
+        &lt;/property&gt;
+        &lt;property name="sessionSettings"&gt;
+            &lt;util:map&gt;
+                &lt;entry key="FIX.4.2:INITIATOR-&gt;ACCEPTOR"&gt;
+                    &lt;util:map&gt;
+                        &lt;entry key="ConnectionType" value="initiator"/&gt;
+                        &lt;entry key="SocketConnectHost" value="localhost"/&gt;
+                        &lt;entry key="SocketConnectPort" value="5000"/&gt;
+                    &lt;/util:map&gt;
+                &lt;/entry&gt;
+                &lt;entry key="FIX.4.2:ACCEPTOR-&gt;INITIATOR"&gt;
+                    &lt;util:map&gt;
+                        &lt;entry key="ConnectionType" value="acceptor"/&gt;
+                        &lt;entry key="SocketAcceptPort" value="5000"/&gt;
+                    &lt;/util:map&gt;
+                &lt;/entry&gt;
+            &lt;/util:map&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;</code></pre> </div> </div> </div> <div class="sect2"> <h3 id="_exception_handling"><a class="anchor" href="#_exception_handling"></a>Exception handling</h3> <div class="paragraph"> <p>QuickFIX/J behavior can be modified if certain exceptions are thrown during processing of a message. If a <code>RejectLogon</code> exception is thrown while processing an incoming logon administrative message, then the logon will be rejected.</p> </div> <div class="paragraph"> <p>Normally, QuickFIX/J handles the logon process automatically. However, sometimes an outgoing logon message must be modified to include credentials required by a FIX counterparty. If the FIX logon message body is modified when sending a logon message (EventCategory=<code>AdminMessageSent</code> the modified message will be sent to the counterparty. It is important that the outgoing logon message is being processed <em>synchronously</em>. If it is processed asynchronously (on another thread), the FIX engine will immediately send the unmodified outgoing message when it&#8217;s callback method returns.</p> </div> </div> <div class="sect2"> <h3 id="_fix_sequence_number_management"><a class="anchor" href="#_fix_sequence_number_management"></a>FIX Sequence Number Management</h3> <div class="paragraph"> <p>If an application exception is thrown during <em>synchronous</em> exchange processing, this will cause QuickFIX/J to not increment incoming FIX message sequence numbers and will cause a resend of the counterparty message. This FIX protocol behavior is primarily intended to handle <em>transport</em> errors rather than application errors. There are risks associated with using this mechanism to handle application errors. The primary risk is that the message will repeatedly cause application errors each time it&#8217;s re-received. A better solution is to persist the incoming message (database, JMS queue) immediately before processing it. This also allows the application to process messages asynchronously without losing messages when errors occur.</p> </div> <div class="paragraph"> <p>Although it&#8217;s possible to send messages to a FIX session before it&#8217;s logged on (the messages will be sent at logon time), it is usually a better practice to wait until the session is logged on. This eliminates the required sequence number resynchronization steps at logon. Waiting for session logon can be done by setting up a route that processes the <code>SessionLogon</code> event category and signals the application to start sending messages.</p> </div> <div class="paragraph"> <p>See the FIX protocol specifications and the QuickFIX/J documentation for more details about FIX sequence number management.</p> </div> </div> <div class="sect2"> <h3 id="_route_examples"><a class="anchor" href="#_route_examples"></a>Route Examples</h3> <div class="paragraph"> <p>Several examples are included in the QuickFIX/J component source code (test subdirectories). One of these examples implements a trival trade excecution simulation. The example defines an application component that uses the URI scheme "trade-executor".</p> </div> <div class="paragraph"> <p>The following route receives messages for the trade executor session and passes application messages to the trade executor component.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">from("quickfix:examples/inprocess.cfg?sessionID=FIX.4.2:MARKET-&gt;TRADER").
     filter(header(QuickfixjEndpoint.EVENT_CATEGORY_KEY).isEqualTo(QuickfixjEventCategory.AppMessageReceived)).
     to("trade-executor:market");</code></pre> </div> </div> <div class="paragraph"> <p>The trade executor component generates messages that are routed back to the trade session. The session ID must be set in the FIX message itself since no session ID is specified in the endpoint URI.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">from("trade-executor:market").to("quickfix:examples/inprocess.cfg");</code></pre> </div> </div> <div class="paragraph"> <p>The trader session consumes execution report messages from the market and processes them.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">from("quickfix:examples/inprocess.cfg?sessionID=FIX.4.2:TRADER-&gt;MARKET").
     filter(header(QuickfixjEndpoint.MESSAGE_TYPE_KEY).isEqualTo(MsgType.EXECUTION_REPORT)).
