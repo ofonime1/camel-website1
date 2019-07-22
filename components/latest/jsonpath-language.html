@@ -44,7 +44,7 @@
       &lt;to uri="mock:other"/&gt;
     &lt;/otherwise&gt;
   &lt;/choice&gt;
-&lt;/route&gt;</code></pre> </div> </div> <div class="paragraph"> <p>This option is also available on the <code>@JsonPath</code> annotation.</p> </div> </div> <div class="sect2"> <h3 id="_inline_simple_exceptions"><a class="anchor" href="#_inline_simple_exceptions"></a>Inline Simple exceptions</h3> <div class="paragraph"> <p><strong>Available as of Camel 2.18</strong></p> </div> <div class="paragraph"> <p>Its now possible to inlined Simple language expressions in the JSonPath expression using the simple syntax \${xxx}. An example is shown below:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">from("direct:start")
+&lt;/route&gt;</code></pre> </div> </div> <div class="paragraph"> <p>This option is also available on the <code>@JsonPath</code> annotation.</p> </div> </div> <div class="sect2"> <h3 id="_inline_simple_exceptions"><a class="anchor" href="#_inline_simple_exceptions"></a>Inline Simple exceptions</h3> <div class="paragraph"> <p><strong>Available as of Camel 2.18</strong></p> </div> <div class="paragraph"> <p>Its now possible to inlined Simple language expressions in the JSonPath expression using the simple syntax ${xxx}. An example is shown below:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">from("direct:start")
   .choice()
     .when().jsonpath("$.store.book[?(@.price &lt; ${header.cheap})]")
       .to("mock:cheap")

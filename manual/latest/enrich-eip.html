@@ -12,7 +12,7 @@
   &lt;from uri="activemq:Input"/&gt;
   &lt;bean ref="myBeanName" method="doTransform"/&gt;
   &lt;to uri="activemq:Output"/&gt;
-&lt;/route&gt;</code></pre> </div> </div> </div> </div> <div class="sect2"> <h3 id="_content_enrichment_using_the_enrich_dsl_element"><a class="anchor" href="#_content_enrichment_using_the_enrich_dsl_element"></a>Content enrichment using the <code>enrich</code> DSL element</h3> <div class="paragraph"> <p>Camel comes with flavor <code>enrich</code> as a choice of content enricher in the DSL. The other one is <code>pollEnrich</code></p> </div> <div class="paragraph"> <p><code>enrich</code> uses a Producer to obtain the additional data. It is usually used for Request Reply messaging, for instance to invoke an external web service.</p> </div> <div class="paragraph"> <p>Both <code>enrich</code> and <code>pollEnrich</code> supports dynamic endpoints that uses an Expression to compute the uri, which allows to use data from the current Exchange.</p> </div> <div class="exampleblock"> <div class="content"> <div class="paragraph"> <p>A little enrich example using Java:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">AggregationStrategy aggregationStrategy = ...
+&lt;/route&gt;</code></pre> </div> </div> </div> </div> <div class="sect2"> <h3 id="_content_enrichment_using_the_enrich_dsl_element"><a class="anchor" href="#_content_enrichment_using_the_enrich_dsl_element"></a>Content enrichment using the <code>enrich</code> DSL element</h3> <div class="paragraph"> <p>Camel comes with flavor <code>enrich</code> as a choice of content enricher in the DSL. The other one is <code>pollEnrich</code></p> </div> <div class="paragraph"> <p><code>enrich</code> uses a Producer to obtain the additional data. It is usually used for Request Reply messaging, for instance to invoke an external web service.</p> </div> <div class="paragraph"> <p>Both <code>enrich</code> and <code>pollEnrich</code> supports dynamic endpoints that uses an Expression to compute the uri, which allows to use data from the current Exchange.</p> </div> <div class="sect3"> <h4 id="_a_little_enrich_example_using_java"><a class="anchor" href="#_a_little_enrich_example_using_java"></a>A little enrich example using Java:</h4> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">AggregationStrategy aggregationStrategy = ...
 
 from("direct:start")
   .enrich("direct:resource", aggregationStrategy)
@@ -33,7 +33,7 @@ from("direct:resource")
         return original;
     }
 
-}</code></pre> </div> </div> <div class="paragraph"> <p>Using this template the original exchange can be of any pattern. The resource exchange created by the enricher is always an in-out exchange.</p> </div> <div class="paragraph"> <p>==== Enrich example using XML</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
+}</code></pre> </div> </div> <div class="paragraph"> <p>Using this template the original exchange can be of any pattern. The resource exchange created by the enricher is always an in-out exchange.</p> </div> </div> <div class="sect3"> <h4 id="_enrich_example_using_xml"><a class="anchor" href="#_enrich_example_using_xml"></a>Enrich example using XML</h4> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"&gt;
   &lt;route&gt;
     &lt;from uri="direct:start"/&gt;
     &lt;enrich strategyRef="aggregationStrategy"&gt;
@@ -47,7 +47,7 @@ from("direct:resource")
   &lt;/route&gt;
 &lt;/camelContext&gt;
 
-&lt;bean id="aggregationStrategy" class="..." /&gt;</code></pre> </div> </div> <div class="paragraph"> <p>=== Aggregation strategy is optional The aggregation strategy is optional. If you do not provide it Camel will by default just use the body obtained from the resource.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">from("direct:start")
+&lt;bean id="aggregationStrategy" class="..." /&gt;</code></pre> </div> </div> </div> </div> <div class="sect2"> <h3 id="_aggregation_strategy_is_optional"><a class="anchor" href="#_aggregation_strategy_is_optional"></a>Aggregation strategy is optional</h3> <div class="paragraph"> <p>The aggregation strategy is optional. If you do not provide it Camel will by default just use the body obtained from the resource.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">from("direct:start")
   .enrich("direct:resource")
   .to("direct:result");</code></pre> </div> </div> <div class="paragraph"> <p>In the route above the message sent to the direct:result endpoint will contain the output from the direct:resource as we do not use any custom aggregation.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;route&gt;
   &lt;from uri="direct:start"/&gt;
@@ -55,7 +55,7 @@ from("direct:resource")
     &lt;constant&gt;direct:resource&lt;/constant&gt;
   &lt;/enrich&gt;
   &lt;to uri="direct:result"/&gt;
-&lt;/route&gt;</code></pre> </div> </div> <div class="paragraph"> <p>=== Using dynamic uris <strong>Available as of Camel 2.16</strong></p> </div> <div class="paragraph"> <p>Both <code>enrich</code> and <code>pollEnrich</code> supports using dynamic uris computed based on information from the current Exchange. For example to enrich from a HTTP endpoint where the header with key orderId is used as part of the content-path of the HTTP url:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">from("direct:start")
+&lt;/route&gt;</code></pre> </div> </div> </div> <div class="sect2"> <h3 id="_using_dynamic_uris"><a class="anchor" href="#_using_dynamic_uris"></a>Using dynamic uris</h3> <div class="paragraph"> <p><strong>Available as of Camel 2.16</strong></p> </div> <div class="paragraph"> <p>Both <code>enrich</code> and <code>pollEnrich</code> supports using dynamic uris computed based on information from the current Exchange. For example to enrich from a HTTP endpoint where the header with key orderId is used as part of the content-path of the HTTP url:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">from("direct:start")
   .enrich().simple("http:myserver/${header.orderId}/order")
   .to("direct:result");</code></pre> </div> </div> <div class="paragraph"> <p>And in XML DSL</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;route&gt;
   &lt;from uri="direct:start"/&gt;
@@ -63,4 +63,4 @@ from("direct:resource")
     &lt;simple&gt;http:myserver/${header.orderId}/order&lt;/simple&gt;
   &lt;/enrich&gt;
   &lt;to uri="direct:result"/&gt;
-&lt;/route&gt;</code></pre> </div> </div> </div> </div> </div> </div> </div> </article> </main> </div> <footer class="footer"> <p>This page was built using the Antora default UI.</p> <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p> </footer> <script src="../../_/js/site.js"></script> <script src="../../_/js/vendor/highlight.js"></script> </body> </html> 
+&lt;/route&gt;</code></pre> </div> </div> </div> </div> </div> </article> </main> </div> <footer class="footer"> <p>This page was built using the Antora default UI.</p> <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p> </footer> <script src="../../_/js/site.js"></script> <script src="../../_/js/vendor/highlight.js"></script> </body> </html> 

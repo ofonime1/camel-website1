@@ -42,7 +42,7 @@ SearchHits response = template.requestBody("direct:search", query, SearchHits.cl
 &lt;/route&gt;</code></pre> </div> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">String query = "{\"query\":{\"match\":{\"content\":\"new release of ApacheCamel\"}}}";
 try (ElasticsearchScrollRequestIterator response = template.requestBody("direct:search", query, ElasticsearchScrollRequestIterator.class)) {
     // do something smart with results
-}</code></pre> </div> </div> <div class="paragraph"> <p><a href="#">split-eip.adoc</a> can also be used.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">from("direct:search")
+}</code></pre> </div> </div> <div class="paragraph"> <p><a href="../../manual/latest/split-eip.html" class="page">Split EIP</a> can also be used.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">from("direct:search")
   .to("elasticsearch-rest://elasticsearch?operation=Search&amp;indexName=twitter&amp;indexType=tweet&amp;useScroll=true&amp;scrollKeepAliveMs=30000")
   .split()
   .body()
