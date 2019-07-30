@@ -239,7 +239,7 @@ public class CamelCdiTest {
     // ...
 }</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="CDITesting-Beanalternatives"><a class="anchor" href="#CDITesting-Beanalternatives"></a>Bean alternatives</h2> <div class="sectionbody"> <div class="paragraph"> <p>You may want to replace a bean that is used in your Camel routes by another bean for testing purpose, for example to mock it or change the behavior of the application bean.</p> </div> <div class="paragraph"> <p>Imagine you have the following route in your application:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class Application {
 
-    @ContextName("camel-test-cdi")
+    @ApplicationScoped
     static class Hello extends RouteBuilder {
 
         @Override
@@ -307,7 +307,7 @@ public class CamelCdiTest {
 public class CamelCdiTest {
 
     @Default
-    @ContextName("camel-test-cdi")
+    @Named("camel-test-cdi")
     @ApplicationScoped
     static class CustomCamelContext extends DefaultCamelContext {
 
