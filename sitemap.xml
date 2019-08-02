@@ -4,6 +4,9 @@
 <loc>https://camel.apache.org/staging/sitemap-camel-k.xml</loc>
 </sitemap>
 <sitemap>
+<loc>https://camel.apache.org/staging/sitemap-camel-quarkus.xml</loc>
+</sitemap>
+<sitemap>
 <loc>https://camel.apache.org/staging/sitemap-components.xml</loc>
 </sitemap>
 <sitemap>
