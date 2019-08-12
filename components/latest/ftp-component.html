@@ -23,7 +23,7 @@ ftp://publicftpserver.com/download</pre> </div> </div> </div> </div> <div class=
 /one
 /one/two
 /one/two/sub-a
-/one/two/sub-b</code></pre> </div> </div> <div class="paragraph"> <p>And that we have a file in each of sub-a (a.txt) and sub-b (b.txt) folder.</p> </div> <div class="paragraph"> <p>====Using stepwise=true (default mode)</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">TYPE A
+/one/two/sub-b</code></pre> </div> </div> <div class="paragraph"> <p>And that we have a file in each of sub-a (a.txt) and sub-b (b.txt) folder.</p> </div> <div class="sect3"> <h4 id="_using_stepwisetrue_default_mode"><a class="anchor" href="#_using_stepwisetrue_default_mode"></a>Using stepwise=true (default mode)</h4> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">TYPE A
 200 Type set to A
 PWD
 257 "/" is current directory.
@@ -103,7 +103,7 @@ CWD /
 250 CWD successful. "/" is current directory.
 QUIT
 221 Goodbye
-disconnected.</code></pre> </div> </div> <div class="paragraph"> <p>As you can see when stepwise is enabled, it will traverse the directory structure using CD xxx.</p> </div> <div class="paragraph"> <p>====Using stepwise=false</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">230 Logged on
+disconnected.</code></pre> </div> </div> <div class="paragraph"> <p>As you can see when stepwise is enabled, it will traverse the directory structure using CD xxx.</p> </div> </div> <div class="sect3"> <h4 id="_using_stepwisefalse"><a class="anchor" href="#_using_stepwisefalse"></a>Using stepwise=false</h4> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">230 Logged on
 TYPE A
 200 Type set to A
 SYST
@@ -140,7 +140,7 @@ RETR one/two/sub-b/b.txt
 226 Transfer OK
 QUIT
 221 Goodbye
-disconnected.</code></pre> </div> </div> <div class="paragraph"> <p>As you can see when not using stepwise, there are no CD operation invoked at all.</p> </div> </div> </div> <div class="sect1"> <h2 id="_samples"><a class="anchor" href="#_samples"></a>Samples</h2> <div class="sectionbody"> <div class="paragraph"> <p>In the sample below we set up Camel to download all the reports from the FTP server once every hour (60 min) as BINARY content and store it as files on the local file system.</p> </div> <div class="paragraph"> <p>And the route using Spring DSL:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">  &lt;route&gt;
+disconnected.</code></pre> </div> </div> <div class="paragraph"> <p>As you can see when not using stepwise, there are no CD operation invoked at all.</p> </div> </div> </div> </div> <div class="sect1"> <h2 id="_samples"><a class="anchor" href="#_samples"></a>Samples</h2> <div class="sectionbody"> <div class="paragraph"> <p>In the sample below we set up Camel to download all the reports from the FTP server once every hour (60 min) as BINARY content and store it as files on the local file system.</p> </div> <div class="paragraph"> <p>And the route using Spring DSL:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">  &lt;route&gt;
      &lt;from uri="ftp://scott@localhost/public/reports?password=tiger&amp;amp;binary=true&amp;amp;delay=60000"/&gt;
      &lt;to uri="file://target/test-reports"/&gt;
   &lt;/route&gt;</code></pre> </div> </div> <div class="sect2"> <h3 id="_consuming_a_remote_ftps_server_implicit_ssl_and_client_authentication"><a class="anchor" href="#_consuming_a_remote_ftps_server_implicit_ssl_and_client_authentication"></a>Consuming a remote FTPS server (implicit SSL) and client authentication</h3> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">from("ftps://admin@localhost:2222/public/camel?password=admin&amp;securityProtocol=SSL&amp;isImplicit=true
