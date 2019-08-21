@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <sitemap>
-<loc>https://camel.apache.org/staging/sitemap-camel-k.xml</loc>
+<loc>https://camel.apache.org/sitemap-camel-k.xml</loc>
 </sitemap>
 <sitemap>
-<loc>https://camel.apache.org/staging/sitemap-camel-quarkus.xml</loc>
+<loc>https://camel.apache.org/sitemap-camel-quarkus.xml</loc>
 </sitemap>
 <sitemap>
-<loc>https://camel.apache.org/staging/sitemap-components.xml</loc>
+<loc>https://camel.apache.org/sitemap-components.xml</loc>
 </sitemap>
 <sitemap>
-<loc>https://camel.apache.org/staging/sitemap-manual.xml</loc>
+<loc>https://camel.apache.org/sitemap-manual.xml</loc>
 </sitemap>
 </sitemapindex>
