@@ -169,7 +169,8 @@ resultEndpoint.assertIsSatisfied();</code></pre> </div> </div> </div> </div> <di
 
         assertMockEndpointsSatisfied();
 
-        // the message was not send to the direct:foo route and thus not sent to the seda endpoint
+        // the message was not send to the direct:foo route and thus not sent to
+        // the seda endpoint
         SedaEndpoint seda = context.getEndpoint("seda:foo", SedaEndpoint.class);
         assertEquals(0, seda.getCurrentQueueSize());
     }</code></pre> </div> </div> <div class="paragraph"> <p>The same example using the Test Kit</p> </div> <div class="listingblock"> <div class="title"><strong>isMockEndpointsAndSkip using camel-test kit</strong></div> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class IsMockEndpointsAndSkipJUnit4Test extends CamelTestSupport {
