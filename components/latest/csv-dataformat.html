@@ -28,7 +28,7 @@ public void doHandleCsvData(List&lt;List&lt;String&gt;&gt; csvData)
     // do magic here
 }</code></pre> </div> </div> <div class="olist lowerroman"> <ol class="lowerroman" type="i"> <li> <p>your route then looks as follows</p> </li> </ol> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;route&gt;
         &lt;!-- poll every 10 seconds --&gt;
-        &lt;from uri="file:///some/path/to/pickup/csvfiles?delete=true&amp;amp;consumer.delay=10000" /&gt;
+        &lt;from uri="file:///some/path/to/pickup/csvfiles?delete=true&amp;amp;delay=10000" /&gt;
         &lt;unmarshal&gt;&lt;csv /&gt;&lt;/unmarshal&gt;
         &lt;to uri="bean:myCsvHandler?method=doHandleCsvData" /&gt;
 &lt;/route&gt;</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_marshaling_with_a_pipe_as_delimiter"><a class="anchor" href="#_marshaling_with_a_pipe_as_delimiter"></a>Marshaling with a pipe as delimiter</h2> <div class="sectionbody"> <div class="paragraph"> <p>Considering the following body</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Map&lt;String, Object&gt; body = new LinkedHashMap&lt;&gt;();
