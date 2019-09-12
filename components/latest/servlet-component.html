@@ -58,20 +58,20 @@
         exchange.getOut().setBody("&lt;b&gt;Hello World&lt;/b&gt;");
     }
 });</code></pre> </div> </div> <div class="admonitionblock note"> <div class="table-wrapper"><table> <tr> <td class="icon"> <i class="fa icon-note" title="Note"></i> </td> <td class="content"> <div class="paragraph"> <p><strong>Specify the relative path for camel-servlet endpoint</strong></p> </div> <div class="paragraph"> <p>Since we are binding the HTTP transport with a published servlet, and we don&#8217;t know the servlet&#8217;s application context path, the <code>camel-servlet</code> endpoint uses the relative path to specify the endpoint&#8217;s URL. A client can access the <code>camel-servlet</code> endpoint through the servlet publish address: <code>("http://localhost:8080/camel/services") + RELATIVE_PATH("/hello")</code></p> </div> </td> </tr> </table></div> </div> <div class="sect2"> <h3 id="_sample_when_using_spring"><a class="anchor" href="#_sample_when_using_spring"></a>Sample when using Spring</h3> <div class="paragraph"> <p>When using the Servlet component in a Camel/Spring application it&#8217;s often required to load the Spring ApplicationContext <em>after</em> the Servlet component has started. This can be accomplished by using Spring&#8217;s <code>ContextLoaderServlet</code> instead of <code>ContextLoaderListener</code>. In that case you&#8217;ll need to start <code>ContextLoaderServlet</code> after <a href="https://github.com/apache/camel/blob/master/components/camel-servlet/src/main/java/org/apache/camel/component/servlet/CamelHttpTransportServlet.java">CamelHttpTransportServlet</a> like this:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;web-app&gt;
-  &lt;servlet&gt;
+    &lt;servlet&gt;
         &lt;servlet-name&gt;CamelServlet&lt;/servlet-name&gt;
         &lt;servlet-class&gt;
             org.apache.camel.component.servlet.CamelHttpTransportServlet
         &lt;/servlet-class&gt;
         &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
-  &lt;/servlet&gt;
-  &lt;servlet&gt;
+    &lt;/servlet&gt;
+    &lt;servlet&gt;
         &lt;servlet-name&gt;SpringApplicationContext&lt;/servlet-name&gt;
         &lt;servlet-class&gt;
             org.springframework.web.context.ContextLoaderServlet
         &lt;/servlet-class&gt;
         &lt;load-on-startup&gt;2&lt;/load-on-startup&gt;
-  &lt;/servlet&gt;
+    &lt;/servlet&gt;
 &lt;web-app&gt;</code></pre> </div> </div> </div> <div class="sect2"> <h3 id="_sample_when_using_osgi"><a class="anchor" href="#_sample_when_using_osgi"></a>Sample when using OSGi</h3> <div class="paragraph"> <p>You can publish the <a href="https://github.com/apache/camel/blob/master/components/camel-servlet/src/main/java/org/apache/camel/component/servlet/CamelHttpTransportServlet.java">CamelHttpTransportServlet</a> as an OSGi service with Blueprint like this:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="
