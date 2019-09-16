@@ -1,10 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>News on Apache Camel</title><link>https://camel.apache.org/news/</link><description>Recent content in News on Apache Camel</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 13 Sep 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://camel.apache.org/news/index.xml" rel="self" type="application/rss+xml"/><item><title>RELEASE 2.24.2</title><link>https://camel.apache.org/news/release-2-24-2.html</link><pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate><guid>https://camel.apache.org/news/release-2-24-2.html</guid><description>The Camel community announces the immediate availability of the new patch release Camel 2.24.2. This release contains 20 fixes and improvements applied in the past weeks by the community on the camel-2.24.x branch.
-The artifacts are published and ready for you to download either from the Apache mirrors or from the Central Maven repository. For more details please take a look at the release notes.
-Many thanks to all who made this release possible.</description></item><item><title>Camel at ApacheCon North America 2019</title><link>https://camel.apache.org/news/ApacheConNA-2019/</link><pubDate>Tue, 10 Sep 2019 16:45:32 +0200</pubDate><guid>https://camel.apache.org/news/ApacheConNA-2019/</guid><description>Apache Camel is part of ApacheCon 2019 in North America this year celebrating the 20th year anniversary of Apache Software Foundation.
-On the Integration track you will find out all about the state of Apache Camel from Claus Ibsen, Sami Adranly will present Camel based data integration platform at Uber called Medley Nicola Ferraro and Andrea Tarocchi will be talking about Camel K and Camel K with Knative, Bob Paulin will make the cloud integration friendly in Configuring Apache Camel for the Cloud and Michael Costello will talk about serverless integration with Camel.</description></item><item><title>RELEASE 3.0.0-RC1</title><link>https://camel.apache.org/news/release-3-0-0-RC1.html</link><pubDate>Mon, 02 Sep 2019 00:00:00 +0000</pubDate><guid>https://camel.apache.org/news/release-3-0-0-RC1.html</guid><description>The Camel community announces the immediate availability of Camel 3.0.0-RC1, the first release candidate towards a new 3.0.0 major release with 148 improvements and fixes.
-The artifacts are published and ready for you to download from the Central Maven repository. For more details please take a look at the release notes.
-Many thanks to all who made this release possible.
-On behalf of the Camel PMC,
-Gregor Zurowski</description></item><item><title>RELEASE 2.24.0</title><link>https://camel.apache.org/news/release-2-24-0.html</link><pubDate>Sun, 12 May 2019 00:00:00 +0000</pubDate><guid>https://camel.apache.org/news/release-2-24-0.html</guid><description>The Camel community announces the immediate availability of the new minor release Camel 2.24.0. This release contains 156 fixes and improvements. An overview of the changes is available here.
-The artifacts are published and ready for you to download either from the Apache mirrors or from the Central Maven repository. For more details please take a look at the release notes.
-Many thanks to all who made this release possible.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>News on Apache Camel</title>
+    <link>https://camel.apache.org/news/</link>
+    <description>Recent content in News on Apache Camel</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://camel.apache.org/news/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+  </channel>
+</rss>

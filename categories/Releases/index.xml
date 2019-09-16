@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Releases on Apache Camel</title>
+    <link>https://camel.apache.org/categories/Releases/</link>
+    <description>Recent content in Releases on Apache Camel</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 13 Sep 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://camel.apache.org/categories/Releases/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>RELEASE 2.24.2</title>
+      <link>https://camel.apache.org/blog/release-2-24-2.html</link>
+      <pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://camel.apache.org/blog/release-2-24-2.html</guid>
+      <description>The Camel community announces the immediate availability of the new patch release Camel 2.24.2. This release contains 20 fixes and improvements applied in the past weeks by the community on the camel-2.24.x branch.
+The artifacts are published and ready for you to download either from the Apache mirrors or from the Central Maven repository. For more details please take a look at the release notes.
+Many thanks to all who made this release possible.</description>
+    </item>
+    
+    <item>
+      <title>RELEASE 3.0.0-RC1</title>
+      <link>https://camel.apache.org/blog/release-3-0-0-RC1.html</link>
+      <pubDate>Mon, 02 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://camel.apache.org/blog/release-3-0-0-RC1.html</guid>
+      <description>The Camel community announces the immediate availability of Camel 3.0.0-RC1, the first release candidate towards a new 3.0.0 major release with 148 improvements and fixes.
+The artifacts are published and ready for you to download from the Central Maven repository. For more details please take a look at the release notes.
+Many thanks to all who made this release possible.
+On behalf of the Camel PMC,
+Gregor Zurowski</description>
+    </item>
+    
+    <item>
+      <title>RELEASE 2.24.0</title>
+      <link>https://camel.apache.org/blog/release-2-24-0.html</link>
+      <pubDate>Sun, 12 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://camel.apache.org/blog/release-2-24-0.html</guid>
+      <description>The Camel community announces the immediate availability of the new minor release Camel 2.24.0. This release contains 156 fixes and improvements. An overview of the changes is available here.
+The artifacts are published and ready for you to download either from the Apache mirrors or from the Central Maven repository. For more details please take a look at the release notes.
+Many thanks to all who made this release possible.</description>
+    </item>
+    
+  </channel>
+</rss>
