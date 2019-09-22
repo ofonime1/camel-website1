@@ -4,17 +4,32 @@
   
   <url>
     <loc>https://camel.apache.org/releases/</loc>
-    <lastmod>2019-09-13T00:00:00+00:00</lastmod>
+    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://camel.apache.org/blog/</loc>
-    <lastmod>2019-09-13T00:00:00+00:00</lastmod>
+    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://camel.apache.org/</loc>
-    <lastmod>2019-09-13T00:00:00+00:00</lastmod>
+    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/blog/release-2-23-4.html</loc>
+    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/releases/release-2.23.4/</loc>
+    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/categories/Releases/</loc>
+    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -24,11 +39,6 @@
   
   <url>
     <loc>https://camel.apache.org/releases/release-2.24.2/</loc>
-    <lastmod>2019-09-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://camel.apache.org/categories/Releases/</loc>
     <lastmod>2019-09-13T00:00:00+00:00</lastmod>
   </url>
   
