@@ -148,7 +148,7 @@ camel.springboot.xml-rests = classpath:com/foo/rests/*.xml</code></pre> </div> <
          &lt;to uri="direct:deletePersionId"/&gt;
      &lt;/delete&gt;
   &lt;/rest&gt;
-&lt;/rests&gt;</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="SpringBoot-Testing"><a class="anchor" href="#SpringBoot-Testing"></a>Testing</h2> <div class="sectionbody"> <div class="paragraph"> <p>For testing, Maven users will need to add the following dependencies to their <code>pom.xml</code>:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+&lt;/rests&gt;</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="SpringBoot-Testing"><a class="anchor" href="#SpringBoot-Testing"></a>Testing the JUnit 4 way</h2> <div class="sectionbody"> <div class="paragraph"> <p>For testing, Maven users will need to add the following dependencies to their <code>pom.xml</code>:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
     &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
     &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
     &lt;version&gt;${spring-boot.version}&lt;/version&gt; &lt;!-- Use the same version as your Spring Boot version --&gt;
@@ -169,6 +169,35 @@ public class MyApplicationTest {
 
     @EndpointInject("mock:direct:end")
     MockEndpoint mock;
+
+    @Test
+    public void testReceive() throws Exception {
+        mock.expectedBodiesReceived("Hello");
+        template.sendBody("direct:start", "Hello");
+        mock.assertIsSatisfied();
+    }
+
+}</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_testing_the_junit_5_way"><a class="anchor" href="#_testing_the_junit_5_way"></a>Testing the JUnit 5 way</h2> <div class="sectionbody"> <div class="paragraph"> <p>For testing, Maven users will need to add the following dependencies to their <code>pom.xml</code>:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+    &lt;version&gt;${spring-boot.version}&lt;/version&gt; &lt;!-- Use the same version as your Spring Boot version --&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+    &lt;artifactId&gt;camel-test-spring-junit5&lt;/artifactId&gt;
+    &lt;version&gt;${camel.version}&lt;/version&gt; &lt;!-- use the same version as your Camel core version --&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;</code></pre> </div> </div> <div class="paragraph"> <p>To test a Camel Spring Boot application, annotate your test class(es) with <code>@CamelSpringBootTest</code>. This brings Camel&#8217;s Spring Test support to your application, so that you can write tests using <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html">Spring Boot test conventions</a>.</p> </div> <div class="paragraph"> <p>To get the <code>CamelContext</code> or <code>ProducerTemplate</code>, you can inject them into the class in the normal Spring manner, using <code>@Autowired</code>.</p> </div> <div class="paragraph"> <p>You can also use <a href="../../manual/latest/spring-testing.html" class="page">Camel Spring test annotations</a> to configure tests declaratively. This example uses the <code>@MockEndpoints</code> annotation to auto-mock an endpoint:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@CamelSpringBootTest
+@SpringBootApplication
+@MockEndpoints("direct:end")
+public class MyApplicationTest {
+
+    @Autowired
+    private ProducerTemplate template;
+
+    @EndpointInject("mock:direct:end")
+    private MockEndpoint mock;
 
     @Test
     public void testReceive() throws Exception {
