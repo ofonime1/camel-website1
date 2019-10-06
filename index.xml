@@ -6,10 +6,23 @@
     <description>Recent content in Home on Apache Camel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://camel.apache.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>RELEASE 3.0.0-RC2</title>
+      <link>https://camel.apache.org/blog/release-3-0-0-RC2.html</link>
+      <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://camel.apache.org/blog/release-3-0-0-RC2.html</guid>
+      <description>The Camel community announces the immediate availability of Camel 3.0.0-RC2, the second release candidate towards a new 3.0.0 major release with 94 improvements and fixes.
+The artifacts are published and ready for you to download from the Central Maven repository. For more details please take a look at the release notes.
+Many thanks to all who made this release possible.
+On behalf of the Camel PMC,
+Gregor Zurowski</description>
+    </item>
     
     <item>
       <title>Apache Camel 3 is only 2 months away</title>
@@ -77,19 +90,6 @@ On the Integration track you will find out all about the state of Apache Camel f
       
       <guid>https://camel.apache.org/blog/release-3-0-0-RC1.html</guid>
       <description>The Camel community announces the immediate availability of Camel 3.0.0-RC1, the first release candidate towards a new 3.0.0 major release with 148 improvements and fixes.
-The artifacts are published and ready for you to download from the Central Maven repository. For more details please take a look at the release notes.
-Many thanks to all who made this release possible.
-On behalf of the Camel PMC,
-Gregor Zurowski</description>
-    </item>
-    
-    <item>
-      <title>RELEASE 3.0.0-RC2</title>
-      <link>https://camel.apache.org/blog/release-3-0-0-RC2.html</link>
-      <pubDate>Mon, 02 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://camel.apache.org/blog/release-3-0-0-RC2.html</guid>
-      <description>The Camel community announces the immediate availability of Camel 3.0.0-RC2, the second release candidate towards a new 3.0.0 major release with 94 improvements and fixes.
 The artifacts are published and ready for you to download from the Central Maven repository. For more details please take a look at the release notes.
 Many thanks to all who made this release possible.
 On behalf of the Camel PMC,

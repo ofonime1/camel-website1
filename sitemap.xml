@@ -3,17 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://camel.apache.org/blog/Camel3-2monthsaway/</loc>
-    <lastmod>2019-10-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://camel.apache.org/blog/</loc>
-    <lastmod>2019-10-02T00:00:00+00:00</lastmod>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://camel.apache.org/</loc>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/blog/release-3-0-0-RC2.html</loc>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/categories/Releases/</loc>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/blog/Camel3-2monthsaway/</loc>
     <lastmod>2019-10-02T00:00:00+00:00</lastmod>
   </url>
   
@@ -34,11 +44,6 @@
   
   <url>
     <loc>https://camel.apache.org/releases/release-2.23.4/</loc>
-    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://camel.apache.org/categories/Releases/</loc>
     <lastmod>2019-09-22T00:00:00+00:00</lastmod>
   </url>
   
@@ -64,11 +69,6 @@
   
   <url>
     <loc>https://camel.apache.org/blog/release-3-0-0-RC1.html</loc>
-    <lastmod>2019-09-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://camel.apache.org/blog/release-3-0-0-RC2.html</loc>
     <lastmod>2019-09-02T00:00:00+00:00</lastmod>
   </url>
   
