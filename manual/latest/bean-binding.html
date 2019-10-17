@@ -8,7 +8,7 @@
      public void doSomething(Exchange exchange) {
          // process the exchange
          exchange.getIn().setBody("Bye World");
- }</code></pre> </div> </div> <div class="paragraph"> <p>[[BeanBinding-@Handler]] === @Handler</p> </div> <div class="paragraph"> <p>You can mark a method in your bean with the @Handler annotation to indicate that this method should be used for <a href="#">Bean Binding</a>. This has an advantage as you need not specify a method name in the Camel route, and therefore do not run into problems after renaming the method in an IDE that can&#8217;t find all its references.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-syntaxhighlighter-pre hljs" data-lang="syntaxhighlighter-pre">public class Bar {
+ }</code></pre> </div> </div> </div> <div class="sect2"> <h3 id="BeanBinding-Handler"><a class="anchor" href="#BeanBinding-Handler"></a>@Handler</h3> <div class="paragraph"> <p>You can mark a method in your bean with the @Handler annotation to indicate that this method should be used for <a href="#">Bean Binding</a>. This has an advantage as you need not specify a method name in the Camel route, and therefore do not run into problems after renaming the method in an IDE that can&#8217;t find all its references.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-syntaxhighlighter-pre hljs" data-lang="syntaxhighlighter-pre">public class Bar {
     @Handler
     public String doSomething(String body) {
         // process the in body and return whatever you want
