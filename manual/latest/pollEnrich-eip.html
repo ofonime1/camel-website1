@@ -12,7 +12,16 @@
     &lt;constant&gt;file:inbox?fileName=data.txt&lt;/constant&gt;
   &lt;/pollEnrich&gt;
   &lt;to uri="direct:result"/&gt;
-&lt;/route&gt;</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_using_dynamic_uris"><a class="anchor" href="#_using_dynamic_uris"></a>Using dynamic uris</h2> <div class="sectionbody"> <div class="paragraph"> <p>Both <code>enrich</code> and <code>pollEnrich</code> supports using dynamic uris computed based on information from the current Exchange. For example to <code>pollEnrich</code> from an endpoint that uses a header to indicate a SEDA queue name:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">from("direct:start")
+&lt;/route&gt;</code></pre> </div> </div> <div class="paragraph"> <p>To use it as a consumer in the middle of a REST Get route downloading a file from AWS S3 as the response of an API call.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;rest path="/report"&gt;
+    &lt;description&gt;Report REST API&lt;/description&gt;
+    &lt;get uri="/{id}/payload"&gt;
+        &lt;route id="report-payload-download"&gt;
+            &lt;pollEnrich id="pollEnrich"&gt;
+                &lt;simple&gt;aws-s3:xavier-dev?amazonS3Client=#s3client&amp;amp;deleteAfterRead=false&amp;amp;fileName=report-file.pdf&lt;/simple&gt;
+            &lt;/pollEnrich&gt;
+        &lt;/route&gt;
+    &lt;/get&gt;
+&lt;/rest&gt;</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_using_dynamic_uris"><a class="anchor" href="#_using_dynamic_uris"></a>Using dynamic uris</h2> <div class="sectionbody"> <div class="paragraph"> <p>Both <code>enrich</code> and <code>pollEnrich</code> supports using dynamic uris computed based on information from the current Exchange. For example to <code>pollEnrich</code> from an endpoint that uses a header to indicate a SEDA queue name:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">from("direct:start")
   .pollEnrich().simple("seda:${header.name}")
   .to("direct:result");</code></pre> </div> </div> <div class="paragraph"> <p>And in XML DSL</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;route&gt;
   &lt;from uri="direct:start"/&gt;
