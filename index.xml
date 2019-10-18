@@ -6,10 +6,20 @@
     <description>Recent content in Home on Apache Camel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 18 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://camel.apache.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Camel K on CNCF Serverless Landscape</title>
+      <link>https://camel.apache.org/blog/CamelK-CNCF-Landscape/</link>
+      <pubDate>Fri, 18 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://camel.apache.org/blog/CamelK-CNCF-Landscape/</guid>
+      <description>The Apache Camel K project is now listed on the CNCF (Cloud Native Computing Foundation) interactive landscape; which lists all known open source projects that works with kubernetes and cloud platforms.
+  Camel K CNCF landscape (Click to enlarge)  </description>
+    </item>
     
     <item>
       <title>RELEASE 3.0.0-RC2</title>
