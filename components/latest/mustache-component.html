@@ -12,7 +12,7 @@ to("mustache:com/acme/MyResponse.mustache");</code></pre> </div> </div> <div cla
 to("mustache:com/acme/MyResponse.mustache").
 to("activemq:Another.Queue");</code></pre> </div> </div> <div class="paragraph"> <p>It&#8217;s possible to specify what template the component should use dynamically via a header, so for example:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">from("direct:in").
 setHeader(MustacheConstants.MUSTACHE_RESOURCE_URI).constant("path/to/my/template.mustache").
-to("mustache:dummy");</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_the_email_sample"><a class="anchor" href="#_the_email_sample"></a>The Email Sample</h2> <div class="sectionbody"> <div class="paragraph"> <p>In this sample we want to use Mustache templating for an order confirmation email. The email template is laid out in Mustache as:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Dear {{headers.lastName}}}, {{headers.firstName}}
+to("mustache:dummy");</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_the_email_sample"><a class="anchor" href="#_the_email_sample"></a>The Email Sample</h2> <div class="sectionbody"> <div class="paragraph"> <p>In this sample we want to use Mustache templating for an order confirmation email. The email template is laid out in Mustache as:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Dear {{headers.lastName}}, {{headers.firstName}}
 
 Thanks for the order of {{headers.item}}.
 
