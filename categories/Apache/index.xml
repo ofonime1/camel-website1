@@ -6,6 +6,7 @@
     <description>Recent content in Apache on Apache Camel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Fri, 01 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://camel.apache.org/categories/Apache/index.xml" rel="self" type="application/rss+xml" />
     
@@ -13,7 +14,7 @@
     <item>
       <title>Apache Camel on top-5 in the ASF annual 2019 report</title>
       <link>https://camel.apache.org/blog/ASF-Report-2019/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 01 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>https://camel.apache.org/blog/ASF-Report-2019/</guid>
       <description>The ASF Annual 2019 Report includes 25 highlights where Apache Camel is referred twice as a top-5 project:
