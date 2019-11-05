@@ -6,19 +6,19 @@ $ cp -r camel-quarkus/examples/rest-json .
 $ cd rest-json</code></pre> </div> </div> </li> <li> <p>Open the <code>pom.xml</code> file in your IDE.</p> <div class="paragraph"> <p>Make sure that the parent is <code>org.apache.camel.quarkus:camel-quarkus-bom</code> and do the changes as sketched below:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;project&gt;
     &lt;parent&gt;
         &lt;groupId&gt;org.apache.camel.quarkus&lt;/groupId&gt;
-        &lt;artifactId&gt;camel-quarkus-bom&lt;/artifactId&gt;
+        &lt;artifactId&gt;camel-quarkus-bom&lt;/artifactId&gt;<i class="conum" data-value="1"></i><b>(1)</b>
         &lt;version&gt;0.3.1&lt;/version&gt;
-        &lt;!-- &lt;relativePath&gt;../../bom/pom.xml&lt;/relativePath&gt; --&gt;<i class="conum" data-value="1"></i><b>(1)</b>
+        &lt;!-- &lt;relativePath&gt;../../bom/pom.xml&lt;/relativePath&gt; --&gt;<i class="conum" data-value="2"></i><b>(2)</b>
     &lt;/parent&gt;
     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
 
-    &lt;groupId&gt;org.my-org&lt;/groupId&gt;<i class="conum" data-value="2"></i><b>(2)</b>
-    &lt;artifactId&gt;my-app&lt;/artifactId&gt;<i class="conum" data-value="3"></i><b>(3)</b>
-    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;<i class="conum" data-value="4"></i><b>(4)</b>
+    &lt;groupId&gt;org.my-org&lt;/groupId&gt;<i class="conum" data-value="3"></i><b>(3)</b>
+    &lt;artifactId&gt;my-app&lt;/artifactId&gt;<i class="conum" data-value="4"></i><b>(4)</b>
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;<i class="conum" data-value="5"></i><b>(5)</b>
 
     ...
 
-&lt;/project&gt;</code></pre> </div> </div> <div class="colist arabic"> <div class="table-wrapper"><table> <tr> <td><i class="conum" data-value="1"></i><b>1</b></td> <td>Remove the <code>&lt;relativePath&gt;</code> element.</td> </tr> <tr> <td><i class="conum" data-value="2"></i><b>2</b></td> <td>Add a <code>groupId</code> of your choice.</td> </tr> <tr> <td><i class="conum" data-value="3"></i><b>3</b></td> <td>Change the <code>artifactId</code> to whatever you like</td> </tr> <tr> <td><i class="conum" data-value="4"></i><b>4</b></td> <td>Add the <code>version</code></td> </tr> </table></div> </div> </li> </ol> </div> </div> <div class="sect2"> <h3 id="_explore_the_application_code"><a class="anchor" href="#_explore_the_application_code"></a>Explore the application code</h3> <div class="paragraph"> <p>The application has just two compile dependencies:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+&lt;/project&gt;</code></pre> </div> </div> <div class="colist arabic"> <div class="table-wrapper"><table> <tr> <td><i class="conum" data-value="1"></i><b>1</b></td> <td>Change the <code>&lt;artifactId&gt;</code> element to <code>camel-quarkus-bom</code>.</td> </tr> <tr> <td><i class="conum" data-value="2"></i><b>2</b></td> <td>Remove the <code>&lt;relativePath&gt;</code> element.</td> </tr> <tr> <td><i class="conum" data-value="3"></i><b>3</b></td> <td>Add a <code>groupId</code> of your choice.</td> </tr> <tr> <td><i class="conum" data-value="4"></i><b>4</b></td> <td>Change the <code>artifactId</code> to whatever you like</td> </tr> <tr> <td><i class="conum" data-value="5"></i><b>5</b></td> <td>Add the <code>version</code></td> </tr> </table></div> </div> </li> </ol> </div> </div> <div class="sect2"> <h3 id="_explore_the_application_code"><a class="anchor" href="#_explore_the_application_code"></a>Explore the application code</h3> <div class="paragraph"> <p>The application has just two compile dependencies:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.camel.quarkus&lt;/groupId&gt;
     &lt;artifactId&gt;camel-quarkus-platform-http&lt;/artifactId&gt;
 &lt;/dependency&gt;
