@@ -6,7 +6,7 @@ ottracer.init(camelContext);</code></pre> </div> </div> <div class="paragraph"> 
   &lt;bean id="ottracer" class="org.apache.camel.opentracing.OpenTracingTracer"&gt;
     &lt;property name="tracer" ref="tracer"/&gt;
   &lt;/bean&gt;</code></pre> </div> </div> </div> </div> </div> <div class="sect1"> <h2 id="_spring_boot"><a class="anchor" href="#_spring_boot"></a>Spring Boot</h2> <div class="sectionbody"> <div class="paragraph"> <p>If you are using Spring Boot then you can add the <code>camel-opentracing-starter</code> dependency, and turn on OpenTracing by annotating the main class with <code>@CamelOpenTracing</code>.</p> </div> <div class="paragraph"> <p>The <code>Tracer</code> will be implicitly obtained from the camel context&#8217;s <code>Registry</code>, or the <code>ServiceLoader</code>, unless a <code>Tracer</code> bean has been defined by the application.</p> </div> </div> </div> <div class="sect1"> <h2 id="_spring_boot_auto_configuration"><a class="anchor" href="#_spring_boot_auto_configuration"></a>Spring Boot Auto-Configuration</h2> <div class="sectionbody"> <div class="paragraph"> <p>When using Spring Boot make sure to use the following Maven dependency to have support for auto configuration:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
-  &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+  &lt;groupId&gt;org.apache.camel.springboot&lt;/groupId&gt;
   &lt;artifactId&gt;camel-opentracing-starter&lt;/artifactId&gt;
   &lt;version&gt;x.x.x&lt;/version&gt;
   &lt;!-- use the same version as your Camel core version --&gt;
