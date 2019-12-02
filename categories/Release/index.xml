@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Release on Apache Camel</title>
+    <link>https://camel.apache.org/categories/Release/</link>
+    <description>Recent content in Release on Apache Camel</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 02 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://camel.apache.org/categories/Release/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Apache Camel 3 Whats New (top 10)</title>
+      <link>https://camel.apache.org/blog/Camel3-Whatsnew/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://camel.apache.org/blog/Camel3-Whatsnew/</guid>
+      <description>Apache Camel 3 was released last thursday November 28th 2019, which also happens to be the day of the US Thanksgiving. This was not intentionally but we can say its a big thanks from us to the community with a brand new major version of Camel - this does not come often by. In fact its 10 years since Camel 2 hit the streets. So this 3rd generation is long overdue.</description>
+    </item>
+    
+  </channel>
+</rss>
