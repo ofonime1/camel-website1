@@ -66,7 +66,13 @@ body.put("bar", 123);</code></pre> </div> </div> <div class="paragraph"> <p>and 
 
 &lt;bean id="excelStrategy" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean"&gt;
   &lt;property name="staticField" value="org.apache.commons.csv.CSVStrategy.EXCEL_STRATEGY" /&gt;
-&lt;/bean&gt;</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_using_skipfirstline_option_while_unmarshaling"><a class="anchor" href="#_using_skipfirstline_option_while_unmarshaling"></a>Using skipFirstLine option while unmarshaling</h2> <div class="sectionbody"> <div class="paragraph"> <p><strong>Since Camel 2.10 and deleted for Camel 2.15</strong></p> </div> <div class="paragraph"> <p>You can instruct the CSV Data Format to skip the first line which contains the CSV headers. Using the Spring/XML DSL:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;route&gt;
+&lt;/bean&gt;</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_using_skipfirstline_or_skipheaderrecord_option_while_unmarshaling"><a class="anchor" href="#_using_skipfirstline_or_skipheaderrecord_option_while_unmarshaling"></a>Using skipFirstLine or skipHeaderRecord option while unmarshaling</h2> <div class="sectionbody"> <div class="paragraph"> <p>*For Camel &gt;= 2.16.5 The instruction for CSV Data format to skip headers or first line is the following. Usign the Spring/XML DSL:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;route&gt;
+  &lt;from uri="direct:start" /&gt;
+  &lt;unmarshal&gt;
+    &lt;csv skipHeaderRecord="true" /&gt;
+  &lt;/unmarshal&gt;
+  &lt;to uri="bean:myCsvHandler?method=doHandleCsv" /&gt;
+&lt;/route&gt;</code></pre> </div> </div> <div class="paragraph"> <p><strong>Since Camel 2.10 and deleted for Camel 2.15</strong></p> </div> <div class="paragraph"> <p>You can instruct the CSV Data Format to skip the first line which contains the CSV headers. Using the Spring/XML DSL:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;route&gt;
   &lt;from uri="direct:start" /&gt;
   &lt;unmarshal&gt;
     &lt;csv skipFirstLine="true" /&gt;
