@@ -6,10 +6,21 @@
     <description>Recent content in Blog on Apache Camel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 14 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 16 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://camel.apache.org/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Language Support for Apache Camel - VS Code extension 0.0.20</title>
+      <link>https://camel.apache.org/blog/LanguageSupportTooling-0.0.20/</link>
+      <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://camel.apache.org/blog/LanguageSupportTooling-0.0.20/</guid>
+      <description>Disclaimer: this article has been first published on developers.redhat.com
+During the past months, several noticeable new features have been added to improve the developer experience of application based on Apache Camel. These updates are available in the 0.0.20 release of Visual Studio (VS) Code extension.
+Before going into the list of updates in detail, I want to note that I mentioned in the title the VS Code Extension release because VS Code extension is covering the broader set of new features.</description>
+    </item>
     
     <item>
       <title>Apache Camel Kafka Connector: Introducing the latest project in the ecosystem</title>
