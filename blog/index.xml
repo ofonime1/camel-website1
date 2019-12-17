@@ -6,10 +6,20 @@
     <description>Recent content in Blog on Apache Camel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 14 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://camel.apache.org/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>JBoss Asylum Podcast about Apache Camel 3</title>
+      <link>https://camel.apache.org/blog/Podcast47/</link>
+      <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://camel.apache.org/blog/Podcast47/</guid>
+      <description>JBoss Asylm Podcast episode 47: What do you call an Apache Camel with 3 humps
+Claus Ibsen and Luca Burgazzoli sits down with Emanual and Max (hosts) and talks about what is coming in Apache Camel 3 on topics like Camel K and Camel Quarkus. We also cover Camel&amp;rsquo;s place in the modern world with cloud native and serverless workloads. And at the end we have some bits about what&amp;rsquo;s coming next in Camel 3.</description>
+    </item>
     
     <item>
       <title>Apache Camel Kafka Connector: Introducing the latest project in the ecosystem</title>
