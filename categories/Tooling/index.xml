@@ -17,8 +17,7 @@
       <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>https://camel.apache.org/blog/LanguageSupportTooling-0.0.20/</guid>
-      <description>Disclaimer: this article has been first published on developers.redhat.com
-During the past months, several noticeable new features have been added to improve the developer experience of application based on Apache Camel. These updates are available in the 0.0.20 release of Visual Studio (VS) Code extension.
+      <description>During the past months, several noticeable new features have been added to improve the developer experience of application based on Apache Camel. These updates are available in the 0.0.20 release of Visual Studio (VS) Code extension.
 Before going into the list of updates in detail, I want to note that I mentioned in the title the VS Code Extension release because VS Code extension is covering the broader set of new features.</description>
     </item>
     
