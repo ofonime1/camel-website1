@@ -3,17 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://camel.apache.org/releases/</loc>
-    <lastmod>2019-12-26T00:00:00+00:00</lastmod>
+    <loc>https://camel.apache.org/blog/</loc>
+    <lastmod>2019-12-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://camel.apache.org/blog/</loc>
-    <lastmod>2019-12-26T00:00:00+00:00</lastmod>
+    <loc>https://camel.apache.org/blog/2019-Numbers/</loc>
+    <lastmod>2019-12-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://camel.apache.org/</loc>
+    <lastmod>2019-12-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/categories/Roadmap/</loc>
+    <lastmod>2019-12-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/releases/</loc>
     <lastmod>2019-12-26T00:00:00+00:00</lastmod>
   </url>
   
@@ -54,11 +64,6 @@
   
   <url>
     <loc>https://camel.apache.org/blog/Camel-Kafka-connector-intro/</loc>
-    <lastmod>2019-12-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://camel.apache.org/categories/Roadmap/</loc>
     <lastmod>2019-12-14T00:00:00+00:00</lastmod>
   </url>
   

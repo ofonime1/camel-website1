@@ -6,10 +6,23 @@
     <description>Recent content in Roadmap on Apache Camel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 14 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 31 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://camel.apache.org/categories/Roadmap/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Camel 2019 in Numbers</title>
+      <link>https://camel.apache.org/blog/2019-Numbers/</link>
+      <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://camel.apache.org/blog/2019-Numbers/</guid>
+      <description>It&amp;rsquo;s the time of the year where we take a look back at 2019, and compile a brief summary of the Apache Camel project.
+  Camel Sunset (Click to enlarge)  The big news of 2019 was the much anticipated release of Apache Camel 3.
+== Family of projects
+It was also in 2019 that the Camel project became a faimily of projects by introducing:
+ Camel K Camel Quarkus  Making Apache Camel a trilogy.</description>
+    </item>
     
     <item>
       <title>Apache Camel Kafka Connector: Introducing the latest project in the ecosystem</title>
