@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Guest Posts on Apache Camel</title>
-    <link>https://camel.apache.org/categories/Guest-Posts/</link>
-    <description>Recent content in Guest Posts on Apache Camel</description>
+    <title>Usecases on Apache Camel</title>
+    <link>https://camel.apache.org/categories/Usecases/</link>
+    <description>Recent content in Usecases on Apache Camel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 02 Jan 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://camel.apache.org/categories/Guest-Posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://camel.apache.org/categories/Usecases/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
