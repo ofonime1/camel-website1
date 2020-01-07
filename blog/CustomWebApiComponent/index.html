@@ -1,0 +1,269 @@
+<!doctype html> <html lang="en"> <head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width,initial-scale=1"> <link rel="apple-touch-icon-precomposed" sizes="57x57" href="../../apple-touch-icon-57x57.png"> <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../apple-touch-icon-114x114.png"> <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../apple-touch-icon-72x72.png"> <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../apple-touch-icon-144x144.png"> <link rel="apple-touch-icon-precomposed" sizes="60x60" href="../../apple-touch-icon-60x60.png"> <link rel="apple-touch-icon-precomposed" sizes="120x120" href="../../apple-touch-icon-120x120.png"> <link rel="apple-touch-icon-precomposed" sizes="76x76" href="../../apple-touch-icon-76x76.png"> <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../apple-touch-icon-152x152.png"> <link rel="icon" type="image/png" href="../../favicon-196x196.png" sizes="196x196"> <link rel="icon" type="image/png" href="../../favicon-96x96.png" sizes="96x96"> <link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32"> <link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16"> <link rel="icon" type="image/png" href="../../favicon-128.png" sizes="128x128"> <meta name="application-name" content="Apache Camel"> <link rel="manifest" href="../../site.webmanifest"> <title>Custom Web API Component - Apache Camel</title> <link rel="canonical" href="../../blog/CustomWebApiComponent/"> <link rel="stylesheet" href="../../_/css/site-a55d48ec1d.css"> </head> <body class="article"> <header class="header"> <nav class="navbar"> <div class="navbar-brand"> <a class="nav-logo" href="../../" title="Apache Camel"><span>Apache Camel</span></a> <div id="topbar-nav" class="navbar-menu"> <div class="navbar-end"> <a class="navbar-item" href="../../blog/">Blog</a> <div class="navbar-item has-dropdown is-hoverable"> <a class="navbar-link" href="#">Projects</a> <div class="navbar-dropdown"> <a class="navbar-item" href="../../projects/camel-k/">Camel K</a> <a class="navbar-item" href="../../projects/camel-quarkus/">Camel Quarkus</a> </div> </div> <div class="navbar-item has-dropdown is-hoverable"> <a class="navbar-link" href="#">Documentation</a> <div class="navbar-dropdown"> <a class="navbar-item" href="../../manual/latest/getting-started.html">Getting started</a> <a class="navbar-item" href="../../manual/latest/">User manual</a> <a class="navbar-item" href="../../components/latest/">Component reference</a> <a class="navbar-item" href="../../camel-k/latest/">Camel K</a> <a class="navbar-item" href="../../camel-quarkus/latest/">Camel Quarkus</a> <a class="navbar-item" href="../../manual/latest/enterprise-integration-patterns.html">Enterprise Integration Patterns</a> <a class="navbar-item" href="../../manual/latest/camel-3-migration-guide.html">Camel 2.x to 3.0 Migration Guide</a> <a class="navbar-item" href="../../manual/latest/camel-3x-upgrade-guide.html">Camel 3.x Upgrade Guide</a> </div> </div> <div class="navbar-item has-dropdown is-hoverable"> <a class="navbar-link" href="#">Community</a> <div class="navbar-dropdown"> <a class="navbar-item" href="../../community/support/">Support</a> <a class="navbar-item" href="../../manual/latest/contributing.html">Contributing</a> <a class="navbar-item" href="../../community/user-stories/">User stories</a> <a class="navbar-item" href="../../community/articles/">Articles</a> <a class="navbar-item" href="../../community/books/">Books</a> <a class="navbar-item" href="../../community/team/">Team</a> </div> </div> <a class="navbar-item" href="../../download/">Download</a> <div class="navbar-item has-dropdown is-hoverable"> <a class="navbar-link" href="#">About</a> <div class="navbar-dropdown"> <a class="navbar-item" href="https://www.apache.org/events/current-event.html">Apache events</a> <a class="navbar-item" href="https://www.apache.org/licenses/">License</a> <a class="navbar-item" href="../../security/">Security</a> <a class="navbar-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a> <a class="navbar-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a> </div> </div> </div> </div> <div class="navbar-tools"> <a href="https://github.com/apache/camel/" title="Collaborate on GitHub"><svg class="brand-icon"><use href="../../_/img/brand-logos.svg#github"/></svg></a> <a href="https://gitter.im/apache/apache-camel" title="Chat on Gitter"><svg class="brand-icon"><use href="../../_/img/brand-logos.svg#gitter"/></svg></a> <a href="https://twitter.com/ApacheCamel" title="Follow Apache Camel on Twitter"><svg class="brand-icon"><use href="../../_/img/brand-logos.svg#twitter"/></svg></a> </div> <button class="navbar-burger" data-target="topbar-nav" type="button"> <span></span> <span></span> <span></span> </button> </div> </nav> </header> <div class="body"> <main role="main blog"> <article class="blog doc"> <header> <a class="category" href="../../categories/Usecases/">USECASES</a> <h1><a href="https://camel.apache.org/blog/CustomWebApiComponent/">Custom Web API Component</a></h1> </header> <div class="post"> <aside> <div class="summary">Build your own custom Web API Component from scratch.</div> <time itemprop="published" datetime="2020-01-07" title="Tuesday, January 7, 2020">January 7, 2020</time> <p>by <span rel="author">Federico Valeri</span></p> <p> <a class="arrow prev" href="../../blog/capi-gateway/" title="Previous post: CAPI Gateway: Using Apache Camel at the European Commission">&#10094;</a> </p> </aside> <div class="post-content"> <img class="featured" alt="Blog post featured image" src="../../blog/CustomWebApiComponent/camel-featured_hua29054ae124e0a556509e94b698dcf1b_122153_800x0_resize_q95_gaussian.jpg" width="800" height="199"> <p>Have you built a new great Web API for your product? Wouldn&rsquo;t be wonderful to have it available as a part of the great <a href="https://camel.apache.org/components/latest">Apache Camel component family</a>? We would love it.</p> <p>The community just released <a href="https://camel.apache.org/blog/Camel3-Whatsnew">Camel 3</a> which is more modular, lightweight and already includes lots of components (300+) to quickly integrate various systems consuming or producing data. All of these components can be used with the same integration domain specific language (DSL) based on the famous <a href="https://www.enterpriseintegrationpatterns.com">Enterprise Integration Patterns</a> (EIPs).</p> <p>Creating a new component is actually pretty simple and, as a benefit, you will also have the possibility to use Camel sub-projects to make your Web API available within different runtimes: <a href="https://github.com/apache/camel-spring-boot">SpringBoot</a> (auto-config), <a href="https://github.com/apache/camel-quarkus">Quarkus</a> (Java native compilation) and <a href="https://github.com/apache/camel-k">Camel-K</a> (serverless work).</p> <p>This minimal, yet complete, example will focus on all the steps required to create and contribute your own Web API component to the Apache Camel codebase.</p> <p>As prerequisites you just need OpenJDK 1.8 and Maven 3.5+. <a href="camel-chuck.zip">Download the complete source code</a>.</p> <h2 id="api-endpoint">API endpoint</h2> <p>To keep the example short and simple, we have chosen the <a href="https://api.chucknorris.io">free JSON API for hand curated Chuck Norris facts</a>. This is perfect to showcase how to create our new component, without having to deal with all the details and complexity of a full blown API.</p> <p>There are a few endpoints available, but we will use the following to retrieve a random joke in JSON format:</p> <pre><code class="language-sh">$ curl https://api.chucknorris.io/jokes/random | jq
+{
+  &quot;categories&quot;: [],
+  &quot;created_at&quot;: &quot;2016-05-01 10:51:41.584544&quot;,
+  &quot;icon_url&quot;: &quot;https://assets.chucknorris.host/img/avatar/chuck-norris.png&quot;,
+  &quot;id&quot;: &quot;TMGDYHjLSu-G5Jkueph9lA&quot;,
+  &quot;updated_at&quot;: &quot;2016-05-01 10:51:41.584544&quot;,
+  &quot;url&quot;: &quot;https://api.chucknorris.io/jokes/TMGDYHjLSu-G5Jkueph9lA&quot;,
+  &quot;value&quot;: &quot;Who wins in a race car race? chuck Norris always wins. No excuses.&quot;
+}
+</code></pre> <h2 id="checkout-and-initial-setup">Checkout and initial setup</h2> <p>The first step is to fork the official <a href="https://github.com/apache/camel">Camel project on Github</a> and then clone it on your local machine with the following shell command (replace <code>$USERNAME</code> with yours):</p> <pre><code class="language-sh">$ git clone git@github.com:$USERNAME/camel.git
+$ cd camel/components
+</code></pre> <p>At this point we could use the <code>camel-archetype-component</code> to generate the project skeleton, but I usually prefer to do it from scratch:</p> <pre><code class="language-sh">$ mkdir -p camel-chuck/src/main/java/org/apache/camel/component/chuck \
+    &amp;&amp; mkdir -p camel-chuck/src/main/docs/chuck-component.adoc \
+    &amp;&amp; mkdir -p camel-chuck/src/test/java/org/apache/camel/component/chuck \
+    &amp;&amp; mkdir -p camel-chuck/src/test/resources \
+    &amp;&amp; cd camel-chuck
+</code></pre> <p>Now we need to create the project object module (POM) for Maven build (use the same parent version that you find in <code>camel/pom.xml</code>):</p> <pre><code class="language-sh">$ cat &lt;&lt;EOF &gt; pom.xml
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;parent&gt;
+        &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+        &lt;artifactId&gt;components&lt;/artifactId&gt;
+        &lt;version&gt;3.1.0-SNAPSHOT&lt;/version&gt;
+    &lt;/parent&gt;
+
+    &lt;artifactId&gt;camel-chuck&lt;/artifactId&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+    &lt;name&gt;Camel :: Chuck&lt;/name&gt;
+    &lt;description&gt;Camel Chuck Norris API&lt;/description&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+            &lt;artifactId&gt;camel-support&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;!-- test dependencies --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.camel&lt;/groupId&gt;
+            &lt;artifactId&gt;camel-test-junit5&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
+            &lt;artifactId&gt;log4j-core&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
+            &lt;artifactId&gt;log4j-slf4j-impl&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+EOF
+</code></pre> <p>Let&rsquo;s also add the log4j2 configuration that will be useful while testing:</p> <pre><code class="language-sh">$ cat &lt;&lt;EOF &gt; src/test/resources/log4j2.properties
+appender.out.type = Console
+appender.out.name = out
+appender.out.layout.type = PatternLayout
+appender.out.layout.pattern = %d [%15.15t] %highlight{%-5p} %-30.30c - %m%n
+rootLogger.level = INFO
+rootLogger.appenderRef.out.ref = out
+
+loggers = mine
+logger.mine.name = org.apache.camel.component.chuck
+logger.mine.level = INFO
+EOF
+</code></pre> <p>That&rsquo;s all for the initial setup, your project folder should look like this:</p> <pre><code class="language-sh">$ tree
+.
+├── pom.xml
+├── src
+│   ├── main
+│   │   ├── docs
+│   │   │   └── chuck-component.adoc
+│   │   └── java
+│   │       └── org
+│   │           └── apache
+│   │               └── camel
+│   │                   └── component
+│   │                       └── chuck
+│   └── test
+│       ├── java
+│       │   └── org
+│       │       └── apache
+│       │           └── camel
+│       │               └── component
+│       │                   └── chuck
+│       └── resources
+│           └── log4j2.properties
+</code></pre> <h2 id="component-creation">Component creation</h2> <p>After the initial project setup, we are ready to add the component main building blocks.</p> <p>When the Camel Context starts, it creates the Component object, that creates the Endpoint object, that in turns creates the Producer and the Consumer objects as needed. The Camel API includes convenient default implementation for all of them, that are also easy to extend.</p> <p>Our component class extends the DefaultComponent class and we also add a configuration class to hold component&rsquo;s query parameters that will allow some level of customization.</p> <pre><code class="language-java">@Component(&quot;chuck&quot;)
+public class ChuckComponent extends DefaultComponent {
+    @Override
+    protected Endpoint createEndpoint(final String uri, String remaining, final Map&lt;String, Object&gt; parameters) throws Exception {
+        final ChuckConfiguration configuration = new ChuckConfiguration();
+        //…
+    }
+}
+</code></pre> <p>Then, we need to extend the DefaultEndpoint and the DefaultAsyncProducer to be able to support asynchronous HTTP requests. For the vast majority of web APIs we don&rsquo;t need to create a Consumer, unless you have a polling endpoint. In that case, you would need to extend ScheduledPollEndpoint and ScheduledPollConsumer.</p> <pre><code class="language-java">@UriEndpoint(firstVersion = &quot;3.0.0&quot;, scheme = &quot;chuck&quot;, title = &quot;Chuck&quot;, syntax = &quot;chuck:type&quot;, label = &quot;chuck&quot;, producerOnly = true)
+public class ChuckEndpoint extends DefaultEndpoint {
+    @UriParam
+    private ChuckConfiguration configuration;
+    //…
+    @Override
+    protected void doStart() throws Exception {
+        //…
+    }
+    @Override
+    protected void doStop() throws Exception {
+        //…
+    }
+    @Override
+    public Producer createProducer() throws Exception {
+        return new ChuckProducer(this);
+    }
+    @Override
+    public Consumer createConsumer(Processor processor) throws Exception {
+        throw new UnsupportedOperationException(&quot;No support for consumers&quot;);
+    }
+}
+
+public class ChuckProducer extends DefaultAsyncProducer {
+    @Override
+    public boolean process(Exchange exchange, AsyncCallback callback) {
+        //…
+        return false;
+    }
+}
+</code></pre> <p>In the process method of the Producer we return false to signal that the processing will be executed asynchronously. Look at the repository for the full source code, but these are the only classes needed to start building a new component.</p> <h3 id="api-service">API service</h3> <p>To implement the call logic we need to add some more dependencies, mainly to deal with the HTTP request and JSON parsing.</p> <pre><code class="language-xml">        &lt;dependency&gt;
+            &lt;groupId&gt;org.asynchttpclient&lt;/groupId&gt;
+            &lt;artifactId&gt;async-http-client&lt;/artifactId&gt;
+            &lt;version&gt;${ahc-version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+            &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+            &lt;artifactId&gt;jackson-annotations&lt;/artifactId&gt;
+            &lt;version&gt;${jackson2-version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.fasterxml.jackson.datatype&lt;/groupId&gt;
+            &lt;artifactId&gt;jackson-datatype-jsr310&lt;/artifactId&gt;
+            &lt;version&gt;${jackson2-version}&lt;/version&gt;
+        &lt;/dependency&gt;
+</code></pre> <p>The <a href="https://github.com/AsyncHttpClient/async-http-client">AsyncHttpClient</a> (AHC) library is built on top of Netty and allows Java applications to easily execute asynchronous HTTP requests and it fits nicely with the Camel asynchronous routing engine. <a href="https://github.com/FasterXML/jackson-databind">JacksonDataBind</a> is used to convert JSON data to and from plain old Java object (POJO) using annotations.</p> <p>The model for our API is really basic and consists of one annotated class:</p> <pre><code class="language-java">@JsonIgnoreProperties(ignoreUnknown = true)
+public class RandomJoke {
+    @JsonProperty(&quot;id&quot;)
+    private String id;
+    @JsonProperty(&quot;url&quot;)
+    private String url;
+    @JsonProperty(&quot;value&quot;)
+    private String value;
+    …
+}
+</code></pre> <p>The service interface represents our API adapter and contains a method to call the random jokes endpoint which takes a callback object. This is the method called by our AsyncProducer class as defined by the message pipeline (see the test example in the next section).</p> <pre><code class="language-java">public interface ApiService {
+    void randomJoke(Exchange exchange, AsyncCallback callback);
+}
+</code></pre> <p>You can check the implementation of this interface which uses the AsyncHttpClient to actually do the HTTP request. The most interesting part is the ChuckAsyncHandler inner class, that gets the response and handles the Camel Exchange object (message container).</p> <h3 id="unit-and-integration-tests">Unit and integration tests</h3> <p>A component would not be complete without a good set of unit and integration tests. This is also an easy task to do thanks to the CamelTestSupport which has some nice abstractions that allows you to create and test your routes.</p> <p>In this case we add the <a href="https://github.com/tomakehurst/wiremock">Wiremock</a> dependency, which is a tool for HTTP response stubbing:</p> <pre><code class="language-xml">        &lt;dependency&gt;
+            &lt;groupId&gt;com.github.tomakehurst&lt;/groupId&gt;
+            &lt;artifactId&gt;wiremock&lt;/artifactId&gt;
+            &lt;version&gt;${wiremock-version}&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+</code></pre> <p>In the integration test we simply create a RouteBuilder and call our Web API by using Message Endpoint EIP (<code>to</code>) and our component&rsquo;s URI (<code>chuck:jokes</code>), also logging the response. We are implicitly using the default base API URL that you can find in the ChuckConfiguration class, among the other parameters.</p> <pre><code class="language-java">public class ChuckComponentTest extends CamelTestSupport {
+    @Test
+    public void testRandomJoke() throws Exception {
+        MockEndpoint mock = getMockEndpoint(&quot;mock:result&quot;);
+        mock.expectedMinimumMessageCount(1);
+        mock.expectedBodyReceived().body(RandomJoke.class);
+        template.sendBody(&quot;direct:test&quot;, &quot;&quot;);
+        assertMockEndpointsSatisfied();
+    }
+
+    @Override
+    protected RouteBuilder createRouteBuilder() throws Exception {
+        return new RouteBuilder() {
+            public void configure() {
+                from(&quot;direct:test&quot;)
+                  .to(&quot;chuck:jokes&quot;)
+                  .log(&quot;${body}&quot;)
+                  .to(&quot;mock:result&quot;);
+            }
+        };
+    }
+}
+</code></pre> <p>The unit test is the same, but this time we need to abstract away the real API by using a Fake web server running on localhost that will return a fixed response contained in <code>src/main/resource/__files/json/random-joke.json</code>. Note how we use the Camel&rsquo;s <code>AvailablePortFinder</code> utility to get the mock&rsquo;s port.</p> <pre><code class="language-java">    private static WireMockServer wireMockServer;
+ 
+    @BeforeAll
+    public static void startServer() {
+        port = AvailablePortFinder.getNextAvailable();
+        wireMockServer = new WireMockServer(port);
+        wireMockServer.start();
+        setupStubs();
+    }
+
+    public static void setupStubs() {
+        wireMockServer.stubFor(get(urlEqualTo(&quot;/jokes/random&quot;))
+            .willReturn(aResponse()
+                .withHeader(&quot;Content-Type&quot;, &quot;application/json; charset=UTF-8&quot;)
+                .withStatus(HttpURLConnection.HTTP_OK)
+                .withBodyFile(&quot;json/random-joke.json&quot;)));
+    }
+</code></pre> <p>As an additional step we also need to customize the component&rsquo;s base URL to make it use our fake server on localhost:</p> <pre><code class="language-java">    @Override
+    protected CamelContext createCamelContext() throws Exception {
+        final CamelContext context = super.createCamelContext();
+        context.disableJMX();
+        final ChuckComponent component = new ChuckComponent();
+        component.setBaseUrl(&quot;http://localhost:&quot; + port);
+        context.addComponent(&quot;chuck&quot;, component);
+        return context;
+    }
+</code></pre> <p>To run unit tests and code style check use the following command (check the required <code>maven-surefire-plugin</code> configuration in <code>pom.xml</code>):</p> <pre><code class="language-sh">$ mvn clean install -Psourcecheck
+</code></pre> <p>We run the slow integration tests using a different profile, that is not executed as part of the default build lifecycle:</p> <pre><code class="language-sh">$ mvn clean test -Pint
+</code></pre> <h2 id="final-integration-and-pr">Final integration and PR</h2> <p>The component is almost ready to be integrated in the current Camel codebase. To automatically generate the component documentation you just need to add the following placeholders and Camel plugins will take care of it.</p> <pre><code class="language-sh">$ cat &lt;&lt;EOF &gt; src/docs/chuck-component.adoc
+
+// component options: START
+// component options: END
+
+// endpoint options: START
+// endpoint options: END
+
+EOF
+</code></pre> <p>Then, put the new component into the list of all Camel components by manually adding the module in <code>components/pom.xml</code>. Before doing a full build, it is also good to rebase the project to get the latest changes:</p> <pre><code class="language-sh">$ git remote add upstream git@github.com:apache/camel.git
+$ git pull --rebase upstream master
+
+$ cd ../..
+$ mvn clean install -Pfastinstall
+</code></pre> <p>Finally, if the build is successful, you can create a new branch to host your changes, commit to your local repository and push the branch:</p> <pre><code class="language-sh">$ git checkout -b camel-chuck
+$ git add .
+$ git commit -m &quot;camel-chuck component&quot;
+$ git push
+</code></pre> <p>The last step is to open a Pull Request (PR) directly from GitHub pages and wait for the community review and feedback. If you need any help before the PR, simply send an email to the developers mailing list and we will do our best to help.</p> <p>Happy coding :)</p> </div> </div> </article> </main> </div> <div class="edit"><a title="Improve this document, receive free virtual hugs &hearts;" href="https://github.com/apache/camel-website/edit/master/content/blog/CustomWebApiComponent/index.md">Edit this Page</a></div> <footer> <div class="footer"> <figure class="logo"> <img class="logo" src="../../_/img/logo-d.svg" alt="Apache Camel Logo" aria-label="white silhouette of a camel in front of a sand dune"> </figure> <dl> <dt>Overview</dt> <dd><a href="../../blog/">Blog</a></dd> <dd><a href="../../components/latest/">Components</a></dd> <dd><a href="../../download/">Download</a></dd> <dd><a href="../../manual/latest/getting-started.html">Getting started</a></dd> <dd><a href="../../manual/latest/faq.html">FAQ</a></dd> </dl> <dl> <dt>Community</dt> <dd><a href="../../community/support/">Support</a></dd> <dd><a href="../../manual/latest/contributing.html">Contributing</a></dd> <dd><a href="../../community/user-stories/">User stories</a></dd> <dd><a href="../../community/articles/">Articles</a></dd> <dd><a href="../../community/books/">Books</a></dd> <dd><a href="../../community/team/">Team</a></dd> </dl> <dl> <dt>About</dt> <dd><a href="../../acknowledgments/">Acknowledgments</a> </dd><dd><a target="_blank" href="https://www.apache.org/events/current-event.html" title="Apache Events">Apache Events</a></dd> <dd><a target="_blank" href="https://www.apache.org/licenses/" title="License">License</a></dd> <dd><a target="_blank" href="https://www.apache.org/security/" title="Security">Security</a></dd> <dd><a target="_blank" href="https://www.apache.org/foundation/sponsorship.html" title="Sponsorship">Sponsorship</a></dd> <dd><a target="_blank" href="https://www.apache.org/foundation/thanks.html" title="Thanks">Thanks</a></dd> </dl> <p> &copy; 2004-2020 The <a href="https://apache.org">Apache Software Foundation</a>.<br> Apache Camel, Camel, Apache, the Apache feather logo, and the Apache Camel project logo are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners. </p> </div> </footer> <script src="../../_/js/site-f4f4dbc142.js"></script> <script src="../../_/js/vendor/highlight-54157f17f1.js"></script> <script src="../../_/js/vendor/svg4everybody-195d47ce7d.js"></script> <script type="application/ld+json"> {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": "Apache Camel",
+    "url": "https:\/\/camel.apache.org\/"
+    , "sameAs": ["https://twitter.com/ApacheCamel"]
+    , "logo": "https:\/\/camel.apache.org\/_\/img\/logo-d.svg"
+    , "description": "Apache Camel ™ is a versatile open-source integration framework based on known Enterprise Integration Patterns. Camel empowers you to define routing and mediation rules in a variety of domain-specific languages, including a Java-based Fluent API, Spring or Blueprint XML Configuration files, and a Scala DSL." 
+  } </script> <script type="application/ld+json"> {
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@id": "https://camel.apache.org/",
+          "name": "Apache Camel"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  2 ,
+        "item": {
+          "@id": "https://camel.apache.org/blog/",
+          "name": "blog"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https://camel.apache.org/blog/CustomWebApiComponent/",
+          "name": "CustomWebApiComponent"
+        }
+    }]
+} </script> </body> </html> 

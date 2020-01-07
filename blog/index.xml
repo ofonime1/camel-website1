@@ -6,10 +6,20 @@
     <description>Recent content in Blog on Apache Camel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 07 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://camel.apache.org/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Custom Web API Component</title>
+      <link>https://camel.apache.org/blog/CustomWebApiComponent/</link>
+      <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://camel.apache.org/blog/CustomWebApiComponent/</guid>
+      <description>Have you built a new great Web API for your product? Wouldn&amp;rsquo;t be wonderful to have it available as a part of the great Apache Camel component family? We would love it.
+The community just released Camel 3 which is more modular, lightweight and already includes lots of components (300+) to quickly integrate various systems consuming or producing data. All of these components can be used with the same integration domain specific language (DSL) based on the famous Enterprise Integration Patterns (EIPs).</description>
+    </item>
     
     <item>
       <title>CAPI Gateway: Using Apache Camel at the European Commission</title>
