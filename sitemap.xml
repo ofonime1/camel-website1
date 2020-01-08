@@ -4,16 +4,26 @@
   
   <url>
     <loc>https://camel.apache.org/blog/</loc>
-    <lastmod>2020-01-07T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-08T13:30:00+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://camel.apache.org/blog/CustomWebApiComponent/</loc>
-    <lastmod>2020-01-07T00:00:00+00:00</lastmod>
+    <loc>https://camel.apache.org/blog/FOSDEM-2020/</loc>
+    <lastmod>2020-01-08T13:30:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/categories/Events/</loc>
+    <lastmod>2020-01-08T13:30:00+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://camel.apache.org/</loc>
+    <lastmod>2020-01-08T13:30:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/blog/CustomWebApiComponent/</loc>
     <lastmod>2020-01-07T00:00:00+00:00</lastmod>
   </url>
   
@@ -154,11 +164,6 @@
   
   <url>
     <loc>https://camel.apache.org/blog/ApacheConNA-2019/</loc>
-    <lastmod>2019-09-10T16:45:32+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://camel.apache.org/categories/Events/</loc>
     <lastmod>2019-09-10T16:45:32+02:00</lastmod>
   </url>
   
