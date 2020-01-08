@@ -38,9 +38,9 @@ In the team, we worked already a couple of times with Apache Camel, and I like t
       
       <guid>https://camel.apache.org/blog/2019-Numbers/</guid>
       <description>It&amp;rsquo;s the time of the year where we take a look back at 2019, and compile a brief summary of the Apache Camel project.
-  Camel Sunset (Click to enlarge)  The big news of 2019 was the much anticipated release of Apache Camel 3.
+The big news of 2019 was the much anticipated release of Apache Camel 3.
 Family of projects It was also in 2019 that the Camel project became a faimily of projects by introducing:
- Camel K Camel Quarkus  Making Apache Camel a trilogy.</description>
+ Camel K Camel Quarkus  Making Apache Camel a trilogy. But it does not stop there; in early 2020 three will become five when we release:</description>
     </item>
     
     <item>
@@ -93,7 +93,7 @@ What is Kafka Connect? It is an Apache Kafka&amp;rsquo;s framework that defines 
     </item>
     
     <item>
-      <title>Apache Camel 3 Whats New (top 10)</title>
+      <title>Apache Camel 3 What&#39;s New (top 10)</title>
       <link>https://camel.apache.org/blog/Camel3-Whatsnew/</link>
       <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
       
