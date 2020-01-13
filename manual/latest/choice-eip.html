@@ -9,7 +9,7 @@
                 .otherwise()
                     .to("direct:d");
     }
-};</code></pre> </div> </div> <div class="admonitionblock tip"> <div class="table-wrapper"><table> <tr> <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> <td class="content"> See <a href="faq/why-can-i-not-use-when-or-otherwise-in-a-java-camel-route.html" class="page">Why can I not use when or otherwise in a Java Camel route</a> if you have problems with the Java DSL, accepting using <code>when</code> or <code>otherwise</code>. </td> </tr> </table></div> </div> <div class="paragraph"> <p>And the same example using XML:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;camelContext xmlns="http://camel.apache.org/schema/spring"&gt;
+};</code></pre> </div> </div> <div class="admonitionblock tip"> <div class="table-wrapper"><table> <tr> <td class="icon"> <i class="fa icon-tip" title="Tip"></i> </td> <td class="content"> <div class="paragraph"> <p>See <a href="faq/why-can-i-not-use-when-or-otherwise-in-a-java-camel-route.html" class="page">Why can I not use when or otherwise in a Java Camel route</a> if you have problems with the Java DSL, accepting using <code>when</code> or <code>otherwise</code>.</p> </div> </td> </tr> </table></div> </div> <div class="paragraph"> <p>And the same example using XML:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;camelContext xmlns="http://camel.apache.org/schema/spring"&gt;
     &lt;route&gt;
         &lt;from uri="direct:a"/&gt;
         &lt;choice&gt;
