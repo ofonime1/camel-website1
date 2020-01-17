@@ -4,7 +4,7 @@
   -DarchetypeGroupId=org.apache.camel.archetypes \
   -DarchetypeArtifactId=camel-archetype-web \
   -DarchetypeVersion=2.9.0 \
-  -DarchetypeRepository=https://repository.apache.org/content/groups/snapshots-group</code></pre> </div> </div> <div class="paragraph"> <p>Notice that archetypes will now be downloaded from <a href="https://repository.apache.org/content/groups/snapshots-group">Apache&#8217;s snapshot repo</a> instead of <a href="http://repo1.maven.org/maven2">Maven central</a>.</p> </div> <div class="paragraph"> <p>When the project is created, you may need to add another repository to the pom.xml file. This is to load a SNAPSHOT version of the camel-maven-plugin</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;pluginRepositories&gt;
+  -DarchetypeRepository=https://repository.apache.org/content/groups/snapshots-group</code></pre> </div> </div> <div class="paragraph"> <p>Notice that archetypes will now be downloaded from <a href="https://repository.apache.org/content/groups/snapshots-group">Apache&#8217;s snapshot repo</a> instead of <a href="https://repo1.maven.org/maven2">Maven central</a>.</p> </div> <div class="paragraph"> <p>When the project is created, you may need to add another repository to the pom.xml file. This is to load a SNAPSHOT version of the camel-maven-plugin</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;pluginRepositories&gt;
   &lt;pluginRepository&gt;
     &lt;releases&gt;
       &lt;enabled&gt;false&lt;/enabled&gt;
