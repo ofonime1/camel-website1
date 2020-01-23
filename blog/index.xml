@@ -6,10 +6,23 @@
     <description>Recent content in Blog on Apache Camel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 16 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://camel.apache.org/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>RELEASE 2.25.0</title>
+      <link>https://camel.apache.org/blog/release-2-25-0.html</link>
+      <pubDate>Thu, 23 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://camel.apache.org/blog/release-2-25-0.html</guid>
+      <description>The Camel community announces the immediate availability of Camel 2.25.0, a new minor release with 112 improvements and fixes.
+Please note that Camel 2.25.x is the last minor release for Camel 2.
+The artifacts are published and ready for you to download from the Central Maven repository. For more details please take a look at the release notes.
+Many thanks to all who made this release possible.
+On behalf of the Camel PMC,</description>
+    </item>
     
     <item>
       <title>RELEASE 3.0.1</title>
