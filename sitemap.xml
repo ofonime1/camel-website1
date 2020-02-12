@@ -482,6 +482,10 @@
   </url>
   
   <url>
+    <loc>https://camel.apache.org/projects/camel-kafka-connector/</loc>
+  </url>
+  
+  <url>
     <loc>https://camel.apache.org/projects/camel-quarkus/</loc>
   </url>
   

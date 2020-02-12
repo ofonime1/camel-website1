@@ -21,6 +21,16 @@ For more information checkout the Camel K manual and join the community on on th
     </item>
     
     <item>
+      <title>Camel Kafka Connector</title>
+      <link>https://camel.apache.org/projects/camel-kafka-connector/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://camel.apache.org/projects/camel-kafka-connector/</guid>
+      <description>Apache Camel Kafka Connector Camel Kafka Connector allows you to use all Camel components as Kafka Connect connectors, which as result expands Kafka Connect compatibility to include all Camel components to be used in Kafka ecosystem.
+For more information checkout the Camel Kafka Connector manual and join the community on the Camel Users mailing list or chat on Gitter chat and have a look at the Camel Kafka Connector GitHub repository.</description>
+    </item>
+    
+    <item>
       <title>Camel Quarkus</title>
       <link>https://camel.apache.org/projects/camel-quarkus/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
