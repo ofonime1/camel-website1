@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://camel.apache.org/camel-kafka-connector/latest/index.html</loc>
-<lastmod>2020-02-11T16:45:05.701Z</lastmod>
+<lastmod>2020-02-12T00:03:33.659Z</lastmod>
 </url>
 <url>
 <loc>https://camel.apache.org/camel-kafka-connector/latest/try-it-out-locally.html</loc>
-<lastmod>2020-02-11T16:45:05.701Z</lastmod>
+<lastmod>2020-02-12T00:03:33.659Z</lastmod>
 </url>
 <url>
 <loc>https://camel.apache.org/camel-kafka-connector/latest/try-it-out-on-openshift-with-strimzi.html</loc>
-<lastmod>2020-02-11T16:45:05.701Z</lastmod>
+<lastmod>2020-02-12T00:03:33.659Z</lastmod>
 </url>
 </urlset>
