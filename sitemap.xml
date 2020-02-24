@@ -3,17 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://camel.apache.org/releases/</loc>
-    <lastmod>2020-01-23T00:00:00+00:00</lastmod>
+    <loc>https://camel.apache.org/blog/</loc>
+    <lastmod>2020-02-24T12:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://camel.apache.org/blog/</loc>
-    <lastmod>2020-01-23T00:00:00+00:00</lastmod>
+    <loc>https://camel.apache.org/blog/ApacheConNA-2020-CFP/</loc>
+    <lastmod>2020-02-24T12:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/categories/Events/</loc>
+    <lastmod>2020-02-24T12:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://camel.apache.org/</loc>
+    <lastmod>2020-02-24T12:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/releases/</loc>
     <lastmod>2020-01-23T00:00:00+00:00</lastmod>
   </url>
   
@@ -44,11 +54,6 @@
   
   <url>
     <loc>https://camel.apache.org/blog/FOSDEM-2020/</loc>
-    <lastmod>2020-01-08T13:30:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://camel.apache.org/categories/Events/</loc>
     <lastmod>2020-01-08T13:30:00+01:00</lastmod>
   </url>
   

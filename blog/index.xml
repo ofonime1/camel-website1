@@ -6,10 +6,21 @@
     <description>Recent content in Blog on Apache Camel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 24 Feb 2020 12:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://camel.apache.org/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CFP for ApacheCon North America 2020</title>
+      <link>https://camel.apache.org/blog/ApacheConNA-2020-CFP/</link>
+      <pubDate>Mon, 24 Feb 2020 12:00:00 +0000</pubDate>
+      
+      <guid>https://camel.apache.org/blog/ApacheConNA-2020-CFP/</guid>
+      <description>As previous year Apache Camel is part of ApacheCon 2020 in North America. This year the conference will be held at the Sheraton, in New Orleans, September 28th through October 2nd, 2020.
+The call for presentations for ApacheCon North America 2020 is now open and the wider Camel community members are encouraged to submit. Look for the Camel/Integration track when submitting.
+We&amp;rsquo;re most interested to see talks that offer learning experience to the attendees, so talks that present new parts of the Camel ecosystem (Camel K, Camel Quarkus, Camel Kafka Connector), talks showing off lessons learned, use cases, and visions on where software integration is heading in the future.</description>
+    </item>
     
     <item>
       <title>RELEASE 2.25.0</title>
