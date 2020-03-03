@@ -57,6 +57,24 @@
     </item>
     
     <item>
+      <title>Release 3.0.0-RC3</title>
+      <link>https://camel.apache.org/releases/release-3.0.0-RC3/</link>
+      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://camel.apache.org/releases/release-3.0.0-RC3/</guid>
+      <description>This release the third and final release candidate towards Camel 3.0.0 release.</description>
+    </item>
+    
+    <item>
+      <title>Release 3.0.0-RC2</title>
+      <link>https://camel.apache.org/releases/release-3.0.0-RC2/</link>
+      <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://camel.apache.org/releases/release-3.0.0-RC2/</guid>
+      <description>This release the second release candidate towards Camel 3.0.0 release.</description>
+    </item>
+    
+    <item>
       <title>Release 2.23.4</title>
       <link>https://camel.apache.org/releases/release-2.23.4/</link>
       <pubDate>Sun, 22 Sep 2019 00:00:00 +0000</pubDate>
@@ -72,6 +90,15 @@
       
       <guid>https://camel.apache.org/releases/release-2.24.2/</guid>
       <description>This release is a minor update of the 2.24.x branch.</description>
+    </item>
+    
+    <item>
+      <title>Release 3.0.0-RC1</title>
+      <link>https://camel.apache.org/releases/release-3.0.0-RC1/</link>
+      <pubDate>Sun, 01 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://camel.apache.org/releases/release-3.0.0-RC1/</guid>
+      <description>This release the first release candidate towards Camel 3.0.0 release.</description>
     </item>
     
     <item>
