@@ -24,6 +24,17 @@ And as well to offer production stable branches (LTS) where end users can stay o
     </item>
     
     <item>
+      <title>Outreachy internship contributions open</title>
+      <link>https://camel.apache.org/blog/Outreachy-May2020/</link>
+      <pubDate>Fri, 06 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://camel.apache.org/blog/Outreachy-May2020/</guid>
+      <description>This year in addition to the Google Summer of Code we&amp;rsquo;re participating in the Outreachy internship program as well.
+For those that might not be aware of the Outreachy, Outreachy is a paid, remote internship program. Outreachy&amp;rsquo;s goal is to support people from groups underrepresented in tech. They help newcomers to free software and open source make their first contributions.
+Apache Camel is looking for contributions to the website you&amp;rsquo;re reading this blog post on.</description>
+    </item>
+    
+    <item>
       <title>RELEASE 3.1.0</title>
       <link>https://camel.apache.org/blog/release-3-1-0.html</link>
       <pubDate>Thu, 27 Feb 2020 00:00:00 +0000</pubDate>
