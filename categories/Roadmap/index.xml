@@ -6,10 +6,22 @@
     <description>Recent content in Roadmap on Apache Camel</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 31 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://camel.apache.org/categories/Roadmap/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Apache Camel 2020 Release Schedule</title>
+      <link>https://camel.apache.org/blog/LTS-Release-Schedule/</link>
+      <pubDate>Fri, 06 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://camel.apache.org/blog/LTS-Release-Schedule/</guid>
+      <description>The Apache Camel project is moving to release schedule with Long Term Support (LTS) and non-LTS releases.
+The plan is to have 2 yearly LTS releases and then non-LTS releases in between.
+This allows the Camel project to innovate and move much faster in non-LTS releases.
+And as well to offer production stable branches (LTS) where end users can stay on for a longer period of time and get CVEs and important/critical bug fixes only.</description>
+    </item>
     
     <item>
       <title>Camel 2019 in Numbers</title>
