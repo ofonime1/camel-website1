@@ -24,6 +24,16 @@ And as well to offer production stable branches (LTS) where end users can stay o
     </item>
     
     <item>
+      <title>Camel AWS2 Components are here: what are the changes for end users?</title>
+      <link>https://camel.apache.org/blog/Camel3-AWS2-Whatsnew/</link>
+      <pubDate>Fri, 06 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://camel.apache.org/blog/Camel3-AWS2-Whatsnew/</guid>
+      <description>In Camel 3.2.0 we&amp;rsquo;ll release the complete set of Camel AWS2 components. In Camel 3.1.0 we already have a bunch of AWS2 components living together with the original AWS components. The aim of this post is giving a full perspective of what will change for the end users and the roadmap for new features.
+New components Except camel-aws-xray, which is a particular component needing much more work to be migrated, all the original AWS components have been migrated to AWS SDK v2.</description>
+    </item>
+    
+    <item>
       <title>Outreachy internship contributions open</title>
       <link>https://camel.apache.org/blog/Outreachy-May2020/</link>
       <pubDate>Fri, 06 Mar 2020 00:00:00 +0000</pubDate>

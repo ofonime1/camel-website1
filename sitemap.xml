@@ -3,12 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://camel.apache.org/categories/Apache/</loc>
+    <lastmod>2020-03-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://camel.apache.org/blog/LTS-Release-Schedule/</loc>
     <lastmod>2020-03-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://camel.apache.org/blog/</loc>
+    <lastmod>2020-03-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://camel.apache.org/blog/Camel3-AWS2-Whatsnew/</loc>
     <lastmod>2020-03-06T00:00:00+00:00</lastmod>
   </url>
   
@@ -165,11 +175,6 @@
   <url>
     <loc>https://camel.apache.org/releases/release-3.0.0/</loc>
     <lastmod>2019-11-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://camel.apache.org/categories/Apache/</loc>
-    <lastmod>2019-11-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
