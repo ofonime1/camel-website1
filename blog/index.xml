@@ -62,7 +62,7 @@ We are looking for ideas, students and mentors willing to participate in GSoC 20
       <guid>https://camel.apache.org/blog/ApacheConNA-2020-CFP/</guid>
       <description>As previous year Apache Camel is part of ApacheCon 2020 in North America. This year the conference will be held at the Sheraton, in New Orleans, September 28th through October 2nd, 2020.
 The call for presentations for ApacheCon North America 2020 is now open and the wider Camel community members are encouraged to submit. Look for the Camel/Integration track when submitting.
-We&amp;rsquo;re most interested to see talks that offer learning experience to the attendees, so talks that present new parts of the Camel ecosystem (Camel K, Camel Quarkus, Camel Kafka Connector), talks showing off lessons learned, use cases, and visions on where software integration is heading in the future.</description>
+We&amp;rsquo;re most interested to see talks that offer a learning experience to the attendees, so talks that present new parts of the Camel ecosystem (Camel K, Camel Quarkus, Camel Kafka Connector), talks showing off lessons learned, use cases, and visions on where software integration is heading in the future.</description>
     </item>
     
     <item>
@@ -129,7 +129,7 @@ In the team, we worked already a couple of times with Apache Camel, and I like t
       <guid>https://camel.apache.org/blog/2019-Numbers/</guid>
       <description>It&amp;rsquo;s the time of the year where we take a look back at 2019, and compile a brief summary of the Apache Camel project.
 The big news of 2019 was the much anticipated release of Apache Camel 3.
-Family of projects It was also in 2019 that the Camel project became a faimily of projects by introducing:
+Family of projects It was also in 2019 that the Camel project became a family of projects by introducing:
  Camel K Camel Quarkus  Making Apache Camel a trilogy. But it does not stop there; in early 2020 three will become five when we release:</description>
     </item>
     
@@ -179,7 +179,7 @@ What is Kafka Connect? It is an Apache Kafka&amp;rsquo;s framework that defines 
       <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>https://camel.apache.org/blog/Camel3-Whatsnew/</guid>
-      <description>Apache Camel 3 was released last thursday November 28th 2019, which also happens to be the day of the US Thanksgiving. This was not intentionally but we can say its a big thanks from us to the community with a brand new major version of Camel - this does not come often by. In fact its 10 years since Camel 2 hit the streets. So this 3rd generation is long overdue.</description>
+      <description>Apache Camel 3 was released last thursday November 28th 2019, which also happens to be the day of the US Thanksgiving. This was not intentionally but we can say its a big thanks from us to the community with a brand new major version of Camel - this does not come often by. In fact, its 10 years since Camel 2 hit the streets. So this 3rd generation is long overdue.</description>
     </item>
     
     <item>
