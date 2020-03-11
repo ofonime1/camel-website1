@@ -16,8 +16,10 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://camel.apache.org/projects/camel-k/</guid>
-      <description>Apache Camel K Apache Camel K is a lightweight integration platform, born on Kubernetes, with serverless superpowers.
-For more information checkout the Camel K manual and join the community on on the Camel Users mailing list and have a look at the Camel K GitHub repository.</description>
+      <description>Apache Camel K is a lightweight integration framework built from Apache Camel that runs natively on Kubernetes and is specifically designed for serverless and microservice architectures.
+Users of Camel K can instantly run integration code written in Camel DSL on their preferred cloud (Kubernetes or OpenShift).
+HOW IT WORKS Just write a helloworld.groovy integration file with the following content:
+from(&#39;timer:tick?period=3s&#39;) .setBody().constant(&#39;Hello world from Camel K&#39;) .to(&#39;log:info&#39;)  You can then execute the following command:</description>
     </item>
     
     <item>
