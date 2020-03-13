@@ -21,11 +21,11 @@ public class MyRouteBuilder extends RouteBuilder {
                     .to("file:target/messages/others");
     }
 
-}</code></pre> </div> </div> <div class="paragraph"> <p>In the <code>configure</code> method we can define Camel Routes. In the example above we have a single route, which pickup files, (eg the from).</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">        from("file:src/data?noop=true")</code></pre> </div> </div> <div class="paragraph"> <p>Then we use the Content Based Router (eg the choice) to route the message depending if the person is from London or not.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">            .choice()
-                .when(xpath("/person/city = 'London'"))
-                    .to("file:target/messages/uk")
-                .otherwise()
-                    .to("file:target/messages/others");</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="JavaDSL-Routes"><a class="anchor" href="#JavaDSL-Routes"></a>Routes</h2> <div class="sectionbody"> <div class="paragraph"> <p>Camel supports the definition of routing rules using a Java DSL (domain specific language) which avoids the need for cumbersome XML using a RouteBuilder.</p> </div> <div class="paragraph"> <p>For example a simple route can be created as follows.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">RouteBuilder builder = new RouteBuilder() {
+}</code></pre> </div> </div> <div class="paragraph"> <p>In the <code>configure</code> method we can define Camel Routes. In the example above we have a single route, which pickup files, (eg the from).</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">from("file:src/data?noop=true")</code></pre> </div> </div> <div class="paragraph"> <p>Then we use the <code>Content Based Router</code> (for ex: the choice) to route the message depending if the person is from London or not.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">.choice()
+    .when(xpath("/person/city = 'London'"))
+        .to("file:target/messages/uk")
+    .otherwise()
+        .to("file:target/messages/others");</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="JavaDSL-Routes"><a class="anchor" href="#JavaDSL-Routes"></a>Routes</h2> <div class="sectionbody"> <div class="paragraph"> <p>Camel supports the definition of routing rules using a Java DSL (domain specific language) which avoids the need for cumbersome XML using a RouteBuilder.</p> </div> <div class="paragraph"> <p>For example a simple route can be created as follows.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">RouteBuilder builder = new RouteBuilder() {
     public void configure() {
         errorHandler(deadLetterChannel("mock:error"));
 
